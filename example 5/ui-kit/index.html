@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo-Skeuo Tactile UI Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Neo-Skeuo Tactile UI</h1>
+            <p style="text-align: center; font-size: 0.9rem; opacity: 0.7; margin-bottom: 40px;">Line Art Styleguide Implementation</p>
+        </header>
+
+        <section>
+            <div class="section-title">Navigation & Process</div>
+            <div class="neo-tabs">
+                <div class="neo-tab active">Overview</div>
+                <div class="neo-tab">Components</div>
+                <div class="neo-tab">Settings</div>
+            </div>
+
+            <div class="neo-process">
+                <div class="neo-step completed"></div>
+                <div class="neo-step active">2</div>
+                <div class="neo-step">3</div>
+                <div class="neo-step">4</div>
+            </div>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <div class="section-title">Data & Content</div>
+            <div class="neo-card">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span class="neo-badge">Article</span>
+                    <span class="neo-badge neo-badge-teal">New</span>
+                </div>
+                <h2 style="margin-bottom: 10px;">Tactile Design Systems</h2>
+                <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin-bottom: 20px;">
+                    The neo-skeuomorphic approach combines the clean lines of flat design with the tactile depth of traditional skeuomorphism. Using thick strokes and offset shadows creates a physical presence on the screen.
+                </p>
+                <div style="display: flex; gap: 15px;">
+                    <button class="neo-btn neo-btn-primary">Read More</button>
+                    <button class="neo-btn neo-btn-secondary">Save Draft</button>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <div class="section-title">Controls & Inputs</div>
+            <div class="neo-card">
+                <div class="neo-input-group">
+                    <label class="neo-label">User Email</label>
+                    <input type="email" class="neo-input" placeholder="user@example.com">
+                </div>
+                <div class="neo-input-group">
+                    <label class="neo-label">Password</label>
+                    <input type="password" class="neo-input" placeholder="••••••••">
+                </div>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <label style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; cursor: pointer;">
+                        <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--accent-color);">
+                        Remember me
+                    </label>
+                    <button class="neo-btn neo-btn-primary" style="flex: 1;">Sign In</button>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top: 60px; text-align: center; border-top: 2px solid var(--border-color); padding-top: 20px;">
+            <div style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Based on Example 5 Styleguide</div>
+        </footer>
+    </div>
+</body>
+</html>
