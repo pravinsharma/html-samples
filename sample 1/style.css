@@ -1,0 +1,187 @@
+:root {
+    --bg-start: #2c343c;
+    --bg-end: #1a1e23;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.2);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --blur-amount: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-end);
+}
+
+.bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, var(--bg-start), var(--bg-end));
+    z-index: -1;
+}
+
+/* Add some floating shapes to show off the glass effect */
+.bg-gradient::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-amount));
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid var(--glass-border);
+    border-radius: 40px;
+    padding: 3rem;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px var(--glass-highlight);
+    position: relative;
+}
+
+.panel-header {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.version {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Glass Button Core Styles */
+.glass-btn {
+    background: linear-gradient(
+        180deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.02) 50%, 
+        rgba(0, 0, 0, 0.05) 100%
+    );
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    
+    /* Top and Bottom Inner Shines (The "Volume" effect) */
+    box-shadow: 
+        /* Outer soft shadow */
+        0 10px 30px -5px rgba(0, 0, 0, 0.3),
+        /* Top inner highlight shine */
+        inset 0 15px 15px -10px rgba(255, 255, 255, 0.3),
+        /* Bottom inner shadow shine */
+        inset 0 -15px 15px -10px rgba(0, 0, 0, 0.3),
+        /* Very subtle overall inner glow */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.glass-btn:hover {
+    background: linear-gradient(
+        180deg, 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.04) 50%, 
+        rgba(0, 0, 0, 0.02) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.4),
+        inset 0 20px 20px -10px rgba(255, 255, 255, 0.4),
+        inset 0 -20px 20px -10px rgba(0, 0, 0, 0.2);
+}
+
+.glass-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 5px 15px -5px rgba(0, 0, 0, 0.3),
+        inset 0 10px 10px -5px rgba(255, 255, 255, 0.2),
+        inset 0 -10px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Circle Button Specifics */
+.btn-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.btn-circle .icon {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.5;
+}
+
+/* Pill Button Specifics */
+.btn-pill {
+    padding: 1.25rem 3rem;
+    border-radius: 100px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.btn-pill .text {
+    letter-spacing: -0.01em;
+}
+
+/* Inner highlight for buttons */
+.glass-btn::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
