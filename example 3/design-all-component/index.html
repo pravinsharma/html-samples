@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design All Component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="component-card">
+            <header class="header">
+                <h1>Design all</h1>
+                <button class="text-button">Deselect all</button>
+            </header>
+
+            <div class="dropdown-trigger selection-bar" id="dropdownTrigger">
+                <span class="badge">2</span>
+                <span class="label">Multiselect</span>
+                <div class="chevron">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+            </div>
+
+            <div class="dropdown-content" id="dropdownContent">
+                <div class="items-list">
+                    <div class="list-item selected">
+                        <div class="checkbox-wrapper">
+                            <div class="checkbox checked">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                            </div>
+                        </div>
+                        <span class="item-name">2 amps</span>
+                        <button class="add-button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="checkbox-wrapper">
+                            <div class="checkbox-circle"></div>
+                        </div>
+                        <span class="item-name">Cim chips</span>
+                        <button class="add-button circle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="checkbox-wrapper">
+                            <div class="checkbox-circle"></div>
+                        </div>
+                        <span class="item-name">Coletect</span>
+                        <button class="add-button circle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="checkbox-wrapper">
+                            <div class="checkbox-circle"></div>
+                        </div>
+                        <span class="item-name">Culsiect</span>
+                        <button class="add-button circle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="checkbox-wrapper">
+                            <div class="checkbox-circle"></div>
+                        </div>
+                        <span class="item-name">Cultups</span>
+                        <button class="add-button circle">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <button class="btn btn-primary">Confirm</button>
+                    <button class="btn btn-secondary">Reset</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const trigger = document.getElementById('dropdownTrigger');
+        const content = document.getElementById('dropdownContent');
+        const card = document.querySelector('.component-card');
+        const listItems = document.querySelectorAll('.list-item');
+        const badge = document.querySelector('.badge');
+
+        // Toggle Dropdown
+        trigger.addEventListener('click', () => {
+            card.classList.toggle('open');
+        });
+
+        // Item Selection Logic
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Prevent trigger toggle if clicking inside the list
+                e.stopPropagation();
+                
+                item.classList.toggle('selected');
+                
+                // Update checkbox UI
+                const checkboxWrapper = item.querySelector('.checkbox-wrapper');
+                if (item.classList.contains('selected')) {
+                    checkboxWrapper.innerHTML = `
+                        <div class="checkbox checked">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                        </div>
+                    `;
+                } else {
+                    checkboxWrapper.innerHTML = `<div class="checkbox-circle"></div>`;
+                }
+                
+                // Update badge count
+                const selectedCount = document.querySelectorAll('.list-item.selected').length;
+                badge.textContent = selectedCount;
+            });
+        });
+
+        // Prevent dropdown close when clicking buttons
+        document.querySelectorAll('.btn, .add-button, .text-button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                if (btn.classList.contains('text-button') || btn.classList.contains('btn-secondary')) {
+                    // Deselect All / Reset
+                    listItems.forEach(item => {
+                        item.classList.remove('selected');
+                        const checkboxWrapper = item.querySelector('.checkbox-wrapper');
+                        checkboxWrapper.innerHTML = `<div class="checkbox-circle"></div>`;
+                    });
+                    badge.textContent = 0;
+                }
+            });
+        });
+    </script>
+        </div>
+    </div>
+</body>
+</html>

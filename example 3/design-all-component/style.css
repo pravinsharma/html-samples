@@ -1,0 +1,290 @@
+:root {
+    --bg-color: #a8d5ba; /* Soft mint green background */
+    --card-bg: #e8f5ed; /* Lighter card background */
+    --primary-green: #2d5a27; /* Dark green for confirm button */
+    --highlight-green: #8ee4af; /* Selected item highlight */
+    --text-main: #1a3a1a;
+    --text-muted: #6b8c6b;
+    --white: #ffffff;
+    --shadow-light: #ffffff;
+    --shadow-dark: rgba(0, 0, 0, 0.05);
+    --inner-shadow: inset 2px 2px 5px rgba(0,0,0,0.03), inset -2px -2px 5px #fff;
+    --outer-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    --small-outer-shadow: 3px 3px 8px var(--shadow-dark), -3px -3px 8px var(--shadow-light);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.component-card {
+    background-color: var(--card-bg);
+    border-radius: 40px;
+    padding: 30px;
+    box-shadow: var(--outer-shadow);
+    border: 1px solid var(--shadow-light);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.text-button {
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.text-button:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.selection-bar {
+    background: var(--white);
+    padding: 12px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: var(--small-outer-shadow);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.selection-bar:hover {
+    transform: translateY(-1px);
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}
+
+.selection-bar:active {
+    transform: translateY(0);
+    box-shadow: inset 2px 2px 4px var(--shadow-dark);
+}
+
+.badge {
+    background: var(--card-bg);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 12px;
+    box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+}
+
+.label {
+    flex-grow: 1;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.chevron {
+    color: var(--text-muted);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.component-card.open .chevron {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-10px);
+    will-change: max-height, opacity, transform;
+}
+
+.component-card.open .dropdown-content {
+    max-height: 1200px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 15px;
+}
+
+.items-list {
+    background: var(--white);
+    border-radius: 30px;
+    padding: 15px;
+    box-shadow: var(--small-outer-shadow);
+    margin-bottom: 25px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    will-change: background-color, transform;
+}
+
+.list-item:last-child {
+    margin-bottom: 0;
+}
+
+.list-item.selected {
+    background-color: var(--highlight-green);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-wrapper {
+    margin-right: 15px;
+}
+
+.checkbox {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.checkbox.checked {
+    background: var(--primary-green);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.checkbox-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #d1d9d1;
+}
+
+.item-name {
+    flex-grow: 1;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: 16px;
+}
+
+.add-button {
+    background: var(--white);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+    transition: all 0.2s ease;
+    color: var(--text-main);
+}
+
+.add-button:hover {
+    transform: scale(1.1);
+}
+
+.add-button:active {
+    box-shadow: inset 1px 1px 2px var(--shadow-dark);
+    transform: scale(0.95);
+}
+
+.add-button.circle {
+    background: transparent;
+    border: 2px solid #d1d9d1;
+    box-shadow: none;
+}
+
+.footer {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 18px;
+    border-radius: 25px;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--small-outer-shadow);
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #1e3d1a;
+    transform: translateY(-1px);
+    box-shadow: 4px 4px 12px var(--shadow-dark), -4px -4px 12px var(--shadow-light);
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: #f8fcf9;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: inset 2px 2px 4px var(--shadow-dark);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.list-item {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.list-item:nth-child(1) { animation-delay: 0.1s; }
+.list-item:nth-child(2) { animation-delay: 0.2s; }
+.list-item:nth-child(3) { animation-delay: 0.3s; }
+.list-item:nth-child(4) { animation-delay: 0.4s; }
+.list-item:nth-child(5) { animation-delay: 0.5s; }
