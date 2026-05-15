@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian Dark Glass Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <main class="login-container">
+        <form class="glass-form">
+            <div class="form-header">
+                <div class="logo">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Login to your secure dashboard</p>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <i data-lucide="mail"></i>
+                    <input type="email" id="email" placeholder="name@example.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="label-row">
+                    <label for="password">Password</label>
+                    <a href="#" class="forgot-link">Forgot?</a>
+                </div>
+                <div class="input-wrapper">
+                    <i data-lucide="lock"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span>Sign In</span>
+                <i data-lucide="arrow-right"></i>
+            </button>
+
+            <div class="form-footer">
+                <p>Don't have an account? <a href="#">Create one</a></p>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

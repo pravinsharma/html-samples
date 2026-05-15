@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Glass Buttons</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="aurora-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <div class="glass-card">
+            <header>
+                <h1>Aurora Glass</h1>
+                <p>Premium UI Elements</p>
+            </header>
+
+            <div class="button-grid">
+                <!-- Primary Action -->
+                <button class="btn btn-primary">
+                    <span>Explore Now</span>
+                    <i data-lucide="arrow-right"></i>
+                </button>
+
+                <!-- Secondary -->
+                <button class="btn btn-secondary">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </button>
+
+                <!-- Glass Minimal -->
+                <button class="btn btn-minimal">
+                    <i data-lucide="play"></i>
+                </button>
+
+                <!-- Glass Outline -->
+                <button class="btn btn-outline">
+                    <span>Learn More</span>
+                </button>
+            </div>
+
+            <footer class="badge-row">
+                <span class="badge">V.09</span>
+                <span class="badge">AESTHETIC</span>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Edge Glass Interactive</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <main class="container">
+        <header>
+            <h1>Interactive Glass</h1>
+            <p>Hover over the cards to see the neon effect</p>
+        </header>
+
+        <div class="card-grid">
+            <!-- Neon Cyan -->
+            <div class="neon-card cyan">
+                <div class="card-inner">
+                    <div class="icon">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>Core Processor</h3>
+                    <p>Ultra-low latency rendering with dedicated glass shaders.</p>
+                    <button class="action-btn">Optimize</button>
+                </div>
+            </div>
+
+            <!-- Neon Purple -->
+            <div class="neon-card purple">
+                <div class="card-inner">
+                    <div class="icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3>Fast Response</h3>
+                    <p>Optimized for real-time interaction and feedback.</p>
+                    <button class="action-btn">Launch</button>
+                </div>
+            </div>
+
+            <!-- Neon Rose -->
+            <div class="neon-card rose">
+                <div class="card-inner">
+                    <div class="icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3>Layered UI</h3>
+                    <p>Stack multiple glass layers for deep aesthetic depth.</p>
+                    <button class="action-btn">Deploy</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Mouse follow effect for the grid
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.neon-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>

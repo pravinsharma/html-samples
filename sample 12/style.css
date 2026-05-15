@@ -1,0 +1,179 @@
+:root {
+    --bg: #050505;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --cyan: #06b6d4;
+    --purple: #a855f7;
+    --rose: #f43f5e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.grid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, white, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.neon-card {
+    position: relative;
+    border-radius: 24px;
+    background: var(--border);
+    padding: 1px; /* The border width */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.neon-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        800px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.15),
+        transparent 40%
+    );
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.neon-card:hover::before {
+    opacity: 1;
+}
+
+/* Color specific glow */
+.neon-card.cyan:hover {
+    background: radial-gradient(
+        400px circle at var(--mouse-x) var(--mouse-y),
+        var(--cyan),
+        transparent 40%
+    );
+}
+
+.neon-card.purple:hover {
+    background: radial-gradient(
+        400px circle at var(--mouse-x) var(--mouse-y),
+        var(--purple),
+        transparent 40%
+    );
+}
+
+.neon-card.rose:hover {
+    background: radial-gradient(
+        400px circle at var(--mouse-x) var(--mouse-y),
+        var(--rose),
+        transparent 40%
+    );
+}
+
+.card-inner {
+    position: relative;
+    background: #0a0a0a;
+    border-radius: 23px;
+    padding: 40px;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cyan .icon i { color: var(--cyan); }
+.purple .icon i { color: var(--purple); }
+.rose .icon i { color: var(--rose); }
+
+.card-inner h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-inner p {
+    color: #999;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.action-btn {
+    margin-top: auto;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: white;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.neon-card:hover .action-btn {
+    border-color: white;
+    background: white;
+    color: black;
+}
