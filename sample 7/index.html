@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Button – Icon Circle</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #11111a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        .bg { position: fixed; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(251, 191, 36, 0.18) 0%, transparent 55%), linear-gradient(180deg, #11111a 0%, #1a1520 100%); z-index: -1; }
+        button {
+            width: 72px; height: 72px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(251, 191, 36, 0.06);
+            border: 1px solid rgba(251, 191, 36, 0.22);
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -8px 16px rgba(0, 0, 0, 0.15);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        button::after {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; height: 40%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.14) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        button svg {
+            position: relative;
+            z-index: 1;
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: #fde68a;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s ease;
+        }
+        button:hover { background: rgba(251, 191, 36, 0.14); border-color: rgba(251, 191, 36, 0.36); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.44), 0 0 22px rgba(251, 191, 36, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -6px 12px rgba(0, 0, 0, 0.12); transform: scale(1.08); }
+        button:hover svg { stroke: #fff; }
+        button:active { transform: scale(0.96); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 2px 8px rgba(0, 0, 0, 0.20); }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <button>
+        <svg viewBox="0 0 24 24"><polyline points="12 5 12 19"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
+</body>
+</html>
