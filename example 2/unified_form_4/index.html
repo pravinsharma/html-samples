@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Glassy Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-shell">
+        <header>
+            <h1>Component Suite</h1>
+            <p>Unified Glassy Design</p>
+        </header>
+
+        <form class="unified-form">
+            <div class="control-group">
+                <label>User Identity</label>
+                <input type="text" placeholder="Quantum Explorer">
+            </div>
+
+            <div class="control-group">
+                <label>System Access</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+
+            <div class="control-group inline">
+                <label>Sync Status</label>
+                <label class="glass-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>Atmospheric Pressure</label>
+                <input type="range" class="glass-range">
+            </div>
+
+            <div class="control-group">
+                <label>Interface Mode</label>
+                <div class="radio-group">
+                    <label class="glass-radio">
+                        <input type="radio" name="mode" checked>
+                        <span class="checkmark"></span>
+                        Linear
+                    </label>
+                    <label class="glass-radio">
+                        <input type="radio" name="mode">
+                        <span class="checkmark"></span>
+                        Recursive
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="glass-btn">Initialize Protocol</button>
+        </form>
+    </div>
+</body>
+</html>

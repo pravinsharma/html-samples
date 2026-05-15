@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassy Buttons Collection</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            background: #0d0d12;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bg-orb:nth-child(1) { width: 500px; height: 500px; top: -100px; left: -100px; background: radial-gradient(circle, #4f46e577, transparent 70%); }
+        .bg-orb:nth-child(2) { width: 400px; height: 400px; bottom: -50px; right: -50px; background: radial-gradient(circle, #ec489977, transparent 70%); }
+        .bg-orb:nth-child(3) { width: 350px; height: 350px; top: 40%; left: 55%; background: radial-gradient(circle, #06b6d477, transparent 70%); }
+
+        .button-card {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .label {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .glass-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: white;
+            font-family: inherit;
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* ── Primary ── */
+        .btn-primary {
+            padding: 14px 36px;
+            border-radius: 16px;
+            background: rgba(99, 102, 241, 0.18);
+            border: 1px solid rgba(99, 102, 241, 0.38);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            box-shadow:
+                0 4px 24px rgba(99, 102, 241, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.15));
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .btn-primary:hover::before { opacity: 1; }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.35), inset 0 1px 0 rgba(255,255,255,0.18);
+            border-color: rgba(99,102,241,0.6);
+        }
+        .btn-primary:active { transform: translateY(-1px); }
+
+        /* ── Secondary / Outline ── */
+        .btn-secondary {
+            padding: 14px 36px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow:
+                0 4px 20px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.07);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.10);
+            border-color: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+
+        /* ── Pill ── */
+        .btn-pill {
+            padding: 12px 34px;
+            border-radius: 50px;
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.35);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            box-shadow:
+                0 4px 20px rgba(236, 72, 153, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .btn-pill:hover {
+            background: rgba(236,72,153,0.25);
+            border-color: rgba(236,72,153,0.55);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(236,72,153,0.3);
+        }
+
+        /* ── Circular Icon Button ── */
+        .btn-icon {
+            width: 68px; height: 68px;
+            border-radius: 50%;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            font-size: 22px;
+            box-shadow:
+                0 4px 20px rgba(6,182,212,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .btn-icon span { font-size: 20px; }
+        .btn-icon:hover {
+            background: rgba(6,182,212,0.25);
+            border-color: rgba(6,182,212,0.55);
+            transform: translateY(-3px) rotate(90deg);
+            box-shadow: 0 10px 30px rgba(6,182,212,0.35);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* ── Ghost / Subtle ── */
+        .btn-ghost {
+            padding: 14px 36px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ── Danger / Destructive ── */
+        .btn-danger {
+            padding: 14px 36px;
+            border-radius: 16px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.38);
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(239,68,68,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+        .btn-danger:hover {
+            background: rgba(239,68,68,0.28);
+            border-color: rgba(239,68,68,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(239,68,68,0.35);
+        }
+
+        /* ── Large CTA ── */
+        .btn-cta {
+            padding: 18px 52px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.2));
+            border: 1px solid rgba(99,102,241,0.45);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            box-shadow:
+                0 8px 32px rgba(99,102,241,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 42px rgba(99,102,241,0.45), inset 0 1px 0 rgba(255,255,255,0.22);
+            border-color: rgba(99,102,241,0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-primary">Primary</button>
+        <span class="label">Primary</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-secondary">Secondary</button>
+        <span class="label">Secondary</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-pill">Pill</button>
+        <span class="label">Pill</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-icon"><span>&#10132;</span></button>
+        <span class="label">Icon</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-ghost">Ghost</button>
+        <span class="label">Ghost</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-danger">Delete</button>
+        <span class="label">Danger</span>
+    </div>
+
+    <div class="button-card">
+        <button class="glass-btn btn-cta">Get Started</button>
+        <span class="label">CTA</span>
+    </div>
+
+</body>
+</html>

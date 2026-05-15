@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Glassy Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-shell">
+        <header>
+            <h1>Component Suite</h1>
+            <p>Unified Glassy Neomorphic Design</p>
+        </header>
+
+        <form class="unified-form">
+            <!-- Text Input -->
+            <div class="control-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe">
+            </div>
+
+            <!-- Email Input -->
+            <div class="control-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com">
+            </div>
+
+            <!-- Toggle Switch -->
+            <div class="control-group inline">
+                <label>Notifications</label>
+                <label class="glass-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Slider -->
+            <div class="control-group">
+                <label>Sensitivity Level</label>
+                <input type="range" class="glass-range">
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="control-group">
+                <label>Plan Type</label>
+                <div class="radio-group">
+                    <label class="glass-radio">
+                        <input type="radio" name="plan" checked>
+                        <span class="checkmark"></span>
+                        Basic
+                    </label>
+                    <label class="glass-radio">
+                        <input type="radio" name="plan">
+                        <span class="checkmark"></span>
+                        Premium
+                    </label>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button type="submit" class="glass-btn">Save Configurations</button>
+        </form>
+    </div>
+</body>
+</html>

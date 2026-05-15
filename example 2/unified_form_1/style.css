@@ -1,0 +1,64 @@
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --accent: #4facfe;
+    --text: #1e293b;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f9ff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.glass-shell {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 40px;
+    padding: 40px;
+    width: 380px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+header h1 { color: #0369a1; }
+label { color: #64748b; font-size: 13px; font-weight: 500; }
+
+input[type="text"], input[type="password"] {
+    width: 100%; padding: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.glass-switch .slider {
+    background: rgba(0,0,0,0.05);
+    border-radius: 20px;
+    width: 50px; height: 26px;
+    position: relative; display: inline-block;
+}
+
+.slider:before {
+    content: ""; position: absolute;
+    width: 20px; height: 20px; left: 3px; bottom: 3px;
+    background: white; border-radius: 50%; transition: .3s;
+}
+
+input:checked + .slider { background: var(--accent); }
+input:checked + .slider:before { transform: translateX(24px); }
+
+.glass-range { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 5px; -webkit-appearance: none; }
+.glass-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: white; border: 2px solid var(--accent); border-radius: 50%; }
+
+.glass-btn {
+    width: 100%; padding: 16px; border: none; border-radius: 20px;
+    background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+    color: white; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}

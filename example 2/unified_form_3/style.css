@@ -1,0 +1,60 @@
+:root {
+    --bg: #e0e5ec;
+    --shadow-light: #ffffff;
+    --shadow-dark: #a3b1c6;
+    --accent: #4facfe;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg);
+    font-family: 'Outfit', sans-serif;
+}
+
+.glass-shell {
+    background: rgba(224, 229, 236, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 50px;
+    width: 400px;
+    box-shadow: 20px 20px 60px var(--shadow-dark), -20px -20px 60px var(--shadow-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%; padding: 15px;
+    background: var(--bg);
+    border: none;
+    border-radius: 15px;
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    color: #4a5568;
+}
+
+.glass-switch .slider {
+    background: var(--bg);
+    width: 60px; height: 30px; border-radius: 15px;
+    box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+}
+
+.slider:before {
+    content: ""; position: absolute;
+    width: 22px; height: 22px; left: 4px; bottom: 4px;
+    background: var(--accent); border-radius: 50%; transition: .3s;
+}
+
+input:checked + .slider:before { transform: translateX(30px); background: #00f2fe; }
+
+.glass-btn {
+    width: 100%; padding: 18px; border-radius: 20px; border: none;
+    background: var(--bg); color: #4a5568; font-weight: 600;
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    cursor: pointer; transition: 0.2s;
+}
+
+.glass-btn:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
