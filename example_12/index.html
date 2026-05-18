@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Claymorphic Dashboard & Interactive Form — Example 12</title>
+    <meta name="description" content="A premium 3D Claymorphic Dashboard and Form inspired by sample1.jpg. Features tactile sliders, dynamic tab sheets, and detailed system controls.">
+    <!-- Google Fonts: Plus Jakarta Sans for futuristic sleek typography, JetBrains Mono for system logs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Premium Ambient Backdrop Orbs -->
+    <div class="ambient-glow glow-orb-cyan" aria-hidden="true"></div>
+    <div class="ambient-glow glow-orb-pink" aria-hidden="true"></div>
+    <div class="studio-reflection-floor" aria-hidden="true"></div>
+
+    <div class="studio-viewport-container">
+        <!-- Main 3D Claymorphic Dashboard Wrapper -->
+        <main class="dashboard-window clay-board" id="main-dashboard-frame">
+            
+            <!-- SECTION 1: SYSTEM NAVIGATION HEADER (Matching sample1.jpg navbar) -->
+            <header class="dashboard-navbar">
+                <div class="nav-left">
+                    <span class="nav-logo-text">Dashboard</span>
+                </div>
+                <nav class="nav-right" aria-label="Main Navigation">
+                    <ul class="nav-links-list">
+                        <li class="nav-item"><a href="#" class="nav-link active" data-nav="home">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-nav="projects">Projects</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-nav="source">Source</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-nav="settings">Settings</a></li>
+                    </ul>
+                    <button type="button" class="btn-search-icon" aria-label="Search Settings" id="btn-search-nav">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </nav>
+            </header>
+
+            <!-- SECTION 2: 4-PILL TAB CHANNELS (Exactly modeled from sample1.jpg) -->
+            <section class="pill-tabs-row" aria-label="Configuration Panels">
+                <!-- Tab 1: UI (Blue Pill) -->
+                <button type="button" class="tab-pill-btn pill-blue active" id="tab-pill-ui" data-panel="panel-ui" aria-controls="panel-ui" aria-selected="true" role="tab">
+                    <span class="pill-glow-highlight"></span>
+                    <span class="tab-label">UI</span>
+                </button>
+
+                <!-- Tab 2: UX (Purple Pill) -->
+                <button type="button" class="tab-pill-btn pill-purple" id="tab-pill-ux" data-panel="panel-ux" aria-controls="panel-ux" aria-selected="false" role="tab">
+                    <span class="pill-glow-highlight"></span>
+                    <span class="tab-label">UX</span>
+                </button>
+
+                <!-- Tab 3: Accessibility (Orange Pill) -->
+                <button type="button" class="tab-pill-btn pill-orange" id="tab-pill-accessibility" data-panel="panel-accessibility" aria-controls="panel-accessibility" aria-selected="false" role="tab">
+                    <span class="pill-glow-highlight"></span>
+                    <span class="tab-label">Accessibility</span>
+                </button>
+
+                <!-- Tab 4: Editor (Pink Pill) -->
+                <button type="button" class="tab-pill-btn pill-pink" id="tab-pill-editor" data-panel="panel-editor" aria-controls="panel-editor" aria-selected="false" role="tab">
+                    <span class="pill-glow-highlight"></span>
+                    <span class="tab-label">Editor</span>
+                </button>
+            </section>
+
+            <!-- SECTION 3: FORM CONTENT WORKSPACE -->
+            <form id="claymorphic-dashboard-form" action="#" method="POST" novalidate>
+                
+                <!-- ================= PANEL 1: UI METRICS & SLIDERS (Direct Image Replication) ================= -->
+                <section class="form-content-panel active" id="panel-ui" role="tabpanel" aria-labelledby="tab-pill-ui">
+                    <div class="clay-metrics-grid">
+                        
+                        <!-- Left Metric Card: Evaluation -->
+                        <div class="clay-inner-card elevated-3d">
+                            <div class="metric-header">
+                                <h3 class="metric-title" id="lbl-ui-eval">Evaluation</h3>
+                                <div class="metric-value-container">
+                                    <span class="metric-percentage" id="ui-eval-percent-val">150%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 3D Debossed Range Slider Track -->
+                            <div class="slider-track-wrap">
+                                <div class="slider-fill-ribbon-cyan" id="ui-eval-fill-track" style="width: 75%;"></div>
+                                <input type="range" id="input-ui-evaluation" min="0" max="200" value="150" class="range-slider-debossed" aria-labelledby="lbl-ui-eval" aria-valuemin="0" aria-valuemax="200" aria-valuenow="150">
+                            </div>
+
+                            <div class="metric-footer-labels">
+                                <div class="footer-lbl-left">
+                                    <span class="sub-lbl-title">Branding</span>
+                                    <span class="sub-lbl-desc">Reports</span>
+                                </div>
+                                <div class="footer-lbl-right">
+                                    <span class="sub-lbl-title text-right">Technical</span>
+                                    <span class="sub-lbl-desc text-right">Audits</span>
+                                </div>
+                            </div>
+
+                            <!-- Small Secondary Adjuster Slider -->
+                            <div class="slider-track-wrap-small">
+                                <div class="slider-fill-ribbon-grey" id="ui-eval-sub-fill" style="width: 40%;"></div>
+                                <input type="range" id="input-ui-evaluation-sub" min="0" max="100" value="40" class="range-slider-debossed-small" aria-label="Secondary UI Evaluation Adjustment">
+                            </div>
+                        </div>
+
+                        <!-- Right Metric Card: Exploration -->
+                        <div class="clay-inner-card elevated-3d">
+                            <div class="metric-header">
+                                <h3 class="metric-title" id="lbl-ui-exp">Exploration</h3>
+                                <div class="metric-value-container">
+                                    <span class="metric-percentage" id="ui-exp-percent-val">120%</span>
+                                </div>
+                            </div>
+
+                            <!-- 3D Debossed Range Slider Track -->
+                            <div class="slider-track-wrap">
+                                <div class="slider-fill-ribbon-pink" id="ui-exp-fill-track" style="width: 60%;"></div>
+                                <input type="range" id="input-ui-exploration" min="0" max="200" value="120" class="range-slider-debossed" aria-labelledby="lbl-ui-exp" aria-valuemin="0" aria-valuemax="200" aria-valuenow="120">
+                            </div>
+
+                            <div class="metric-footer-labels">
+                                <div class="footer-lbl-left">
+                                    <span class="sub-lbl-title">Running</span>
+                                    <span class="sub-lbl-desc">Expenses</span>
+                                </div>
+                                <div class="footer-lbl-right">
+                                    <span class="sub-lbl-title text-right">Testing</span>
+                                    <span class="sub-lbl-desc text-right">Exports</span>
+                                </div>
+                            </div>
+
+                            <!-- Small Secondary Adjuster Slider -->
+                            <div class="slider-track-wrap-small">
+                                <div class="slider-fill-ribbon-grey" id="ui-exp-sub-fill" style="width: 30%;"></div>
+                                <input type="range" id="input-ui-exploration-sub" min="0" max="100" value="30" class="range-slider-debossed-small" aria-label="Secondary UI Exploration Adjustment">
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ================= PANEL 2: UX USER PROFILE (Standard Form Elements) ================= -->
+                <section class="form-content-panel" id="panel-ux" role="tabpanel" aria-labelledby="tab-pill-ux">
+                    <div class="panel-intro">
+                        <h2 class="panel-section-title">UX Profile Settings</h2>
+                        <p class="panel-section-desc">Manage applicant account identification, credentials, and custom organizational roles.</p>
+                    </div>
+
+                    <div class="clay-form-grid">
+                        <!-- Full Name (Floating Label) -->
+                        <div class="clay-form-group floating-group">
+                            <input type="text" id="input-full-name" class="clay-input debossed" placeholder=" " required autocomplete="name">
+                            <label for="input-full-name" class="clay-floating-label">Full Name</label>
+                            <span class="clay-input-helper">Enter first and last legal names.</span>
+                        </div>
+
+                        <!-- Email Address (Floating Label with Active Validation Status) -->
+                        <div class="clay-form-group floating-group has-validation-badge" id="group-email">
+                            <input type="email" id="input-email-address" class="clay-input debossed" placeholder=" " required autocomplete="email">
+                            <label for="input-email-address" class="clay-floating-label">Email Address</label>
+                            <span class="validation-badge-status success-banner" id="badge-email-valid">✓ Valid Format</span>
+                            <span class="validation-badge-status error-banner" id="badge-email-invalid">✗ Check Email</span>
+                            <span class="clay-input-helper">Primary communication address (e.g. name@domain.com).</span>
+                        </div>
+
+                        <!-- Password (Eye Toggle & Live Strength Liquid Track) -->
+                        <div class="clay-form-group floating-group full-width-field" id="group-password">
+                            <div class="password-input-container">
+                                <input type="password" id="input-password-field" class="clay-input debossed" placeholder=" " required autocomplete="new-password">
+                                <label for="input-password-field" class="clay-floating-label">Secure Access Key</label>
+                                <button type="button" class="btn-password-eye-toggle" id="btn-pass-toggle" title="Toggle password visibility">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="eye-icon-open" id="eye-open-svg">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="eye-icon-closed" id="eye-closed-svg" style="display: none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="password-gauge-container">
+                                <div class="gauge-bar-track">
+                                    <div class="gauge-bar-fill" id="pass-strength-gauge"></div>
+                                </div>
+                                <span class="gauge-bar-lbl" id="pass-strength-text">Strength: Empty</span>
+                            </div>
+                        </div>
+
+                        <!-- Custom Premium Select Dropdown (Glass-styled options list) -->
+                        <div class="clay-form-group full-width-field">
+                            <label class="clay-group-title">Organization Assignment (Role Title)</label>
+                            <div class="clay-custom-select-wrapper" id="custom-role-select-box">
+                                <div class="clay-select-field debossed" id="selected-role-display">
+                                    <span class="selected-text-val" id="text-role-current">Select your target assignment...</span>
+                                    <span class="select-chevron-indicator">▼</span>
+                                </div>
+                                <ul class="clay-select-options-list" id="list-role-options">
+                                    <li class="option-item" data-value="ux-arch">Senior Experience Architect</li>
+                                    <li class="option-item" data-value="ui-eng">Principal Interface Engineer</li>
+                                    <li class="option-item" data-value="a11y-cons">Lead Accessibility Consultant</li>
+                                    <li class="option-item" data-value="plat-dir">Platform Product Director</li>
+                                    <li class="option-item" data-value="ai-research">Applied Interaction Researcher</li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="input-selected-role-hidden" name="user-role" value="">
+                            <span class="clay-input-helper">Assigns target platform permissions for form blueprints.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= PANEL 3: ACCESSIBILITY & SYSTEMS (Toggles, Radios & Checkboxes) ================= -->
+                <section class="form-content-panel" id="panel-accessibility" role="tabpanel" aria-labelledby="tab-pill-accessibility">
+                    <div class="panel-intro">
+                        <h2 class="panel-section-title">Accessibility &amp; Environment Settings</h2>
+                        <p class="panel-section-desc">A11y display parameters, switch toggles, custom interactive checkboxes, and environments.</p>
+                    </div>
+
+                    <div class="clay-form-grid">
+                        <!-- Boolean Slide Switches -->
+                        <div class="clay-form-group">
+                            <label class="clay-group-title">Boolean Toggles (Slide Switches)</label>
+                            <div class="clay-debossed-panel-box toggles-stack">
+                                <div class="toggle-control-item">
+                                    <span class="toggle-name-lbl">High Contrast Theme</span>
+                                    <label class="clay-switch-btn" for="toggle-high-contrast">
+                                        <input type="checkbox" id="toggle-high-contrast">
+                                        <span class="switch-ball-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="toggle-control-item">
+                                    <span class="toggle-name-lbl">Screen Reader Compatibility</span>
+                                    <label class="clay-switch-btn" for="toggle-screen-reader">
+                                        <input type="checkbox" id="toggle-screen-reader" checked>
+                                        <span class="switch-ball-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Stylized Checkboxes -->
+                        <div class="clay-form-group">
+                            <label class="clay-group-title">Functional Checklist Toggles</label>
+                            <div class="clay-debossed-panel-box checkboxes-stack">
+                                <label class="custom-checkbox-wrapper" for="chk-newsletter">
+                                    <input type="checkbox" id="chk-newsletter" class="hidden-native-chk">
+                                    <span class="custom-chk-box">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4.5" class="chk-check-svg">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                    <span class="chk-description-lbl">Subscribe to interface audit notifications</span>
+                                </label>
+
+                                <label class="custom-checkbox-wrapper" for="chk-privacy-policy">
+                                    <input type="checkbox" id="chk-privacy-policy" class="hidden-native-chk" checked required>
+                                    <span class="custom-chk-box">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4.5" class="chk-check-svg">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                    <span class="chk-description-lbl">Acknowledge telemetry data privacy policy</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Neumorphic Grid Radio Selection Cards -->
+                        <div class="clay-form-group full-width-field">
+                            <label class="clay-group-title">Layout Node (Neumorphic Grid Selection Cards)</label>
+                            <div class="neumorphic-radio-grid">
+                                <!-- Option 1: Development -->
+                                <label class="radio-selection-card active" id="card-node-dev">
+                                    <input type="radio" name="system-env-node" value="development" class="native-radio-hidden" checked>
+                                    <div class="radio-card-body">
+                                        <div class="radio-3d-dot marble-glow-cyan"></div>
+                                        <div class="radio-card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                <polyline points="16 18 22 12 16 6"></polyline>
+                                                <polyline points="8 6 2 12 8 18"></polyline>
+                                            </svg>
+                                        </div>
+                                        <div class="radio-card-texts">
+                                            <span class="radio-card-title">Development Sandbox</span>
+                                            <span class="radio-card-desc">Detailed logs, active debugging tools, and sandbox telemetry compiling.</span>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 2: Staging -->
+                                <label class="radio-selection-card" id="card-node-staging">
+                                    <input type="radio" name="system-env-node" value="staging" class="native-radio-hidden">
+                                    <div class="radio-card-body">
+                                        <div class="radio-3d-dot marble-glow-cyan"></div>
+                                        <div class="radio-card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                            </svg>
+                                        </div>
+                                        <div class="radio-card-texts">
+                                            <span class="radio-card-title">Staging Environment</span>
+                                            <span class="radio-card-desc">Pre-production test node mirroring cluster performance.</span>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 3: Production -->
+                                <label class="radio-selection-card" id="card-node-production">
+                                    <input type="radio" name="system-env-node" value="production" class="native-radio-hidden">
+                                    <div class="radio-card-body">
+                                        <div class="radio-3d-dot marble-glow-cyan"></div>
+                                        <div class="radio-card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="radio-card-texts">
+                                            <span class="radio-card-title">Production Shield</span>
+                                            <span class="radio-card-desc">High security optimization. Core logs compressed. Live cluster active.</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= PANEL 4: EDITOR & ASSETS (Upload, Themes & Action States) ================= -->
+                <section class="form-content-panel" id="panel-editor" role="tabpanel" aria-labelledby="tab-pill-editor">
+                    <div class="panel-intro">
+                        <h2 class="panel-section-title">Editor Configuration</h2>
+                        <p class="panel-section-desc">Upload validation credentials, customize accent styling theme, and compile blueprints.</p>
+                    </div>
+
+                    <div class="clay-form-grid">
+                        <!-- Date & Time Pickers -->
+                        <div class="clay-form-group">
+                            <label for="input-target-date" class="clay-group-title">Target Launch Date</label>
+                            <input type="date" id="input-target-date" class="clay-input debossed date-picker-element" required>
+                            <span class="clay-input-helper">Select blueprint active release target.</span>
+                        </div>
+
+                        <div class="clay-form-group">
+                            <label for="input-target-time" class="clay-group-title">Target Sync Hour</label>
+                            <input type="time" id="input-target-time" class="clay-input debossed time-picker-element" value="09:00">
+                            <span class="clay-input-helper">Specify a suitable daily sync window.</span>
+                        </div>
+
+                        <!-- 3D Color Picker Accent Theme -->
+                        <div class="clay-form-group full-width-field" id="color-accent-field-group">
+                            <label class="clay-group-title">3D Accent Color Tone Modifier</label>
+                            <div class="clay-debossed-panel-box color-picker-flex">
+                                <div class="color-picker-orb-container">
+                                    <input type="color" id="input-accent-color-picker" class="clay-native-color-picker" value="#0284c7">
+                                </div>
+                                <div class="color-picker-metadata">
+                                    <span class="color-value-badge" id="badge-color-accent-hex">#0284C7</span>
+                                    <span class="clay-input-helper">Click the 3D gel bubble to dynamically repaint buttons, ranges, and indicators.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Drag and Drop File Upload Capsule -->
+                        <div class="clay-form-group full-width-field">
+                            <label class="clay-group-title">Security Blueprint Credentials (Drag &amp; Drop)</label>
+                            <div class="clay-file-drop-zone debossed" id="blueprint-drag-drop-zone">
+                                <input type="file" id="input-blueprint-file" class="hidden-native-file-input" accept=".pdf,.png,.jpg,.jpeg">
+                                
+                                <div class="drop-zone-idle-state" id="drop-zone-idle">
+                                    <div class="drop-zone-icon-container">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="drop-zone-details">
+                                        <p class="drop-text-primary">Drag &amp; drop key credential document, or <span class="browse-files-highlight">browse files</span></p>
+                                        <p class="drop-text-secondary">Accepts PDF, PNG, or JPG formats (Maximum size 5MB)</p>
+                                    </div>
+                                </div>
+
+                                <!-- File Upload Progress / Uploaded Capsule -->
+                                <div class="file-loaded-status-card" id="file-status-card" style="display: none;">
+                                    <div class="file-card-header-row">
+                                        <div class="file-type-icon">📄</div>
+                                        <div class="file-meta-texts">
+                                            <span class="file-name-title" id="loaded-file-name-lbl">credential_cert.pdf</span>
+                                            <span class="file-size-subtitle" id="loaded-file-size-lbl">1.4 MB</span>
+                                        </div>
+                                        <button type="button" class="btn-clear-loaded-file" id="btn-clear-blueprint-file" title="Clear uploaded document">×</button>
+                                    </div>
+                                    <div class="file-upload-bar-track">
+                                        <div class="file-upload-bar-fill" id="file-upload-progress-fill-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons Grid Showcase -->
+                        <div class="clay-form-group full-width-field">
+                            <label class="clay-group-title">Form Interactive Button State Showcase</label>
+                            <div class="clay-debossed-panel-box buttons-showcase-container">
+                                <div class="btn-state-capsule">
+                                    <span class="btn-state-lbl">Solid Primary</span>
+                                    <button type="button" class="btn-reference btn-solid-primary-accent">Snapshot</button>
+                                </div>
+                                <div class="btn-state-capsule">
+                                    <span class="btn-state-lbl">Glossy Gel</span>
+                                    <button type="button" class="btn-reference btn-glossy-cyan-gel">Sync Node</button>
+                                </div>
+                                <div class="btn-state-capsule">
+                                    <span class="btn-state-lbl">Outline Slate</span>
+                                    <button type="button" class="btn-reference btn-outline-slate-grey">Cancel</button>
+                                </div>
+                                <div class="btn-state-capsule">
+                                    <span class="btn-state-lbl">Destructive Danger</span>
+                                    <button type="button" class="btn-reference btn-danger-red-3d">Purge</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 4: ACTIONS NAVIGATION FOOTER BAR -->
+                <footer class="form-navigation-footer">
+                    <!-- Prev Button -->
+                    <button type="button" class="btn-navigation-debossed" id="btn-step-prev" style="visibility: hidden;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-back-icon">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                        <span>Previous Section</span>
+                    </button>
+
+                    <!-- Next / Submit Button (Starts as Next Step, turns into Compile Blueprint in Editor step) -->
+                    <button type="button" class="btn-navigation-glossy-gel" id="btn-step-next">
+                        <span id="label-next-btn-text">Next Section</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="svg-next-icon" id="icon-next-btn-svg">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </footer>
+
+            </form>
+
+            <!-- SECTION 5: FOOTER PROGRESS BULLET & KEYBOARD REFERENCE (Exactly matching bottom elements of sample1.jpg) -->
+            <footer class="dashboard-footer-status">
+                <div class="completion-gauge-capsule">
+                    <span class="gauge-lbl">Configuration progress:</span>
+                    <div class="capsule-slate-outer" id="gauge-container-capsule">
+                        <span class="capsule-fill-val" id="text-gauge-percentage">25%</span>
+                    </div>
+                </div>
+
+                <!-- Keyboard arrows from bottom right of sample1.jpg -->
+                <div class="keyboard-guide-icons" aria-hidden="true" title="System Keyboard Navigation Active">
+                    <span class="key-cap-item">▲</span>
+                    <span class="key-cap-item">▼</span>
+                    <span class="key-cap-item">◀</span>
+                    <span class="key-cap-item">▶</span>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- SECTION 6: BLUEPRINT SUBMISSION SUCCESS MODAL OVERLAY -->
+    <div id="compilation-modal-overlay" class="modal-overlay-backdrop" role="dialog" aria-modal="true" aria-labelledby="compilation-success-title" style="display: none;">
+        <div class="success-blueprint-modal clay-board 3d-pop-modal">
+            
+            <header class="modal-header-capsule">
+                <h2 class="modal-header-title-text" id="compilation-success-title">Blueprint Compilation Complete</h2>
+                <button type="button" class="btn-close-modal-x" id="btn-close-submission-overlay" aria-label="Close dialog">×</button>
+            </header>
+
+            <div class="modal-body-scrollable">
+                <div class="neomorphic-score-row">
+                    <!-- Progress Radial Circle -->
+                    <div class="circular-radial-progress">
+                        <svg class="ring-progress-svg" width="120" height="120">
+                            <circle class="radial-ring-bg" stroke="rgba(0, 0, 0, 0.05)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"></circle>
+                            <circle class="radial-ring-fill" id="radial-score-indicator-circle" stroke="#0284c7" stroke-width="10" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314.15" stroke-dashoffset="0"></circle>
+                        </svg>
+                        <div class="radial-text-content">
+                            <span class="radial-percentage-text" id="modal-metric-percentage">100%</span>
+                            <span class="radial-status-text">Compiled</span>
+                        </div>
+                    </div>
+
+                    <!-- Details Table -->
+                    <div class="compiled-details-manifest">
+                        <div class="manifest-detail-item">
+                            <span class="manifest-lbl">Configuration Node:</span>
+                            <span class="manifest-val text-bold" id="manifest-val-node">Development Sandbox</span>
+                        </div>
+                        <div class="manifest-detail-item">
+                            <span class="manifest-lbl">Applicant Architect:</span>
+                            <span class="manifest-val text-bold" id="manifest-val-name">Pravin Sharma</span>
+                        </div>
+                        <div class="manifest-detail-item">
+                            <span class="manifest-lbl">Role Assignment:</span>
+                            <span class="manifest-val text-bold" id="manifest-val-role">-</span>
+                        </div>
+                        <div class="manifest-detail-item">
+                            <span class="manifest-lbl">System Target:</span>
+                            <span class="manifest-val text-bold" id="manifest-val-sync">Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="manifest-table-title">Dynamic Compiled Values</h3>
+                <div class="manifest-scrollable-table-wrap">
+                    <table class="manifest-data-table">
+                        <thead>
+                            <tr>
+                                <th>System Element</th>
+                                <th>Active Config Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-table-data-tbody">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="manifest-table-title">System Compiling Operations Logs</h3>
+                <pre class="compilation-terminal-output" id="modal-compilation-console-logs">
+[BLUEPRINT-CORE] Initiating form validation compiler stream...
+[BLUEPRINT-CORE] Validating security tokens & inputs...
+[BLUEPRINT-CORE] Processing dynamic slider levels (UI/UX)...
+[BLUEPRINT-CORE] Telemetry data privacy policy checked.
+[BLUEPRINT-CORE] Drag and Drop upload credentials verified.
+[SUCCESS] Compilation complete. Build sheet generated.
+                </pre>
+            </div>
+
+            <footer class="modal-footer-capsule">
+                <button type="button" class="btn-navigation-glossy-gel" id="btn-modal-download-blueprint">Download Blueprint Configuration</button>
+                <button type="button" class="btn-navigation-debossed" id="btn-modal-dismiss">Dismiss</button>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- Interactivity controller script -->
+    <script src="script.js"></script>
+</body>
+</html>

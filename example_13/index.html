@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeuomorphic Neumorphic Form & Control Center — Example 13</title>
+    <meta name="description" content="A premium, ultra-tactile Neumorphic (Soft UI) Dashboard & Control Panel with double-shadow skeuomorphic buttons, range sliders, progress rings, and interactive forms.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Ambient glowing decorative backgrounds for studio rendering look -->
+    <div class="ambient-glow glow-gold"></div>
+    <div class="ambient-glow glow-blue"></div>
+
+    <div class="studio-reflection-floor"></div>
+
+    <div class="dashboard-viewport">
+        <!-- Main Extruded Neumorphic Plate -->
+        <main class="control-center" id="controlCenterPanel">
+            
+            <!-- 1. HEADER ROW: Logo, Sunken Search, Dropdown Select -->
+            <header class="control-header">
+                <div class="header-logo-group">
+                    <span class="logo-dot"></span>
+                    <div>
+                        <h1 class="logo-title">SOFTUI-13</h1>
+                        <p class="logo-subtitle">SKEUOMORPHIC CONTROLS</p>
+                    </div>
+                </div>
+
+                <!-- Sunken Search Bar -->
+                <div class="search-bar-wrap">
+                    <div class="search-input-inner">
+                        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="searchInput" class="search-input" placeholder="SEARCH SYSTEM..." aria-label="Search System">
+                    </div>
+                </div>
+
+                <!-- Custom Dropdown Selector -->
+                <div class="dropdown-wrapper">
+                    <button class="dropdown-trigger-btn" id="dropdownTrigger" aria-expanded="false" aria-haspopup="listbox">
+                        <span id="selectedDropdownValue">HOME</span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <!-- Expanded Dropdown Menu Panel (Extruded Plate) -->
+                    <ul class="dropdown-menu-list" id="dropdownMenu" role="listbox" aria-label="Navigation Sections">
+                        <li class="dropdown-item active" role="option" data-val="HOME" aria-selected="true">
+                            <span>HOME PAGE</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                        <li class="dropdown-item" role="option" data-val="ANALYTICS" aria-selected="false">
+                            <span>ANALYTICS</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                        <li class="dropdown-item" role="option" data-val="METRICS" aria-selected="false">
+                            <span>METRICS</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                        <li class="dropdown-item" role="option" data-val="SETTINGS" aria-selected="false">
+                            <span>SETTINGS</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- 2. MAIN GRID LAYOUT -->
+            <div class="control-grid">
+                
+                <!-- COLUMN A: INTERACTIVE LOGIN FORM -->
+                <section class="grid-column col-left">
+                    <div class="neumorphic-card raised-card" id="loginCard">
+                        <div class="card-header">
+                            <h2 class="card-title">USER AUTHENTICATION</h2>
+                            <p class="card-subtitle">TACTILE SIGN IN SECURE NODE</p>
+                        </div>
+                        
+                        <form id="authForm" class="card-form" novalidate>
+                            <!-- Input 1: Login (Sunken Field) -->
+                            <div class="form-group">
+                                <label for="loginUsername" class="group-label">LOGIN IDENTIFIER</label>
+                                <div class="input-sunken-wrap" id="usernameFieldWrap">
+                                    <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <input type="text" id="loginUsername" class="tactile-input" placeholder="ENTER USERNAME..." autocomplete="username" required>
+                                    <span class="status-indicator" id="usernameStatus"></span>
+                                </div>
+                                <span class="validation-message" id="usernameError"></span>
+                            </div>
+
+                            <!-- Input 2: Password (Sunken Field) -->
+                            <div class="form-group">
+                                <label for="loginPassword" class="group-label">SECURITY KEYPASS</label>
+                                <div class="input-sunken-wrap" id="passwordFieldWrap">
+                                    <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    <input type="password" id="loginPassword" class="tactile-input" placeholder="ENTER PASSWORD..." autocomplete="current-password" required>
+                                    
+                                    <!-- Toggle Visibility Eye -->
+                                    <button type="button" class="password-toggle-btn" id="passwordToggle" aria-label="Toggle password visibility">
+                                        <svg id="eyeOpenIcon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                        <svg id="eyeClosedIcon" class="hidden" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        </svg>
+                                    </button>
+                                    
+                                    <span class="status-indicator" id="passwordStatus"></span>
+                                </div>
+                                <span class="validation-message" id="passwordError"></span>
+                                
+                                <!-- Password Strength debossed line -->
+                                <div class="strength-meter-container">
+                                    <div class="strength-meter-bar" id="strengthBar"></div>
+                                </div>
+                            </div>
+
+                            <!-- Remember Me Dot Switch -->
+                            <div class="remember-row">
+                                <label class="custom-radio-container" id="rememberLabel">
+                                    <input type="checkbox" id="rememberMeCheckbox" class="hidden-checkbox">
+                                    <span class="radio-sunken-dot">
+                                        <span class="radio-active-core"></span>
+                                    </span>
+                                    <span class="remember-label-text">REMEMBER NODE CONNECTION</span>
+                                </label>
+                            </div>
+
+                            <!-- Buttons Row: Extruded Pills -->
+                            <div class="form-actions-row">
+                                <button type="submit" class="action-btn btn-login" id="btnLoginSubmit">
+                                    <span class="btn-highlight-gloss"></span>
+                                    <span class="btn-text">LOGIN</span>
+                                </button>
+                                <button type="button" class="action-btn btn-cancel" id="btnCancel">
+                                    <span class="btn-highlight-gloss"></span>
+                                    <span class="btn-text">CANCEL</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Auxiliary Raised Forgotten Password Plate -->
+                    <button class="forgot-pass-plate" id="btnForgotPass">
+                        <span class="plate-gloss"></span>
+                        <div class="plate-content">
+                            <svg class="lock-plate-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span class="plate-text">FORGOT KEY ACCESS CREDENTIALS?</span>
+                        </div>
+                    </button>
+                </section>
+
+                <!-- COLUMN B: SYSTEM CONTROLS & METRICS -->
+                <section class="grid-column col-right">
+                    
+                    <!-- Box 1: Range Sliders -->
+                    <div class="neumorphic-card raised-card inner-card-block">
+                        <h3 class="section-card-title">VOLUME TRANSLATION</h3>
+                        
+                        <!-- Primary Orange Range Slider -->
+                        <div class="slider-group">
+                            <div class="slider-header-info">
+                                <span class="slider-label-main">AMPLITUDE</span>
+                                <span class="slider-percentage-val" id="primarySliderVal">45%</span>
+                            </div>
+                            <!-- Sunken track containing the input -->
+                            <div class="sunken-slider-track">
+                                <!-- Gradient Active Ribbon Fill -->
+                                <div class="slider-gradient-fill" id="primarySliderFill" style="width: 45%;"></div>
+                                <input type="range" id="primarySlider" min="0" max="100" value="45" class="neumorphic-range" aria-label="System Amplitude">
+                            </div>
+                            <div class="slider-footer-labels">
+                                <div class="lbl-col">
+                                    <span class="footer-lbl-title">EVALUATION</span>
+                                    <span class="footer-lbl-sub">SYSTEM STATUS</span>
+                                </div>
+                                <div class="lbl-col text-right">
+                                    <span class="footer-lbl-title">NORMALIZED</span>
+                                    <span class="footer-lbl-sub">MODE ACTIVE</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Smaller Slider -->
+                        <div class="slider-group-small">
+                            <div class="slider-header-info">
+                                <span class="slider-label-sub">AUX GAIN DAMPING</span>
+                                <span class="slider-percentage-val-sub" id="secondarySliderVal">72%</span>
+                            </div>
+                            <div class="sunken-slider-track-small">
+                                <div class="slider-grey-fill" id="secondarySliderFill" style="width: 72%;"></div>
+                                <input type="range" id="secondarySlider" min="0" max="100" value="72" class="neumorphic-range-small" aria-label="Aux Gain Damping">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: Toggles, Binary Buttons & Circular Progress -->
+                    <div class="controls-subset-grid">
+                        
+                        <!-- Mini Card: Toggles and Binary Selects -->
+                        <div class="neumorphic-card raised-card inner-card-block flex-col gap-medium">
+                            <div>
+                                <h3 class="section-card-title">NODE STABILITY</h3>
+                            </div>
+                            
+                            <!-- Double Toggles Container -->
+                            <div class="toggle-switch-pair">
+                                <!-- Switch 1: Active Orange Switch -->
+                                <div class="switch-control">
+                                    <span class="switch-label">COHERENCE</span>
+                                    <button class="capsule-toggle-track active" id="toggleCoherence" aria-pressed="true" aria-label="Toggle Coherence">
+                                        <span class="capsule-toggle-knob"></span>
+                                    </button>
+                                </div>
+
+                                <!-- Switch 2: Inactive Grey Switch -->
+                                <div class="switch-control">
+                                    <span class="switch-label">ISOLATION</span>
+                                    <button class="capsule-toggle-track" id="toggleIsolation" aria-pressed="false" aria-label="Toggle Isolation">
+                                        <span class="capsule-toggle-knob"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Custom Binary Block Toggle Buttons -->
+                            <div class="binary-button-sets">
+                                <!-- Set A: YES / NO -->
+                                <div class="binary-set">
+                                    <button class="binary-btn active" id="btnYes" aria-pressed="true">YES</button>
+                                    <button class="binary-btn" id="btnNo" aria-pressed="false">NO</button>
+                                </div>
+
+                                <!-- Set B: ON / OFF -->
+                                <div class="binary-set">
+                                    <button class="binary-btn" id="btnOn" aria-pressed="false">ON</button>
+                                    <button class="binary-btn active" id="btnOff" aria-pressed="true">OFF</button>
+                                </div>
+                            </div>
+
+                            <!-- Custom Checkboxes & Radios Grid -->
+                            <div class="selections-grid">
+                                <label class="custom-selection-label">
+                                    <input type="checkbox" class="hidden-selection-input" id="checkOpt1" checked>
+                                    <span class="checkbox-sunken-box">
+                                        <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="4.5" fill="none" class="selection-check-svg">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                    <span class="selection-text-label">SECURE ENCRYPT</span>
+                                </label>
+
+                                <label class="custom-selection-label">
+                                    <input type="checkbox" class="hidden-selection-input" id="checkOpt2">
+                                    <span class="checkbox-sunken-box">
+                                        <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="4.5" fill="none" class="selection-check-svg">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                    <span class="selection-text-label">VERIFY DATA</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Mini Card: Circular Progress Indicator -->
+                        <div class="neumorphic-card raised-card inner-card-block flex-center flex-col">
+                            <h3 class="section-card-title text-center margin-bottom-small">CLOUD TRANSFER</h3>
+                            
+                            <!-- Neumorphic Ring container -->
+                            <div class="radial-loader-container">
+                                <div class="radial-ring-recessed">
+                                    <svg class="radial-svg" width="120" height="120">
+                                        <!-- Sunken dark background track -->
+                                        <circle class="radial-track" cx="60" cy="60" r="48"></circle>
+                                        <!-- Glowing orange indicator active dash -->
+                                        <circle class="radial-indicator" id="radialProgressCircle" cx="60" cy="60" r="48" stroke-dasharray="301.6" stroke-dashoffset="226.2"></circle>
+                                    </svg>
+                                    <!-- Raised tactile central core pill -->
+                                    <div class="radial-core-raised">
+                                        <svg class="cloud-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                                        </svg>
+                                        <span class="radial-core-percentage" id="radialProgressText">25%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Raised Action sync button -->
+                            <button class="sync-action-btn" id="btnSyncAction">
+                                <span class="sync-btn-gloss"></span>
+                                <span class="sync-btn-text">RUN SYNC PROCESS</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 3. FOOTER TOOLBAR: Square Custom Icons Extruded -->
+            <footer class="control-footer-toolbar">
+                <div class="toolbar-flex">
+                    <!-- Button 1: Home (Active by default) -->
+                    <button class="toolbar-square-btn active" id="toolBtnHome" aria-label="Toolbar Home" title="System Dashboard Home">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Button 2: Heart (Inactive) -->
+                    <button class="toolbar-square-btn" id="toolBtnHeart" aria-label="Toolbar Favorites" title="System Favorites Health">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Button 3: Chat bubble -->
+                    <button class="toolbar-square-btn" id="toolBtnChat" aria-label="Toolbar Communications" title="Node Messaging Console">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Button 4: WiFi signal status -->
+                    <button class="toolbar-square-btn" id="toolBtnWifi" aria-label="Toolbar Connections" title="Wireless Node Frequency">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                        </svg>
+                    </button>
+
+                    <!-- Button 5: Bluetooth -->
+                    <button class="toolbar-square-btn" id="toolBtnBluetooth" aria-label="Toolbar Bluetooth" title="Local Area Pairing">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M6.5 6.5h11l-11 11h11"></path>
+                            <line x1="12" y1="2" x2="12" y2="22"></line>
+                        </svg>
+                    </button>
+
+                    <!-- Button 6: Mail mailbox -->
+                    <button class="toolbar-square-btn" id="toolBtnMail" aria-label="Toolbar Inbox" title="Network Secure Mailbox">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Button 7: Fullscreen / resize -->
+                    <button class="toolbar-square-btn" id="toolBtnResize" aria-label="Toolbar Window Action" title="Fit Viewport Aspect Ratio">
+                        <span class="tool-glow-ribbon"></span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <polyline points="9 21 3 21 3 15"></polyline>
+                            <line x1="21" y1="3" x2="14" y2="10"></line>
+                            <line x1="3" y1="21" x2="10" y2="14"></line>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+
+            <!-- 4. LIVE LOGS PANE: Real-time feedback for interactions -->
+            <section class="live-logger-wrap" aria-live="polite">
+                <div class="logger-header">
+                    <span class="logger-status-bullet"></span>
+                    <span class="logger-title">SYSTEM EVENTS & SECURITY VALIDATION LOGGER</span>
+                </div>
+                <div class="logger-output-container" id="logConsole">
+                    <div class="log-line text-info">&gt; System initialized. Secure neumorphic console online.</div>
+                    <div class="log-line text-info">&gt; Ready for local authentication request. Theme active: assets/sample1.webp</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notifications Element -->
+    <div id="toastContainer" class="toast-overlay" aria-live="assertive"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

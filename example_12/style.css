@@ -1,0 +1,1831 @@
+/* ==========================================================================
+   EXAMPLE 12: 3D CLAYMORPHIC DASHBOARD & FORM STYLESHEET
+   Accurately replicates the 3D visual language and elements of sample1.jpg
+   Incorporates high-fidelity claymorphic components and dynamic panels
+   ========================================================================== */
+
+/* 1. Design Tokens & Visual Theme Variables */
+:root {
+    /* Color Palette derived from sample1.jpg */
+    --color-bg-viewport: #0c0f16;      /* Deep space dark backdrop */
+    --color-bg-clay-board: #ecf0f8;    /* Soft, light off-white clay board base */
+    --color-nav-bg: #0b0d16;           /* Space capsule black navigation bar */
+    --color-text-dark: #1e2638;        /* Slate dark blue for body text */
+    --color-text-grey: #64748b;        /* Cool grey for subtitles */
+    --color-card-bg: #f8fafc;          /* Solid cards white background */
+    --color-border-neutral: #cbd5e1;   /* Soft slate borders */
+    
+    /* Active 3D Theme Accent (Repainted dynamically by color picker) */
+    --theme-accent: #0284c7;           /* Default Blue Accent */
+    --theme-accent-glow: rgba(2, 132, 199, 0.35);
+    --theme-accent-tint: #f0f9ff;      /* Light blue tint wash */
+    
+    /* 3D Tab Gradient Pill Presets */
+    --grad-ui: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    --grad-ux: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%);
+    --grad-accessibility: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+    --grad-editor: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+    
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Skeuomorphic & 3D Tactile Claymorphic Shadows */
+    /* Soft massive card elevation + double specular highlights for pillowy depth */
+    --shadow-clay-dashboard: 
+        0 45px 95px rgba(0, 0, 0, 0.65),
+        inset 0 3px 6px #ffffff,
+        inset 0 -3px 6px rgba(0, 0, 0, 0.08);
+
+    /* Inner card soft elevations */
+    --shadow-clay-card:
+        0 14px 30px rgba(30, 41, 59, 0.06),
+        inset 0 2px 4px #ffffff,
+        inset 0 -2px 4px rgba(0, 0, 0, 0.04);
+
+    /* Deep recessed mechanical inset for inputs, slider tracks, and switches */
+    --shadow-debossed-inset: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.08),
+        inset -2px -2px 5px #ffffff,
+        0 1px 0 rgba(255, 255, 255, 0.85);
+
+    /* 3D pill button bubble shadows */
+    --shadow-3d-pill-blue:
+        0 8px 20px rgba(2, 132, 199, 0.3),
+        inset 0 3px 5px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+
+    --shadow-3d-pill-purple:
+        0 8px 20px rgba(126, 34, 206, 0.3),
+        inset 0 3px 5px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+
+    --shadow-3d-pill-orange:
+        0 8px 20px rgba(234, 88, 12, 0.3),
+        inset 0 3px 5px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+
+    --shadow-3d-pill-pink:
+        0 8px 20px rgba(190, 18, 60, 0.3),
+        inset 0 3px 5px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+
+    /* Standard glossy button shadow */
+    --shadow-3d-button-accent:
+        0 8px 24px var(--theme-accent-glow),
+        inset 0 3px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.25);
+
+    /* Transitions */
+    --transition-standard: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.15s ease;
+}
+
+/* 2. Global Reset & Body Elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--color-bg-viewport);
+    font-family: var(--font-sans);
+    color: var(--color-text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 3. Decorative Studio Render Elements (Background orbs & reflective floor) */
+.ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.25;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.glow-orb-cyan {
+    top: -10%;
+    right: 10%;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, #38bdf8 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.glow-orb-pink {
+    bottom: -10%;
+    left: 5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f43f5e 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.studio-reflection-floor {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15vh;
+    background: linear-gradient(to top, rgba(12, 15, 22, 0.95) 0%, rgba(12, 15, 22, 0) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.studio-viewport-container {
+    width: 100%;
+    max-width: 1000px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 4. Main 3D Claymorphic Board Layout */
+.dashboard-window.clay-board {
+    background-color: var(--color-bg-clay-board);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+    box-shadow: var(--shadow-clay-dashboard);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Bevel highlight line at the absolute top edge */
+.dashboard-window.clay-board::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* 5. Navigation Header Capsule (Modeled from top bar of sample1.jpg) */
+.dashboard-navbar {
+    background-color: var(--color-nav-bg);
+    border-radius: 38px 38px 16px 16px;
+    padding: 22px 38px;
+    margin: 8px 8px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-left .nav-logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links-list {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+}
+
+.nav-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    position: relative;
+    padding: 4px 0;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active {
+    color: #ffffff;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2.5px;
+    background-color: #ffffff;
+    border-radius: 99px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Slate chiseled Search button */
+.btn-search-icon {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.btn-search-icon:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.btn-search-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* 6. Pill Tabs row (Row of 4 beautiful 3D pills) */
+.pill-tabs-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 36px 36px 12px 36px;
+    z-index: 4;
+}
+
+.tab-pill-btn {
+    border: none;
+    border-radius: 99px;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    outline: none;
+    user-select: none;
+    transition: var(--transition-standard);
+}
+
+/* Glassy white specular highlight ribbon on top edge of active buttons */
+.pill-glow-highlight {
+    position: absolute;
+    top: 4px;
+    left: 12%;
+    right: 12%;
+    height: 6px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 99px;
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--transition-standard);
+}
+
+.tab-pill-btn .tab-label {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--color-text-dark);
+    z-index: 2;
+    transition: var(--transition-standard);
+}
+
+/* Recessed state for unselected tabs */
+.tab-pill-btn {
+    background-color: var(--color-bg-clay-board);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.02),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(0,0,0,0.04);
+}
+
+.tab-pill-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 14px rgba(0,0,0,0.05),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(0,0,0,0.04);
+}
+
+/* Selected active pill states */
+.tab-pill-btn.active {
+    transform: translateY(0) scale(1.02);
+}
+
+.tab-pill-btn.active .tab-label {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.tab-pill-btn.active .pill-glow-highlight {
+    opacity: 1;
+}
+
+/* Gradient themes and active shadows modeled from image */
+.tab-pill-btn.pill-blue.active {
+    background: var(--grad-ui);
+    box-shadow: var(--shadow-3d-pill-blue);
+    border: 1px solid #38bdf8;
+}
+
+.tab-pill-btn.pill-purple.active {
+    background: var(--grad-ux);
+    box-shadow: var(--shadow-3d-pill-purple);
+    border: 1px solid #c084fc;
+}
+
+.tab-pill-btn.pill-orange.active {
+    background: var(--grad-accessibility);
+    box-shadow: var(--shadow-3d-pill-orange);
+    border: 1px solid #fb923c;
+}
+
+.tab-pill-btn.pill-pink.active {
+    background: var(--grad-editor);
+    box-shadow: var(--shadow-3d-pill-pink);
+    border: 1px solid #f43f5e;
+}
+
+/* 7. Sub-form Panels Interactivity */
+.form-content-panel {
+    display: none;
+    flex-direction: column;
+    padding: 12px 36px 36px 36px;
+    animation: panelTransition 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.form-content-panel.active {
+    display: flex;
+}
+
+@keyframes panelTransition {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.panel-intro {
+    margin-bottom: 24px;
+    border-left: 4.5px solid var(--theme-accent);
+    padding-left: 14px;
+    transition: border-color var(--transition-standard);
+}
+
+.panel-section-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.panel-section-desc {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-text-grey);
+    margin-top: 3px;
+}
+
+/* 8. PANEL 1: UI METRICS (Exact layout of sample1.jpg) */
+.clay-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    width: 100%;
+}
+
+.clay-inner-card.elevated-3d {
+    background-color: var(--color-bg-clay-board);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: var(--shadow-clay-card);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.metric-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    letter-spacing: 0.02em;
+}
+
+.metric-percentage {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    font-family: var(--font-sans);
+}
+
+/* Custom 3D Sliders tracks (Physical debossed indents in clay) */
+.slider-track-wrap {
+    height: 18px;
+    background-color: #cbd5e1;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 99px;
+    box-shadow: var(--shadow-debossed-inset);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Cyan slide fill (Evaluation card) */
+.slider-fill-ribbon-cyan {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+    border-radius: 99px 0 0 99px;
+    pointer-events: none;
+}
+
+/* Pink slide fill (Exploration card) */
+.slider-fill-ribbon-pink {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #ec4899 0%, #f43f5e 50%, #f97316 100%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+    border-radius: 99px 0 0 99px;
+    pointer-events: none;
+}
+
+/* Debossed Range Inputs overrides */
+.range-slider-debossed {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    margin: 0;
+}
+
+/* Glossy white spherical knob with specular highlight overlay */
+.range-slider-debossed::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.15), 
+        inset 0 3px 4px #ffffff,
+        inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.range-slider-debossed::-webkit-slider-thumb:hover {
+    transform: scale(1.08);
+}
+
+.range-slider-debossed::-webkit-slider-thumb:active {
+    transform: scale(0.96);
+}
+
+/* Standard slider thumb elements for Firefox */
+.range-slider-debossed::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #d1d5db;
+    box-shadow: 
+        0 4px 10px rgba(0, 0, 0, 0.15), 
+        inset 0 3px 4px #ffffff,
+        inset 0 -3px 4px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+/* Labels at bottom of cards */
+.metric-footer-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.footer-lbl-left, .footer-lbl-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-lbl-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.sub-lbl-desc {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--color-text-grey);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 1px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Small secondary adjust range slider */
+.slider-track-wrap-small {
+    height: 8px;
+    background-color: #cbd5e1;
+    border-radius: 99px;
+    box-shadow: var(--shadow-debossed-inset);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.slider-fill-ribbon-grey {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #94a3b8;
+    border-radius: 99px 0 0 99px;
+    pointer-events: none;
+}
+
+.range-slider-debossed-small {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    margin: 0;
+}
+
+.range-slider-debossed-small::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px #ffffff;
+    cursor: pointer;
+}
+
+.range-slider-debossed-small::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px #ffffff;
+    cursor: pointer;
+}
+
+/* 9. PANEL 2: UX FORM WORKSPACE (Text Inputs, Floating labels, validation, custom select) */
+.clay-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.clay-form-grid .full-width-field {
+    grid-column: span 2;
+}
+
+.clay-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+}
+
+.clay-group-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-grey);
+}
+
+.clay-input-helper {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-grey);
+    line-height: 1.25;
+}
+
+/* 3D Debossed Input design */
+.clay-input.debossed {
+    width: 100%;
+    padding: 13.5px 16px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-clay-board);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+    box-shadow: var(--shadow-debossed-inset);
+    transition: var(--transition-standard);
+}
+
+.clay-input.debossed:hover {
+    border-color: #94a3b8;
+}
+
+.clay-input.debossed:focus {
+    border-color: var(--theme-accent);
+    background-color: #ffffff;
+    box-shadow: 
+        0 0 0 3.5px var(--theme-accent-glow),
+        inset 1px 1px 3px rgba(0,0,0,0.04);
+}
+
+/* Floating Label Mechanical Design */
+.floating-group {
+    position: relative;
+    padding-top: 6px;
+}
+
+.floating-group .clay-floating-label {
+    position: absolute;
+    left: 16px;
+    top: 19px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    pointer-events: none;
+    transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    transform-origin: left top;
+}
+
+.clay-input:focus ~ .clay-floating-label,
+.clay-input:not(:placeholder-shown) ~ .clay-floating-label {
+    transform: translateY(-20px) scale(0.85);
+    font-weight: 800;
+    color: var(--theme-accent);
+}
+
+/* Inline Verification Status Banner */
+.has-validation-badge {
+    position: relative;
+}
+
+.validation-badge-status {
+    position: absolute;
+    top: 18px;
+    right: 14px;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 6px;
+    pointer-events: none;
+    display: none;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.validation-badge-status.success-banner {
+    background-color: var(--theme-accent-tint);
+    color: var(--theme-accent);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.validation-badge-status.error-banner {
+    background-color: #fef2f2;
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.clay-input.is-valid {
+    border-color: var(--theme-accent) !important;
+    background-color: #ffffff !important;
+}
+
+.clay-input.is-valid ~ .clay-floating-label {
+    color: var(--theme-accent) !important;
+}
+
+.clay-input.is-invalid {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+    animation: shakeElement 0.3s ease;
+}
+
+.clay-input.is-invalid ~ .clay-floating-label {
+    color: #ef4444 !important;
+}
+
+@keyframes shakeElement {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+}
+
+/* Password Eye Button & Strength liquid fill */
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.btn-password-eye-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.btn-password-eye-toggle:hover {
+    color: var(--color-text-dark);
+}
+
+.btn-password-eye-toggle svg {
+    width: 17px;
+    height: 17px;
+}
+
+.password-gauge-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 3px;
+}
+
+.gauge-bar-track {
+    height: 4.5px;
+    border-radius: 99px;
+    background-color: #cbd5e1;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.08);
+    overflow: hidden;
+    width: 100%;
+}
+
+.gauge-bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 99px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.gauge-bar-lbl {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--color-text-grey);
+}
+
+/* Custom premium dropdown selectors */
+.clay-custom-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.clay-select-field.debossed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.clay-select-field.debossed.open {
+    border-color: var(--theme-accent);
+    background-color: #ffffff;
+    box-shadow: 
+        0 0 0 3.5px var(--theme-accent-glow),
+        inset 1px 1px 3px rgba(0,0,0,0.04);
+}
+
+.selected-text-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.select-chevron-indicator {
+    font-size: 9px;
+    color: #94a3b8;
+    transition: transform 0.25s ease;
+}
+
+.clay-select-field.debossed.open .select-chevron-indicator {
+    transform: rotate(180deg);
+}
+
+.clay-select-options-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    box-shadow: 
+        0 12px 28px rgba(30, 41, 59, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    list-style: none;
+    padding: 5px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.clay-select-options-list.open {
+    display: flex;
+}
+
+.option-item {
+    padding: 10.5px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.option-item:hover {
+    background-color: var(--theme-accent-tint);
+    color: var(--theme-accent);
+}
+
+/* 10. PANEL 3: A11Y & SYSTEMS (Switches, checkboxes, Neumorphic Radios) */
+.clay-debossed-panel-box {
+    background-color: var(--color-bg-clay-board);
+    border: 1.5px solid #cbd5e1;
+    box-shadow: var(--shadow-debossed-inset);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Switch toggles styled */
+.toggle-control-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-name-lbl {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.clay-switch-btn {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.clay-switch-btn input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-ball-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1;
+    border-radius: 99px;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+    transition: var(--transition-standard);
+}
+
+.switch-ball-slider::before {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.1),
+        inset 0 1px 1px #ffffff;
+    transition: var(--transition-standard);
+}
+
+.clay-switch-btn input:checked + .switch-ball-slider {
+    background-color: var(--theme-accent);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.clay-switch-btn input:checked + .switch-ball-slider::before {
+    transform: translateX(22px);
+}
+
+/* Custom Checkbox Design */
+.custom-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.hidden-native-chk {
+    opacity: 0;
+    position: absolute;
+    width: 0; height: 0;
+}
+
+.custom-chk-box {
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-bg-clay-board);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 7px;
+    box-shadow: 
+        0 3px 6px rgba(0,0,0,0.02),
+        inset 0 1.5px 2px #ffffff,
+        inset 0 -1.5px 2px rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-standard);
+}
+
+.custom-checkbox-wrapper:hover .custom-chk-box {
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+}
+
+.chk-check-svg {
+    width: 14px;
+    height: 14px;
+    color: #ffffff;
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset 0.25s ease-out;
+}
+
+.hidden-native-chk:checked + .custom-chk-box {
+    background-color: var(--theme-accent);
+    border-color: var(--theme-accent);
+    box-shadow: 
+        0 4px 10px var(--theme-accent-glow),
+        inset 0 1.5px 2px rgba(255,255,255,0.4);
+}
+
+.hidden-native-chk:checked + .custom-chk-box .chk-check-svg {
+    stroke-dashoffset: 0;
+}
+
+.chk-description-lbl {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+/* Neumorphic selection cards styled */
+.neumorphic-radio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.radio-selection-card {
+    background-color: var(--color-bg-clay-board);
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    padding: 18px;
+    cursor: pointer;
+    box-shadow: var(--shadow-clay-card);
+    transition: var(--transition-standard);
+    user-select: none;
+    position: relative;
+}
+
+.native-radio-hidden {
+    opacity: 0;
+    position: absolute;
+    width: 0; height: 0;
+}
+
+.radio-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-3d-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--color-bg-clay-board);
+    border: 1.5px solid #cbd5e1;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.05);
+    transition: var(--transition-standard);
+}
+
+.radio-card-icon {
+    color: var(--color-text-grey);
+    transition: var(--transition-standard);
+}
+
+.radio-card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.radio-card-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.radio-card-title {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+}
+
+.radio-card-desc {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--color-text-grey);
+    line-height: 1.35;
+}
+
+/* Hover and active states for cards */
+.radio-selection-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 10px 24px rgba(30, 41, 59, 0.08),
+        inset 0 2px 3px #ffffff;
+}
+
+.radio-selection-card.active {
+    border-color: var(--theme-accent);
+    box-shadow: 
+        0 12px 28px var(--theme-accent-glow),
+        inset 0 2px 4px rgba(255,255,255,0.7);
+}
+
+.radio-selection-card.active .radio-3d-dot {
+    border-color: var(--theme-accent);
+    background-color: var(--theme-accent);
+    box-shadow: 
+        0 0 0 3px var(--theme-accent-glow),
+        inset 0 1px 1.5px rgba(255,255,255,0.4);
+}
+
+.radio-selection-card.active .radio-card-icon {
+    color: var(--theme-accent);
+}
+
+/* 11. PANEL 4: EDITOR & UPLOADER (Pickers, drag/drop, buttons showcase) */
+.date-picker-element, .time-picker-element {
+    cursor: pointer;
+}
+
+/* Color Picker bubble row */
+.color-picker-flex {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.color-picker-orb-container {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.1),
+        inset 0 3px 5px rgba(255,255,255,0.5),
+        inset 0 -3px 5px rgba(0,0,0,0.15);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border: 1.5px solid #cbd5e1;
+    background-color: var(--theme-accent);
+    transition: var(--transition-standard);
+}
+
+.color-picker-orb-container:hover {
+    transform: scale(1.08);
+}
+
+.clay-native-color-picker {
+    position: absolute;
+    top: -5px; left: -5px; width: 54px; height: 54px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.color-picker-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.color-value-badge {
+    font-size: 12px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+}
+
+/* Drag and Drop File Upload zone */
+.clay-file-drop-zone.debossed {
+    background-color: var(--color-bg-clay-board);
+    border: 2px dashed #cbd5e1;
+    border-radius: 18px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-debossed-inset);
+    transition: var(--transition-standard);
+}
+
+.clay-file-drop-zone.debossed.dragover {
+    border-color: var(--theme-accent);
+    background-color: #ffffff;
+    box-shadow: 
+        0 0 0 4px var(--theme-accent-glow),
+        inset 1px 1px 3px rgba(0,0,0,0.04);
+}
+
+.hidden-native-file-input {
+    display: none;
+}
+
+.drop-zone-idle-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.drop-zone-icon-container {
+    color: var(--color-text-grey);
+    transition: var(--transition-standard);
+}
+
+.drop-zone-icon-container svg {
+    width: 32px;
+    height: 32px;
+}
+
+.clay-file-drop-zone.debossed:hover .drop-zone-icon-container {
+    color: var(--theme-accent);
+    transform: translateY(-2px);
+}
+
+.drop-text-primary {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.browse-files-highlight {
+    color: var(--theme-accent);
+    text-decoration: underline;
+}
+
+.drop-text-secondary {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--color-text-grey);
+    margin-top: 2px;
+}
+
+/* Uploaded file metadata card */
+.file-loaded-status-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fileCardPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fileCardPop {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.file-card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-type-icon {
+    font-size: 18px;
+}
+
+.file-meta-texts {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.file-name-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-size-subtitle {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--color-text-grey);
+}
+
+.btn-clear-loaded-file {
+    background: none;
+    border: none;
+    color: var(--color-text-grey);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition-fast);
+}
+
+.btn-clear-loaded-file:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: #ef4444;
+}
+
+.file-upload-bar-track {
+    height: 4px;
+    border-radius: 99px;
+    background-color: #cbd5e1;
+    overflow: hidden;
+    width: 100%;
+}
+
+.file-upload-bar-fill {
+    height: 100%;
+    width: 0;
+    background-color: var(--theme-accent);
+    border-radius: 99px;
+    transition: width 0.1s ease;
+}
+
+/* Button Showcase Layout */
+.buttons-showcase-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.btn-state-capsule {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.btn-state-lbl {
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--color-text-grey);
+    text-transform: uppercase;
+}
+
+/* Solid reference button styles */
+.btn-reference {
+    border: none;
+    border-radius: 10px;
+    padding: 10.5px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition-standard);
+    width: 100%;
+    text-align: center;
+}
+
+.btn-reference:hover {
+    transform: translateY(-1.5px);
+}
+
+.btn-solid-primary-accent {
+    background-color: var(--theme-accent);
+    color: #ffffff;
+    box-shadow: var(--shadow-3d-button-accent);
+}
+
+.btn-solid-primary-accent:hover {
+    box-shadow: 0 6px 16px var(--theme-accent-glow);
+}
+
+.btn-glossy-cyan-gel {
+    background: linear-gradient(185deg, #22d3ee 0%, #0891b2 100%);
+    color: #ffffff;
+    box-shadow: 
+        0 8px 18px rgba(8, 145, 178, 0.25),
+        inset 0 2px 3px rgba(255,255,255,0.4),
+        inset 0 -2px 3px rgba(0,0,0,0.15);
+}
+
+.btn-outline-slate-grey {
+    background: none;
+    border: 1.5px solid #cbd5e1;
+    color: var(--color-text-dark);
+    box-shadow: inset 0 1px 1px #ffffff;
+}
+
+.btn-outline-slate-grey:hover {
+    background-color: rgba(255,255,255,0.5);
+    border-color: #94a3b8;
+}
+
+.btn-danger-red-3d {
+    background-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 
+        0 8px 18px rgba(239, 68, 68, 0.25),
+        inset 0 2px 3px rgba(255,255,255,0.4),
+        inset 0 -2px 3px rgba(0,0,0,0.15);
+}
+
+/* 12. Actions Navigation Footer (Back / Next and Submit) */
+.form-navigation-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid #cbd5e1;
+    padding: 22px 36px;
+    background-color: rgba(236, 240, 248, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+.btn-navigation-debossed {
+    background: none;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 99px;
+    padding: 12px 24px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 1px #ffffff;
+    transition: var(--transition-standard);
+}
+
+.btn-navigation-debossed:hover {
+    background-color: rgba(255,255,255,0.5);
+    border-color: #94a3b8;
+    transform: translateX(-2px);
+}
+
+.btn-navigation-debossed svg {
+    transition: var(--transition-fast);
+}
+
+.btn-navigation-glossy-gel {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    border: none;
+    border-radius: 99px;
+    padding: 13px 28px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: var(--shadow-3d-button-accent);
+    transition: var(--transition-standard);
+}
+
+.btn-navigation-glossy-gel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px var(--theme-accent-glow);
+}
+
+.btn-navigation-glossy-gel:active {
+    transform: translateY(0);
+}
+
+.btn-navigation-glossy-gel svg {
+    transition: var(--transition-fast);
+}
+
+/* 13. System Footer Status Metrics */
+.dashboard-footer-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid #cbd5e1;
+    padding: 20px 36px;
+    background-color: var(--color-bg-clay-board);
+}
+
+.completion-gauge-capsule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gauge-lbl {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-text-grey);
+}
+
+.capsule-slate-outer {
+    background-color: #1e293b;
+    border-radius: 99px;
+    padding: 4px 14px;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.capsule-fill-val {
+    font-size: 11px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: #38bdf8;
+    text-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
+}
+
+/* Keyboard guide buttons */
+.keyboard-guide-icons {
+    display: flex;
+    gap: 6px;
+}
+
+.key-cap-item {
+    background-color: var(--color-bg-clay-board);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--color-text-grey);
+    box-shadow: 
+        0 2.5px 0 #cbd5e1, 
+        inset 0 1px 0 #ffffff;
+}
+
+/* 14. OVERLAY SUBMISSION DIALOG (3D Modal Success Overlay) */
+.modal-overlay-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(12, 15, 22, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: overlayFadeIn 0.3s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.success-blueprint-modal.clay-board {
+    background-color: var(--color-bg-clay-board);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 36px;
+    box-shadow: var(--shadow-clay-dashboard);
+    width: 100%;
+    max-width: 680px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes modalPopUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header-capsule {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 30px;
+    border-bottom: 1.5px solid #cbd5e1;
+}
+
+.modal-header-title-text {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.btn-close-modal-x {
+    background: none;
+    border: none;
+    color: var(--color-text-grey);
+    font-size: 26px;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition-fast);
+}
+
+.btn-close-modal-x:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.modal-body-scrollable {
+    padding: 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Neumorphic score row inside modal */
+.neomorphic-score-row {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.circular-radial-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ring-progress-svg {
+    transform: rotate(-90deg);
+}
+
+.radial-ring-bg {
+    stroke-width: 8;
+}
+
+.radial-ring-fill {
+    stroke-width: 10;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0.2s;
+}
+
+.radial-text-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radial-percentage-text {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+}
+
+.radial-status-text {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-text-grey);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.compiled-details-manifest {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.manifest-detail-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cbd5e1;
+    padding-bottom: 6px;
+}
+
+.manifest-lbl {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-text-grey);
+}
+
+.manifest-val {
+    font-size: 12px;
+    color: var(--color-text-dark);
+}
+
+.manifest-val.text-bold {
+    font-weight: 800;
+}
+
+/* Spreadsheet table inside success modal */
+.manifest-table-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-grey);
+}
+
+.manifest-scrollable-table-wrap {
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    box-shadow: var(--shadow-debossed-inset);
+    background-color: var(--color-bg-clay-board);
+}
+
+.manifest-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-sans);
+    text-align: left;
+}
+
+.manifest-data-table th {
+    background-color: rgba(30, 41, 59, 0.04);
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    border-bottom: 1.5px solid #cbd5e1;
+}
+
+.manifest-data-table td {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.manifest-data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Simulated compilation logs console */
+.compilation-terminal-output {
+    background-color: #0b0d16;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #38bdf8;
+    line-height: 1.5;
+    overflow-x: auto;
+    max-height: 130px;
+    box-shadow: inset 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+.modal-footer-capsule {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 30px;
+    border-top: 1.5px solid #cbd5e1;
+    background-color: rgba(236, 240, 248, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+/* 15. Responsive Media Queries */
+@media (max-width: 820px) {
+    .pill-tabs-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 24px;
+    }
+    
+    .clay-metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .clay-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .clay-form-grid .full-width-field {
+        grid-column: span 1;
+    }
+
+    .neumorphic-radio-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .buttons-showcase-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
