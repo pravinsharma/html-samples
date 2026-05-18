@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M-19 Tactile Form Panel: High-Fidelity Retro-Industrial Calibration Console Deck featuring skeuomorphic and flat-tactile UI interfaces.">
+    <title>M-19 TACTILE FORM PANEL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- MAIN PHYSICAL DECK CONTAINER -->
+    <div class="console-deck-outer" id="console-deck">
+        
+        <!-- HARDWARE ANCHOR SCREWS -->
+        <div class="screw screw-tl"></div>
+        <div class="screw screw-tr"></div>
+        <div class="screw screw-bl"></div>
+        <div class="screw screw-br"></div>
+
+        <!-- CONSOLE SYSTEM HEADER -->
+        <header class="console-header">
+            <div class="brand-block">
+                <h1 class="console-title">TACTILE CALIBRATOR</h1>
+                <p class="console-subtitle">SYSTEM MODEL M-19 // HARDWARE DESIGN BLOCK</p>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator pulsing" id="system-status-dot"></span>
+                <span id="system-status-text">CONSOLE STATE: OPERATIONAL</span>
+            </div>
+        </header>
+
+        <!-- DYNAMIC FORM COMPLETENESS PANEL (Theme from sample1.webp) -->
+        <section class="form-calibration-board">
+            
+            <div class="progress-bar-segmented-wrapper">
+                <div class="calibration-progress-info">
+                    <span>FORM INTEGRITY COEFFICIENT</span>
+                    <span id="completion-text-percent">CALIBRATION INCOMPLETE (0%)</span>
+                </div>
+                
+                <!-- Linear Segmented Progress Bar (Directly from sample1.webp top-left) -->
+                <div class="progress-bar-segmented" id="linear-segments-bar">
+                    <!-- 20 Segment Blocks representing form completeness -->
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                    <div class="progress-block"></div>
+                </div>
+
+                <!-- Striped Progress Bar (Theme from sample1.webp middle-right) -->
+                <div class="progress-bar-striped-wrapper">
+                    <div class="progress-bar-striped">
+                        <div class="progress-bar-striped-fill" id="linear-striped-fill"></div>
+                        <span class="progress-bar-striped-tooltip" id="striped-tooltip">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segmented Circular Gauge (Theme from sample1.webp bottom row) -->
+            <div class="calibration-dial-widget">
+                <div class="circular-gauge-wrapper">
+                    <svg class="circular-svg" viewBox="0 0 100 100">
+                        <circle class="circular-bg" cx="50" cy="50" r="40" />
+                        <circle class="circular-fill-segmented" id="circular-fill-elem" cx="50" cy="50" r="40" />
+                    </svg>
+                    <div class="circular-label-readout" id="circular-percent-readout">0%</div>
+                </div>
+                <span class="circular-caption">LOAD_CAL</span>
+            </div>
+
+        </section>
+
+        <!-- MAIN CALIBRATION FORM -->
+        <form id="m19-calibration-form" novalidate autocomplete="off">
+            <div class="form-grid">
+
+                <!-- PANEL 01: IDENTITY & CORE SPECIFICATIONS -->
+                <section class="form-module">
+                    <div class="module-header">
+                        <span class="module-number">01</span>
+                        <h2 class="module-title">SYSTEM OPERATOR SPEC</h2>
+                        <div class="module-decor-stripes"></div>
+                    </div>
+
+                    <!-- Input Text Field -->
+                    <div class="input-field-group">
+                        <label class="field-label" for="operator-code">OPERATOR CODE (SIG_ID)</label>
+                        <div class="input-text-wrapper">
+                            <input type="text" id="operator-code" name="operator_code" required 
+                                   placeholder="PILOT_M19" class="input-text" maxlength="15">
+                        </div>
+                    </div>
+
+                    <!-- Stepper Number Field -->
+                    <div class="input-field-group">
+                        <label class="field-label" for="calibration-index">CALIBRATION INDEX (STEP)</label>
+                        <div class="stepper-input-container">
+                            <button type="button" class="stepper-btn" id="btn-step-minus" aria-label="Decrease Value">−</button>
+                            <div class="stepper-input-wrapper">
+                                <input type="number" id="calibration-index" name="calibration_index" 
+                                       min="10" max="150" value="50" required readonly class="input-number-stepper">
+                            </div>
+                            <button type="button" class="stepper-btn" id="btn-step-plus" aria-label="Increase Value">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Custom Dropdown Selection -->
+                    <div class="input-field-group">
+                        <label class="field-label">SECTOR VECTOR RANGE</label>
+                        <div class="custom-select-container" id="sector-select-box">
+                            <div class="select-trigger">
+                                <span id="selected-sector-label" data-default="SELECT COIL SECTOR">SELECT COIL SECTOR</span>
+                                <svg class="select-arrow" viewBox="0 0 24 24">
+                                    <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <ul class="select-options-list">
+                                <li class="option-item" data-value="sector_a">
+                                    <span class="pointer">▶</span> SECTOR ALPHA (LOW BAND)
+                                </li>
+                                <li class="option-item" data-value="sector_b">
+                                    <span class="pointer">▶</span> SECTOR BETA (STABLE WIDE)
+                                </li>
+                                <li class="option-item" data-value="sector_c">
+                                    <span class="pointer">▶</span> SECTOR GAMMA (HIGH FREQ)
+                                </li>
+                                <li class="option-item" data-value="sector_d">
+                                    <span class="pointer">▶</span> SECTOR DELTA (MUTABLE DUAL)
+                                </li>
+                            </ul>
+                            <!-- Hidden select for native submission -->
+                            <select name="sector_vector" id="sector-vector-native" class="native-hidden-select" required>
+                                <option value="" disabled selected>Select Coil Sector</option>
+                                <option value="sector_a">SECTOR ALPHA</option>
+                                <option value="sector_b">SECTOR BETA</option>
+                                <option value="sector_c">SECTOR GAMMA</option>
+                                <option value="sector_d">SECTOR DELTA</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PANEL 02: MODALITY & TOGGLES -->
+                <section class="form-module">
+                    <div class="module-header">
+                        <span class="module-number">02</span>
+                        <h2 class="module-title">SYSTEM MODULATION</h2>
+                        <div class="module-decor-stripes"></div>
+                    </div>
+
+                    <!-- Segmented Tabs Button Toggles -->
+                    <div class="input-field-group">
+                        <label class="field-label">COIL COOLING SUB-SYSTEM</label>
+                        <div class="segmented-control-tabs" id="cooling-segmented-toggles">
+                            <button type="button" class="segment-tab active" data-value="off">OFF</button>
+                            <button type="button" class="segment-tab" data-value="low">LOW</button>
+                            <button type="button" class="segment-tab" data-value="high">HIGH</button>
+                            <!-- Hidden input to save value -->
+                            <input type="hidden" name="cooling_system" id="cooling-system-input" value="off">
+                        </div>
+                    </div>
+
+                    <!-- Custom Tactile Radio Deck -->
+                    <div class="input-field-group">
+                        <label class="field-label">ENERGY MODALITY CALIBRATION</label>
+                        <div class="tactile-radio-column">
+                            
+                            <label class="tactile-radio-row">
+                                <input type="radio" name="energy_modality" value="direct_current" class="native-radio" checked>
+                                <div class="radio-circle-decor"></div>
+                                <div class="radio-labels">
+                                    <span class="radio-main-label">DIRECT CURRENT MODALITY</span>
+                                    <span class="radio-sub-label">STANDARD WAVEFORM WITH DUAL ANCHORS</span>
+                                </div>
+                            </label>
+
+                            <label class="tactile-radio-row">
+                                <input type="radio" name="energy_modality" value="alternating_freq" class="native-radio">
+                                <div class="radio-circle-decor"></div>
+                                <div class="radio-labels">
+                                    <span class="radio-main-label">ALTERNATING COIL FREQUENCY</span>
+                                    <span class="radio-sub-label">DYNAMIC TUNING FLUX UP TO 400Hz</span>
+                                </div>
+                            </label>
+
+                            <label class="tactile-radio-row">
+                                <input type="radio" name="energy_modality" value="quantum_mod" class="native-radio">
+                                <div class="radio-circle-decor"></div>
+                                <div class="radio-labels">
+                                    <span class="radio-main-label">QUANTUM COUPLING MODULATION</span>
+                                    <span class="radio-sub-label">EXPERIMENTAL PARTICLES SYNC INTERACTION</span>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PANEL 03: RESONANCE & RANGE CONTROL -->
+                <section class="form-module">
+                    <div class="module-header">
+                        <span class="module-number">03</span>
+                        <h2 class="module-title">RESONANCE TUNING</h2>
+                        <div class="module-decor-stripes"></div>
+                    </div>
+
+                    <!-- Custom Range Slider with Ticks -->
+                    <div class="input-field-group">
+                        <div class="slider-container">
+                            <div class="slider-header-row">
+                                <label class="field-label">COIL RESONANCE COEFFICIENT</label>
+                                <span class="slider-readout" id="resonance-readout">100</span>
+                            </div>
+                            
+                            <div class="range-track-wrapper">
+                                <input type="range" name="resonance_coefficient" min="100" max="900" value="100" 
+                                       class="custom-range-slider" id="resonance-slider">
+                            </div>
+                            
+                            <div class="slider-scale-ticks">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span>
+                            </div>
+                            
+                            <div class="slider-limits">
+                                <span>MIN (100)</span>
+                                <span>MAX (900)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PANEL 04: SAFEGUARDS & LOGS -->
+                <section class="form-module">
+                    <div class="module-header">
+                        <span class="module-number">04</span>
+                        <h2 class="module-title">SYSTEM SAFEGUARDS</h2>
+                        <div class="module-decor-stripes"></div>
+                    </div>
+
+                    <!-- Custom Tactile Checkboxes -->
+                    <div class="input-field-group">
+                        <label class="field-label">HARDWARE PROTOCOL COUPLING</label>
+                        <div class="tactile-checkbox-column">
+                            
+                            <label class="tactile-checkbox-row">
+                                <input type="checkbox" name="cyber_dampener" class="native-checkbox" id="check-cyber">
+                                <div class="checkbox-box-decor"></div>
+                                <div class="checkbox-labels">
+                                    <span class="checkbox-main-label">INTEGRATE AUTONOMOUS DAMPENING</span>
+                                    <span class="checkbox-sub-label">AUTO-SHUTDOWN IF RESONANCE SURPASSES 800</span>
+                                </div>
+                            </label>
+
+                            <label class="tactile-checkbox-row">
+                                <input type="checkbox" name="ground_stabilizer" class="native-checkbox" id="check-ground">
+                                <div class="checkbox-box-decor"></div>
+                                <div class="checkbox-labels">
+                                    <span class="checkbox-main-label">ENGAGE GROUNDED FLUID STABILIZER</span>
+                                    <span class="checkbox-sub-label">FILL CORE CHAMBER WITH LIQUID NITROGEN MATRIX</span>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Scrolling Live Telemetry Terminal Logs -->
+                    <div class="terminal-log-module">
+                        <div class="terminal-header">
+                            <span class="terminal-title">TELEMETRY DIAG DATA FEED</span>
+                            <div class="terminal-decor"></div>
+                        </div>
+                        <div class="terminal-body" id="console-log-box">
+                            <div class="log-line">M-19 CALIBRATION CONSOLE INITIATING...</div>
+                            <div class="log-line">INTELLIGENT FEEDBACK MATRIX STATUS: ONLINE</div>
+                            <div class="log-line">INPUT DETECTOR ENGAGED. AWAITING DATA SPEC.</div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- ACTION BAR SECTION -->
+            <div class="action-submit-panel">
+                <div class="action-disclaimer">
+                    <span class="disclaimer-text">* SYSTEM DANGER ALERT: ENSURE FLUID STABILIZER STATUS MATTERS PRIOR TO HIGH RESONANCE COMMISSIONING.</span>
+                </div>
+                
+                <div class="action-buttons-group">
+                    <!-- Reset Circular Button -->
+                    <button type="button" class="btn-reset" id="form-reset-btn" aria-label="Reset Calibration Settings">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+                        </svg>
+                    </button>
+
+                    <!-- Commit Calibration Industrial Button -->
+                    <button type="submit" class="btn-submit" id="btn-submit-form">
+                        <span>COMMIT CONFIG</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- FOOTER METADATA -->
+        <footer class="console-footer">
+            <span>SKEUO-TECH LAB DIVISION</span>
+            <span class="footer-divider">//</span>
+            <span>MODULAR REGISTRY MATRIX M-19</span>
+            <span class="footer-divider">//</span>
+            <span>PILOT DECK ACCESS ONLY</span>
+        </footer>
+
+    </div>
+
+    <!-- OVERLAY DIAGNOSTIC CERTIFICATE TICKET -->
+    <div class="overlay-container" id="ticket-overlay-panel">
+        <div class="report-ticket">
+            <!-- Hardware Accent Screws -->
+            <div class="ticket-screw ts-tl"></div>
+            <div class="ticket-screw ts-tr"></div>
+            <div class="ticket-screw ts-bl"></div>
+            <div class="ticket-screw ts-br"></div>
+
+            <div class="ticket-header">
+                <span class="ticket-brand">M-19 CONSOLE DECK READOUT</span>
+                <h3 class="ticket-title">CALIBRATION COMMISSION DIAGNOSTICS</h3>
+                <div class="ticket-meta">
+                    <span id="ticket-date-stamp">DATE: 18-05-2026</span>
+                    <span id="ticket-hash-stamp">HASH: #M19-B582</span>
+                </div>
+            </div>
+
+            <div class="ticket-body">
+                <div class="ticket-line">
+                    <span class="lbl">OPERATOR SIGNATURE</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-operator">PILOT_M19</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">CALIBRATION INDEX</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-index">50 STEP</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">SECTOR VECTOR RANGE</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-sector">SECTOR BETA</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">COOLING SUB-SYSTEM</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-cooling">OFF</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">ENERGY MODALITY</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-energy">DIRECT CURRENT</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">RESONANCE COEFFICIENT</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-resonance">100</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">AUTONOMOUS DAMPENING</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-dampening">DISENGAGED</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">LIQUID FLUID STABILIZER</span>
+                    <span class="dots"></span>
+                    <span class="val" id="ticket-val-stabilizer">DISENGAGED</span>
+                </div>
+            </div>
+
+            <div class="ticket-footer">
+                <div class="ticket-stamp">CALIBRATION APPROVED // PILOT MISSION VERIFIED</div>
+                <div class="barcode-wrapper">
+                    <div class="barcode-stripes"></div>
+                    <span class="barcode-numbers">19052026857321</span>
+                </div>
+            </div>
+
+            <button type="button" class="btn-ticket-close" id="btn-close-ticket">DISMISS SYSTEM CERTIFICATE</button>
+        </div>
+    </div>
+
+    <!-- MAIN INTERACTIVE JS LAYER -->
+    <script src="script.js"></script>
+</body>
+</html>

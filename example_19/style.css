@@ -1,0 +1,1210 @@
+/* 
+ * M-19 RETRO-INDUSTRIAL CALIBRATION CONSOLE DECK
+ * Complete custom styling based on the visual language of example_19/assets/sample1.webp
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Space+Mono:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    /* Color Palette from sample1.webp */
+    --color-slate-black: #1E2229;
+    --color-charcoal: #2E333F;
+    --color-tactical-gray: #5A6270;
+    --color-border-dark: #1E2229;
+    --color-bg-light: #F0F2F5;
+    --color-card-bg: #FFFFFF;
+    --color-gauge-bg: #E3E6EB;
+    
+    /* Warm Accents (Skeuomorphic Indicators) */
+    --color-accent-amber: #FF9F1C;
+    --color-accent-red: #FF4040;
+    --color-accent-green: #2EC4B6;
+    
+    /* Layout & Sizing Constants */
+    --border-thickness: 3px;
+    --border-style: var(--border-thickness) solid var(--color-border-dark);
+    --shadow-flat: 4px 4px 0px var(--color-border-dark);
+    --shadow-flat-hover: 2px 2px 0px var(--color-border-dark);
+    --shadow-flat-active: 0px 0px 0px var(--color-border-dark);
+    --shadow-recessed: inset 3px 3px 0px rgba(0, 0, 0, 0.15);
+    
+    /* Font Declarations */
+    --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+    --font-tech: 'Share Tech Mono', var(--font-mono);
+}
+
+/* ==========================================================================
+   RESET & FOUNDATION
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg-light);
+    color: var(--color-slate-black);
+    font-family: var(--font-mono);
+    line-height: 1.5;
+    padding: 3rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   MAIN CONSOLE PANEL
+   ========================================================================== */
+.console-deck-outer {
+    width: 100%;
+    max-width: 1200px;
+    background: var(--color-card-bg);
+    border: var(--border-style);
+    box-shadow: var(--shadow-flat);
+    position: relative;
+    padding: 2.5rem;
+    overflow: hidden;
+}
+
+/* Mechanical Screw Details */
+.screw {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-gauge-bg);
+    border: 2px solid var(--color-border-dark);
+    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.8), 1px 1px 2px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.screw::after {
+    content: '';
+    width: 10px;
+    height: 2px;
+    background: var(--color-border-dark);
+    display: block;
+}
+.screw-tl { top: 12px; left: 12px; }
+.screw-tl::after { transform: rotate(45deg); }
+.screw-tr { top: 12px; right: 12px; }
+.screw-tr::after { transform: rotate(135deg); }
+.screw-bl { bottom: 12px; left: 12px; }
+.screw-bl::after { transform: rotate(-45deg); }
+.screw-br { bottom: 12px; right: 12px; }
+.screw-br::after { transform: rotate(75deg); }
+
+/* ==========================================================================
+   HEADER SYSTEM
+   ========================================================================== */
+.console-header {
+    border-bottom: var(--border-style);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.brand-block {
+    display: flex;
+    flex-direction: column;
+}
+.console-title {
+    font-family: var(--font-tech);
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--color-slate-black);
+    text-transform: uppercase;
+}
+.console-subtitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-tactical-gray);
+    letter-spacing: 0.2em;
+    margin-top: 0.25rem;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-gauge-bg);
+    border: 2px solid var(--color-border-dark);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-accent-amber);
+    border-radius: 50%;
+    position: relative;
+    border: 1px solid var(--color-border-dark);
+}
+.status-indicator.pulsing {
+    animation: pulse-amber 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-amber {
+    0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 159, 28, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(255, 159, 28, 0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 159, 28, 0); }
+}
+
+/* ==========================================================================
+   DYNAMIC FORM COMPLETENESS SYSTEM
+   ========================================================================== */
+.form-calibration-board {
+    background: var(--color-bg-light);
+    border: var(--border-style);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-calibration-board {
+        grid-template-columns: 1fr;
+    }
+}
+
+.calibration-progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--color-charcoal);
+}
+
+/* Linear Segmented Progress Bar (Directly adapting from sample1.webp top-left) */
+.progress-bar-segmented-wrapper {
+    width: 100%;
+}
+.progress-bar-segmented {
+    border: var(--border-style);
+    background: var(--color-card-bg);
+    height: 34px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.progress-block {
+    height: 100%;
+    width: 14px;
+    background-color: var(--color-slate-black);
+    margin-right: 3px;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.progress-block:last-child {
+    margin-right: 0;
+}
+.progress-block.active {
+    opacity: 1;
+}
+
+/* Striped Diagonal Progress Bar (Adapting from sample1.webp middle-right) */
+.progress-bar-striped-wrapper {
+    margin-top: 0.75rem;
+}
+.progress-bar-striped {
+    border: var(--border-style);
+    background: var(--color-card-bg);
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.progress-bar-striped-fill {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-slate-black),
+        var(--color-slate-black) 10px,
+        var(--color-tactical-gray) 10px,
+        var(--color-tactical-gray) 20px
+    );
+    border-right: 2px solid var(--color-border-dark);
+    transition: width 0.4s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+.progress-bar-striped-tooltip {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-slate-black);
+    color: var(--color-card-bg);
+    padding: 2px 6px;
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+/* Circular Arc Gauge (Adapting from sample1.webp bottom row) */
+.calibration-dial-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px dashed var(--color-border-dark);
+    padding-left: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .calibration-dial-widget {
+        border-left: none;
+        border-top: 2px dashed var(--color-border-dark);
+        padding-left: 0;
+        padding-top: 1.5rem;
+    }
+}
+
+.circular-gauge-wrapper {
+    position: relative;
+    width: 90px;
+    height: 90px;
+}
+.circular-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+.circular-bg {
+    fill: none;
+    stroke: var(--color-gauge-bg);
+    stroke-width: 8;
+}
+.circular-fill-segmented {
+    fill: none;
+    stroke: var(--color-slate-black);
+    stroke-width: 8;
+    stroke-linecap: flat;
+    stroke-dasharray: 251.2; /* 2 * PI * r (r=40) */
+    stroke-dashoffset: 251.2;
+    stroke-dasharray: 8 4; /* Segmented LCD ring style */
+    transition: stroke-dashoffset 0.4s ease;
+}
+.circular-label-readout {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-slate-black);
+}
+.circular-caption {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-tactical-gray);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   FORM LAYOUT SYSTEM (GRID)
+   ========================================================================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 992px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-module {
+    border: var(--border-style);
+    padding: 1.5rem;
+    position: relative;
+    background: var(--color-card-bg);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-border-dark);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+.module-number {
+    font-family: var(--font-tech);
+    font-size: 1rem;
+    font-weight: 800;
+    background: var(--color-slate-black);
+    color: var(--color-card-bg);
+    padding: 2px 6px;
+}
+.module-title {
+    font-family: var(--font-tech);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--color-slate-black);
+    text-transform: uppercase;
+}
+.module-decor-stripes {
+    width: 40px;
+    height: 12px;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--color-border-dark),
+        var(--color-border-dark) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+}
+
+/* ==========================================================================
+   INPUT ELEMENTS (COMMON & HARDWARE)
+   ========================================================================== */
+.input-field-group {
+    margin-bottom: 1.25rem;
+}
+.input-field-group:last-child {
+    margin-bottom: 0;
+}
+
+.field-label {
+    display: block;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: var(--color-tactical-gray);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Standard Recessed Input Box */
+.input-text-wrapper {
+    position: relative;
+}
+.input-text {
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    border: var(--border-style);
+    background-color: var(--color-bg-light);
+    color: var(--color-slate-black);
+    outline: none;
+    box-shadow: var(--shadow-recessed);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.input-text:focus {
+    background-color: var(--color-card-bg);
+    box-shadow: var(--shadow-recessed), 0 0 0 2px var(--color-accent-amber);
+}
+.input-text::placeholder {
+    color: var(--color-tactical-gray);
+    opacity: 0.6;
+}
+
+/* Numerical Stepper Input (Plus/Minus Buttons) */
+.stepper-input-container {
+    display: flex;
+    border: var(--border-style);
+    box-shadow: var(--shadow-flat);
+}
+.stepper-btn {
+    width: 46px;
+    height: 46px;
+    background-color: var(--color-gauge-bg);
+    border: none;
+    color: var(--color-slate-black);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+.stepper-btn:hover {
+    background-color: var(--color-slate-black);
+    color: var(--color-card-bg);
+}
+.stepper-btn:active {
+    background-color: var(--color-charcoal);
+}
+.stepper-input-wrapper {
+    flex-grow: 1;
+}
+.input-number-stepper {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: var(--color-card-bg);
+    color: var(--color-slate-black);
+    font-family: var(--font-tech);
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    outline: none;
+    padding: 0 1rem;
+}
+
+/* ==========================================================================
+   CUSTOM DROPDOWN SELECTOR
+   ========================================================================== */
+.custom-select-container {
+    position: relative;
+    border: var(--border-style);
+    background: var(--color-card-bg);
+    box-shadow: var(--shadow-flat);
+    cursor: pointer;
+    user-select: none;
+}
+.select-trigger {
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-tech);
+    font-weight: bold;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+}
+.select-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+.custom-select-container.open .select-arrow {
+    transform: rotate(180deg);
+}
+
+.select-options-list {
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--border-thickness));
+    width: calc(100% + 2 * var(--border-thickness));
+    border: var(--border-style);
+    background: var(--color-card-bg);
+    list-style: none;
+    z-index: 100;
+    margin-top: 3px;
+    box-shadow: var(--shadow-flat);
+    display: none;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.custom-select-container.open .select-options-list {
+    display: block;
+}
+
+.option-item {
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--color-gauge-bg);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+.option-item:last-child {
+    border-bottom: none;
+}
+.option-item .pointer {
+    display: none;
+    font-size: 0.75rem;
+}
+.option-item:hover {
+    background-color: var(--color-slate-black);
+    color: var(--color-card-bg);
+}
+.option-item:hover .pointer {
+    display: inline-block;
+}
+.option-item.selected {
+    background-color: var(--color-gauge-bg);
+    font-weight: bold;
+}
+.option-item.selected .pointer {
+    display: inline-block;
+    color: var(--color-tactical-gray);
+}
+
+.native-hidden-select {
+    display: none;
+}
+
+/* ==========================================================================
+   SEGMENTED TOGGLES (TABS)
+   ========================================================================== */
+.segmented-control-tabs {
+    display: flex;
+    border: var(--border-style);
+    background: var(--color-gauge-bg);
+    padding: 3px;
+    width: 100%;
+}
+.segment-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.6rem 0;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    text-align: center;
+}
+.segment-tab:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.segment-tab.active {
+    background-color: var(--color-slate-black);
+    color: var(--color-card-bg);
+}
+
+/* ==========================================================================
+   TACTILE RADIO GRID
+   ========================================================================== */
+.tactile-radio-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.tactile-radio-row {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: var(--border-style);
+    padding: 0.75rem 1rem;
+    background-color: var(--color-card-bg);
+    box-shadow: 2px 2px 0px var(--color-border-dark);
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+.tactile-radio-row:hover {
+    background-color: var(--color-bg-light);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--color-border-dark);
+}
+.tactile-radio-row:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--color-border-dark);
+}
+
+.native-radio {
+    display: none;
+}
+
+/* Outer/Inner Circle Elements */
+.radio-circle-decor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border-dark);
+    border-radius: 50%;
+    margin-right: 1rem;
+    position: relative;
+    background: var(--color-card-bg);
+    flex-shrink: 0;
+}
+.radio-circle-decor::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-slate-black);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.native-radio:checked + .radio-circle-decor::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+.native-radio:checked ~ .radio-labels .radio-main-label {
+    color: var(--color-slate-black);
+    font-weight: 700;
+}
+
+.radio-labels {
+    display: flex;
+    flex-direction: column;
+}
+.radio-main-label {
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-charcoal);
+}
+.radio-sub-label {
+    font-size: 0.7rem;
+    color: var(--color-tactical-gray);
+    margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   TACTILE CHECKBOX GRID
+   ========================================================================== */
+.tactile-checkbox-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.tactile-checkbox-row {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: var(--border-style);
+    padding: 0.75rem 1rem;
+    background-color: var(--color-card-bg);
+    box-shadow: 2px 2px 0px var(--color-border-dark);
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+.tactile-checkbox-row:hover {
+    background-color: var(--color-bg-light);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--color-border-dark);
+}
+
+.native-checkbox {
+    display: none;
+}
+
+/* Box Graphic Details */
+.checkbox-box-decor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border-dark);
+    margin-right: 1rem;
+    position: relative;
+    background: var(--color-card-bg);
+    flex-shrink: 0;
+}
+.checkbox-box-decor::after {
+    content: '✖';
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-slate-black);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.15s ease-in-out;
+}
+.native-checkbox:checked + .checkbox-box-decor::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+.native-checkbox:checked ~ .checkbox-labels .checkbox-main-label {
+    color: var(--color-slate-black);
+}
+
+.checkbox-labels {
+    display: flex;
+    flex-direction: column;
+}
+.checkbox-main-label {
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-charcoal);
+}
+.checkbox-sub-label {
+    font-size: 0.7rem;
+    color: var(--color-tactical-gray);
+    margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   CUSTOM TECHNICAL RANGE SLIDER
+   ========================================================================== */
+.slider-container {
+    background-color: var(--color-bg-light);
+    border: var(--border-style);
+    padding: 1.25rem;
+    position: relative;
+}
+
+.slider-header-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+.slider-readout {
+    font-family: var(--font-tech);
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: var(--color-slate-black);
+    color: var(--color-card-bg);
+    padding: 2px 8px;
+}
+
+.range-track-wrapper {
+    position: relative;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-border-dark);
+    background-color: var(--color-card-bg);
+    padding: 0 0.5rem;
+}
+
+.custom-range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    height: 10px;
+    z-index: 5;
+}
+
+/* Chrome/Safari track & thumb */
+.custom-range-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: var(--color-gauge-bg);
+    border: 1px solid var(--color-border-dark);
+}
+.custom-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 28px;
+    width: 16px;
+    background: var(--color-slate-black);
+    border: 2px solid var(--color-card-bg);
+    outline: 2px solid var(--color-border-dark);
+    cursor: ew-resize;
+    margin-top: -10px; /* Offset to center */
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+}
+
+/* Firefox track & thumb */
+.custom-range-slider::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: var(--color-gauge-bg);
+    border: 1px solid var(--color-border-dark);
+}
+.custom-range-slider::-moz-range-thumb {
+    height: 28px;
+    width: 16px;
+    background: var(--color-slate-black);
+    border: 2px solid var(--color-card-bg);
+    outline: 2px solid var(--color-border-dark);
+    cursor: ew-resize;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+}
+
+/* Visual Tick Marks underneath Slider */
+.slider-scale-ticks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding: 0 0.75rem;
+}
+.slider-scale-ticks span {
+    width: 2px;
+    height: 6px;
+    background-color: var(--color-tactical-gray);
+}
+.slider-scale-ticks span:nth-child(5n+1) {
+    height: 10px;
+    width: 3px;
+    background-color: var(--color-border-dark);
+}
+
+.slider-limits {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: var(--color-tactical-gray);
+}
+
+/* ==========================================================================
+   TELEMETRY DIAGNOSTIC FEED LOG
+   ========================================================================== */
+.terminal-log-module {
+    margin-top: 2rem;
+    border: var(--border-style);
+    background: var(--color-slate-black);
+    color: var(--color-gauge-bg);
+    padding: 1rem;
+    box-shadow: var(--shadow-recessed);
+}
+.terminal-header {
+    border-bottom: 1px solid var(--color-tactical-gray);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.terminal-title {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-amber);
+    text-transform: uppercase;
+}
+.terminal-decor {
+    width: 60px;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-tactical-gray),
+        var(--color-tactical-gray) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+}
+
+.terminal-body {
+    height: 100px;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    padding-right: 0.5rem;
+}
+.terminal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.terminal-body::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+}
+.terminal-body::-webkit-scrollbar-thumb {
+    background: var(--color-tactical-gray);
+}
+
+.log-line {
+    margin-bottom: 0.25rem;
+    word-break: break-all;
+}
+.log-line::before {
+    content: '> ';
+    color: var(--color-accent-amber);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   ACTION BUTTON PANEL (SUBMIT DECK)
+   ========================================================================== */
+.action-submit-panel {
+    border-top: var(--border-style);
+    padding-top: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.action-disclaimer {
+    max-width: 50%;
+}
+.disclaimer-text {
+    font-family: var(--font-tech);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--color-accent-red);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.action-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Heavy Industrial Buttons */
+.btn-reset {
+    width: 50px;
+    height: 50px;
+    background: var(--color-gauge-bg);
+    border: var(--border-style);
+    color: var(--color-slate-black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0px var(--color-border-dark);
+    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+}
+.btn-reset:hover {
+    background-color: var(--color-accent-red);
+    color: var(--color-card-bg);
+}
+.btn-reset:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px var(--color-border-dark);
+}
+.btn-reset svg {
+    width: 22px;
+    height: 22px;
+}
+
+.btn-submit {
+    height: 50px;
+    padding: 0 2rem;
+    background: var(--color-slate-black);
+    color: var(--color-card-bg);
+    border: var(--border-style);
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 4px 4px 0px var(--color-border-dark);
+    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+}
+.btn-submit:hover {
+    background-color: var(--color-charcoal);
+    box-shadow: 5px 5px 0px var(--color-border-dark);
+    transform: translate(-1px, -1px);
+}
+.btn-submit:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--color-border-dark);
+}
+.btn-submit svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s;
+}
+.btn-submit:hover svg {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   DECK CONSOLE FOOTER
+   ========================================================================== */
+.console-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--color-tactical-gray);
+    text-transform: uppercase;
+}
+.footer-divider {
+    color: var(--color-border-dark);
+}
+
+/* ==========================================================================
+   OVERLAY: TELEMETRY SUCCESS CERTIFICATE TICKET
+   ========================================================================== */
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30, 34, 41, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+}
+.overlay-container.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.report-ticket {
+    background-color: var(--color-card-bg);
+    border: var(--border-style);
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 8px 8px 0px var(--color-border-dark);
+    animation: ticket-slide-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+@keyframes ticket-slide-in {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.ticket-header {
+    text-align: center;
+    border-bottom: 2px dashed var(--color-border-dark);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.ticket-brand {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    color: var(--color-tactical-gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.ticket-title {
+    font-family: var(--font-tech);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-slate-black);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+}
+.ticket-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-tactical-gray);
+    margin-top: 0.5rem;
+}
+
+.ticket-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+.ticket-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+}
+.ticket-line .lbl {
+    font-family: var(--font-tech);
+    font-weight: bold;
+    color: var(--color-tactical-gray);
+    text-transform: uppercase;
+}
+.ticket-line .dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--color-gauge-bg);
+    margin: 0 0.5rem;
+}
+.ticket-line .val {
+    font-family: var(--font-mono);
+    font-weight: bold;
+    color: var(--color-slate-black);
+}
+
+.ticket-footer {
+    border-top: 2px dashed var(--color-border-dark);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+.ticket-stamp {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-accent-green);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+/* CSS Barcode styling */
+.barcode-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.barcode-stripes {
+    height: 36px;
+    width: 200px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-slate-black),
+        var(--color-slate-black) 2px,
+        transparent 2px,
+        transparent 5px,
+        var(--color-slate-black) 5px,
+        var(--color-slate-black) 8px,
+        transparent 8px,
+        transparent 10px
+    );
+}
+.barcode-numbers {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    margin-top: 0.25rem;
+}
+
+.btn-ticket-close {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-slate-black);
+    color: var(--color-card-bg);
+    border: var(--border-style);
+    font-family: var(--font-tech);
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+.btn-ticket-close:hover {
+    background-color: var(--color-charcoal);
+}
+
+/* Decorative Ticket Corner Screws */
+.ticket-screw {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-gauge-bg);
+    border: 1.5px solid var(--color-border-dark);
+}
+.ts-tl { top: 8px; left: 8px; }
+.ts-tr { top: 8px; right: 8px; }
+.ts-bl { bottom: 8px; left: 8px; }
+.ts-br { bottom: 8px; right: 8px; }
