@@ -1,0 +1,795 @@
+/* ==========================================================================
+   MINIMALIST CAD DESIGN SYSTEM - THEME STYLESHEET
+   Based on e:\projects\ai\antigravity\html-samples\example_6\assets\sample1.webp
+   ========================================================================== */
+
+/* Custom CSS Variables & Typography Setup */
+:root {
+    /* Color Palette */
+    --studio-bg-center: #d2d4dc;
+    --studio-bg-edge: #a1a3aa;
+    --card-bg: #bebfc6;
+    --primary-black: #000000;
+    --primary-white: #ffffff;
+    --inactive-gray: #5e6068;
+    --input-bg-idle: rgba(0, 0, 0, 0.03);
+    --input-bg-hover: rgba(0, 0, 0, 0.06);
+    --input-bg-focus: rgba(255, 255, 255, 0.7);
+    
+    /* Grid & Line Defaults */
+    --border-stroke: 1px solid var(--primary-black);
+    --border-stroke-dashed: 1px dashed var(--primary-black);
+    
+    /* Typography Font stacks */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+/* Global Reset & Base Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, var(--studio-bg-center) 0%, var(--studio-bg-edge) 100%);
+    font-family: var(--font-sans);
+    color: var(--primary-black);
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   FORM CARD CONTAINER (MAIN CABINET)
+   -------------------------------------------------------------------------- */
+.form-card {
+    background-color: var(--card-bg);
+    width: 100%;
+    border: var(--border-stroke);
+    padding: 30px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   TECHNICAL WINDOW HEADER
+   -------------------------------------------------------------------------- */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+.header-date {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.window-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--primary-black);
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: transform 0.15s ease;
+}
+
+.window-btn:hover {
+    transform: scale(1.3);
+}
+
+.header-divider, .footer-divider {
+    border: none;
+    border-top: var(--border-stroke);
+    margin: 12px 0 24px 0;
+    width: 100%;
+}
+
+.footer-divider {
+    margin: 24px 0 16px 0;
+}
+
+/* --------------------------------------------------------------------------
+   FORM GRID LAYOUT (BODY COLUMNS)
+   -------------------------------------------------------------------------- */
+.form-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Responsive grid collapsing for smaller viewports */
+@media (max-width: 900px) {
+    .form-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--inactive-gray);
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   STANDARD INPUTS & GROUPING
+   -------------------------------------------------------------------------- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+    gap: 6px;
+}
+
+.form-group label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--inactive-gray);
+    letter-spacing: 0.06em;
+}
+
+/* Inputs: Text, Email, Password, Number */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"] {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--primary-black);
+    background-color: var(--input-bg-idle);
+    border: var(--border-stroke);
+    padding: 11px 14px;
+    outline: none;
+    border-radius: 0; /* Keep everything boxy */
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group input[type="password"]::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="email"]:hover,
+.form-group input[type="password"]:hover,
+.form-group input[type="number"]:hover {
+    background-color: var(--input-bg-hover);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="number"]:focus {
+    background-color: var(--input-bg-focus);
+    box-shadow: inset 0 0 0 1px var(--primary-black);
+}
+
+/* --------------------------------------------------------------------------
+   CUSTOM SELECT DROPDOWN
+   -------------------------------------------------------------------------- */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--primary-black);
+    background-color: var(--input-bg-idle);
+    border: var(--border-stroke);
+    padding: 11px 14px;
+    padding-right: 40px;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select-wrapper select:hover {
+    background-color: var(--input-bg-hover);
+}
+
+.select-wrapper select:focus {
+    background-color: var(--input-bg-focus);
+    box-shadow: inset 0 0 0 1px var(--primary-black);
+}
+
+.select-wrapper::after {
+    content: "▼";
+    font-size: 9px;
+    font-family: var(--font-sans);
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-black);
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+.select-wrapper:hover::after {
+    transform: translateY(-30%);
+}
+
+/* --------------------------------------------------------------------------
+   CUSTOM RANGE SLIDERS
+   -------------------------------------------------------------------------- */
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.slider-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-black);
+}
+
+.form-group input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    margin: 8px 0;
+    outline: none;
+}
+
+/* Webkit browser slider track & thumb styling (Chrome, Safari, Edge) */
+.form-group input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--primary-black);
+    border: none;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 24px;
+    background-color: var(--primary-black);
+    cursor: pointer;
+    margin-top: -5px; /* Centers thumb vertically on track */
+    border-radius: 0;
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+.form-group input[type="range"]:active::-webkit-slider-thumb,
+.form-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scaleY(1.35);
+}
+
+/* Firefox slider track & thumb styling */
+.form-group input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--primary-black);
+    border: none;
+}
+
+.form-group input[type="range"]::-moz-range-thumb {
+    height: 12px;
+    width: 24px;
+    background-color: var(--primary-black);
+    cursor: pointer;
+    border-radius: 0;
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+.form-group input[type="range"]:active::-moz-range-thumb,
+.form-group input[type="range"]::-moz-range-thumb:hover {
+    transform: scaleY(1.35);
+}
+
+/* --------------------------------------------------------------------------
+   CUSTOM CHECKBOXES (HORIZONTAL LIST)
+   -------------------------------------------------------------------------- */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px 0;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-box {
+    height: 14px;
+    width: 14px;
+    border: var(--border-stroke);
+    background-color: transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.custom-checkbox input:checked ~ .checkbox-box {
+    background-color: var(--primary-black);
+}
+
+.checkbox-box::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border: solid var(--primary-white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkbox-box::after {
+    display: block;
+}
+
+.checkbox-label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--primary-black);
+    transition: color 0.15s ease;
+}
+
+.custom-checkbox:hover input ~ .checkbox-label {
+    color: var(--inactive-gray);
+}
+
+/* --------------------------------------------------------------------------
+   CUSTOM RADIO CARD GRID (LIGHTNING OPTIONS - COPIED FROM IMAGE)
+   -------------------------------------------------------------------------- */
+.lightning-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.lightning-card {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lightning-card input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-stroke);
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 14px;
+    min-height: 74px;
+    box-sizing: border-box;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightning-card:hover .card-content {
+    background-color: var(--input-bg-hover);
+}
+
+/* Selected Active State: Pure black card, white contents */
+.lightning-card input:checked + .card-content {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+}
+
+.card-indicator {
+    margin-bottom: 6px;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightning-card:hover .card-indicator {
+    transform: scale(1.08);
+}
+
+.card-name {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   FILE UPLOAD DROPZONE
+   -------------------------------------------------------------------------- */
+.file-dropzone {
+    border: var(--border-stroke-dashed);
+    background-color: rgba(0, 0, 0, 0.01);
+    padding: 22px 14px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-dropzone:hover {
+    background-color: var(--input-bg-hover);
+    border-style: solid;
+}
+
+/* Active drop indicator class for JS dragover events */
+.file-dropzone.dragover {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-style: double;
+    border-width: 2px;
+}
+
+.file-input-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.dropzone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    pointer-events: none;
+}
+
+.upload-icon {
+    color: var(--primary-black);
+    transition: transform 0.2s ease;
+}
+
+.file-dropzone:hover .upload-icon {
+    transform: translateY(-2px);
+}
+
+.dropzone-text {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.dropzone-sub {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    color: var(--inactive-gray);
+}
+
+.file-name-display {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--primary-white);
+    background-color: var(--primary-black);
+    padding: 4px 8px;
+    margin-top: 6px;
+    border: var(--border-stroke);
+    word-break: break-all;
+    max-width: 200px;
+}
+
+/* --------------------------------------------------------------------------
+   TEXTAREA (FULL WIDTH ENVIRONMENT DESCRIPTION)
+   -------------------------------------------------------------------------- */
+.form-body-full {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.form-body-full textarea {
+    width: 100%;
+    min-height: 84px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    color: var(--primary-black);
+    background-color: var(--input-bg-idle);
+    border: var(--border-stroke);
+    padding: 12px 14px;
+    outline: none;
+    border-radius: 0;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.form-body-full textarea::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.form-body-full textarea:hover {
+    background-color: var(--input-bg-hover);
+}
+
+.form-body-full textarea:focus {
+    background-color: var(--input-bg-focus);
+    box-shadow: inset 0 0 0 1px var(--primary-black);
+}
+
+/* --------------------------------------------------------------------------
+   TECHNICAL FOOTER (BRANDING, COORDS, BUTTONS)
+   -------------------------------------------------------------------------- */
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Minimalist "END IS UI." square branding block */
+.branding-box {
+    border: var(--border-stroke);
+    padding: 6px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.brand-text {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: 0.05em;
+}
+
+.brand-text .dot {
+    font-size: 14px;
+    line-height: 0;
+}
+
+.technical-readout {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.coord {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--inactive-gray);
+    letter-spacing: 0.05em;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Button Controls */
+.form-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 12px 24px;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Primary Button: Solid Black -> Inverts on hover */
+.btn-primary {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    border: var(--border-stroke);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-black);
+}
+
+.btn-primary:active, .btn-secondary:active {
+    transform: scale(0.97);
+}
+
+/* Secondary Button: Outline -> Solid Black on hover */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-black);
+    border: var(--border-stroke);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+}
+
+/* Decorative grid index "013" matching bottom-right of image */
+.footer-index {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-black);
+    padding-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   COMPILE SUCCESS MODAL OVERLAY (MONOSPACE DEBUG CONSOLE STYLE)
+   -------------------------------------------------------------------------- */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none; /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.success-overlay.show {
+    display: flex;
+}
+
+.success-card {
+    background-color: var(--card-bg);
+    border: var(--border-stroke);
+    padding: 24px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.success-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.close-overlay {
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 1;
+    color: var(--primary-black);
+    transition: transform 0.15s ease;
+}
+
+.close-overlay:hover {
+    transform: scale(1.2);
+}
+
+.success-divider {
+    border: none;
+    border-top: var(--border-stroke);
+    margin: 10px 0 16px 0;
+}
+
+.success-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Green retro terminal output box */
+.terminal-log {
+    background-color: #0d0e12;
+    color: #a8ffb2;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 16px;
+    margin-bottom: 20px;
+    max-height: 180px;
+    overflow-y: auto;
+    border-left: 3px solid #2dfc5c;
+    border-radius: 0;
+    line-height: 1.5;
+    text-align: left;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+.success-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}

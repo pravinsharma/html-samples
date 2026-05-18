@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Configuration — Form 013</title>
+    <!-- Google Fonts: Inter for sleek UI labels/text, Space Mono for numbers and technical markings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Form Container -->
+        <form id="minimal-form" class="form-card" action="#" method="POST" enctype="multipart/form-data">
+            
+            <!-- Technical Window Header -->
+            <header class="form-header">
+                <div class="header-left">
+                    <span id="current-date" class="header-date">Sat &mdash; 19 January</span>
+                </div>
+                <div class="header-right">
+                    <button type="button" class="window-btn" aria-label="Minimize">—</button>
+                    <button type="button" class="window-btn" aria-label="Close">×</button>
+                </div>
+            </header>
+
+            <!-- Decorative Technical Line -->
+            <hr class="header-divider">
+
+            <!-- Main Layout Body -->
+            <div class="form-body">
+                
+                <!-- Left Column: Primary Metadata Inputs -->
+                <div class="form-column">
+                    <div class="section-tag">01 // METADATA</div>
+                    
+                    <!-- Text Input -->
+                    <div class="form-group">
+                        <label for="fullName">Workspace Owner</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="e.g. Pravin Sharma">
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="email">Owner Email</label>
+                        <input type="email" id="email" name="email" required placeholder="e.g. pravin@domain.com">
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-group">
+                        <label for="accessPin">Workspace Password</label>
+                        <input type="password" id="accessPin" name="accessPin" required placeholder="••••••••" minlength="8">
+                    </div>
+
+                    <!-- Number Input -->
+                    <div class="form-group">
+                        <label for="maxNodes">Maximum Node Limit</label>
+                        <input type="number" id="maxNodes" name="maxNodes" required min="1" max="1000" value="35">
+                    </div>
+
+                    <!-- Select Dropdown Input -->
+                    <div class="form-group">
+                        <label for="engine">Rendering Core Engine</label>
+                        <div class="select-wrapper">
+                            <select id="engine" name="engine" required>
+                                <option value="" disabled selected>Select Engine...</option>
+                                <option value="webgpu">WebGPU Core (High Performance)</option>
+                                <option value="webgl2">WebGL 2.0 (Standard Compat)</option>
+                                <option value="software">Software Rasterizer (Legacy)</option>
+                                <option value="canvas2d">Canvas 2D (Draft Mode)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Settings, Toggles, Sliders & Textarea -->
+                <div class="form-column">
+                    <div class="section-tag">02 // PARAMETERS</div>
+                    
+                    <!-- Slider Inputs (Range) -->
+                    <div class="form-group">
+                        <div class="slider-header">
+                            <label for="brightness">Ambient Brightness</label>
+                            <span id="brightness-val" class="slider-value">70%</span>
+                        </div>
+                        <input type="range" id="brightness" name="brightness" min="0" max="100" value="70">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="slider-header">
+                            <label for="shadowDensity">Shadow Density</label>
+                            <span id="shadow-val" class="slider-value">35%</span>
+                        </div>
+                        <input type="range" id="shadowDensity" name="shadowDensity" min="0" max="100" value="35">
+                    </div>
+
+                    <!-- Checkboxes (Styled as beautiful grid selection list) -->
+                    <div class="form-group">
+                        <label>Subsystems Enabled</label>
+                        <div class="checkbox-group">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="subsystems" value="ambientOcclusion" checked>
+                                <span class="checkbox-box"></span>
+                                <span class="checkbox-label">Ambient Occlusion</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="subsystems" value="antialiasing">
+                                <span class="checkbox-box"></span>
+                                <span class="checkbox-label">Antialiasing</span>
+                            </label>
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="subsystems" value="wireframe">
+                                <span class="checkbox-box"></span>
+                                <span class="checkbox-label">Wireframe Mesh</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Column: Lightning Preset & File Upload -->
+                <div class="form-column">
+                    <div class="section-tag">03 // RESOURCES & LAYOUT</div>
+
+                    <!-- Radios (Styled like the 2x2 Lightning card grid in sample1.webp!) -->
+                    <div class="form-group">
+                        <label>Lightning Workspace Theme</label>
+                        <div class="lightning-grid">
+                            <label class="lightning-card">
+                                <input type="radio" name="lightingPreset" value="spot" checked>
+                                <div class="card-content">
+                                    <div class="card-indicator">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M18.36 5.64l-1.42 1.42M7.05 16.95l-1.42 1.42M18.36 18.36l-1.42-1.42M7.05 7.05L5.64 5.64" stroke-linecap="round"/>
+                                            <circle cx="12" cy="12" r="4"/>
+                                        </svg>
+                                    </div>
+                                    <span class="card-name">Spot</span>
+                                </div>
+                            </label>
+                            <label class="lightning-card">
+                                <input type="radio" name="lightingPreset" value="area">
+                                <div class="card-content">
+                                    <div class="card-indicator">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round"/>
+                                            <path d="M9 9h6v6H9z" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                    <span class="card-name">Area</span>
+                                </div>
+                            </label>
+                            <label class="lightning-card">
+                                <input type="radio" name="lightingPreset" value="target">
+                                <div class="card-content">
+                                    <div class="card-indicator">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                    <span class="card-name">Target</span>
+                                </div>
+                            </label>
+                            <label class="lightning-card">
+                                <input type="radio" name="lightingPreset" value="sun">
+                                <div class="card-content">
+                                    <div class="card-indicator">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <path d="M12 2v20M2 12h20M5.64 5.64l12.72 12.72M5.64 18.36L18.36 5.64" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <span class="card-name">Sun</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Input (Styled as a sleek drag-and-drop region) -->
+                    <div class="form-group">
+                        <label for="modelFile">Workspace Preset Template</label>
+                        <div class="file-dropzone" id="dropzone">
+                            <input type="file" id="modelFile" name="modelFile" class="file-input-hidden" accept=".json,.obj,.gltf">
+                            <div class="dropzone-content">
+                                <svg class="upload-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="dropzone-text">Click to choose or drag template</span>
+                                <span class="dropzone-sub">JSON, OBJ or GLTF (Max 5MB)</span>
+                                <span class="file-name-display" id="file-name-display">No file selected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Textarea Area (Full Width Span) -->
+            <div class="form-body-full">
+                <div class="form-group">
+                    <label for="notes">Workspace Configuration Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Enter optional environment variables, hardware configurations, developer notes or setup instructions..."></textarea>
+                </div>
+            </div>
+
+            <!-- Decorative Form Divider -->
+            <hr class="footer-divider">
+
+            <!-- Technical Form Footer -->
+            <footer class="form-footer">
+                <div class="footer-left">
+                    <div class="branding-box">
+                        <span class="brand-text">END<br>IS<br>UI<span class="dot">.</span></span>
+                    </div>
+                    <div class="technical-readout">
+                        <span class="coord">X: 0.035</span>
+                        <span class="coord">Y: 0.129</span>
+                        <span class="coord">Z: -0.892</span>
+                    </div>
+                </div>
+
+                <!-- Form Actions (Submit / Reset buttons) -->
+                <div class="footer-right">
+                    <div class="form-actions">
+                        <button type="reset" class="btn-secondary">RESET</button>
+                        <button type="submit" class="btn-primary">SUBMIT CONFIG</button>
+                    </div>
+                    <div class="footer-index">013</div>
+                </div>
+            </footer>
+        </form>
+    </div>
+
+    <!-- Success Modal/Toast for form submission confirmation -->
+    <div id="success-overlay" class="success-overlay">
+        <div class="success-card">
+            <header class="success-header">
+                <span>SYSTEM LOG // COMPILE SUCCESS</span>
+                <button type="button" class="close-overlay" id="close-overlay">×</button>
+            </header>
+            <hr class="success-divider">
+            <div class="success-body">
+                <pre class="terminal-log" id="terminal-log">
+[SYSTEM] Initializing build sequence...
+[SYSTEM] Loading core WebGL/WebGPU parameters...
+[SYSTEM] Generating configuration manifest...
+[SYSTEM] Compiling lighting presets [SPOT MODE]...
+[SYSTEM] Form data successfully verified.
+[SYSTEM] JSON configuration bundle ready for download.
+[SUCCESS] Workspace build completed. Status code: 013.
+                </pre>
+                <div class="success-actions">
+                    <button type="button" id="download-config" class="btn-primary">DOWNLOAD CONFIG.JSON</button>
+                    <button type="button" id="dismiss-success" class="btn-secondary">CLOSE LOG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
