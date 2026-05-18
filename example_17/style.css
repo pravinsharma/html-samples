@@ -1,0 +1,1284 @@
+/* ==========================================================================
+   NAVIGATOR MODEL N-17 CALIBRATION DECK
+   DESIGN SYSTEM: ABSOLUTE MINIMALIST MONOCHROME RETRO-SKEUOMORPHISM
+   ========================================================================== */
+
+/* 1. CSS VARIABLES & RESET */
+:root {
+    --bg-canvas: #D5D6D8;          /* Warm greige industrial base */
+    --color-ink: #000000;          /* High contrast solid ink black */
+    --color-paper: #E6E7E9;        /* Slightly lighter gray for active elements */
+    --border-thickness: 1.5px;
+    --border-style: var(--border-thickness) solid var(--color-ink);
+    
+    /* Typography */
+    --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+}
+
+/* Base list reset */
+ul, ol {
+    list-style: none;
+}
+
+/* 2. LAYOUT WRAPPERS & CONTAINERS */
+.deck-outer-container {
+    width: 100%;
+    max-width: 1160px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+/* The Main Control Board */
+.control-panel {
+    background-color: var(--bg-canvas);
+    border: 2px solid var(--color-ink);
+    border-radius: 6px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    position: relative; /* For corner screws positioning */
+    box-shadow: none; /* Skeuomorphic theme relies purely on high-contrast lines */
+}
+
+/* Corner Screws System */
+.screw {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: var(--border-style);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-canvas);
+    pointer-events: none;
+}
+.screw-groove {
+    width: 12px;
+    height: 1.5px;
+    background-color: var(--color-ink);
+    transform: rotate(45deg); /* Slotted screw look */
+    transition: transform 0.5s ease;
+}
+/* Randomize rotation a bit for organic realism */
+.screw-tl { top: 12px; left: 12px; }
+.screw-tl .screw-groove { transform: rotate(15deg); }
+.screw-tr { top: 12px; right: 12px; }
+.screw-tr .screw-groove { transform: rotate(-60deg); }
+.screw-bl { bottom: 12px; left: 12px; }
+.screw-bl .screw-groove { transform: rotate(115deg); }
+.screw-br { bottom: 12px; right: 12px; }
+.screw-br .screw-groove { transform: rotate(-35deg); }
+
+/* PANEL HEADER BRANDING */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--color-ink);
+    padding-bottom: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.brand-title {
+    font-family: var(--font-sans);
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    line-height: 1;
+}
+
+.brand-model {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+}
+
+.header-meta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.system-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--color-ink);
+}
+
+.pulsing {
+    animation: ledPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* 3. MODULAR GRID SYSTEM */
+.panel-grid-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 0.9fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Column division borders in desktop viewport */
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* INSTRUMENT MODULAR BOXES */
+.instrument-module {
+    border: var(--border-style);
+    border-radius: 4px;
+    padding: 1.5rem 1.2rem;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--color-ink);
+    padding-bottom: 0.5rem;
+}
+
+.module-number {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 800;
+    background-color: var(--color-ink);
+    color: var(--bg-canvas);
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.module-title {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.module-decor-dots {
+    flex-grow: 1;
+    height: 3px;
+    background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-repeat: repeat-x;
+    opacity: 0.5;
+}
+
+.module-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* 4. FORM FIELDS & LABELS STYLING */
+.input-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.field-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.field-sub-note {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-top: 0.1rem;
+    opacity: 0.7;
+}
+
+/* Custom retro monospace input wrappers */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-decor-brackets {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--color-ink);
+    transition: transform 0.2s ease;
+}
+
+.input-wrapper input {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    padding: 4px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    outline: none;
+}
+
+.input-wrapper input::placeholder {
+    opacity: 0.3;
+}
+
+/* Active focus feedback: bracket hugging */
+.input-wrapper input:focus {
+    border-bottom-width: 1.5px;
+}
+
+.input-wrapper:focus-within .input-decor-brackets {
+    font-weight: 800;
+    transform: scaleX(1.2);
+}
+
+/* Split field rows */
+.dual-fields-row {
+    display: flex;
+    gap: 1rem;
+}
+.dual-fields-row .input-field-group {
+    flex: 1;
+}
+
+/* 5. CUSTOM DROP DOWN WIDGET */
+.custom-select-deck {
+    position: relative;
+    width: 100%;
+    font-family: var(--font-mono);
+}
+
+.select-trigger {
+    border: var(--border-style);
+    border-radius: 3px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background-color: var(--bg-canvas);
+    transition: background-color 0.2s ease;
+    text-transform: uppercase;
+}
+
+.select-trigger:hover, .select-trigger:focus {
+    background-color: var(--color-paper);
+}
+
+.select-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+}
+
+.select-options-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-canvas);
+    border: var(--border-style);
+    border-radius: 3px;
+    z-index: 10;
+    display: none; /* Toggled in JS */
+    box-shadow: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.select-options-list.active {
+    display: block;
+}
+
+.option-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+}
+
+.option-item:hover {
+    background-color: var(--color-paper);
+}
+
+.option-pointer {
+    margin-right: 6px;
+    font-size: 0.6rem;
+    visibility: hidden;
+}
+
+.option-item.selected .option-pointer {
+    visibility: visible;
+}
+
+/* Hidden native element */
+.native-hidden-select {
+    display: none;
+}
+
+/* 6. MECHANICAL RADIO SELECTION BUTTONS */
+.mechanical-radios-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.mech-radio-row {
+    display: flex;
+    align-items: center;
+    border: var(--border-style);
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.mech-radio-row:hover {
+    background-color: var(--color-paper);
+}
+
+.native-radio {
+    display: none; /* Styled purely via the .radio-pointer element */
+}
+
+/* Radio mechanical pointer block */
+.radio-pointer {
+    width: 14px;
+    height: 14px;
+    border: var(--border-style);
+    background-color: var(--bg-canvas);
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+}
+
+.radio-pointer::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-ink);
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* When native radio checked */
+.native-radio:checked + .radio-pointer {
+    background-color: var(--color-ink);
+}
+
+.native-radio:checked + .radio-pointer::after {
+    background-color: var(--bg-canvas);
+    transform: scale(1);
+}
+
+.radio-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.radio-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.radio-desc {
+    font-family: var(--font-sans);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    opacity: 0.7;
+}
+
+/* 7. MECHANICAL TOGGLE SWITCHES */
+.toggles-flex-layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    gap: 0.5rem;
+}
+
+.mechanical-switch-module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.switch-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.native-checkbox {
+    display: none;
+}
+
+/* The structural switch housing plate */
+.switch-hardware {
+    cursor: pointer;
+    display: block;
+}
+
+.switch-plate {
+    width: 32px;
+    height: 80px;
+    border: var(--border-style);
+    border-radius: 4px;
+    background-color: var(--bg-canvas);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    position: relative;
+}
+
+.plate-text {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    font-weight: 800;
+    opacity: 0.5;
+    user-select: none;
+    letter-spacing: 0.02em;
+}
+
+.native-checkbox:checked ~ .switch-plate .plate-text.text-on {
+    opacity: 1;
+}
+
+.native-checkbox:not(:checked) ~ .switch-plate .plate-text.text-off {
+    opacity: 1;
+}
+
+/* The slider rail slot */
+.switch-slot {
+    width: 8px;
+    height: 44px;
+    background-color: var(--color-ink);
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Mechanical slider handle switch button */
+.switch-handle {
+    width: 22px;
+    height: 18px;
+    border: var(--border-style);
+    border-radius: 3px;
+    background-color: var(--bg-canvas);
+    position: absolute;
+    left: -7px;
+    bottom: 0px; /* Switch DOWN (OFF) by default */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: bottom 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ridge lines inside toggle switches */
+.handle-ridge {
+    width: 10px;
+    height: 8px;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        var(--color-ink),
+        var(--color-ink) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+}
+
+.native-checkbox:checked ~ .switch-plate .switch-handle {
+    bottom: 26px; /* Switch UP (ON) */
+}
+
+/* Custom Mechanical LED */
+.switch-indicator-led {
+    width: 8px;
+    height: 8px;
+    border: var(--border-style);
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.switch-indicator-led.active {
+    background-color: var(--color-ink); /* Monochrome active look */
+}
+
+/* 8. SLIDERS & ROTARY DIAL GAUGES */
+.slider-module {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.slider-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.slider-value {
+    font-weight: 800;
+}
+
+.slider-track-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.slider-limit-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+/* Standard HTML range custom reset */
+.custom-range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    outline: none;
+}
+
+.custom-range-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-ink);
+}
+
+/* Triangle slider thumb pointer */
+.custom-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    background-color: var(--color-ink);
+    cursor: pointer;
+    margin-top: -5px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Sharp retro arrow pointing UP */
+    transition: transform 0.1s ease;
+}
+
+.custom-range-slider:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+/* Mozilla fallback */
+.custom-range-slider::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-ink);
+}
+
+.custom-range-slider::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    background-color: var(--color-ink);
+    cursor: pointer;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border: none;
+}
+
+/* Scale Ticks underneath sliders */
+.slider-scale-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    margin-top: 1px;
+}
+
+.slider-scale-ticks span {
+    width: 1px;
+    height: 5px;
+    background-color: var(--color-ink);
+    opacity: 0.6;
+}
+
+.slider-scale-ticks span:nth-child(5n + 1) {
+    height: 8px;
+    width: 1.5px;
+    opacity: 1;
+}
+
+/* DUAL DIALS (ROTARY KNOBS) */
+.dual-knobs-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 0.5rem;
+}
+
+.rotary-knob-module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.knob-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.knob-hardware-wrapper {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.knob-dial {
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--color-ink);
+    border-radius: 50%;
+    background-color: var(--bg-canvas);
+    position: relative;
+    cursor: grab;
+    transform: rotate(45deg); /* Default rotation driven in JS */
+    transition: transform 0.05s ease-out;
+}
+
+.knob-dial:active {
+    cursor: grabbing;
+}
+
+.knob-pointer-line {
+    width: 2px;
+    height: 18px;
+    background-color: var(--color-ink);
+    position: absolute;
+    top: 0;
+    left: calc(50% - 1px);
+}
+
+.knob-ticks-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.knob-value-readout {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+/* 9. RADAR BALANCE SCOPE & LOG MODULE */
+.scope-screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.scope-screen-bezel {
+    border: var(--border-style);
+    border-radius: 6px;
+    padding: 12px;
+    background-color: var(--bg-canvas);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Bezel screw details */
+.bezel-screw {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    background-color: var(--bg-canvas);
+}
+.bs-tl { top: 4px; left: 4px; }
+.bs-tr { top: 4px; right: 4px; }
+.bs-bl { bottom: 4px; left: 4px; }
+.bs-br { bottom: 4px; right: 4px; }
+
+.scope-vector-svg {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+}
+
+/* Sweeping line scanner */
+#scope-sweep-line {
+    transform-origin: 100px 100px;
+    animation: sweepRadar 4s infinite linear;
+}
+
+@keyframes sweepRadar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.scope-status-footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--color-ink);
+    padding-top: 0.4rem;
+}
+
+.scope-coord-readout span {
+    font-weight: 800;
+}
+
+/* TELEMETRY TERMINAL MODULE */
+.terminal-log-module {
+    border: var(--border-style);
+    border-radius: 3px;
+    background-color: var(--bg-canvas);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.8rem;
+}
+
+.terminal-header {
+    border-bottom: 1px solid var(--color-ink);
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.terminal-decor-lines {
+    width: 24px;
+    height: 4px;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        var(--color-ink),
+        var(--color-ink) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
+
+.terminal-body {
+    padding: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 1.4;
+    height: 68px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.log-line {
+    word-break: break-all;
+}
+
+/* 10. SUBMIT ACTIONS & INDUSTRIAL BAIL BUTTON */
+.action-submit-panel-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--color-ink);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+    gap: 1.5rem;
+}
+
+.action-meta-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-width: 50%;
+}
+
+.action-alert-msg {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+.action-dots-mesh {
+    height: 6px;
+    background-image: radial-gradient(var(--color-ink) 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-repeat: repeat;
+    opacity: 0.2;
+}
+
+.action-buttons-side {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* EMERGENCY BAIL HARDWARE BUTTON */
+.bail-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.bail-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.bail-hardware-btn {
+    width: 38px;
+    height: 38px;
+    border: var(--border-style);
+    border-radius: 50%;
+    background-color: var(--bg-canvas);
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.bail-ring-decor {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 1px dashed var(--color-ink);
+    border-radius: 50%;
+    animation: spinRing 20s infinite linear;
+}
+
+@keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.bail-core {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--color-ink); /* Monochrome flat big button */
+    display: block;
+    transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bail-hardware-btn:active .bail-core {
+    transform: scale(0.7);
+}
+
+/* SOLID PREMIUM SUBMIT KEY */
+.submit-premium-button {
+    background-color: var(--color-ink);
+    color: var(--bg-canvas);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-premium-button:hover {
+    background-color: #222222;
+}
+
+.submit-premium-button:active {
+    transform: translateY(1px);
+}
+
+.btn-arrow-svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* DECK FOOTER METADATA */
+.deck-footer {
+    display: flex;
+    gap: 0.8rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.5;
+    text-transform: uppercase;
+}
+
+.footer-separator {
+    user-select: none;
+}
+
+/* 11. OVERLAY PRINT CONFIRMATION TICKET */
+.overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(213, 214, 216, 0.9); /* Greige color with transparency */
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.overlay-container.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.report-ticket {
+    background-color: var(--bg-canvas);
+    border: 2px solid var(--color-ink);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 440px;
+    padding: 2.2rem 1.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.overlay-container.active .report-ticket {
+    transform: translateY(0);
+}
+
+/* Screws in ticket corners */
+.ticket-screw {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    background-color: var(--bg-canvas);
+}
+.ticket-screw::after {
+    content: '';
+    width: 8px;
+    height: 1px;
+    background-color: var(--color-ink);
+    display: block;
+    position: absolute;
+    top: 4.5px;
+    left: 1px;
+    transform: rotate(45deg);
+}
+.ts-tl { top: 8px; left: 8px; }
+.ts-tr { top: 8px; right: 8px; }
+.ts-bl { bottom: 8px; left: 8px; }
+.ts-br { bottom: 8px; right: 8px; }
+
+.ticket-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+}
+
+.ticket-logo {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+}
+
+.ticket-title-main {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+}
+
+.ticket-metadata-line {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    opacity: 0.6;
+    margin-top: 0.2rem;
+}
+
+.ticket-divider-strip {
+    height: 4px;
+    border-top: 1.5px dashed var(--color-ink);
+    border-bottom: 1.5px dashed var(--color-ink);
+}
+
+.ticket-body-readout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ticket-line {
+    display: flex;
+    align-items: flex-end;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.ticket-line .lbl {
+    text-transform: uppercase;
+}
+
+.ticket-line .dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--color-ink);
+    margin: 0 4px;
+    position: relative;
+    top: -2px;
+}
+
+.ticket-line .val {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.ticket-status-stamp {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-align: center;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+/* BARCODE DESIGN */
+.barcode-stripes {
+    height: 38px;
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-ink),
+        var(--color-ink) 1px,
+        transparent 1px,
+        transparent 3px,
+        var(--color-ink) 3px,
+        var(--color-ink) 5px,
+        transparent 5px,
+        transparent 7px
+    );
+    opacity: 0.85;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.barcode-numbers {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+    margin-top: 0.2rem;
+    letter-spacing: 0.2em;
+}
+
+/* TICKET DISMISS LINK BUTTON */
+.ticket-dismiss-btn {
+    border: var(--border-style);
+    background-color: var(--color-ink);
+    color: var(--bg-canvas);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ticket-dismiss-btn:hover {
+    background-color: var(--bg-canvas);
+    color: var(--color-ink);
+}
+
+/* ==========================================================================
+   12. RESPONSIVE DESIGN (SCALING DECK)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .panel-grid-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .col-right {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+    .terminal-log-module {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    .control-panel {
+        padding: 2rem 1.2rem;
+    }
+    .panel-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .col-right {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+    .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .header-meta-block {
+        align-items: flex-start;
+    }
+    .action-submit-panel-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+    .action-meta-side {
+        max-width: 100%;
+    }
+    .action-buttons-side {
+        justify-content: space-between;
+    }
+    .deck-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        text-align: center;
+    }
+    .footer-separator {
+        display: none;
+    }
+}

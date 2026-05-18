@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tactical Control Console Model S-18: Premium Skeuomorphic & Neumorphic Configuration Deck. Real tactile hardware inputs, knobs, sliders, and telemetry diagnostics.">
+    <title>S-18 TACTILE CONTROL CONSOLE</title>
+    <!-- Google Fonts: Outfit for clean labels, JetBrains Mono for monospaced numbers & readouts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="deck-outer-container">
+        
+        <!-- THE MECHANICAL MAIN CONTROL PANEL -->
+        <main class="control-panel" id="main-panel">
+            
+            <!-- PHYSICAL-STYLE DECORATIVE SCREWS IN THE 4 CORNERS -->
+            <div class="screw screw-tl"><div class="screw-groove"></div></div>
+            <div class="screw screw-tr"><div class="screw-groove"></div></div>
+            <div class="screw screw-bl"><div class="screw-groove"></div></div>
+            <div class="screw screw-br"><div class="screw-groove"></div></div>
+
+            <!-- PANEL BRANDING HEADER -->
+            <header class="panel-header">
+                <div class="header-brand-block">
+                    <h1 class="brand-title">SKEUO-CALIBRATOR</h1>
+                    <p class="brand-model">MODEL S-18 // HARDWARE CONSOLE DECK</p>
+                </div>
+                <div class="header-meta-block">
+                    <div class="system-status-indicator">
+                        <span class="status-dot pulsing"></span>
+                        <span class="status-text">SYSTEM READY: ACTIVE</span>
+                    </div>
+                    <div class="system-firmware">FIRMWARE: v18.4.12</div>
+                </div>
+            </header>
+
+            <!-- SUB-PANEL SYSTEM GRID -->
+            <form id="skeuo-calibration-form" novalidate autocomplete="off">
+                <div class="panel-grid-layout">
+
+                    <!-- COLUMN LEFT: OPERATOR INDUCTION & SELECTION -->
+                    <div class="grid-column col-left">
+                        
+                        <!-- PANEL 01: OPERATOR PROFILE -->
+                        <section class="instrument-module module-identity">
+                            <div class="module-header">
+                                <span class="module-number">01</span>
+                                <h2 class="module-title">OPERATOR INDUCTION</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                <!-- Text Input -->
+                                <div class="input-field-group">
+                                    <label class="field-label" for="operator-signature">OPERATOR SIGNATURE</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="operator-signature" name="operator_signature" required placeholder="PILOT_S18" maxlength="15">
+                                    </div>
+                                </div>
+
+                                <!-- Number Input with custom plus/minus circular buttons -->
+                                <div class="input-field-group">
+                                    <label class="field-label" for="load-coefficient">LOAD COEFFICIENT (KG)</label>
+                                    <div class="stepper-input-container">
+                                        <button type="button" class="stepper-btn btn-minus" id="btn-load-minus" aria-label="Decrease Load">
+                                            <span class="btn-icon">−</span>
+                                        </button>
+                                        <div class="input-wrapper stepper-wrapper">
+                                            <input type="number" id="load-coefficient" name="load_coefficient" min="30" max="200" value="80" required readonly>
+                                        </div>
+                                        <button type="button" class="stepper-btn btn-plus" id="btn-load-plus" aria-label="Increase Load">
+                                            <span class="btn-icon">+</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Custom Dropdown Selector -->
+                                <div class="input-field-group">
+                                    <label class="field-label">OPERATIONAL BAND</label>
+                                    <div class="custom-select-deck" id="band-select-container">
+                                        <div class="select-trigger">
+                                            <span class="select-selected-label">BAND ALPHA (OPTIMAL)</span>
+                                            <svg class="select-arrow" viewBox="0 0 24 24">
+                                                <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <ul class="select-options-list">
+                                            <li class="option-item selected" data-value="alpha">
+                                                <span class="option-pointer">▶</span> BAND ALPHA (OPTIMAL)
+                                            </li>
+                                            <li class="option-item" data-value="beta">
+                                                <span class="option-pointer">▶</span> BAND BETA (SECONDARY)
+                                            </li>
+                                            <li class="option-item" data-value="gamma">
+                                                <span class="option-pointer">▶</span> BAND GAMMA (EXPERIMENTAL)
+                                            </li>
+                                        </ul>
+                                        <!-- Hidden native select for form support -->
+                                        <select name="operator_band" class="native-hidden-select">
+                                            <option value="alpha" selected>ALPHA</option>
+                                            <option value="beta">BETA</option>
+                                            <option value="gamma">GAMMA</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- PANEL 02: CONDUIT ROUTING -->
+                        <section class="instrument-module module-conduit">
+                            <div class="module-header">
+                                <span class="module-number">02</span>
+                                <h2 class="module-title">CONDUIT STATE</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                <!-- Tactile Segmented Buttons (On/Off toggle tabs) -->
+                                <div class="input-field-group">
+                                    <label class="field-label">POWER SUPPLY STATE</label>
+                                    <div class="segmented-control-tabs" id="power-segmented-tabs">
+                                        <button type="button" class="segment-tab active" data-value="on">
+                                            <span class="tab-label">ON</span>
+                                        </button>
+                                        <button type="button" class="segment-tab" data-value="off">
+                                            <span class="tab-label">OFF</span>
+                                        </button>
+                                        <!-- Hidden field to save input -->
+                                        <input type="hidden" name="power_state" id="power-state-input" value="on">
+                                    </div>
+                                </div>
+
+                                <!-- Custom Pill Toggles -->
+                                <div class="input-field-group">
+                                    <label class="field-label">SYSTEM LINE SELECTORS</label>
+                                    <div class="toggles-grid-row">
+                                        
+                                        <!-- Pill Toggle 1 -->
+                                        <div class="pill-toggle-module">
+                                            <span class="toggle-name">THERMAL_BST</span>
+                                            <label class="toggle-hardware">
+                                                <input type="checkbox" name="thermal_boost" class="native-checkbox" id="toggle-thermal" checked>
+                                                <div class="toggle-plate">
+                                                    <!-- Circle o state on Left, Bar | state on Right -->
+                                                    <span class="active-blue-area">o</span>
+                                                    <div class="toggle-handle"></div>
+                                                    <span class="active-red-area">|</span>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <!-- Pill Toggle 2 -->
+                                        <div class="pill-toggle-module">
+                                            <span class="toggle-name">GRAV_DEFL</span>
+                                            <label class="toggle-hardware">
+                                                <input type="checkbox" name="grav_deflator" class="native-checkbox" id="toggle-grav">
+                                                <div class="toggle-plate">
+                                                    <span class="active-blue-area">o</span>
+                                                    <div class="toggle-handle"></div>
+                                                    <span class="active-red-area">|</span>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- COLUMN CENTER: MODULATION DIALS & GAUGES -->
+                    <div class="grid-column col-center">
+                        
+                        <!-- PANEL 03: SIGNAL GAGES -->
+                        <section class="instrument-module module-gauges">
+                            <div class="module-header">
+                                <span class="module-number">03</span>
+                                <h2 class="module-title">SIGNAL MODULATOR GAGES</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                
+                                <!-- Slider 1: Single with Round Handle & Tooltip -->
+                                <div class="slider-module single-slider-module">
+                                    <div class="slider-meta">
+                                        <span class="slider-title">RESONANCE LEVEL (dB)</span>
+                                    </div>
+                                    <div class="slider-track-wrapper">
+                                        <!-- Tooltip Speech Bubble -->
+                                        <div class="slider-tooltip" id="tooltip-resonance">250</div>
+                                        <div class="slider-track-container">
+                                            <span class="slider-limit-label">MIN</span>
+                                            <input type="range" name="resonance_level" min="100" max="600" value="250" class="custom-range-slider" id="range-resonance">
+                                            <span class="slider-limit-label">MAX</span>
+                                        </div>
+                                    </div>
+                                    <!-- Scale Ticks -->
+                                    <div class="slider-scale-ticks">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                                <!-- Slider 2: Dynamic Dual Range Slider -->
+                                <div class="slider-module dual-slider-module">
+                                    <div class="slider-meta">
+                                        <span class="slider-title">OPERATIONAL WINDOW (Hz)</span>
+                                    </div>
+                                    
+                                    <div class="dual-range-widget" id="dual-range-frequency">
+                                        <!-- Custom sliders track -->
+                                        <div class="dual-track-background"></div>
+                                        <div class="dual-track-active" id="frequency-active-track"></div>
+                                        
+                                        <!-- Interactive Knobs -->
+                                        <div class="dual-handle handle-min" id="freq-min-handle" tabindex="0">
+                                            <div class="speech-bubble" id="bubble-min">200</div>
+                                        </div>
+                                        <div class="dual-handle handle-max" id="freq-max-handle" tabindex="0">
+                                            <div class="speech-bubble" id="bubble-max">450</div>
+                                        </div>
+                                        
+                                        <!-- Hidden standard inputs for form support -->
+                                        <input type="hidden" name="freq_min" id="freq-min-input" value="200">
+                                        <input type="hidden" name="freq_max" id="freq-max-input" value="450">
+                                    </div>
+
+                                    <div class="slider-limits-row">
+                                        <span class="slider-limit-label">100 Hz</span>
+                                        <span class="slider-limit-label">800 Hz</span>
+                                    </div>
+                                </div>
+
+                                <!-- Dual Knobs layout -->
+                                <div class="dual-knobs-row">
+                                    
+                                    <!-- Knob 1: Spin Flux -->
+                                    <div class="rotary-knob-module">
+                                        <span class="knob-label">SPIN_FLUX</span>
+                                        <div class="knob-hardware-wrapper">
+                                            <!-- Tooltip readout above knob -->
+                                            <div class="knob-tooltip-bubble" id="bubble-knob-spin">45%</div>
+                                            <div class="knob-dial" id="knob-spin" data-value="45" data-min="0" data-max="100">
+                                                <div class="knob-pointer-line"></div>
+                                            </div>
+                                            <!-- SVG Scale border -->
+                                            <svg class="knob-ticks-svg" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 7" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <!-- Hidden Input for Form Submission -->
+                                        <input type="hidden" name="spin_flux" id="input-knob-spin" value="45">
+                                    </div>
+
+                                    <!-- Knob 2: Amplitude -->
+                                    <div class="rotary-knob-module">
+                                        <span class="knob-label">AMPLITUDE_LVL</span>
+                                        <div class="knob-hardware-wrapper">
+                                            <div class="knob-tooltip-bubble" id="bubble-knob-amp">72%</div>
+                                            <div class="knob-dial" id="knob-amp" data-value="72" data-min="0" data-max="100">
+                                                <div class="knob-pointer-line"></div>
+                                            </div>
+                                            <!-- SVG Scale border -->
+                                            <svg class="knob-ticks-svg" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 7" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <input type="hidden" name="amplitude_level" id="input-knob-amp" value="72">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- COLUMN RIGHT: FEEDBACK READOUT & CHECKS -->
+                    <div class="grid-column col-right">
+                        
+                        <!-- PANEL 04: RADAR MONITOR -->
+                        <section class="instrument-module module-scope">
+                            <div class="module-header">
+                                <span class="module-number">04</span>
+                                <h2 class="module-title">RADAR TELEMETRY MONITOR</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                
+                                <!-- Mechanical SVG Scope radar display -->
+                                <div class="scope-screen-wrapper">
+                                    <div class="scope-screen-bezel">
+                                        <!-- Bezel Screws -->
+                                        <div class="bezel-screw bs-tl"></div>
+                                        <div class="bezel-screw bs-tr"></div>
+                                        <div class="bezel-screw bs-bl"></div>
+                                        <div class="bezel-screw bs-br"></div>
+
+                                        <svg class="scope-vector-svg" viewBox="0 0 200 200" id="telemetry-scope">
+                                            <!-- Concentric radar circles -->
+                                            <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" fill="none" opacity="0.4"/>
+                                            <circle cx="100" cy="100" r="50" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2" fill="none" opacity="0.3"/>
+                                            <circle cx="100" cy="100" r="20" stroke="currentColor" stroke-width="1" fill="none" opacity="0.2"/>
+                                            
+                                            <!-- Crosshairs -->
+                                            <line x1="100" y1="10" x2="100" y2="190" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+                                            <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+                                            
+                                            <!-- Grid mesh lines -->
+                                            <line x1="60" y1="20" x2="60" y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+                                            <line x1="140" y1="20" x2="140" y2="180" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+                                            <line x1="20" y1="60" x2="180" y2="60" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+                                            <line x1="20" y1="140" x2="180" y2="140" stroke="currentColor" stroke-width="0.5" opacity="0.1"/>
+
+                                            <!-- Animated radar sweep line -->
+                                            <line x1="100" y1="100" x2="175" y2="65" stroke="currentColor" stroke-width="1.5" id="scope-sweep-line" opacity="0.6"/>
+                                            
+                                            <!-- Telemetry target nodes -->
+                                            <g class="target-dot-group" id="scope-target-group">
+                                                <circle cx="135" cy="78" r="6" fill="currentColor" id="scope-target-dot" />
+                                                <circle cx="135" cy="78" r="11" stroke="currentColor" stroke-width="1" fill="none" id="scope-target-ring" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="scope-status-footer">
+                                        <div class="scope-coord-readout">
+                                            FLUX_X: <span id="val-flux-x">35</span> // FLUX_Y: <span id="val-flux-y">-22</span>
+                                        </div>
+                                        <div class="scope-frequency-val">68.2 MHz</div>
+                                    </div>
+                                </div>
+
+                                <!-- SYSTEM TELEMETRY FEEDBACK LOGS -->
+                                <div class="terminal-log-module">
+                                    <div class="terminal-header">
+                                        <span class="terminal-title">TELEMETRY DIAG DATA FEED</span>
+                                        <div class="terminal-decor-lines"></div>
+                                    </div>
+                                    <div class="terminal-body" id="log-console">
+                                        <div class="log-line">> CONSOLE LOADED. HARDWARE INTERACTION SYSTEM ONLINE.</div>
+                                        <div class="log-line">> WAITING FOR CALIBRATION SIGNATURE INPUT...</div>
+                                        <div class="log-line">> RESONANCE COIL AT STABLE IDLE STATE.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                        <!-- PANEL 05: PARAMETER FLAGS -->
+                        <section class="instrument-module module-parameters">
+                            <div class="module-header">
+                                <span class="module-number">05</span>
+                                <h2 class="module-title">HARDWARE SELECTORS</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                
+                                <!-- Tactile Checkboxes -->
+                                <div class="input-field-group">
+                                    <label class="field-label">STABILITY COEFFICIENT OPTIONS</label>
+                                    <div class="checkbox-collection-column">
+                                        
+                                        <label class="tactile-checkbox-row">
+                                            <input type="checkbox" name="stability_lock" class="native-checkbox" checked>
+                                            <div class="checkbox-box-decor"></div>
+                                            <div class="checkbox-labels">
+                                                <span class="checkbox-main-label">AUTONOMOUS STABILITY LOCK</span>
+                                                <span class="checkbox-sub-label">AUTO-DAMPENS HIGH VOLTAGE SPIKES</span>
+                                            </div>
+                                        </label>
+
+                                        <label class="tactile-checkbox-row">
+                                            <input type="checkbox" name="fluid_dampener" class="native-checkbox">
+                                            <div class="checkbox-box-decor"></div>
+                                            <div class="checkbox-labels">
+                                                <span class="checkbox-main-label">ENABLE FLUID DAMPENING</span>
+                                                <span class="checkbox-sub-label">DYNAMIC LIQUID COIL CONDUIT DAMPENER</span>
+                                            </div>
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                                <!-- Tactile Radios -->
+                                <div class="input-field-group">
+                                    <label class="field-label">TUNING STANCE DECK</label>
+                                    <div class="radios-collection-column">
+                                        
+                                        <label class="tactile-radio-row">
+                                            <input type="radio" name="stance_tuning" value="carve" checked class="native-radio">
+                                            <div class="radio-circle-decor"></div>
+                                            <div class="radio-labels">
+                                                <span class="radio-main-label">CARVING WAVE PROFILE</span>
+                                                <span class="radio-sub-label">ENHANCED EDGE CALIBRATION FOR BINDINGS</span>
+                                            </div>
+                                        </label>
+
+                                        <label class="tactile-radio-row">
+                                            <input type="radio" name="stance_tuning" value="velocity" class="native-radio">
+                                            <div class="radio-circle-decor"></div>
+                                            <div class="radio-labels">
+                                                <span class="radio-main-label">VELOCITY STABILITY DECK</span>
+                                                <span class="radio-sub-label">HIGH SPEED FREERIDE CALIBRATION LOCK</span>
+                                            </div>
+                                        </label>
+
+                                        <label class="tactile-radio-row">
+                                            <input type="radio" name="stance_tuning" value="pro" class="native-radio">
+                                            <div class="radio-circle-decor"></div>
+                                            <div class="radio-labels">
+                                                <span class="radio-main-label">PRO COMP INTEGRATOR</span>
+                                                <span class="radio-sub-label">MUTABLE MATRIX DUAL SIGNALS IN FLUX</span>
+                                            </div>
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+                </div>
+
+                <!-- SUBMIT ACTION PANEL BAR -->
+                <div class="action-submit-panel-bar">
+                    <!-- Left branding side -->
+                    <div class="action-meta-side">
+                        <span class="action-alert-msg">*PLEASE COMMIT CALIBRATION SETTINGS BEFORE TURNING OFF POWER SUPPLY</span>
+                        <div class="action-dots-mesh"></div>
+                    </div>
+
+                    <!-- Right buttons side -->
+                    <div class="action-buttons-side">
+                        
+                        <!-- EMERGENCY BAIL INDUSTRIAL BUTTON -->
+                        <div class="bail-button-wrapper">
+                            <span class="bail-label">EMERGENCY BAIL</span>
+                            <button type="button" class="bail-hardware-btn" id="btn-bail" aria-label="Trigger Emergency Bail">
+                                <span class="bail-ring-decor"></span>
+                                <span class="bail-core"></span>
+                            </button>
+                        </div>
+
+                        <!-- Reset reload button -->
+                        <button type="button" class="reset-circular-btn" id="btn-reset" aria-label="Reset All Settings">
+                            <svg class="reset-icon-svg" viewBox="0 0 24 24">
+                                <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+                            </svg>
+                        </button>
+
+                        <!-- SOLID INDUSTRIAL CALIBRATION COMMIT BUTTON -->
+                        <button type="submit" class="submit-premium-button" id="submit-calibration">
+                            <span class="btn-text">COMMIT CALIBRATION</span>
+                            <svg class="btn-arrow-svg" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </main>
+        
+        <!-- DECK FOOTER METADATA -->
+        <footer class="deck-footer">
+            <span class="footer-element">SKEUO-TECH DYNAMICS CORP</span>
+            <span class="footer-separator">•</span>
+            <span class="footer-element">NEUMORPHIC HARDWARE SYSTEMS</span>
+            <span class="footer-separator">•</span>
+            <span class="footer-element">MADE FOR PILOTS</span>
+        </footer>
+
+    </div>
+
+    <!-- MECHANICAL OVERLAY CALIBRATION DIAL CONFIRMATION TICKET -->
+    <div class="overlay-container" id="calibration-overlay">
+        <div class="report-ticket">
+            <!-- Decorative screws inside ticket corners -->
+            <div class="ticket-screw ts-tl"></div>
+            <div class="ticket-screw ts-tr"></div>
+            <div class="ticket-screw ts-bl"></div>
+            <div class="ticket-screw ts-br"></div>
+
+            <div class="ticket-header">
+                <span class="ticket-logo">S-18 CONSOLE DECK</span>
+                <span class="ticket-title-main">DIAGNOSTIC CALIBRATION CERTIFICATE</span>
+                <div class="ticket-metadata-line">
+                    <span id="ticket-time">DATE: 18-05-2026</span>
+                    <span id="ticket-id">HASH: #S18-9321</span>
+                </div>
+            </div>
+
+            <div class="ticket-divider-strip"></div>
+
+            <div class="ticket-body-readout">
+                <div class="ticket-line">
+                    <span class="lbl">OPERATOR SIGNATURE</span><span class="dots"></span><span class="val" id="t-signature">PILOT_S18</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">LOAD COEFFICIENT</span><span class="dots"></span><span class="val" id="t-load">80 KG</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">OPERATIONAL BAND</span><span class="dots"></span><span class="val" id="t-band">ALPHA</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">POWER SUPPLY STATE</span><span class="dots"></span><span class="val" id="t-power">ON</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">THERMAL BOOST STATUS</span><span class="dots"></span><span class="val" id="t-thermal">ACTIVE</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">GRAVITY DEFLATOR</span><span class="dots"></span><span class="val" id="t-gravity">INACTIVE</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">RESONANCE LEVEL</span><span class="dots"></span><span class="val" id="t-resonance">250 dB</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">FREQUENCY BOUNDS</span><span class="dots"></span><span class="val" id="t-freq">200 Hz - 450 Hz</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">ROTARY SPIN FLUX</span><span class="dots"></span><span class="val" id="t-spin">45%</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">ROTARY AMPLITUDE</span><span class="dots"></span><span class="val" id="t-amp">72%</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">STABILITY LOCK</span><span class="dots"></span><span class="val" id="t-stab">ACTIVE</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">FLUID DAMPENER</span><span class="dots"></span><span class="val" id="t-damp">INACTIVE</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">TUNING PROFILE</span><span class="dots"></span><span class="val" id="t-stance">CARVING WAVE</span>
+                </div>
+            </div>
+
+            <div class="ticket-divider-strip"></div>
+
+            <div class="ticket-footer-strip">
+                <span class="ticket-status-stamp">CALIBRATION SUCCESSFUL // READY FOR MISSION</span>
+                <!-- CSS barcode design -->
+                <div class="barcode-wrapper">
+                    <div class="barcode-stripes"></div>
+                    <span class="barcode-numbers">1805202683925</span>
+                </div>
+            </div>
+
+            <button type="button" class="ticket-dismiss-btn" id="btn-close-ticket">DISMISS TELEMETRY TICKET</button>
+        </div>
+    </div>
+
+    <!-- JS script -->
+    <script src="script.js"></script>
+</body>
+</html>

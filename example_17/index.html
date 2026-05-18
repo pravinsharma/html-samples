@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Navigator Model N-17: Technical Snowboard Calibration & Simulation Configurator Deck. Absolute minimal hardware-skeuomorphic interface.">
+    <title>NAVIGATOR // MODEL N-17 CALIBRATION DECK</title>
+    <!-- Premium Google Fonts: JetBrains Mono for monospaced elements, Outfit for neat sans-serif labels -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Outfit:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="deck-outer-container">
+        
+        <!-- THE MECHANICAL MAIN CONTROL PANEL -->
+        <main class="control-panel" id="main-panel">
+            
+            <!-- PHYSICAL-STYLE DECORATIVE SCREWS IN THE 4 CORNERS -->
+            <div class="screw screw-tl"><div class="screw-groove"></div></div>
+            <div class="screw screw-tr"><div class="screw-groove"></div></div>
+            <div class="screw screw-bl"><div class="screw-groove"></div></div>
+            <div class="screw screw-br"><div class="screw-groove"></div></div>
+
+            <!-- PANEL BRANDING HEADER -->
+            <header class="panel-header">
+                <div class="header-brand-block">
+                    <h1 class="brand-title">NAVIGATOR</h1>
+                    <p class="brand-model">MODEL N-17 // SIMULATION CALIBRATOR</p>
+                </div>
+                <div class="header-meta-block">
+                    <div class="system-status-indicator">
+                        <span class="status-dot pulsing"></span>
+                        <span class="status-text">STATUS: ACTIVE</span>
+                    </div>
+                    <div class="system-firmware">SYS_VER: 4.17.02</div>
+                </div>
+            </header>
+
+            <!-- SUB-PANEL SYSTEM GRID -->
+            <form id="navigator-calibrator-form" novalidate autocomplete="off">
+                <div class="panel-grid-layout">
+
+                    <!-- COLUMN LEFT: IDENTITY & CALIBRATION CODES -->
+                    <div class="grid-column col-left">
+                        
+                        <!-- PANEL 01: RIDER IDENTITY -->
+                        <section class="instrument-module module-identity">
+                            <div class="module-header">
+                                <span class="module-number">01</span>
+                                <h2 class="module-title">RIDER IDENTITY</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                <!-- Monospaced styled text input -->
+                                <div class="input-field-group">
+                                    <label class="field-label" for="rider-name">RIDER DESIGNATION</label>
+                                    <div class="input-wrapper">
+                                        <span class="input-decor-brackets">[</span>
+                                        <input type="text" id="rider-name" name="rider_name" required placeholder="PILOT_A" maxlength="20">
+                                        <span class="input-decor-brackets">]</span>
+                                    </div>
+                                </div>
+
+                                <!-- Monospaced split input blocks -->
+                                <div class="dual-fields-row">
+                                    <div class="input-field-group">
+                                        <label class="field-label" for="rider-weight">WEIGHT INDEX (KG)</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-decor-brackets">[</span>
+                                            <input type="number" id="rider-weight" name="rider_weight" min="40" max="150" value="75" required>
+                                            <span class="input-decor-brackets">]</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-field-group">
+                                        <label class="field-label" for="stance-width">STANCE WIDTH (CM)</label>
+                                        <div class="input-wrapper">
+                                            <span class="input-decor-brackets">[</span>
+                                            <input type="number" id="stance-width" name="stance_width" min="45" max="65" value="54" required>
+                                            <span class="input-decor-brackets">]</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Technical encryption code -->
+                                <div class="input-field-group">
+                                    <label class="field-label" for="calib-key">ENCRYPTION HASH</label>
+                                    <div class="input-wrapper input-with-code">
+                                        <span class="input-decor-brackets">[</span>
+                                        <input type="text" id="calib-key" name="calibration_hash" required 
+                                               pattern="^[A-Z0-9]{4}-[A-Z0-9]{4}$" placeholder="N17X-F89A" maxlength="9">
+                                        <span class="input-decor-brackets">]</span>
+                                    </div>
+                                    <span class="field-sub-note">*FORMAT REQUIRED: XXXX-XXXX</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- PANEL 02: STANCE CONFIGURATION -->
+                        <section class="instrument-module module-stance">
+                            <div class="module-header">
+                                <span class="module-number">02</span>
+                                <h2 class="module-title">STANCE CONFIGURATION</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                <!-- Custom Styled dropdown selector -->
+                                <div class="input-field-group">
+                                    <label class="field-label">STANCE PROFILE</label>
+                                    <div class="custom-select-deck" id="stance-select-container">
+                                        <div class="select-trigger">
+                                            <span class="select-selected-label">REGULAR (LEFT FOOT FORWARD)</span>
+                                            <svg class="select-arrow" viewBox="0 0 24 24">
+                                                <path d="M7 10l5 5 5-5H7z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <ul class="select-options-list">
+                                            <li class="option-item selected" data-value="regular">
+                                                <span class="option-pointer">▶</span> REGULAR (LEFT FOOT FORWARD)
+                                            </li>
+                                            <li class="option-item" data-value="goofy">
+                                                <span class="option-pointer">▶</span> GOOFY (RIGHT FOOT FORWARD)
+                                            </li>
+                                            <li class="option-item" data-value="switch">
+                                                <span class="option-pointer">▶</span> DUAL-SWITCH (MUTABLE ORIENTATION)
+                                            </li>
+                                        </ul>
+                                        <!-- Hidden native select for form submit integration -->
+                                        <select name="stance_profile" class="native-hidden-select">
+                                            <option value="regular" selected>REGULAR</option>
+                                            <option value="goofy">GOOFY</option>
+                                            <option value="switch">SWITCH</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Radio custom mechanical button list -->
+                                <div class="input-field-group">
+                                    <label class="field-label">BINDING SPLIT ANGLE</label>
+                                    <div class="mechanical-radios-column">
+                                        
+                                        <label class="mech-radio-row">
+                                            <input type="radio" name="binding_angle" value="duck" checked class="native-radio">
+                                            <div class="radio-pointer"></div>
+                                            <div class="radio-details">
+                                                <span class="radio-label">DUCK STANCE (-15° / +15°)</span>
+                                                <span class="radio-desc">OPTIONAL FOR FREESTYLE & PARK</span>
+                                            </div>
+                                        </label>
+
+                                        <label class="mech-radio-row">
+                                            <input type="radio" name="binding_angle" value="carve" class="native-radio">
+                                            <div class="radio-pointer"></div>
+                                            <div class="radio-details">
+                                                <span class="radio-label">CARVE STANCE (0° / +18°)</span>
+                                                <span class="radio-desc">HIGH SPEED FREE-RIDE STABILITY</span>
+                                            </div>
+                                        </label>
+
+                                        <label class="mech-radio-row">
+                                            <input type="radio" name="binding_angle" value="custom" class="native-radio">
+                                            <div class="radio-pointer"></div>
+                                            <div class="radio-details">
+                                                <span class="radio-label">PRO COMP STANCE (-9° / +21°)</span>
+                                                <span class="radio-desc">AGGRESSIVE TECHNICAL RE-ENTRY</span>
+                                            </div>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- COLUMN CENTER: CALIBRATORS & GAUGES -->
+                    <div class="grid-column col-center">
+                        
+                        <!-- PANEL 03: RIDE-ABILITY MECHANICAL TOGGLES -->
+                        <section class="instrument-module module-toggles">
+                            <div class="module-header">
+                                <span class="module-number">03</span>
+                                <h2 class="module-title">RIDE-ABILITY</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                <div class="toggles-flex-layout">
+                                    
+                                    <!-- Toggle 01: SPEED BOOST -->
+                                    <div class="mechanical-switch-module">
+                                        <span class="switch-label">SPEED_BST</span>
+                                        <label class="switch-hardware">
+                                            <input type="checkbox" name="speed_boost" class="native-checkbox" id="switch-speed">
+                                            <div class="switch-plate">
+                                                <div class="plate-text text-on">ON</div>
+                                                <div class="switch-slot">
+                                                    <div class="switch-handle"><div class="handle-ridge"></div></div>
+                                                </div>
+                                                <div class="plate-text text-off">OFF</div>
+                                            </div>
+                                        </label>
+                                        <span class="switch-indicator-led" id="led-speed"></span>
+                                    </div>
+
+                                    <!-- Toggle 02: GRAVITY COMP -->
+                                    <div class="mechanical-switch-module">
+                                        <span class="switch-label">GRV_COMP</span>
+                                        <label class="switch-hardware">
+                                            <input type="checkbox" name="gravity_comp" class="native-checkbox" id="switch-gravity" checked>
+                                            <div class="switch-plate">
+                                                <div class="plate-text text-on">ON</div>
+                                                <div class="switch-slot">
+                                                    <div class="switch-handle"><div class="handle-ridge"></div></div>
+                                                </div>
+                                                <div class="plate-text text-off">OFF</div>
+                                            </div>
+                                        </label>
+                                        <span class="switch-indicator-led active" id="led-gravity"></span>
+                                    </div>
+
+                                    <!-- Toggle 03: BUTTER CONTROL -->
+                                    <div class="mechanical-switch-module">
+                                        <span class="switch-label">BTR_CTRL</span>
+                                        <label class="switch-hardware">
+                                            <input type="checkbox" name="butter_control" class="native-checkbox" id="switch-butter">
+                                            <div class="switch-plate">
+                                                <div class="plate-text text-on">ON</div>
+                                                <div class="switch-slot">
+                                                    <div class="switch-handle"><div class="handle-ridge"></div></div>
+                                                </div>
+                                                <div class="plate-text text-off">OFF</div>
+                                            </div>
+                                        </label>
+                                        <span class="switch-indicator-led" id="led-butter"></span>
+                                    </div>
+
+                                    <!-- Toggle 04: TRACTION STAB -->
+                                    <div class="mechanical-switch-module">
+                                        <span class="switch-label">TRC_STAB</span>
+                                        <label class="switch-hardware">
+                                            <input type="checkbox" name="traction_stab" class="native-checkbox" id="switch-traction" checked>
+                                            <div class="switch-plate">
+                                                <div class="plate-text text-on">ON</div>
+                                                <div class="switch-slot">
+                                                    <div class="switch-handle"><div class="handle-ridge"></div></div>
+                                                </div>
+                                                <div class="plate-text text-off">OFF</div>
+                                            </div>
+                                        </label>
+                                        <span class="switch-indicator-led active" id="led-traction"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- PANEL 04: SHRED-ABILITY RANGE SLIDERS -->
+                        <section class="instrument-module module-gauges">
+                            <div class="module-header">
+                                <span class="module-number">04</span>
+                                <h2 class="module-title">SHRED-ABILITY GAUGES</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                
+                                <!-- Slider 1: Ollie Trigger -->
+                                <div class="slider-module">
+                                    <div class="slider-meta">
+                                        <span class="slider-title">OLLIE HEIGHT THRESHOLD</span>
+                                        <span class="slider-value" id="val-ollie">65%</span>
+                                    </div>
+                                    <div class="slider-track-container">
+                                        <span class="slider-limit-label">-</span>
+                                        <input type="range" name="ollie_height" min="10" max="100" value="65" class="custom-range-slider" id="range-ollie">
+                                        <span class="slider-limit-label">+</span>
+                                    </div>
+                                    <!-- Scale Tick Marks -->
+                                    <div class="slider-scale-ticks">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                                <!-- Slider 2: Steez Level -->
+                                <div class="slider-module">
+                                    <div class="slider-meta">
+                                        <span class="slider-title">STEEZ CALIBRATION SCALE</span>
+                                        <span class="slider-value" id="val-steez">82%</span>
+                                    </div>
+                                    <div class="slider-track-container">
+                                        <span class="slider-limit-label">-</span>
+                                        <input type="range" name="steez_scale" min="0" max="100" value="82" class="custom-range-slider" id="range-steez">
+                                        <span class="slider-limit-label">+</span>
+                                    </div>
+                                    <!-- Scale Tick Marks -->
+                                    <div class="slider-scale-ticks">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+
+                                <!-- Dual Knobs layout -->
+                                <div class="dual-knobs-row">
+                                    
+                                    <!-- Knob 1: Spin Force -->
+                                    <div class="rotary-knob-module">
+                                        <span class="knob-label">SPIN_FORCE</span>
+                                        <div class="knob-hardware-wrapper">
+                                            <div class="knob-dial" id="knob-spin" data-value="45">
+                                                <div class="knob-pointer-line"></div>
+                                            </div>
+                                            <!-- SVG Scale dial border -->
+                                            <svg class="knob-ticks-svg" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="42" stroke="#000000" stroke-width="1.5" stroke-dasharray="2 6" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <span class="knob-value-readout" id="readout-spin">45%</span>
+                                    </div>
+
+                                    <!-- Knob 2: Edge Bite -->
+                                    <div class="rotary-knob-module">
+                                        <span class="knob-label">EDGE_BITE</span>
+                                        <div class="knob-hardware-wrapper">
+                                            <div class="knob-dial" id="knob-bite" data-value="75">
+                                                <div class="knob-pointer-line"></div>
+                                            </div>
+                                            <!-- SVG Scale dial border -->
+                                            <svg class="knob-ticks-svg" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="42" stroke="#000000" stroke-width="1.5" stroke-dasharray="2 6" fill="none" />
+                                            </svg>
+                                        </div>
+                                        <span class="knob-value-readout" id="readout-bite">75%</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- COLUMN RIGHT: RADAR SCOPE & CONSOLE LOG -->
+                    <div class="grid-column col-right">
+                        
+                        <!-- PANEL 05: RAIL BALANCE SCOPE -->
+                        <section class="instrument-module module-scope">
+                            <div class="module-header">
+                                <span class="module-number">05</span>
+                                <h2 class="module-title">RAIL BALANCE SCOPE</h2>
+                                <div class="module-decor-dots"></div>
+                            </div>
+                            
+                            <div class="module-body">
+                                
+                                <!-- Mechanical SVG Scope radar display -->
+                                <div class="scope-screen-wrapper">
+                                    <div class="scope-screen-bezel">
+                                        <!-- Screw Details in Bezel Corners -->
+                                        <div class="bezel-screw bs-tl"></div>
+                                        <div class="bezel-screw bs-tr"></div>
+                                        <div class="bezel-screw bs-bl"></div>
+                                        <div class="bezel-screw bs-br"></div>
+
+                                        <svg class="scope-vector-svg" viewBox="0 0 200 200" id="balance-scope">
+                                            <!-- Concentric radar circles -->
+                                            <circle cx="100" cy="100" r="80" stroke="#000000" stroke-width="1" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+                                            <circle cx="100" cy="100" r="50" stroke="#000000" stroke-width="1" stroke-dasharray="2 2" fill="none" opacity="0.4"/>
+                                            <circle cx="100" cy="100" r="20" stroke="#000000" stroke-width="1" fill="none" opacity="0.3"/>
+                                            
+                                            <!-- Crosshairs -->
+                                            <line x1="100" y1="10" x2="100" y2="190" stroke="#000000" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+                                            <line x1="10" y1="100" x2="190" y2="100" stroke="#000000" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+                                            
+                                            <!-- Grid mesh lines -->
+                                            <line x1="60" y1="20" x2="60" y2="180" stroke="#000000" stroke-width="0.5" opacity="0.2"/>
+                                            <line x1="140" y1="20" x2="140" y2="180" stroke="#000000" stroke-width="0.5" opacity="0.2"/>
+                                            <line x1="20" y1="60" x2="180" y2="60" stroke="#000000" stroke-width="0.5" opacity="0.2"/>
+                                            <line x1="20" y1="140" x2="180" y2="140" stroke="#000000" stroke-width="0.5" opacity="0.2"/>
+
+                                            <!-- Animated scan sweep line -->
+                                            <line x1="100" y1="100" x2="180" y2="100" stroke="#000000" stroke-width="1" id="scope-sweep-line" opacity="0.6"/>
+                                            
+                                            <!-- Active Balance Tracker Target Dot -->
+                                            <g class="target-dot-group" id="scope-target-group">
+                                                <circle cx="120" cy="85" r="7" fill="#000000" id="scope-target-dot" />
+                                                <circle cx="120" cy="85" r="12" stroke="#000000" stroke-width="1" fill="none" id="scope-target-ring" />
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="scope-status-footer">
+                                        <div class="scope-coord-readout">
+                                            X_BAL: <span id="val-xbal">20</span> // Y_BAL: <span id="val-ybal">-15</span>
+                                        </div>
+                                        <div class="scope-frequency-val">128.4 Hz</div>
+                                    </div>
+                                </div>
+
+                                <!-- MOCK MECHANICAL SYSTEM TERMINAL LOGGER -->
+                                <div class="terminal-log-module">
+                                    <div class="terminal-header">
+                                        <span class="terminal-title">TELEMETRY DATA FEED</span>
+                                        <div class="terminal-decor-lines"></div>
+                                    </div>
+                                    <div class="terminal-body" id="log-console">
+                                        <div class="log-line">> SYSTEM ONLINE. DECK READY.</div>
+                                        <div class="log-line">> STANDBY: NO PILOT ASSIGNED.</div>
+                                        <div class="log-line">> GRAVITY RE-BALANCER LOADED.</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
+                    </div>
+
+                </div>
+
+                <!-- SUBMIT ACTION PANEL BAR -->
+                <div class="action-submit-panel-bar">
+                    <!-- Left branding side -->
+                    <div class="action-meta-side">
+                        <span class="action-alert-msg">*CALIBRATE STABILITY PARAMETERS BEFORE ENGAGING SIMULATOR</span>
+                        <div class="action-dots-mesh"></div>
+                    </div>
+
+                    <!-- Right buttons side -->
+                    <div class="action-buttons-side">
+                        
+                        <!-- EMERGENCY BAIL INDUSTRIAL ACTIVATOR -->
+                        <div class="bail-button-wrapper">
+                            <span class="bail-label">EMERGENCY BAIL</span>
+                            <button type="button" class="bail-hardware-btn" id="btn-bail" aria-label="Trigger Emergency Bail">
+                                <span class="bail-ring-decor"></span>
+                                <span class="bail-core"></span>
+                            </button>
+                        </div>
+
+                        <!-- SOLID INDUSTRIAL CALIBRATION COMMIT BUTTON -->
+                        <button type="submit" class="submit-premium-button" id="submit-calibration">
+                            <span class="btn-text">COMMIT CALIBRATION</span>
+                            <svg class="btn-arrow-svg" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </main>
+        
+        <!-- DECK FOOTER METADATA -->
+        <footer class="deck-footer">
+            <span class="footer-element">NAVIGATOR CO. INSTRUMENTS DIVISION</span>
+            <span class="footer-separator">•</span>
+            <span class="footer-element">RUGGED SIMULATION CONTROL SYSTEMS</span>
+            <span class="footer-separator">•</span>
+            <span class="footer-element">DESIGNED IN SWEDEN</span>
+        </footer>
+
+    </div>
+
+    <!-- MECHANICAL OVERLAY CALIBRATION DIAL CONFIRMATION REPORT -->
+    <div class="overlay-container" id="calibration-overlay">
+        <div class="report-ticket">
+            <!-- Decorative screws inside ticket corners -->
+            <div class="ticket-screw ts-tl"></div>
+            <div class="ticket-screw ts-tr"></div>
+            <div class="ticket-screw ts-bl"></div>
+            <div class="ticket-screw ts-br"></div>
+
+            <div class="ticket-header">
+                <span class="ticket-logo">NAVIGATOR DECK</span>
+                <span class="ticket-title-main">DIAGNOSTIC CALIBRATION CERTIFICATE</span>
+                <div class="ticket-metadata-line">
+                    <span id="ticket-time">DATE: 18-05-2026</span>
+                    <span id="ticket-id">HASH: #N17-8372</span>
+                </div>
+            </div>
+
+            <div class="ticket-divider-strip"></div>
+
+            <div class="ticket-body-readout">
+                <div class="ticket-line">
+                    <span class="lbl">PILOT</span><span class="dots"></span><span class="val" id="t-pilot">PILOT_A</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">WEIGHT REF</span><span class="dots"></span><span class="val" id="t-weight">75 KG</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">STANCE PROFILE</span><span class="dots"></span><span class="val" id="t-stance">REGULAR</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">BINDING ANGLE</span><span class="dots"></span><span class="val" id="t-angle">DUCK (-15°/15°)</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">STABILITY BOOST</span><span class="dots"></span><span class="val" id="t-boost">ACTIVE</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">OLLIE HEIGHT</span><span class="dots"></span><span class="val" id="t-ollie">65%</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">STEEZ COEFFICIENT</span><span class="dots"></span><span class="val" id="t-steez">82%</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">SPIN ROTATION FORCE</span><span class="dots"></span><span class="val" id="t-spin">45%</span>
+                </div>
+                <div class="ticket-line">
+                    <span class="lbl">EDGE BITE RATE</span><span class="dots"></span><span class="val" id="t-bite">75%</span>
+                </div>
+            </div>
+
+            <div class="ticket-divider-strip"></div>
+
+            <div class="ticket-footer-strip">
+                <span class="ticket-status-stamp">CALIBRATION SUCCESSFUL // STATUS PASS</span>
+                <!-- CSS barcode design -->
+                <div class="barcode-wrapper">
+                    <div class="barcode-stripes"></div>
+                    <span class="barcode-numbers">4012026839215</span>
+                </div>
+            </div>
+
+            <button type="button" class="ticket-dismiss-btn" id="btn-close-ticket">DISMISS INTERFACE</button>
+        </div>
+    </div>
+
+    <!-- JS script -->
+    <script src="script.js"></script>
+</body>
+</html>
