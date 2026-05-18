@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Claymorphic Reference Form — Example 11</title>
+    <!-- Google Fonts: Plus Jakarta Sans for premium modern aesthetics, JetBrains Mono for logs and code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Soft Decorative Blurred Organic Shapes in Background for Premium Studio Feel -->
+    <div class="glow-orb orb-1" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
+    <div class="backdrop-studio" aria-hidden="true"></div>
+
+    <div class="app-container">
+        <!-- Main Specular 3D Claymorphic Board Container -->
+        <main class="glass-board clay-card">
+            
+            <!-- SECTION 1: HEADER & TITLE (Matching 3D layout from sample1.jpg) -->
+            <header class="portal-header clay-header">
+                <!-- Left circular blue button from sample1.jpg -->
+                <button type="button" class="header-blue-circle-btn" aria-label="Go back">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                </button>
+
+                <div class="portal-title-text text-center">
+                    <h1>FORM DICTIONARY</h1>
+                    <span class="portal-subtitle">3D Claymorphic Style Guide (Course 11)</span>
+                </div>
+
+                <!-- Right hamburger button from sample1.jpg -->
+                <button type="button" class="header-menu-btn" aria-label="Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <line x1="4" y1="6" x2="20" y2="6"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="18" x2="20" y2="18"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- SECTION 2: THEME STEPPER -->
+            <nav class="horizontal-stepper" aria-label="Form Sections Progress">
+                <div class="stepper-connector-line"></div>
+                <div class="stepper-progress-fill" id="stepper-progress"></div>
+
+                <!-- Step 1: Active -->
+                <div class="step-node active" id="step-node-1" data-step="1">
+                    <!-- The Ribbon Banner - Modeled exactly after the skewed electric blue banner in sample1.jpg -->
+                    <div class="floating-skewed-banner" id="active-step-banner">
+                        <span>Profile & Account</span>
+                    </div>
+                    <div class="circle-node">
+                        <span class="node-num">1</span>
+                    </div>
+                    <span class="step-label">Account Info</span>
+                </div>
+
+                <!-- Step 2: Pending -->
+                <div class="step-node pending" id="step-node-2" data-step="2">
+                    <div class="circle-node">
+                        <span class="node-num">2</span>
+                    </div>
+                    <span class="step-label">Controls</span>
+                </div>
+
+                <!-- Step 3: Pending -->
+                <div class="step-node pending" id="step-node-3" data-step="3">
+                    <div class="circle-node">
+                        <span class="node-num">3</span>
+                    </div>
+                    <span class="step-label">Upload & Finish</span>
+                </div>
+            </nav>
+
+            <!-- SECTION 3: FORM WORKSPACE CONTAINER -->
+            <form id="premium-reference-form" action="#" method="POST" novalidate>
+                
+                <!-- ================= STEP 1: PROFILE & TEXT FIELDS ================= -->
+                <section class="form-step-panel active" id="form-panel-1">
+                    <div class="panel-header">
+                        <h2>Step 1: Account Setup & Text Inputs</h2>
+                        <p class="panel-subtitle">Comprehensive set of standard text, email, password, and text area inputs with floating labels and inline validation states.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        
+                        <!-- 1. First Name (Standard Floating Label) -->
+                        <div class="form-group floating-group">
+                            <input type="text" id="input-first-name" class="form-input debossed-input" placeholder=" " required autocomplete="given-name">
+                            <label for="input-first-name" class="floating-label">First Name</label>
+                            <span class="input-helper">Please enter your given name as registered.</span>
+                        </div>
+
+                        <!-- 2. Last Name (Standard Floating Label) -->
+                        <div class="form-group floating-group">
+                            <input type="text" id="input-last-name" class="form-input debossed-input" placeholder=" " required autocomplete="family-name">
+                            <label for="input-last-name" class="floating-label">Last Name</label>
+                            <span class="input-helper">Please enter your family name.</span>
+                        </div>
+
+                        <!-- 3. Email Input (With active email validation check) -->
+                        <div class="form-group floating-group has-validation" id="email-group">
+                            <input type="email" id="input-email" class="form-input debossed-input" placeholder=" " required autocomplete="email">
+                            <label for="input-email" class="floating-label">Email Address</label>
+                            <span class="validation-badge success-badge">✓ Valid Email</span>
+                            <span class="validation-badge error-badge">✗ Invalid Email Format</span>
+                            <span class="input-helper">Primary communication email (e.g. pravin@domain.com).</span>
+                        </div>
+
+                        <!-- 4. Phone Number (Phone field with formatted helper) -->
+                        <div class="form-group floating-group" id="phone-group">
+                            <input type="tel" id="input-phone" class="form-input debossed-input" placeholder=" " pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                            <label for="input-phone" class="floating-label">Phone Number</label>
+                            <span class="input-helper">Format: 123-456-7890 (optional)</span>
+                        </div>
+
+                        <!-- 5. Password Input (With visible eye toggle, password meter) -->
+                        <div class="form-group floating-group full-width" id="password-group">
+                            <div class="password-wrapper">
+                                <input type="password" id="input-password" class="form-input debossed-input" placeholder=" " required autocomplete="new-password">
+                                <label for="input-password" class="floating-label">Account Password</label>
+                                <button type="button" class="password-toggle" id="btn-toggle-password" title="Toggle password visibility">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="eye-open">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="eye-closed" style="display: none;">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                        <line x1="1" y1="1" x2="23" y2="23"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator Meter -->
+                            <div class="password-strength-container">
+                                <div class="strength-bar-track">
+                                    <div class="strength-bar-fill" id="password-strength-fill"></div>
+                                </div>
+                                <span class="strength-text" id="password-strength-text">Password Strength: Empty</span>
+                            </div>
+                        </div>
+
+                        <!-- 6. Autocomplete Combobox Search Field (Filtered via Javascript list) -->
+                        <div class="form-group combobox-group" id="country-combobox-group">
+                            <label class="group-label">Country of Residence (Autocomplete Combobox)</label>
+                            <div class="combobox-wrapper">
+                                <input type="text" id="input-country" class="form-input custom-combobox-input debossed-input" placeholder="Type country name..." autocomplete="off">
+                                <div class="combobox-chevron">▼</div>
+                                <ul class="combobox-dropdown-list" id="country-results-list">
+                                    <!-- Populated dynamically and filtered in script.js -->
+                                </ul>
+                            </div>
+                            <span class="input-helper">Combobox filters a database of 10+ countries instantly.</span>
+                        </div>
+
+                        <!-- 7. Textarea Bio (With dynamic character counter) -->
+                        <div class="form-group full-width" id="bio-group">
+                            <label for="input-bio" class="group-label">Short Biography / Remarks</label>
+                            <div class="textarea-wrapper">
+                                <textarea id="input-bio" class="form-textarea debossed-input" placeholder="Describe your background or leave additional notes here..." maxlength="250" rows="4"></textarea>
+                                <div class="char-count-badge" id="bio-char-count">0 / 250 characters</div>
+                            </div>
+                            <span class="input-helper">Summarize in 250 characters. Rich text is not supported.</span>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- ================= STEP 2: INTERACTIVE CONTROLS & OPTIONS ================= -->
+                <section class="form-step-panel" id="form-panel-2">
+                    <div class="panel-header">
+                        <h2>Step 2: Interactive Controls & Dropdowns</h2>
+                        <p class="panel-subtitle">Display of select pickers, toggles, checkboxes, radios, range sliders, and active pill selectors.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        
+                        <!-- 1. Selection Dropdowns (Native vs Custom Spec) -->
+                        <div class="form-group">
+                            <label for="select-native-industry" class="group-label">Native Select Dropdown</label>
+                            <div class="native-select-wrapper">
+                                <select id="select-native-industry" class="form-select-native debossed-input">
+                                    <option value="" disabled selected>Choose industry sector...</option>
+                                    <option value="tech">Technology & Cloud Computing</option>
+                                    <option value="fin">Finance & Cryptocurrencies</option>
+                                    <option value="health">Healthcare & Biotechnology</option>
+                                    <option value="edu">Education & Academy</option>
+                                    <option value="energy">Renewable Systems & Energy</option>
+                                </select>
+                            </div>
+                            <span class="input-helper">Styled native browser select fallback.</span>
+                        </div>
+
+                        <!-- 2. Custom Rich Select Dropdown (Active dropdown layout like example 10) -->
+                        <div class="form-group custom-select-group">
+                            <label class="group-label">Custom Premium Dropdown</label>
+                            <div class="custom-select-field debossed-input" id="custom-select-field-role">
+                                <span class="custom-select-selected" id="selected-role-text">Select role title...</span>
+                                <ul class="custom-select-dropdown-list" id="dropdown-list-role">
+                                    <li data-value="junior" class="dropdown-item">Junior Software Architect</li>
+                                    <li data-value="mid" class="dropdown-item">Mid-Level Systems Engineer</li>
+                                    <li data-value="senior" class="dropdown-item">Senior DevOps Consultant</li>
+                                    <li data-value="lead" class="dropdown-item">Principal Platform Director</li>
+                                    <li data-value="researcher" class="dropdown-item">Academic AI Researcher</li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="input-custom-role" name="custom-role" value="">
+                            <span class="input-helper">Glass-styled dropdown closing on blur or outside click.</span>
+                        </div>
+
+                        <!-- 3. Checkboxes (Native vs Modern Checklist) -->
+                        <div class="form-group">
+                            <label class="group-label">Functional Checkboxes</label>
+                            <div class="checkbox-options-stack debossed-box">
+                                <!-- Standard native enhanced -->
+                                <label class="checkbox-label-wrapper">
+                                    <input type="checkbox" id="check-native-updates" class="form-checkbox-native">
+                                    <span class="checkbox-label-text">Subscribe to developer announcements</span>
+                                </label>
+                                <!-- Modern custom check icon -->
+                                <label class="custom-checkbox-container">
+                                    <input type="checkbox" id="check-custom-privacy" class="form-checkbox-custom" checked>
+                                    <span class="custom-checkbox-box">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </span>
+                                    <span class="custom-checkbox-text">Acknowledge data privacy policy (Required)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 4. Switch Toggles (Premium Slide Switches) -->
+                        <div class="form-group">
+                            <label class="group-label">Slide Toggles (Boolean Switches)</label>
+                            <div class="toggles-options-stack debossed-box">
+                                <!-- Toggle 1 -->
+                                <div class="toggle-row">
+                                    <span class="toggle-label">Enable Real-Time Cloud Alerts</span>
+                                    <label class="switch-toggle-btn">
+                                        <input type="checkbox" id="toggle-cloud-alerts" checked>
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                </div>
+                                <!-- Toggle 2 -->
+                                <div class="toggle-row">
+                                    <span class="toggle-label">Strict Compilation Level</span>
+                                    <label class="switch-toggle-btn">
+                                        <input type="checkbox" id="toggle-strict-compilation">
+                                        <span class="switch-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Single Handle Range Slider (Live Value Indicator Bubble) -->
+                        <div class="form-group full-width" id="range-slider-group">
+                            <div class="slider-header-row">
+                                <label for="input-slider-experience" class="group-label">Developer Experience Level</label>
+                                <div class="slider-value-badge" id="slider-experience-badge">2 Years</div>
+                            </div>
+                            <div class="range-slider-container">
+                                <span class="slider-bound left">0 Yrs</span>
+                                <input type="range" id="input-slider-experience" min="0" max="15" value="2" class="form-range-slider">
+                                <span class="slider-bound right">15+ Yrs</span>
+                            </div>
+                            <span class="input-helper">Drag the slider to update candidate eligibility index.</span>
+                        </div>
+
+                        <!-- 6. Radios & Neumorphic Radio Image Selection Cards -->
+                        <div class="form-group full-width">
+                            <label class="group-label">Grid Selector Options: Neumorphic Selection Cards</label>
+                            <div class="radio-card-grid">
+                                <!-- Option 1: Development Mode -->
+                                <label class="radio-card active" id="card-mode-dev">
+                                    <input type="radio" name="layout-mode" value="development" class="radio-card-input" checked>
+                                    <div class="radio-card-content">
+                                        <div class="card-radio-circle marble-bullet"></div>
+                                        <div class="card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="16 18 22 12 16 6"/>
+                                                <polyline points="8 6 2 12 8 18"/>
+                                            </svg>
+                                        </div>
+                                        <div class="card-details">
+                                            <span class="card-title">Development Mode</span>
+                                            <span class="card-desc">Detailed logs, trace diagnostics, and hot reloading active.</span>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 2: Staging Mode -->
+                                <label class="radio-card" id="card-mode-staging">
+                                    <input type="radio" name="layout-mode" value="staging" class="radio-card-input">
+                                    <div class="radio-card-content">
+                                        <div class="card-radio-circle marble-bullet"></div>
+                                        <div class="card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                                                <line x1="6" y1="6" x2="6.01" y2="6"/>
+                                                <line x1="6" y1="18" x2="6.01" y2="18"/>
+                                            </svg>
+                                        </div>
+                                        <div class="card-details">
+                                            <span class="card-title">Staging Environment</span>
+                                            <span class="card-desc">Pre-production test node mirroring live clusters.</span>
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <!-- Option 3: Production Mode -->
+                                <label class="radio-card" id="card-mode-production">
+                                    <input type="radio" name="layout-mode" value="production" class="radio-card-input">
+                                    <div class="radio-card-content">
+                                        <div class="card-radio-circle marble-bullet"></div>
+                                        <div class="card-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="card-details">
+                                            <span class="card-title">Production Shield</span>
+                                            <span class="card-desc">High security optimization. Core logs compressed.</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 7. Pill Selectors / Interactive Tag Filters -->
+                        <div class="form-group full-width" id="skills-pill-group">
+                            <label class="group-label">Candidate Technical Stack (Pill Toggle Tags)</label>
+                            <div class="pill-tags-container debossed-box">
+                                <div class="pill-tag active" data-value="javascript">JavaScript</div>
+                                <div class="pill-tag active" data-value="html5">HTML5 / CSS3</div>
+                                <div class="pill-tag" data-value="nodejs">Node.js</div>
+                                <div class="pill-tag" data-value="typescript">TypeScript</div>
+                                <div class="pill-tag" data-value="react">React Engine</div>
+                                <div class="pill-tag" data-value="docker">Docker Clusters</div>
+                                <div class="pill-tag" data-value="mongodb">MongoDB</div>
+                                <div class="pill-tag" data-value="webgl">WebGL Rendering</div>
+                            </div>
+                            <input type="hidden" id="input-selected-skills" name="selected-skills" value="javascript,html5">
+                            <span class="input-helper">Select any technical skills that apply. Click to toggle.</span>
+                        </div>
+
+                    </div>
+                </section>
+
+
+                <!-- ================= STEP 3: UPLOADS & VERIFICATION ================= -->
+                <section class="form-step-panel" id="form-panel-3">
+                    <div class="panel-header">
+                        <h2>Step 3: Verification, Uploads & Buttons</h2>
+                        <p class="panel-subtitle">Premium native pickers, interactive theme coloring, file drag & drop, and action buttons showcase.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        
+                        <!-- 1. Date Picker (Premium native styled) -->
+                        <div class="form-group">
+                            <label for="input-date-available" class="group-label">Earliest Date Available</label>
+                            <input type="date" id="input-date-available" class="form-input form-date-picker debossed-input" required>
+                            <span class="input-helper">Specify your onboarding target date.</span>
+                        </div>
+
+                        <!-- 2. Time Picker (Premium native styled) -->
+                        <div class="form-group">
+                            <label for="input-time-contact" class="group-label">Best Hour for Contact</label>
+                            <input type="time" id="input-time-contact" class="form-input form-time-picker debossed-input" value="09:00">
+                            <span class="input-helper">Specify a suitable phone or call window.</span>
+                        </div>
+
+                        <!-- 3. Color Picker Theme Accent Modifier (Fun premium capability!) -->
+                        <div class="form-group full-width" id="color-theme-group">
+                            <label for="input-color-accent" class="group-label">Customize Accent Color Theme (3D Gel Palette Picker)</label>
+                            <div class="color-picker-row debossed-box">
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="input-color-accent" class="form-color-picker" value="#2563eb">
+                                </div>
+                                <div class="color-picker-details">
+                                    <span class="color-value-lbl" id="color-selected-value">#2563EB</span>
+                                    <span class="input-helper">Click to pick a color and watch the 3D buttons and highlights instantly repaint!</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Drag & Drop File Upload Capsule -->
+                        <div class="form-group full-width" id="file-uploader-group">
+                            <label class="group-label">Verification Documentation (Drag & Drop File Upload)</label>
+                            <div class="drag-drop-zone debossed-box" id="file-drop-zone">
+                                <input type="file" id="input-file-document" class="file-input-hidden" accept=".pdf,.png,.jpg,.jpeg">
+                                <div class="drop-zone-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                </div>
+                                <div class="drop-zone-text-group">
+                                    <p class="drop-primary-txt">Drag and drop your candidate document here, or <span class="browse-link">browse system files</span></p>
+                                    <p class="drop-secondary-txt">Supports PDF, PNG, or JPG formats (Maximum 5MB)</p>
+                                </div>
+                                
+                                <!-- File Uploading/Uploaded State capsule (hidden initially) -->
+                                <div class="file-upload-card" id="file-card-state" style="display: none;">
+                                    <div class="file-card-details">
+                                        <div class="file-card-icon">📄</div>
+                                        <div class="file-card-info">
+                                            <span class="file-name" id="uploaded-file-name">resume_pravin.pdf</span>
+                                            <span class="file-size" id="uploaded-file-size">1.2 MB</span>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-progress">
+                                        <div class="upload-progress-fill" id="upload-progress-fill"></div>
+                                    </div>
+                                    <button type="button" class="btn-clear-file" id="btn-remove-file" title="Remove loaded file">×</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Interactive Buttons Showcase (Reference of all forms button states) -->
+                        <div class="form-group full-width" id="buttons-showcase-group">
+                            <label class="group-label">Reference Form Button Styles Showcase</label>
+                            <div class="buttons-showcase-grid debossed-box">
+                                
+                                <!-- A. Solid Accent Primary Button -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Primary Solid</span>
+                                    <button type="button" class="btn-demo-ref btn-solid-accent">Save Snapshot</button>
+                                </div>
+
+                                <!-- B. High Glossy Green Pill Button -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Glossy Blue Gel</span>
+                                    <button type="button" class="btn-demo-ref green-glass-btn">Proceed Next</button>
+                                </div>
+
+                                <!-- C. Secondary Outline Button -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Secondary Outline</span>
+                                    <button type="button" class="btn-demo-ref btn-outline-slate">Cancel Operation</button>
+                                </div>
+
+                                <!-- D. Destructive Danger Button -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Destructive Danger</span>
+                                    <button type="button" class="btn-demo-ref btn-destructive-danger">Purge Vault</button>
+                                </div>
+
+                                <!-- E. Loading Spinner State -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Loading State</span>
+                                    <button type="button" class="btn-demo-ref btn-solid-accent btn-loading" disabled>
+                                        <span class="spinner"></span>
+                                        Compiling...
+                                    </button>
+                                </div>
+
+                                <!-- F. Disabled State -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Disabled Button</span>
+                                    <button type="button" class="btn-demo-ref btn-solid-accent" disabled>Locked System</button>
+                                </div>
+
+                                <!-- G. Icon Only Button -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Icon Button</span>
+                                    <button type="button" class="btn-icon-demo" title="Help system">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <!-- H. Button Group Layout -->
+                                <div class="btn-spec-card">
+                                    <span class="btn-spec-lbl">Button Group</span>
+                                    <div class="ref-btn-group">
+                                        <button type="button" class="group-btn active">Filter A</button>
+                                        <button type="button" class="group-btn">Filter B</button>
+                                        <button type="button" class="group-btn">Filter C</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- SECTION 4: ACTIONS FOOTER BAR -->
+                <footer class="form-navigation-actions">
+                    <!-- Elegant Back button (hidden on Step 1) -->
+                    <button type="button" class="btn-back debossed-btn" id="btn-prev-step" style="visibility: hidden;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 6px; transform: scaleX(-1);">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                        Previous Step
+                    </button>
+
+                    <!-- Glossy Blue Gel Button (Modeled after the blue pill button in sample1.jpg) -->
+                    <button type="button" class="btn-next green-glass-btn" id="btn-next-step">
+                        <span id="next-btn-text">Next Step</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 6px;" id="next-btn-icon">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </footer>
+
+            </form>
+
+            <!-- SECTION 5: FLOATING PROGRESS BUBBLE CAPSULE & KEYBOARD HELPER -->
+            <footer class="assessment-footer-area clay-footer">
+                <div class="timer-pill-bubble">
+                    <span class="timer-label">Form Completion:</span>
+                    <div class="timer-slate-capsule" id="progress-capsule">
+                        <span class="timer-clock" id="live-progress-percent">0%</span>
+                    </div>
+                </div>
+
+                <!-- Keyboard helper keys modeled directly from keyboard section at bottom of sample1.jpg -->
+                <div class="keyboard-navigation-guide" aria-hidden="true" title="Keyboard Shortcuts Reference">
+                    <span class="key-cap">↑</span>
+                    <span class="key-cap">↓</span>
+                    <span class="key-cap">↵</span>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- SECTION 6: SUBMISSION SUCCESS & BLUEPRINT OVERLAY DIALOG -->
+    <div id="submission-overlay" class="onboard-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="success-card clay-card 3d-modal">
+            
+            <header class="success-header clay-header">
+                <h2 id="modal-title">BLUEPRINT COMPILATION COMPLETE</h2>
+                <button type="button" class="close-overlay" id="close-overlay-btn" aria-label="Close dialogue">×</button>
+            </header>
+            
+            <div class="success-body">
+                <!-- Neumorphic Score Board -->
+                <div class="submission-score-board">
+                    <div class="circular-progress-score">
+                        <svg class="progress-ring-svg" width="120" height="120">
+                            <circle class="ring-bg" stroke="rgba(0,0,0,0.06)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                            <circle class="ring-fill" id="modal-score-ring" stroke="#2563eb" stroke-width="10" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314.15" stroke-dashoffset="0"/>
+                        </svg>
+                        <div class="score-display">
+                            <span class="score-percentage" id="modal-score-percent">100%</span>
+                            <span class="score-ratio" id="modal-score-ratio">Ready</span>
+                        </div>
+                    </div>
+                    
+                    <div class="submission-stats-grid">
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Applicant Name:</span>
+                            <span class="report-stat-val text-slate" id="modal-val-name">Pravin Sharma</span>
+                        </div>
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Primary Sector:</span>
+                            <span class="report-stat-val text-slate" id="modal-val-sector">-</span>
+                        </div>
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Layout Environment:</span>
+                            <span class="report-stat-val text-slate" id="modal-val-layout">-</span>
+                        </div>
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Verification Status:</span>
+                            <span class="report-stat-val text-green" id="modal-val-verified">Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live manifest of all form elements for proof -->
+                <h3 class="manifest-header-title">Compiled Manifest Blueprint</h3>
+                <div class="manifest-table-container">
+                    <table class="manifest-table">
+                        <thead>
+                            <tr>
+                                <th>Field ID</th>
+                                <th>Form Value Reference</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manifest-table-body">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Simulation Compilation logs -->
+                <pre id="success-log" class="success-log">
+[MANIFEST-ENGINE] Initiating form validation compilation...
+[MANIFEST-ENGINE] Verifying applicant details [Pravin Sharma]...
+[MANIFEST-ENGINE] Reading checkbox, toggle, and slider metrics...
+[MANIFEST-ENGINE] File documentation stream validated.
+[MANIFEST-ENGINE] Accent color successfully compiled.
+[SUCCESS] Manifest sheet compiled. Complete system ready for review.
+                </pre>
+                
+                <div class="success-footer">
+                    <!-- High gloss blue dome button -->
+                    <button type="button" id="btn-download-blueprint" class="btn-next green-glass-btn">Download Form Blueprint</button>
+                    <button type="button" id="btn-dismiss-overlay" class="btn-back">Dismiss</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

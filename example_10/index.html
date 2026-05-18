@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Assessment Portal — Example 10</title>
+    <!-- Google Fonts: Plus Jakarta Sans for premium modern aesthetics, JetBrains Mono for code snippets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Soft Decorative Blurred Organic Shapes in Background for Premium Studio Feel -->
+    <div class="glow-orb orb-1" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
+    <div class="backdrop-studio" aria-hidden="true"></div>
+
+    <div class="app-container">
+        <!-- Main Specular Glass Board Container -->
+        <main class="glass-board">
+            
+            <!-- SECTION 1: HEADER & TITLE -->
+            <header class="portal-header">
+                <div class="portal-logo-area">
+                    <div class="portal-logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="portal-title-text">
+                        <h1>SYSTEM INTEGRATION TERM EXAM</h1>
+                        <span class="portal-subtitle">Advanced Systems Engineering (Course 10)</span>
+                    </div>
+                </div>
+                <div class="portal-user-meta">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" alt="User Profile" class="avatar">
+                    <div class="user-details">
+                        <span class="user-name">Pravin Sharma</span>
+                        <span class="user-id">Candidate ID: 2026-9539</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SECTION 2: THEME STEPPER (Identical horizontal step style from sample1.jpg) -->
+            <nav class="horizontal-stepper" aria-label="Assessment Process Steps">
+                <div class="stepper-connector-line"></div>
+                <div class="stepper-progress-fill" id="stepper-progress"></div>
+
+                <!-- Step 1: Completed -->
+                <div class="step-node completed" id="step-node-1" data-step="1">
+                    <div class="circle-node">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="node-num">1</span>
+                    </div>
+                    <span class="step-label">Overview</span>
+                </div>
+
+                <!-- Step 2: Completed -->
+                <div class="step-node completed" id="step-node-2" data-step="2">
+                    <div class="circle-node">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="node-num">2</span>
+                    </div>
+                    <span class="step-label">General Info</span>
+                </div>
+
+                <!-- Step 3: Active (Assessment - Features the skewed vibrant green ribbon!) -->
+                <div class="step-node active" id="step-node-3" data-step="3">
+                    <!-- The Ribbon Banner - Modeled exactly after the skewed green banner in sample1.jpg! -->
+                    <div class="floating-skewed-banner">
+                        <span>Assessment</span>
+                    </div>
+                    <div class="circle-node">
+                        <span class="node-num">3</span>
+                    </div>
+                    <span class="step-label">Assessment</span>
+                </div>
+
+                <!-- Step 4: Pending / Locked -->
+                <div class="step-node pending" id="step-node-4" data-step="4">
+                    <div class="circle-node">
+                        <span class="node-num">4</span>
+                    </div>
+                    <span class="step-label">Completion</span>
+                </div>
+            </nav>
+
+            <!-- SECTION 3: CONFIGURATION FORM GRID (8-cell grid modeled directly from sample1.jpg) -->
+            <section class="configuration-grid-container" aria-label="Exam Parameters">
+                <div class="config-grid">
+                    
+                    <!-- Row 1: Pill Radio Selectors (Matches "Quiz", "Choice", "Choice", "Quiat" style in image) -->
+                    <div class="grid-item pill-selector active" id="filter-quiz">
+                        <div class="pill-radio-circle"></div>
+                        <span class="pill-text">Quiz Mode</span>
+                    </div>
+                    
+                    <div class="grid-item pill-selector" id="filter-coding">
+                        <div class="pill-radio-circle"></div>
+                        <span class="pill-text">Coding Practice</span>
+                    </div>
+                    
+                    <div class="grid-item pill-selector" id="filter-architecture">
+                        <div class="pill-radio-circle"></div>
+                        <span class="pill-text">Architecture Spec</span>
+                    </div>
+                    
+                    <div class="grid-item pill-selector" id="filter-quick">
+                        <div class="pill-radio-circle"></div>
+                        <span class="pill-text">Quick Check</span>
+                    </div>
+
+                    <!-- Row 2: Dropdown Option Fields (Matches "Suk", "Choice", "Choice", "Duer" style in image) -->
+                    <div class="grid-item select-field" id="select-hub">
+                        <span class="select-label">Subject Pool</span>
+                        <div class="custom-dropdown" id="dropdown-subject">
+                            <span class="dropdown-selected">System Design (Suk)</span>
+                            <ul class="dropdown-list">
+                                <li data-value="sys">System Design (Suk)</li>
+                                <li data-value="alg">Algorithmic Complexity</li>
+                                <li data-value="db">Distributed Databases</li>
+                                <li data-value="sec">Cybersecurity Protocols</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item select-field" id="select-difficulty">
+                        <span class="select-label">Difficulty Level</span>
+                        <div class="custom-dropdown" id="dropdown-difficulty">
+                            <span class="dropdown-selected">Advanced (Choice)</span>
+                            <ul class="dropdown-list">
+                                <li data-value="beg">Beginner</li>
+                                <li data-value="int">Intermediate</li>
+                                <li data-value="adv">Advanced (Choice)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item select-field" id="select-mode">
+                        <span class="select-label">Question Types</span>
+                        <div class="custom-dropdown" id="dropdown-types">
+                            <span class="dropdown-selected">Mixed Core (Choice)</span>
+                            <ul class="dropdown-list">
+                                <li data-value="mcq">Multiple Choice Only</li>
+                                <li data-value="code">Coding Challenges</li>
+                                <li data-value="mixed">Mixed Core (Choice)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item select-field" id="select-duration">
+                        <span class="select-label">Exam Duration</span>
+                        <div class="custom-dropdown" id="dropdown-duration">
+                            <span class="dropdown-selected">60 Minutes (Duer)</span>
+                            <ul class="dropdown-list">
+                                <li data-value="30">30 Minutes</li>
+                                <li data-value="60">60 Minutes (Duer)</li>
+                                <li data-value="90">90 Minutes</li>
+                                <li data-value="unlimit">No Limit</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION 4: ASSESSMENT INTERACTIVE SPLIT DASHBOARD (Premium upgrade for extreme appeal) -->
+            <section class="assessment-dashboard" aria-label="Interactive Assessment Board">
+                
+                <!-- Left Sidebar: Question Navigator Grid -->
+                <aside class="dashboard-sidebar">
+                    <div class="sidebar-header">
+                        <h2>Assessment Navigator</h2>
+                        <div class="progress-bar-container">
+                            <div class="progress-info">
+                                <span class="progress-label">Completion Status</span>
+                                <span class="progress-percent" id="sidebar-progress-percent">0%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="sidebar-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-navigation-grid" id="question-nav-grid">
+                        <!-- Instantiated dynamically in script.js (Questions 1 to 12) -->
+                    </div>
+
+                    <div class="sidebar-stats">
+                        <div class="stat-card done">
+                            <span class="stat-num" id="stat-answered">0</span>
+                            <span class="stat-lbl">Answered</span>
+                        </div>
+                        <div class="stat-card flagged">
+                            <span class="stat-num" id="stat-flagged">0</span>
+                            <span class="stat-lbl">Flagged</span>
+                        </div>
+                        <div class="stat-card pending">
+                            <span class="stat-num" id="stat-remaining">12</span>
+                            <span class="stat-lbl">Left</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Center/Right Panel: Interactive Question Board Card -->
+                <article class="question-board-panel">
+                    <form id="assessment-question-form" action="#" method="POST" onsubmit="event.preventDefault();">
+                        
+                        <!-- Question Header -->
+                        <header class="question-card-header">
+                            <div class="question-meta-tags">
+                                <span class="question-badge current" id="question-index-badge">Question 1 of 12</span>
+                                <span class="question-badge tag" id="question-category-tag">System Architecture</span>
+                                <span class="question-badge diff" id="question-difficulty-tag">Hard</span>
+                            </div>
+                            <button type="button" class="btn-flag" id="btn-flag-question" title="Flag this question for later review">
+                                <svg class="flag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/>
+                                </svg>
+                                <span class="btn-flag-text">Flag Question</span>
+                            </button>
+                        </header>
+
+                        <!-- Question Content Board -->
+                        <div class="question-content-container">
+                            <h3 class="question-text" id="question-text-content">
+                                Loading Question...
+                            </h3>
+                            
+                            <!-- Interactive Code block or diagram placeholder if question uses it -->
+                            <div class="question-code-block" id="question-code-block-container" style="display: none;">
+                                <pre><code class="language-javascript" id="question-code-content">// Code snippet goes here</code></pre>
+                            </div>
+
+                            <!-- Multiple Choice Option Panel -->
+                            <div class="mcq-options-panel" id="options-panel-container">
+                                <!-- Options populated dynamically by script.js -->
+                            </div>
+                        </div>
+
+                        <!-- Action Button Bar (Featuring glossy green and elegant back buttons) -->
+                        <footer class="question-card-actions">
+                            <button type="button" class="btn-back" id="btn-prev-question" style="visibility: hidden;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 6px; transform: scaleX(-1);">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-submit-exam" id="btn-submit-action">Submit Exam</button>
+                            <!-- Glossy Green Button (Modeled after the green pill button in sample1.jpg) -->
+                            <button type="button" class="btn-next green-glass-btn" id="btn-next-question">
+                                Next Question
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: 6px;">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </footer>
+
+                    </form>
+                </article>
+
+            </section>
+
+            <!-- SECTION 5: FLOATING TIMER PILL CONTAINER (Modeled exactly from sample1.jpg) -->
+            <footer class="assessment-footer-area">
+                <div class="timer-pill-bubble">
+                    <span class="timer-label">Time remaining:</span>
+                    <div class="timer-slate-capsule" id="timer-capsule">
+                        <span class="timer-clock" id="timer-clock">04:58</span>
+                    </div>
+                </div>
+                <p class="timer-helper-text">Complete all questions to continue.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- SECTION 6: SUBMISSION SUCCESS & DETAILED REPORT OVERLAY DIALOG -->
+    <div id="submission-overlay" class="onboard-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="success-card">
+            
+            <header class="success-header">
+                <h2 id="modal-title">EXAM ENGINE COMPILATION COMPLETE</h2>
+                <button type="button" class="close-overlay" id="close-overlay-btn" aria-label="Close dialogue">×</button>
+            </header>
+            
+            <div class="success-body">
+                <!-- Neumorphic Score Board -->
+                <div class="submission-score-board">
+                    <div class="circular-progress-score">
+                        <svg class="progress-ring-svg" width="120" height="120">
+                            <circle class="ring-bg" stroke="rgba(0,0,0,0.06)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                            <circle class="ring-fill" id="modal-score-ring" stroke="#1b8c43" stroke-width="10" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60" stroke-dasharray="314.15" stroke-dashoffset="314.15"/>
+                        </svg>
+                        <div class="score-display">
+                            <span class="score-percentage" id="modal-score-percent">0%</span>
+                            <span class="score-ratio" id="modal-score-ratio">0/12</span>
+                        </div>
+                    </div>
+                    
+                    <div class="submission-stats-grid">
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Questions Answered:</span>
+                            <span class="report-stat-val text-slate" id="modal-stat-answered">0/12</span>
+                        </div>
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Time Elapsed:</span>
+                            <span class="report-stat-val text-slate" id="modal-stat-time">00:02</span>
+                        </div>
+                        <div class="report-stat-row">
+                            <span class="report-stat-lbl">Accreditation Class:</span>
+                            <span class="report-stat-val text-green" id="modal-stat-grade">Pending</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Compilation logs (Matching beautiful style of example_9 but tailored to exam) -->
+                <pre id="success-log" class="success-log">
+[ASSESS-ENGINE] Initiating final exam compilation...
+[ASSESS-ENGINE] Verifying candidate profile ID 2026-9539...
+[ASSESS-ENGINE] Syncing answer arrays with primary host node...
+[ASSESS-ENGINE] Processing MCQ question vector nodes [1-12]...
+[ASSESS-ENGINE] Done. Score calculated successfully.
+[SUCCESS] Assessment sheet compiled.
+                </pre>
+                
+                <div class="success-footer">
+                    <!-- High gloss green button modeled after image pill button -->
+                    <button type="button" id="btn-download-blueprint" class="btn-next green-glass-btn">Download Blueprint Certificate</button>
+                    <button type="button" id="btn-dismiss-overlay" class="btn-back">Dismiss</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

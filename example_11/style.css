@@ -1,0 +1,1966 @@
+/* ==========================================================================
+   EXAMPLE 11: 3D CLAYMORPHIC & ELECTRIC BLUE REFERENCE SYSTEM STYLESHEET
+   Conforming to the exact theme and 3D style elements in example_11\assets\sample1.jpg
+   Features Debossed inputs, 3D Gel Buttons, Glossy Marble Bullets, Tactile Shadows
+   ========================================================================== */
+
+/* Design Tokens & Theme Variables */
+:root {
+    /* Color Palette derived from sample1.jpg (Defaulting to Royal Electric Blue) */
+    --color-bg-canvas: #0c0f17;        /* Ultra-dark slate canvas for high-contrast studio mode */
+    --color-primary-green: #2563eb;    /* Electric royal blue (var name preserved to match JS engine) */
+    --color-green-hover: #1d4ed8;      /* Deep cobalt blue for hover transitions */
+    --color-green-glow: rgba(37, 99, 235, 0.35);
+    --color-green-tint: #eff6ff;       /* Light blue tint wash */
+    
+    --color-slate-primary: #1e252d;    /* Deep charcoal */
+    --color-slate-hover: #2d3743;
+    --color-slate-light: #4a5568;      /* Secondary grey text */
+    
+    --color-border-neutral: #cbd5e1;   /* Chiseled borders and boundaries */
+    --color-border-focused: #94a3b8;
+    
+    --color-card-white: #ffffff;
+    
+    /* Claymorphic Specific Grays */
+    --color-clay-base: #f0f3f8;        /* Soft white clay card base */
+    --color-clay-debossed: #e6e9f0;    /* Recessed input background */
+    --color-clay-shadow: rgba(0, 0, 0, 0.45);
+    
+    /* Input Validation Palette */
+    --color-success: #2563eb;          /* Successful validation matches royal blue accent */
+    --color-success-bg: #eff6ff;
+    --color-error: #ef4444;            /* Red error highlight */
+    --color-error-bg: #fef2f2;
+    --color-warning: #f59e0b;
+    --color-warning-bg: #fffbeb;
+
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+
+    /* Skeuomorphic & 3D Tactile Shadows */
+    --shadow-clay-panel: 
+        0 35px 85px rgba(0, 0, 0, 0.5),
+        inset 0 3px 6px #ffffff,
+        inset 0 -3px 6px rgba(0, 0, 0, 0.05);
+
+    --shadow-debossed-inset: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.08),
+        inset -2px -2px 5px #ffffff,
+        0 1px 0 rgba(255, 255, 255, 0.8);
+
+    --shadow-3d-button:
+        0 8px 24px var(--color-green-glow),
+        inset 0 3px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.25);
+
+    --shadow-3d-marble:
+        inset -2px -2px 5px rgba(0, 0, 0, 0.45),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.7),
+        0 4px 10px var(--color-green-glow);
+
+    /* Transitions */
+    --transition-standard: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: all 0.15s ease;
+}
+
+/* Global Reset & Base Elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-canvas);
+    font-family: var(--font-sans);
+    color: var(--color-slate-primary);
+    position: relative;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+/* Decorative Organic Glowing Spheres (Electric Neon Blue & Indigo glows) */
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.25;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.orb-1 {
+    top: -10%;
+    right: 15%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, var(--color-primary-green) 0%, rgba(255,255,255,0) 70%);
+}
+
+.orb-2 {
+    bottom: -5%;
+    left: 10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #4f46e5 0%, rgba(255,255,255,0) 70%);
+}
+
+/* Base structural backdrop layer (High-end studio grading) */
+.backdrop-studio {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+    z-index: -3;
+    pointer-events: none;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   MAIN 3D CLAYMORPHIC CARD PANEL
+   ========================================================================== */
+.clay-card {
+    background-color: var(--color-clay-base);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 44px;
+    padding: 44px;
+    box-shadow: var(--shadow-clay-panel);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glossy highlight bevel lines */
+.clay-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   3D CLAY HEADER (FROM SAMPLE1.JPG)
+   ========================================================================== */
+.clay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 24px;
+    z-index: 10;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.portal-title-text h1 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--color-slate-primary);
+}
+
+.portal-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-slate-light);
+    text-transform: uppercase;
+}
+
+/* Left back button from sample1.jpg (electric blue chiseled round) */
+.header-blue-circle-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-primary-green);
+    color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-3d-button);
+    transition: var(--transition-standard);
+}
+
+.header-blue-circle-btn:hover {
+    transform: scale(1.08);
+    background-color: var(--color-green-hover);
+    box-shadow: 0 6px 14px var(--color-green-glow);
+}
+
+.header-blue-circle-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Right hamburger menu chiseled round button */
+.header-menu-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-clay-base);
+    color: var(--color-slate-light);
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.03),
+        inset 0 1px 1px #ffffff;
+    transition: var(--transition-standard);
+}
+
+.header-menu-btn:hover {
+    color: var(--color-slate-primary);
+    border-color: var(--color-slate-primary);
+    transform: scale(1.08);
+}
+
+.header-menu-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================================
+   DYNAMIC STEPPER TIMELINE & 3D STEP NODES
+   ========================================================================== */
+.horizontal-stepper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    z-index: 12;
+    margin: 10px 0;
+}
+
+.stepper-connector-line {
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    height: 4px;
+    background-color: #cbd5e1;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+
+.stepper-progress-fill {
+    position: absolute;
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    background-color: var(--color-primary-green);
+    box-shadow: 0 0 8px var(--color-green-glow);
+    width: 0%;
+    z-index: 2;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 2px;
+}
+
+.step-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 3D clay stepper sphere */
+.circle-node {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-clay-base);
+    border: 1px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 10px rgba(0,0,0,0.05),
+        inset 0 2px 3px #ffffff,
+        inset 0 -2px 3px rgba(0,0,0,0.05);
+    position: relative;
+    transition: var(--transition-standard);
+}
+
+.node-num {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--color-slate-primary);
+    transition: var(--transition-standard);
+}
+
+.step-label {
+    margin-top: 10px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-slate-light);
+    letter-spacing: 0.02em;
+}
+
+/* STEP STATE: COMPLETED (electric blue 3D dome) */
+.step-node.completed .circle-node {
+    background-color: var(--color-primary-green);
+    border-color: var(--color-primary-green);
+    box-shadow: var(--shadow-3d-button);
+}
+
+.step-node.completed .circle-node svg {
+    color: #ffffff;
+}
+
+/* STEP STATE: ACTIVE WITH DYNAMIC BLUE RIBBON */
+.step-node.active .circle-node {
+    border-color: var(--color-primary-green);
+    background-color: #ffffff;
+    box-shadow: 
+        0 0 0 6px rgba(37, 99, 235, 0.12),
+        0 8px 20px var(--color-green-glow);
+}
+
+.step-node.active .node-num {
+    color: var(--color-primary-green);
+    transform: scale(1.1);
+}
+
+/* Skewed Blue Floating Ribbon modeled exactly from sample1.jpg */
+.floating-skewed-banner {
+    position: absolute;
+    top: -38px;
+    white-space: nowrap;
+    background: linear-gradient(135deg, var(--color-primary-green) 0%, var(--color-green-hover) 100%);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    box-shadow: 
+        0 8px 16px var(--color-green-glow),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    transform: rotate(-6deg) skewX(-10deg) translateY(-2px);
+    z-index: 15;
+    animation: ribbonFloat 3s ease-in-out infinite alternate;
+}
+
+.floating-skewed-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 45%;
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: var(--color-green-hover) transparent;
+    display: block;
+    width: 0;
+}
+
+/* STEP STATE: PENDING */
+.step-node.pending .circle-node {
+    background-color: var(--color-clay-debossed);
+    border-color: #cbd5e1;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.step-node.pending .node-num, .step-node.pending .step-label {
+    color: #94a3b8;
+}
+
+
+/* ==========================================================================
+   FORM WORKSPACE & TEXT FIELDS (DEBOSSED STYLE IN CLAY)
+   ========================================================================== */
+.form-step-panel {
+    display: none;
+    flex-direction: column;
+    gap: 28px;
+    animation: slideInStep 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.form-step-panel.active {
+    display: flex;
+}
+
+.panel-header {
+    border-left: 4px solid var(--color-primary-green);
+    padding-left: 14px;
+}
+
+.panel-header h2 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--color-slate-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.panel-subtitle {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--color-slate-light);
+    margin-top: 4px;
+}
+
+/* Form layout Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.form-grid .full-width {
+    grid-column: span 2;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.group-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-slate-light);
+}
+
+/* Debossed/Recessed text input: physical indent inside clay card */
+.debossed-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-slate-primary);
+    background-color: var(--color-clay-debossed) !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 12px;
+    outline: none;
+    box-shadow: var(--shadow-debossed-inset) !important;
+    transition: var(--transition-standard);
+}
+
+.debossed-input:hover {
+    border-color: var(--color-border-focused) !important;
+}
+
+.debossed-input:focus {
+    border-color: var(--color-primary-green) !important;
+    box-shadow: 
+        0 0 0 4px var(--color-green-glow),
+        inset 1px 1px 3px rgba(0,0,0,0.05) !important;
+    background-color: #ffffff !important;
+}
+
+/* Inset chiseled container boxes (checkbox blocks, tags container, uploader) */
+.debossed-box {
+    background-color: var(--color-clay-debossed) !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.06), inset -1px -1px 3px #ffffff !important;
+    border-radius: 12px;
+    transition: var(--transition-standard);
+}
+
+/* Floating Label Mechanical Design */
+.floating-group {
+    position: relative;
+    padding-top: 6px;
+}
+
+.floating-group .floating-label {
+    position: absolute;
+    left: 18px;
+    top: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #94a3b8;
+    pointer-events: none;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), font-size 0.22s ease, color 0.22s ease;
+    transform-origin: left top;
+}
+
+.form-input:focus ~ .floating-label,
+.form-input:not(:placeholder-shown) ~ .floating-label {
+    transform: translateY(-20px) scale(0.85);
+    font-weight: 800;
+    color: var(--color-primary-green);
+}
+
+.input-helper {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+    line-height: 1.3;
+}
+
+.char-count-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 9.5px;
+    font-weight: 800;
+    background-color: var(--color-clay-base);
+    color: var(--color-slate-light);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1.5px solid #cbd5e1;
+    pointer-events: none;
+}
+
+
+/* ==========================================================================
+   INPUT VALIDATION STYLES
+   ========================================================================== */
+.has-validation .validation-badge {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    pointer-events: none;
+    display: none;
+    letter-spacing: 0.02em;
+}
+
+.has-validation .success-badge {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.has-validation .error-badge {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Validation Border triggers */
+.form-input.is-valid {
+    border-color: var(--color-success) !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+.form-input.is-valid ~ .floating-label {
+    color: var(--color-success) !important;
+}
+
+.form-input.is-invalid {
+    border-color: var(--color-error) !important;
+    background-color: var(--color-error-bg) !important;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.05) !important;
+    animation: inputShake 0.3s ease;
+}
+
+.form-input.is-invalid ~ .floating-label {
+    color: var(--color-error) !important;
+}
+
+
+/* ==========================================================================
+   PASSWORD STRENGTH METER & PASSWORD TOGGLE
+   ========================================================================== */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.password-toggle:hover {
+    color: var(--color-slate-primary);
+}
+
+.password-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+.password-strength-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.strength-bar-track {
+    height: 5px;
+    border-radius: 99px;
+    background-color: #cbd5e1;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+    overflow: hidden;
+    width: 100%;
+}
+
+.strength-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: transparent;
+    border-radius: 99px;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.strength-text {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #94a3b8;
+}
+
+
+/* ==========================================================================
+   AUTOCOMPLETE COUNTRY COMBOBOX
+   ========================================================================== */
+.combobox-group {
+    position: relative;
+}
+
+.combobox-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.combobox-chevron {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 8px;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.combobox-dropdown-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background-color: var(--color-card-white);
+    border: 1.5px solid var(--color-border-focused);
+    border-radius: 12px;
+    box-shadow: var(--shadow-premium-hard);
+    list-style: none;
+    max-height: 160px;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    padding: 4px 0;
+}
+
+.combobox-dropdown-list.open {
+    display: flex;
+}
+
+.combobox-dropdown-list li {
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate-light);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.combobox-dropdown-list li:hover {
+    background-color: var(--color-green-tint);
+    color: var(--color-primary-green);
+}
+
+
+/* ==========================================================================
+   SELECT DROPDOWNS (NATIVE & CUSTOM RICH DROPDOWN)
+   ========================================================================== */
+.native-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-select-native {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 40px !important;
+}
+
+.native-select-wrapper::after {
+    content: '▼';
+    font-size: 8px;
+    color: #94a3b8;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Custom premium dropdown */
+.custom-select-field {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    box-shadow: var(--shadow-debossed-inset) !important;
+}
+
+.custom-select-field.open {
+    border-color: var(--color-primary-green) !important;
+    background-color: #ffffff !important;
+    box-shadow: 
+        0 0 0 4px var(--color-green-glow),
+        inset 1px 1px 3px rgba(0,0,0,0.05) !important;
+}
+
+.custom-select-selected {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-slate-primary);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-selected::after {
+    content: '▼';
+    font-size: 8px;
+    color: #94a3b8;
+    transition: transform 0.25s ease;
+}
+
+.custom-select-field.open .custom-select-selected::after {
+    transform: rotate(180deg);
+}
+
+.custom-select-dropdown-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background-color: var(--color-card-white);
+    border: 1.5px solid var(--color-border-focused);
+    border-radius: 12px;
+    box-shadow: var(--shadow-premium-hard);
+    list-style: none;
+    padding: 4px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 110;
+}
+
+.custom-select-field.open .custom-select-dropdown-list {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 11px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate-light);
+    transition: var(--transition-fast);
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-green-tint);
+    color: var(--color-primary-green);
+}
+
+.dropdown-item.selected {
+    background-color: var(--color-green-tint);
+    color: var(--color-primary-green);
+    font-weight: 800;
+}
+
+
+/* ==========================================================================
+   CHECKBOXES & SLIDE SWITCHES
+   ========================================================================== */
+.checkbox-options-stack, .toggles-options-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+}
+
+.checkbox-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-slate-light);
+}
+
+.form-checkbox-native {
+    accent-color: var(--color-primary-green);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Custom checkbox styled as chiseled slot */
+.custom-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+
+.form-checkbox-custom {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+}
+
+.custom-checkbox-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid #cbd5e1;
+    background-color: var(--color-clay-base);
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.custom-checkbox-box svg {
+    width: 12px;
+    height: 12px;
+    color: #ffffff;
+    transform: scale(0);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.form-checkbox-custom:checked ~ .custom-checkbox-box {
+    border-color: var(--color-primary-green);
+    background-color: var(--color-primary-green);
+    box-shadow: var(--shadow-3d-button);
+}
+
+.form-checkbox-custom:checked ~ .custom-checkbox-box svg {
+    transform: scale(1);
+}
+
+.custom-checkbox-text {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--color-slate-primary);
+}
+
+/* Boolean Slide Switches (Tactile 3D Knob Slider) */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+}
+
+.toggle-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--color-slate-primary);
+}
+
+.switch-toggle-btn {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 20px;
+}
+
+.switch-toggle-btn input {
+    opacity: 0;
+    width: 0; height: 0;
+}
+
+/* Debossed toggle track slot */
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #cbd5e1;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.12);
+    border-radius: 34px;
+    transition: var(--transition-standard);
+}
+
+/* 3D Pearl switch knob slider */
+.switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.2),
+        inset 0 1px 1px #ffffff;
+    border-radius: 50%;
+    transition: var(--transition-standard);
+}
+
+.switch-toggle-btn input:checked + .switch-slider {
+    background-color: var(--color-primary-green);
+    box-shadow: 
+        0 0 6px var(--color-green-glow),
+        inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.switch-toggle-btn input:checked + .switch-slider::before {
+    transform: translateX(18px);
+}
+
+
+/* ==========================================================================
+   RANGE SLIDER (EXPERIENCE LEVEL WITH 3D BLUE MARBLE THUMB)
+   ========================================================================== */
+.slider-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider-value-badge {
+    background-color: var(--color-green-tint);
+    border: 1.5px solid #cbd5e1;
+    color: var(--color-primary-green);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 99px;
+    box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.range-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.slider-bound {
+    font-size: 10px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+/* Debossed Range Slider Track */
+.form-range-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 99px;
+    background-color: #cbd5e1;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.12);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+/* Highly realistic 3D Blue Marble Thumb knob (WebKit) */
+.form-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #93c5fd 0%, var(--color-primary-green) 50%, var(--color-green-hover) 100%) !important;
+    border: 1px solid var(--color-primary-green) !important;
+    box-shadow: var(--shadow-3d-marble) !important;
+    transition: var(--transition-fast);
+}
+
+.form-range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+
+/* ==========================================================================
+   NEUMORPHIC 3D RADIO CARDS GRID (WITH GLOSSY BLUE MARBLE SELECTORS)
+   ========================================================================== */
+.radio-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.radio-card {
+    background-color: var(--color-clay-base);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: var(--transition-standard);
+    box-shadow: 
+        0 4px 10px rgba(0,0,0,0.03),
+        inset 0 1px 1px #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.radio-card-input {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+}
+
+.radio-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%;
+}
+
+/* Bullets styled as empty slots, turning into 3D Blue Marbles when selected */
+.card-radio-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid #cbd5e1;
+    background-color: var(--color-clay-debossed);
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+    position: relative;
+    transition: var(--transition-fast);
+}
+
+/* Highly realistic radial-gradient 3D blue marble sphere! */
+.radio-card-input:checked ~ .radio-card-content .card-radio-circle {
+    background: radial-gradient(circle at 35% 35%, #93c5fd 0%, var(--color-primary-green) 50%, var(--color-green-hover) 100%) !important;
+    border: 1px solid var(--color-primary-green) !important;
+    box-shadow: var(--shadow-3d-marble) !important;
+}
+
+.card-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--color-slate-light);
+    transition: var(--transition-fast);
+}
+
+.card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--color-slate-primary);
+}
+
+.card-desc {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-slate-light);
+    line-height: 1.35;
+}
+
+/* Hover and active states for Cards */
+.radio-card:hover {
+    border-color: var(--color-border-focused);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 18px rgba(0,0,0,0.06),
+        inset 0 1px 1px #ffffff;
+}
+
+.radio-card.active {
+    border-color: var(--color-primary-green);
+    background-color: var(--color-green-tint);
+    box-shadow: 
+        0 10px 24px rgba(37, 99, 235, 0.08),
+        inset 0 1px 1px #ffffff;
+}
+
+.radio-card.active .card-icon {
+    color: var(--color-primary-green);
+}
+
+
+/* ==========================================================================
+   PILL SELECTORS / TECHNICAL SKILL TAGS
+   ========================================================================== */
+.pill-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+}
+
+.pill-tag {
+    font-size: 11.5px;
+    font-weight: 700;
+    background-color: var(--color-clay-base);
+    border: 1.5px solid #cbd5e1;
+    color: var(--color-slate-light);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.02),
+        inset 0 1px 1px #ffffff;
+    transition: var(--transition-standard);
+}
+
+.pill-tag:hover {
+    border-color: var(--color-border-focused);
+    color: var(--color-slate-primary);
+}
+
+.pill-tag.active {
+    background-color: var(--color-green-tint);
+    border-color: var(--color-primary-green);
+    color: var(--color-primary-green);
+    font-weight: 800;
+    box-shadow: 
+        0 4px 10px rgba(37, 99, 235, 0.08),
+        inset 0 1px 0 #ffffff;
+}
+
+
+/* ==========================================================================
+   PICKERS (DATE, TIME, THEME COLORS)
+   ========================================================================== */
+.form-date-picker, .form-time-picker {
+    cursor: pointer;
+}
+
+/* 3D Color Picker row */
+.color-picker-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+.color-picker-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.1),
+        inset 0 1px 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    position: relative;
+}
+
+.form-color-picker {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%; left: -50%;
+    border: none;
+    cursor: pointer;
+}
+
+.color-picker-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-value-lbl {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-slate-primary);
+}
+
+
+/* ==========================================================================
+   DRAG-AND-DROP FILE UPLOADER
+   ========================================================================== */
+.drag-drop-zone {
+    width: 100%;
+    border: 2px dashed #cbd5e1 !important;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.drag-drop-zone.dragover {
+    border-color: var(--color-primary-green) !important;
+    background-color: var(--color-green-tint) !important;
+}
+
+.file-input-hidden {
+    position: absolute;
+    opacity: 0;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.drop-zone-icon {
+    width: 42px;
+    height: 42px;
+    color: #94a3b8;
+    background-color: var(--color-clay-base);
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.03),
+        inset 0 1px 1px #ffffff;
+    transition: var(--transition-fast);
+}
+
+.drop-zone-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.drag-drop-zone:hover .drop-zone-icon {
+    transform: translateY(-2px);
+    color: var(--color-primary-green);
+    border-color: var(--color-primary-green);
+}
+
+.drop-zone-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.drop-primary-txt {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-slate-primary);
+}
+
+.drop-primary-txt .browse-link {
+    color: var(--color-primary-green);
+    text-decoration: underline;
+}
+
+.drop-secondary-txt {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.file-upload-card {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--color-clay-base);
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    z-index: 20;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 
+        0 15px 30px rgba(0,0,0,0.1),
+        inset 0 1px 1px #ffffff;
+    animation: slideInStep 0.3s ease;
+}
+
+.file-card-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.file-card-info .file-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-slate-primary);
+    word-break: break-all;
+    text-align: left;
+}
+
+.file-card-info .file-size {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.file-upload-progress {
+    height: 5px;
+    background-color: #cbd5e1;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 99px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.upload-progress-fill {
+    height: 100%;
+    background-color: var(--color-primary-green);
+    width: 0%;
+    border-radius: 99px;
+    transition: width 0.1s linear;
+}
+
+.btn-clear-file {
+    position: absolute;
+    top: 14px; right: 14px;
+    background-color: var(--color-clay-base);
+    border: 1px solid #cbd5e1;
+    color: var(--color-slate-light);
+    font-size: 16px;
+    font-weight: 800;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03), inset 0 1px 1px #ffffff;
+}
+
+.btn-clear-file:hover {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border-color: var(--color-error);
+}
+
+
+/* ==========================================================================
+   BUTTONS STYLES referência
+   ========================================================================== */
+.buttons-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 20px;
+}
+
+.btn-spec-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.btn-spec-lbl {
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.btn-demo-ref {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-solid-accent {
+    background-color: var(--color-primary-green);
+    border: 1px solid var(--color-primary-green);
+    color: #ffffff;
+    box-shadow: var(--shadow-3d-button);
+}
+
+.btn-solid-accent:hover:not(:disabled) {
+    background-color: var(--color-green-hover);
+    border-color: var(--color-green-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px var(--color-green-glow);
+}
+
+/* 3D Gel Dome button modeled after the Density capsule in sample1.jpg */
+.green-glass-btn {
+    background: linear-gradient(135deg, var(--color-primary-green) 0%, var(--color-green-hover) 100%);
+    border: 1px solid var(--color-primary-green);
+    color: #ffffff;
+    border-radius: 9999px !important;
+    box-shadow: 
+        0 8px 24px var(--color-green-glow),
+        inset 0 3px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.green-glass-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+.green-glass-btn:hover:not(:disabled) {
+    transform: translateY(-1.5px);
+    box-shadow: 
+        0 10px 24px var(--color-green-glow),
+        inset 0 3px 5px rgba(255, 255, 255, 0.5),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.06);
+}
+
+/* Outline slate button */
+.btn-outline-slate {
+    background-color: var(--color-clay-base);
+    border: 1.5px solid #cbd5e1;
+    color: var(--color-slate-primary);
+    box-shadow: inset 0 1px 1px #ffffff;
+}
+
+.btn-outline-slate:hover:not(:disabled) {
+    border-color: var(--color-slate-primary);
+    transform: translateY(-1px);
+}
+
+/* Destructive danger */
+.btn-destructive-danger {
+    background-color: var(--color-error-bg);
+    border: 1.5px solid rgba(239, 68, 68, 0.2);
+    color: var(--color-error);
+}
+
+.btn-destructive-danger:hover:not(:disabled) {
+    background-color: var(--color-error);
+    border-color: var(--color-error);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2);
+}
+
+.spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.btn-icon-demo {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background-color: var(--color-clay-base);
+    color: var(--color-slate-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03), inset 0 1px 1px #ffffff;
+    transition: var(--transition-fast);
+}
+
+.btn-icon-demo:hover {
+    color: var(--color-slate-primary);
+    border-color: var(--color-slate-primary);
+}
+
+.btn-icon-demo svg {
+    width: 18px;
+    height: 18px;
+}
+
+.ref-btn-group {
+    display: flex;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-clay-base);
+    box-shadow: inset 0 1px 1px #ffffff;
+}
+
+.group-btn {
+    border: none;
+    background: none;
+    padding: 8px 10px;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--color-slate-light);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.group-btn:not(:last-child) {
+    border-right: 1.5px solid #cbd5e1;
+}
+
+.group-btn:hover {
+    background-color: var(--color-clay-debossed);
+}
+
+.group-btn.active {
+    background-color: var(--color-slate-primary);
+    color: #ffffff;
+}
+
+
+/* ==========================================================================
+   NAVIGATION ACTIONS FOOTER BAR
+   ========================================================================== */
+.form-navigation-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #cbd5e1;
+    padding-top: 24px;
+    margin-top: 8px;
+}
+
+.debossed-btn {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02), inset 0 1px 1px #ffffff;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 1.5px solid #cbd5e1;
+    color: var(--color-slate-primary);
+    padding: 12px 24px;
+    border-radius: 9999px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-standard);
+}
+
+.btn-back:hover {
+    background-color: var(--color-clay-debossed);
+    border-color: var(--color-border-focused);
+}
+
+.btn-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-standard);
+    min-width: 140px;
+}
+
+
+/* ==========================================================================
+   CLAY FOOTER & PHYSICAL KEYBOARD CAPS (FROM SAMPLE1.JPG)
+   ========================================================================== */
+.clay-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+.timer-pill-bubble {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--color-clay-base);
+    padding: 6px 14px 6px 18px;
+    border-radius: 9999px;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.03),
+        inset 0 1px 1px #ffffff;
+    border: 1px solid #cbd5e1;
+}
+
+.timer-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-slate-light);
+    text-transform: uppercase;
+}
+
+.timer-slate-capsule {
+    background-color: var(--color-slate-primary);
+    color: #ffffff;
+    padding: 4px 14px;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: inset 0 -1px 1px rgba(255,255,255,0.2);
+}
+
+/* Beautiful 3D physical Keyboard guide */
+.keyboard-navigation-guide {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.key-cap {
+    background-color: var(--color-clay-base);
+    color: var(--color-slate-light);
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #d1d5db;
+    border-bottom: 3.5px solid #cbd5e1; /* Gives 3D keyboard press weight */
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.05),
+        inset 0 1px 1px #ffffff;
+    display: inline-block;
+    cursor: default;
+    user-select: none;
+    transition: var(--transition-fast);
+}
+
+.key-cap:active {
+    border-bottom-width: 1.5px;
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+
+/* ==========================================================================
+   SUBMISSION BLUEPRINT MODAL
+   ========================================================================== */
+.onboard-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(12, 15, 23, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeInModal 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.3d-modal {
+    box-shadow: 0 45px 95px rgba(0,0,0,0.65) !important;
+}
+
+.success-header {
+    background-color: var(--color-slate-primary);
+    color: #ffffff;
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.success-header h2 {
+    font-size: 13.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.close-overlay {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 26px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.close-overlay:hover {
+    color: #ffffff;
+}
+
+.success-body {
+    padding: 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Neumorphic score/status grid inside modal */
+.submission-score-board {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 
+        0 4px 10px rgba(0,0,0,0.02),
+        inset 0 1px 1px #ffffff;
+}
+
+.circular-progress-score {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-ring-svg {
+    transform: rotate(-90deg);
+}
+
+.score-display {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-percentage {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary-green);
+}
+
+.score-ratio {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.submission-stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.report-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 6px;
+}
+
+.report-stat-lbl {
+    color: var(--color-slate-light);
+}
+
+.report-stat-val {
+    font-weight: 700;
+}
+
+.text-slate { color: var(--color-slate-primary); }
+.text-green { color: var(--color-primary-green); }
+
+/* Table manifest styling */
+.manifest-header-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-slate-light);
+    margin-top: 4px;
+}
+
+.manifest-table-container {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+}
+
+.manifest-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+}
+
+.manifest-table th, .manifest-table td {
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.manifest-table th {
+    background-color: var(--color-clay-debossed);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 9px;
+    color: var(--color-slate-light);
+    border-bottom: 1.5px solid #cbd5e1;
+    position: sticky;
+    top: 0;
+}
+
+.manifest-table td {
+    border-bottom: 1px solid #cbd5e1;
+    font-weight: 600;
+    color: var(--color-slate-primary);
+}
+
+.manifest-table tr:last-child td {
+    border-bottom: none;
+}
+
+.manifest-table td:first-child {
+    font-family: var(--font-mono);
+    color: var(--color-primary-green);
+    font-size: 10.5px;
+}
+
+/* Logging terminal look */
+.success-log {
+    background-color: var(--color-slate-primary);
+    color: #e2e8f0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 16px;
+    border-radius: 12px;
+    line-height: 1.5;
+    overflow-x: auto;
+    max-height: 120px;
+    white-space: pre-wrap;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.success-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1.5px solid #cbd5e1;
+    padding-top: 20px;
+}
+
+.success-footer button {
+    font-size: 12px;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 768px) {
+    .clay-card {
+        padding: 24px;
+        gap: 24px;
+    }
+    .clay-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
+    .horizontal-stepper {
+        padding: 10px 10px;
+    }
+    .stepper-connector-line, .stepper-progress-fill {
+        left: 30px;
+        right: 30px;
+    }
+    .step-label {
+        display: none;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-grid .full-width, .radio-card-grid {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+    .buttons-showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .submission-score-board {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
