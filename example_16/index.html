@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configure and order your custom roasted-to-order micro-batch single-origin coffees from Vim & Vigour Coffee Roasters. Join the elite UK Coffee Club today.">
+    <title>Vim & Vigour — Coffee Club Configurator & Order Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="grid-lines-wrapper">
+        <!-- Corner decorations for catalog layout -->
+        <div class="grid-intersect intersect-top-left"></div>
+        <div class="grid-intersect intersect-top-right"></div>
+
+        <!-- ==========================================================================
+             BRAND HEADER & NAVIGATION
+             ========================================================================== -->
+        <header class="brand-header">
+            <div class="header-top-bar">
+                <div class="left-links">
+                    <a href="#">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: -1px;">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Find Your Nearest Supplier
+                    </a>
+                </div>
+                <div class="right-socials">
+                    <a href="#" aria-label="Twitter">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="header-main-nav">
+                <div class="logo-container">
+                    <a href="#" class="logo-link" aria-label="Vim and Vigour Home">
+                        <!-- Custom Monogram logo 'V&V' from image -->
+                        <svg class="logo-svg" viewBox="0 0 100 45">
+                            <path d="M10,5 L28,38 L46,5 M36,5 L54,38 L72,5 M43,26 C47,21 53,21 57,26 C54,30 46,30 43,26 Z" />
+                            <text x="76" y="28" font-family="'Oswald', sans-serif" font-size="12" fill="white" letter-spacing="0.1em">V&V</text>
+                        </svg>
+                    </a>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Our Roasters</a></li>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Suppliers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ==========================================================================
+             HERO BANNER
+             ========================================================================== -->
+        <section class="hero-section">
+            <h1 class="hero-title">Roasted to Order.<br>Delivered to Your Door.</h1>
+            <p class="hero-subtitle">V&V Micro-Roasters and Single-Origin Coffee Club</p>
+            <div class="hero-divider"></div>
+            
+            <div class="scroll-indicator-text">
+                Scroll Down
+                <div class="scroll-indicator-line"></div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             MAIN APPLICATION WORKSPACE (GRID COLUMN LAYOUT)
+             ========================================================================== -->
+        <main class="main-app-grid">
+
+            <!-- LEFT COLUMN: THE ACTIVE CONFIGURATOR FORM -->
+            <section class="form-configurator-column">
+                <form id="coffee-club-form" novalidate autocomplete="off">
+                    
+                    <!-- STEP 1: BEANS ORIGIN CARD SELECTOR -->
+                    <div class="config-section" id="origin-selection-container">
+                        <div class="section-num-title">
+                            <span class="section-num">01</span>
+                            <h2 class="section-title-text">Select Bean Origin</h2>
+                        </div>
+                        
+                        <div class="origin-cards-grid">
+                            <!-- Tanzania Card -->
+                            <div class="origin-card selected" data-value="tanzania" data-price="14.50" data-desc="Tanzania April 17 Roast — Smooth with sweet and tart notes.">
+                                <input type="radio" name="origin_choice" class="origin-card-radio" value="tanzania" checked>
+                                <div class="card-header-meta">
+                                    <span class="roast-date-tag">Roast: Apr 17</span>
+                                    <div class="card-checked-indicator">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-body-details">
+                                    <h3 class="origin-title">Tanzania</h3>
+                                    <p class="origin-subtitle">Single-Origin micro roast</p>
+                                    <p class="origin-description">Handpicked near Mt. Kilimanjaro, offering a silky body, mild clean acidity, and subtle notes of sweet blackcurrant and wild honey.</p>
+                                </div>
+                                <!-- Background circular coffee badge design -->
+                                <svg class="card-badge-bg" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" stroke="white" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+                                    <path d="M30,50 Q50,70 70,50 Q50,30 30,50 Z" stroke="white" stroke-width="1" fill="none"/>
+                                </svg>
+                            </div>
+
+                            <!-- Costa Rica Card -->
+                            <div class="origin-card" data-value="costa_rica" data-price="16.00" data-desc="Costa Rica April 22 Roast — Rich cocoa and honey-like sweetness.">
+                                <input type="radio" name="origin_choice" class="origin-card-radio" value="costa_rica">
+                                <div class="card-header-meta">
+                                    <span class="roast-date-tag">Roast: Apr 22</span>
+                                    <div class="card-checked-indicator">
+                                        <svg viewBox="0 0 24 24">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="card-body-details">
+                                    <h3 class="origin-title">Costa Rica</h3>
+                                    <p class="origin-subtitle">Honey-process specialty</p>
+                                    <p class="origin-description">Grown in the high Tarrazú region, delivering a dense, balanced body with profiles of decadent dark chocolate, honey, and orange zest.</p>
+                                </div>
+                                <!-- Background circular coffee badge design -->
+                                <svg class="card-badge-bg" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" stroke="white" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
+                                    <path d="M30,50 Q50,70 70,50 Q50,30 30,50 Z" stroke="white" stroke-width="1" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: ROAST STRENGTH STAMPS (CIRCULAR VINTAGE LOOK) -->
+                    <div class="config-section" id="roast-strength-container">
+                        <div class="section-num-title">
+                            <span class="section-num">02</span>
+                            <h2 class="section-title-text">Choose Roast Strength</h2>
+                        </div>
+                        
+                        <div class="strength-stamps-row">
+                            <!-- Stamp 04 (Light) -->
+                            <div class="strength-stamp-item" data-value="04/10">
+                                <input type="radio" name="strength_choice" class="strength-stamp-radio" value="04/10">
+                                <div class="stamp-circle">
+                                    <span class="stamp-num">04</span>
+                                    <span class="stamp-label">Strength</span>
+                                </div>
+                                <span class="stamp-description">Light Roast</span>
+                            </div>
+
+                            <!-- Stamp 06 (Medium) -->
+                            <div class="strength-stamp-item active" data-value="06/10">
+                                <input type="radio" name="strength_choice" class="strength-stamp-radio" value="06/10" checked>
+                                <div class="stamp-circle">
+                                    <span class="stamp-num">06</span>
+                                    <span class="stamp-label">Strength</span>
+                                </div>
+                                <span class="stamp-description">Medium Roast</span>
+                            </div>
+
+                            <!-- Stamp 08 (Dark) -->
+                            <div class="strength-stamp-item" data-value="08/10">
+                                <input type="radio" name="strength_choice" class="strength-stamp-radio" value="08/10">
+                                <div class="stamp-circle">
+                                    <span class="stamp-num">08</span>
+                                    <span class="stamp-label">Strength</span>
+                                </div>
+                                <span class="stamp-description">Dark Roast</span>
+                            </div>
+
+                            <!-- Stamp 10 (Espresso) -->
+                            <div class="strength-stamp-item" data-value="10/10">
+                                <input type="radio" name="strength_choice" class="strength-stamp-radio" value="10/10">
+                                <div class="stamp-circle">
+                                    <span class="stamp-num">10</span>
+                                    <span class="stamp-label">Strength</span>
+                                </div>
+                                <span class="stamp-description">Espresso Roast</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: BREW / GRIND PREFERENCES CARDS -->
+                    <div class="config-section" id="grind-preferences-container">
+                        <div class="section-num-title">
+                            <span class="section-num">03</span>
+                            <h2 class="section-title-text">Select Grind Profile</h2>
+                        </div>
+                        
+                        <div class="grind-grid">
+                            <!-- Whole Beans -->
+                            <div class="grind-card selected" data-value="whole_beans" data-label="Whole Beans">
+                                <input type="radio" name="grind_choice" class="grind-card-radio" value="whole_beans" checked>
+                                <div class="grind-icon-wrapper">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                                    </svg>
+                                </div>
+                                <span class="grind-card-title">Whole Beans</span>
+                            </div>
+
+                            <!-- French Press -->
+                            <div class="grind-card" data-value="french_press" data-label="French Press">
+                                <input type="radio" name="grind_choice" class="grind-card-radio" value="french_press">
+                                <div class="grind-icon-wrapper">
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="6" y="3" width="12" height="18" rx="2"></rect>
+                                        <line x1="6" y1="8" x2="18" y2="8"></line>
+                                        <line x1="12" y1="3" x2="12" y2="21"></line>
+                                    </svg>
+                                </div>
+                                <span class="grind-card-title">French Press</span>
+                            </div>
+
+                            <!-- Drip/Pour-Over -->
+                            <div class="grind-card" data-value="drip" data-label="Filter/Drip">
+                                <input type="radio" name="grind_choice" class="grind-card-radio" value="drip">
+                                <div class="grind-icon-wrapper">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 3h14l-2 13H7L5 3z"></path>
+                                        <path d="M17 16v3a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-3"></path>
+                                    </svg>
+                                </div>
+                                <span class="grind-card-title">Filter/Drip</span>
+                            </div>
+
+                            <!-- Espresso -->
+                            <div class="grind-card" data-value="espresso" data-label="Espresso Fine">
+                                <input type="radio" name="grind_choice" class="grind-card-radio" value="espresso">
+                                <div class="grind-icon-wrapper">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M6 18H18V20H6V18Z M18 6H16V3H18V6Z M8 15V6H14V15C14 16.1 13.1 17 12 17H10C8.9 17 8 16.1 8 15Z"></path>
+                                        <path d="M14 6H19A3 3 0 0 1 22 9V11A3 3 0 0 1 19 14H14"></path>
+                                    </svg>
+                                </div>
+                                <span class="grind-card-title">Espresso</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: QUANTITY & FREQUENCY SELECTION -->
+                    <div class="config-section" id="subscription-options-container">
+                        <div class="section-num-title">
+                            <span class="section-num">04</span>
+                            <h2 class="section-title-text">Subscription Preferences</h2>
+                        </div>
+                        
+                        <div class="options-row-grid">
+                            <!-- Stepper Quantity Counter -->
+                            <div class="option-field-group">
+                                <span class="field-label-desc">Quantity (250g bags)</span>
+                                <div class="stepper-quantity-control">
+                                    <button type="button" class="stepper-btn decrement-btn" aria-label="Decrease quantity">—</button>
+                                    <input type="number" name="quantity_value" class="stepper-value-input" value="1" min="1" max="10" readonly>
+                                    <button type="button" class="stepper-btn increment-btn" aria-label="Increase quantity">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Custom Styled Select Box for Frequency -->
+                            <div class="option-field-group">
+                                <span class="field-label-desc">Delivery Frequency</span>
+                                <div class="custom-select-container" id="frequency-select-wrapper">
+                                    <div class="select-trigger-bar">
+                                        <span class="select-selected-value" id="current-frequency-display">Every Month (Standard)</span>
+                                        <svg class="select-arrow-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <ul class="select-dropdown-list">
+                                        <li data-value="weekly">Every Week</li>
+                                        <li data-value="biweekly">Every 2 Weeks</li>
+                                        <li data-value="monthly" class="selected">Every Month (Standard)</li>
+                                    </ul>
+                                    <!-- Hidden Select for native form submit -->
+                                    <select name="frequency_choice" class="native-hidden-select">
+                                        <option value="weekly">Every Week</option>
+                                        <option value="biweekly">Every 2 Weeks</option>
+                                        <option value="monthly" selected>Every Month (Standard)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: FLOATING UNDERLINE CONTACT FORM & ADDRESS -->
+                    <div class="config-section" id="customer-details-container">
+                        <div class="section-num-title">
+                            <span class="section-num">05</span>
+                            <h2 class="section-title-text">Contact & Shipping Details</h2>
+                        </div>
+                        
+                        <div class="contact-form-grid">
+                            <!-- Full Name -->
+                            <div class="floating-input-group">
+                                <input type="text" name="full_name" class="floating-input" placeholder=" " required id="input-full-name">
+                                <label class="floating-label" for="input-full-name">Full Name</label>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div class="floating-input-group">
+                                <input type="email" name="email_address" class="floating-input" placeholder=" " required id="input-email">
+                                <label class="floating-label" for="input-email">Email Address</label>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="floating-input-group">
+                                <input type="tel" name="phone_number" class="floating-input" placeholder=" " required id="input-phone">
+                                <label class="floating-label" for="input-phone">Phone Number</label>
+                            </div>
+
+                            <!-- Post Code -->
+                            <div class="floating-input-group">
+                                <input type="text" name="post_code" class="floating-input" placeholder=" " required id="input-postcode">
+                                <label class="floating-label" for="input-postcode">Post Code</label>
+                            </div>
+
+                            <!-- Detailed Shipping Address -->
+                            <div class="floating-input-group full-width-field">
+                                <textarea name="shipping_address" class="floating-textarea" placeholder=" " required id="input-address"></textarea>
+                                <label class="floating-label" for="input-address">Detailed Shipping Address</label>
+                            </div>
+
+                            <!-- Special Instructions -->
+                            <div class="floating-input-group full-width-field">
+                                <textarea name="roaster_notes" class="floating-textarea" placeholder=" " id="input-notes"></textarea>
+                                <label class="floating-label" for="input-notes">Special Instructions for the Roasters</label>
+                            </div>
+                        </div>
+
+                        <!-- Checkboxes row -->
+                        <div class="checkboxes-column">
+                            <label class="custom-checkbox-row">
+                                <input type="checkbox" name="agree_terms" class="checkbox-native-hidden" required>
+                                <div class="checkbox-visual-box">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="checkbox-label-text">I agree to join the V&V Coffee Club and accept the <a href="#">Subscription Terms</a>.</span>
+                            </label>
+
+                            <label class="custom-checkbox-row">
+                                <input type="checkbox" name="newsletter_consent" class="checkbox-native-hidden" checked>
+                                <div class="checkbox-visual-box">
+                                    <svg viewBox="0 0 24 24">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="checkbox-label-text">Send me exclusive micro-roast alerts, coffee origin logs, and catalog updates.</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- RIGHT COLUMN: THE TICKET RECEIPT & SUBMIT BAR -->
+            <section class="receipt-summary-column">
+                <div class="sticky-receipt-wrapper">
+                    
+                    <!-- THE PHYSICAL STYLE RECEIPT TICKET -->
+                    <div class="receipt-ticket">
+                        <!-- Custom grid corner decorations -->
+                        <div class="grid-intersect intersect-top-left"></div>
+                        <div class="grid-intersect intersect-top-right"></div>
+                        <div class="grid-intersect intersect-bottom-left"></div>
+                        <div class="grid-intersect intersect-bottom-right"></div>
+
+                        <div class="receipt-header">
+                            <div class="receipt-logo-mark">VIM & VIGOUR</div>
+                            <span class="receipt-subtitle">V&V Specialty Roasters</span>
+                            <div class="receipt-metadata-row">
+                                <span id="receipt-date-val">DATE: 18-05-2026</span>
+                                <span id="receipt-ticket-id">TKT: #VV-83921</span>
+                            </div>
+                        </div>
+
+                        <!-- Receipt active list items -->
+                        <div class="receipt-list">
+                            <!-- Bean origin selection -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Bean Origin</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value" id="receipt-origin-val">Tanzania</span>
+                            </div>
+
+                            <!-- Grind type selection -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Grind Profile</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value" id="receipt-grind-val">Whole Beans</span>
+                            </div>
+
+                            <!-- Roast strength chosen -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Roast Strength</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value highlight-rust" id="receipt-strength-val">06/10</span>
+                            </div>
+
+                            <!-- Quantity bags -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Quantity</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value" id="receipt-qty-val">1 Bag (250g)</span>
+                            </div>
+
+                            <!-- Delivery Frequency -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Frequency</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value" id="receipt-frequency-val">Every Month</span>
+                            </div>
+
+                            <!-- Estimated Delivery Cycle -->
+                            <div class="receipt-item">
+                                <span class="receipt-item-label">Shipping cycle</span>
+                                <span class="receipt-item-dots"></span>
+                                <span class="receipt-item-value" id="receipt-cycle-val">Immediate Roast</span>
+                            </div>
+                        </div>
+
+                        <!-- Total display block -->
+                        <div class="receipt-total-block">
+                            <span class="total-label">Total Cost</span>
+                            <span class="total-price" id="receipt-price-val">£14.50</span>
+                        </div>
+
+                        <!-- Elegant CSS stripe barcode -->
+                        <div class="receipt-barcode-wrapper">
+                            <div class="receipt-barcode"></div>
+                            <span class="barcode-digits" id="receipt-barcode-digits">4012026839215</span>
+                        </div>
+                    </div>
+
+                    <!-- SUBMIT BUTTON TARGETING FORM -->
+                    <button type="submit" form="coffee-club-form" class="submit-btn-premium" id="order-submit-btn">
+                        Place Club Order
+                        <svg viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ==========================================================================
+             BRAND FOOTER SYSTEM
+             ========================================================================== -->
+        <footer class="brand-footer">
+            <div class="grid-intersect intersect-top-left"></div>
+            <div class="grid-intersect intersect-top-right"></div>
+            
+            <div class="footer-brand-statement">
+                <span class="footer-logo-mark">Vim & Vigour</span>
+                <span>•</span>
+                <span>Getting it right since 1982</span>
+            </div>
+            
+            <div class="footer-copy">
+                Copyright © 2026 Vim & Vigour Coffee Co. All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==========================================================================
+         ORDER SUCCESS OVERLAY MODAL (ROASTING QUEUE CONFIRMATION)
+         ========================================================================== -->
+    <div class="success-overlay-container" id="success-modal-overlay">
+        <div class="success-modal">
+            <!-- Intersect decors -->
+            <div class="grid-intersect intersect-top-left"></div>
+            <div class="grid-intersect intersect-top-right"></div>
+            <div class="grid-intersect intersect-bottom-left"></div>
+            <div class="grid-intersect intersect-bottom-right"></div>
+
+            <div class="success-roasting-animation">
+                <div class="animation-circle-outer"></div>
+                <div class="animation-circle-inner">
+                    <!-- SVG Animated Check -->
+                    <svg class="success-check-svg" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <h3 class="modal-title">Roast Scheduled!</h3>
+            <p class="modal-desc">Thank you, <span id="modal-user-name" style="color: var(--color-text-white); font-weight: 600;">Customer</span>. Your V&V Coffee Club membership is now active. We are preparing our micro-roaster for your first batch.</p>
+
+            <div class="modal-ticket-details">
+                <div class="modal-detail-row">
+                    <span class="modal-detail-lbl">Membership ID:</span>
+                    <span class="modal-detail-val" id="modal-member-id">#VV-83921</span>
+                </div>
+                <div class="modal-detail-row">
+                    <span class="modal-detail-lbl">Selection:</span>
+                    <span class="modal-detail-val" id="modal-coffee-selection">Tanzania Single-Origin</span>
+                </div>
+                <div class="modal-detail-row">
+                    <span class="modal-detail-lbl">Cycle Frequency:</span>
+                    <span class="modal-detail-val" id="modal-delivery-cycle">Every Month</span>
+                </div>
+                <div class="modal-detail-row">
+                    <span class="modal-detail-lbl">First Roast Date:</span>
+                    <span class="modal-detail-val" id="modal-roast-date">Tomorrow Morning</span>
+                </div>
+            </div>
+
+            <button type="button" class="modal-close-btn" id="modal-dismiss-btn">Confirm & Exit</button>
+        </div>
+    </div>
+
+    <!-- Interactive script loading -->
+    <script src="script.js"></script>
+</body>
+</html>

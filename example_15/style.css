@@ -1,0 +1,1371 @@
+/* ==========================================================================
+   ADVANCED METAL SURFACE TECHNOLOGY INTERFACE - CORE STYLING (FORM-05)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01. DESIGN SYSTEM & ROOT VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+    /* Theme Color Palette - Derived directly from assets/sample1.jpg */
+    --tech-green: hsl(88, 32%, 58%);       /* Signature matte military olive green */
+    --tech-green-light: hsl(88, 32%, 75%); /* Muted highlights */
+    --tech-green-dark: hsl(88, 38%, 32%);  /* Deep mechanical shadows */
+    --bg-metal-gray: hsl(135, 6%, 81%);     /* Main chassis light gray */
+    --bg-metal-dark: hsl(135, 4%, 60%);     /* Structural shadow gray */
+    --bg-metal-highlight: hsl(135, 10%, 94%);/* Polished metal edges */
+    --terminal-black: hsl(135, 10%, 12%);   /* CRT Screen bezel / background */
+    --terminal-green: hsl(100, 90%, 60%);   /* Active glowing CRT green text */
+    --led-glow-blue: hsl(196, 100%, 53%);   /* Cyan active glowing lights */
+    --led-glow-red: hsl(355, 90%, 60%);     /* Error indicator alert glow */
+    --panel-border-dark: hsl(135, 8%, 40%); /* Framing borders */
+
+    /* Typography */
+    --font-tech: 'Rajdhani', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'Share Tech Mono', 'Courier New', Courier, monospace;
+
+    /* Spacing & Borders */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-norm: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base HTML */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #2b2e2b;
+    color: var(--terminal-black);
+    font-family: var(--font-tech);
+    font-weight: 500;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   02. BACKGROUND DESIGN DECALS
+   -------------------------------------------------------------------------- */
+.desktop-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 850px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.bg-decals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.tech-grid-pattern {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: 
+        radial-gradient(var(--led-glow-blue) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 20px 20px, 20px 20px;
+    opacity: 0.15;
+    transform: rotate(-5deg);
+}
+
+.ambient-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+.glow-blue {
+    background: radial-gradient(circle, var(--led-glow-blue) 0%, transparent 70%);
+    top: -10%;
+    right: -10%;
+}
+
+.glow-green {
+    background: radial-gradient(circle, var(--tech-green) 0%, transparent 70%);
+    bottom: -15%;
+    left: -10%;
+}
+
+/* --------------------------------------------------------------------------
+   03. CHASSIS FRAMEWORK & PANELS (Dual Column Grid)
+   -------------------------------------------------------------------------- */
+.tactical-rack {
+    width: 100%;
+    background-color: var(--bg-metal-gray);
+    border: 3px solid var(--bg-metal-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: 
+        0 25px 60px -15px rgba(0,0,0,0.6),
+        inset 0 1px 0 var(--bg-metal-highlight),
+        inset 0 -3px 8px rgba(0,0,0,0.25);
+    display: grid;
+    grid-template-columns: 38% 62%;
+    overflow: hidden;
+    position: relative;
+}
+
+@media (max-width: 900px) {
+    .tactical-rack {
+        grid-template-columns: 100%;
+    }
+}
+
+/* Custom Chamfer cuts for paneled blocks (Inspired by image angles) */
+.hud-rack-panel, .form-chassis-panel {
+    position: relative;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hud-rack-panel {
+    background-color: var(--bg-metal-dark);
+    border-right: 3px solid var(--panel-border-dark);
+    box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.12);
+}
+
+.form-chassis-panel {
+    background-color: var(--tech-green);
+    border-left: 2px solid var(--bg-metal-highlight);
+    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Technical Dividers */
+.tech-divider {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--panel-border-dark), transparent);
+    margin: 15px 0;
+    opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   04. LEFT PANEL: HUD / CONTROLLER ELEMENTS
+   -------------------------------------------------------------------------- */
+/* Mechanical Branding */
+.hud-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.em-logo-box {
+    width: 50px;
+    height: 50px;
+    background-color: var(--terminal-black);
+    color: var(--tech-green-light);
+    border: 3px solid var(--tech-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    box-shadow: 
+        inset 0 0 6px var(--tech-green-dark),
+        0 4px 10px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.em-logo-box::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hud-brand-text h1 {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: var(--bg-metal-highlight);
+}
+
+.hud-brand-text .hud-sub {
+    display: block;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--tech-green-light);
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.hud-brand-text .hud-date {
+    display: block;
+    font-size: 9px;
+    font-family: var(--font-mono);
+    color: var(--bg-metal-highlight);
+    letter-spacing: 0.5px;
+    opacity: 0.5;
+}
+
+/* Decals & Ruler Row */
+.hud-decal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.technical-ruler {
+    width: 60%;
+    position: relative;
+}
+
+.ruler-line {
+    height: 2px;
+    background-color: var(--panel-border-dark);
+}
+
+.ruler-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--bg-metal-highlight);
+    opacity: 0.4;
+    margin-top: 4px;
+}
+
+.vertical-label-box {
+    writing-mode: vertical-lr;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--tech-green-light);
+    opacity: 0.65;
+    padding-right: 5px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+/* Interactive Rotary Dials */
+.dial-rack {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.dial-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
+    padding: 12px 8px;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.dial-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dial-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--bg-metal-highlight);
+    text-transform: uppercase;
+}
+
+.dial-unit {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--tech-green-light);
+    opacity: 0.7;
+}
+
+.dial-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dial-plate {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #3c3f3d 0%, #151715 80%);
+    border: 3px solid #282a28;
+    box-shadow: 
+        0 6px 12px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    transform: rotate(0deg);
+    transition: transform var(--transition-fast);
+    outline: none;
+}
+
+.dial-plate:active {
+    cursor: grabbing;
+}
+
+.dial-plate:focus-visible {
+    box-shadow: 
+        0 0 0 2px var(--led-glow-blue),
+        0 6px 12px rgba(0,0,0,0.5);
+}
+
+.dial-notch {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--tech-green-light);
+    box-shadow: 0 0 4px var(--tech-green);
+    transform: translateX(-50%);
+}
+
+.dial-readout {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--led-glow-blue);
+    background-color: var(--terminal-black);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.8);
+    min-width: 50px;
+    text-align: center;
+    text-shadow: 0 0 6px rgba(0, 188, 255, 0.6);
+}
+
+/* Tech Vents Clustered Texture */
+.vent-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 15px auto;
+    width: 80%;
+}
+
+.vent-slot {
+    height: 5px;
+    background: linear-gradient(180deg, #101210 0%, #2f3330 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    border-radius: 2px;
+}
+
+/* Diagnostic Terminal Screen */
+.terminal-log-feed {
+    margin-top: auto;
+    background-color: var(--terminal-black);
+    border: 2px solid var(--panel-border-dark);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.9),
+        0 4px 12px rgba(0,0,0,0.15);
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 6px;
+}
+
+.terminal-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--terminal-green);
+    box-shadow: 0 0 6px var(--terminal-green);
+    animation: blinker 1s infinite alternate;
+}
+
+@keyframes blinker {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.terminal-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--bg-metal-highlight);
+    letter-spacing: 0.5px;
+}
+
+.terminal-screen {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    height: 90px;
+    overflow-y: auto;
+    color: var(--terminal-green);
+    text-shadow: 0 0 3px rgba(0, 255, 0, 0.4);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.terminal-screen::-webkit-scrollbar {
+    width: 4px;
+}
+
+.terminal-screen::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}
+
+.log-line {
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+
+.log-line.text-warn {
+    color: var(--led-glow-blue);
+}
+
+.log-line.text-error {
+    color: var(--led-glow-red);
+}
+
+/* --------------------------------------------------------------------------
+   05. RIGHT PANEL: MAIN CALIBRATION FORM
+   -------------------------------------------------------------------------- */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.form-title-area h2 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--terminal-black);
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.15);
+}
+
+.form-title-area .form-desc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--tech-green-dark);
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Skewed Ribbon Step Banner matching sample1.jpg green pill style */
+.skewed-step-ribbon {
+    background-color: var(--terminal-black);
+    color: var(--led-glow-blue);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 16px;
+    transform: skewX(-20deg);
+    border: 2px solid var(--led-glow-blue);
+    box-shadow: 0 0 10px rgba(0, 188, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.skewed-step-ribbon span {
+    display: inline-block;
+    transform: skewX(20deg);
+}
+
+/* Glowing Neon Tube LED (Progress bar modeled after blue pills in image) */
+.progress-glow-tube {
+    background-color: var(--tech-green-dark);
+    border: 2px solid rgba(0,0,0,0.15);
+    border-radius: 20px;
+    padding: 8px 15px 12px 15px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.tube-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--tech-green-light);
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.tube-outer {
+    height: 10px;
+    background: #1e241f;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.tube-led-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #0088cc, var(--led-glow-blue));
+    border-radius: 5px;
+    box-shadow: 0 0 12px var(--led-glow-blue);
+    position: relative;
+    transition: width var(--transition-norm);
+}
+
+.tube-led-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 5px;
+}
+
+.tube-ticks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 8px, #1e241f 8px, #1e241f 10px);
+    pointer-events: none;
+}
+
+/* Grid system for fields */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 650px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.span-2 {
+        grid-column: span 1 !important;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.span-2 {
+    grid-column: span 2;
+}
+
+.tech-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--terminal-black);
+    text-transform: uppercase;
+}
+
+.tech-label .label-code {
+    font-family: var(--font-mono);
+    color: var(--tech-green-dark);
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.helper-text {
+    font-size: 11px;
+    color: var(--tech-green-dark);
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   06. BESPOKE INTERACTIVE FORM CONTROLS
+   -------------------------------------------------------------------------- */
+
+/* Text & Password Inputs */
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--terminal-black);
+    border: 2px solid var(--tech-green-dark);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+    overflow: hidden;
+    transition: border-color var(--transition-fast);
+}
+
+.input-container input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--terminal-green);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    padding: 10px 12px;
+    letter-spacing: 1px;
+}
+
+.input-container input::placeholder {
+    color: rgba(0, 255, 0, 0.25);
+}
+
+.input-prefix {
+    font-family: var(--font-mono);
+    color: rgba(0, 255, 0, 0.4);
+    padding-left: 12px;
+    margin-right: -6px;
+    font-size: 15px;
+    user-select: none;
+}
+
+.input-focus-light {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: transparent;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-container:focus-within {
+    border-color: var(--led-glow-blue);
+}
+
+.input-container:focus-within .input-focus-light {
+    background-color: var(--led-glow-blue);
+    box-shadow: 0 0 8px var(--led-glow-blue);
+}
+
+/* Password Toggle Eyes */
+.btn-toggle-pass {
+    background: transparent;
+    border: none;
+    color: var(--tech-green-light);
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.6;
+    outline: none;
+    transition: opacity var(--transition-fast);
+}
+
+.btn-toggle-pass:hover {
+    opacity: 1;
+    color: var(--terminal-green);
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Passkey Strength Bar */
+.passkey-strength-bar {
+    height: 4px;
+    background-color: var(--tech-green-dark);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--led-glow-red);
+    transition: width var(--transition-norm), background-color var(--transition-norm);
+}
+
+/* High-Tech Custom Dropdown */
+.custom-select-box {
+    position: relative;
+    background-color: var(--terminal-black);
+    border: 2px solid var(--tech-green-dark);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+}
+
+.select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    color: var(--bg-metal-highlight);
+    font-family: var(--font-mono);
+    font-size: 14px;
+}
+
+.trigger-icon {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--tech-green-light);
+    transition: transform var(--transition-norm);
+}
+
+.custom-select-box.open {
+    border-color: var(--led-glow-blue);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.custom-select-box.open .trigger-icon {
+    transform: rotate(180deg);
+}
+
+.select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: -2px;
+    right: -2px;
+    background-color: var(--terminal-black);
+    border: 2px solid var(--led-glow-blue);
+    border-top: none;
+    border-bottom-left-radius: var(--radius-sm);
+    border-bottom-right-radius: var(--radius-sm);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    z-index: 10;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    scrollbar-width: thin;
+}
+
+.custom-select-box.open .select-dropdown {
+    display: block;
+}
+
+.select-option {
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--tech-green-light);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.select-option:last-child {
+    border-bottom: none;
+}
+
+.select-option:hover {
+    background-color: var(--tech-green-dark);
+    color: var(--bg-metal-highlight);
+}
+
+.select-option.active {
+    color: var(--led-glow-blue);
+    background-color: rgba(0, 188, 255, 0.08);
+}
+
+/* Industrial Switches/Checkboxes */
+.switches-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.cyber-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-fast);
+}
+
+.cyber-switch:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.cyber-switch input {
+    display: none;
+}
+
+.switch-slider {
+    width: 34px;
+    height: 18px;
+    background-color: var(--tech-green-dark);
+    border-radius: 9px;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    transition: background-color var(--transition-norm);
+}
+
+.switch-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--bg-metal-highlight);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    transition: transform var(--transition-norm);
+}
+
+.cyber-switch input:checked + .switch-slider {
+    background-color: var(--terminal-black);
+}
+
+.cyber-switch input:checked + .switch-slider::before {
+    transform: translateX(16px);
+    background-color: var(--led-glow-blue);
+    box-shadow: 0 0 6px var(--led-glow-blue);
+}
+
+.switch-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--terminal-black);
+}
+
+/* Target Radios (Concentric Indicators) */
+.radio-target-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.cyber-radio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(0,0,0,0.06);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.cyber-radio input {
+    display: none;
+}
+
+.radio-target {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--tech-green-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: border-color var(--transition-fast);
+}
+
+.target-center {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cyber-radio:hover .radio-target {
+    border-color: var(--terminal-black);
+}
+
+.cyber-radio input:checked + .radio-target {
+    border-color: var(--terminal-black);
+}
+
+.cyber-radio input:checked + .radio-target .target-center {
+    background-color: var(--terminal-black);
+    box-shadow: 0 0 4px var(--terminal-black);
+}
+
+/* In Hazardous level we make it glow cyan */
+.cyber-radio[title*="Hazardous"] input:checked + .radio-target {
+    border-color: var(--led-glow-blue);
+}
+.cyber-radio[title*="Hazardous"] input:checked + .radio-target .target-center {
+    background-color: var(--led-glow-blue);
+    box-shadow: 0 0 6px var(--led-glow-blue);
+}
+
+.radio-label-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--terminal-black);
+}
+
+/* High-Tech Sliders */
+.range-slide-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--terminal-black);
+    border: 2px solid var(--tech-green-dark);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+}
+
+.cyber-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #1e241f;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+}
+
+/* Webkit browser slider thumbs */
+.cyber-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--tech-green-light);
+    border: 2px solid var(--terminal-black);
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(255,255,255,0.1);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.cyber-range::-webkit-slider-thumb:hover {
+    background: var(--led-glow-blue);
+    transform: scale(1.15);
+}
+
+/* Mozilla slider thumbs */
+.cyber-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--tech-green-light);
+    border: 2px solid var(--terminal-black);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.cyber-range::-moz-range-thumb:hover {
+    background: var(--led-glow-blue);
+}
+
+.range-readout-capsule {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    background: var(--tech-green-dark);
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: var(--bg-metal-highlight);
+    min-width: 60px;
+    justify-content: center;
+}
+
+.range-number {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.range-unit {
+    font-size: 10px;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.range-calibration-ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--tech-green-dark);
+    font-weight: bold;
+}
+
+/* Terminal Textarea */
+.terminal-textarea-container {
+    background-color: var(--terminal-black);
+    border: 2px solid var(--tech-green-dark);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: border-color var(--transition-fast);
+}
+
+.textarea-terminal-header {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 6px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.terminal-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--tech-green-light);
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+}
+
+.terminal-textarea-container textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--terminal-green);
+    line-height: 1.5;
+}
+
+.textarea-focus-light {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: transparent;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.terminal-textarea-container:focus-within {
+    border-color: var(--led-glow-blue);
+}
+
+.terminal-textarea-container:focus-within .textarea-focus-light {
+    background-color: var(--led-glow-blue);
+    box-shadow: 0 0 8px var(--led-glow-blue);
+}
+
+/* --------------------------------------------------------------------------
+   07. FOOTER ACTIONS & BUTTONS
+   -------------------------------------------------------------------------- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-tactical {
+    font-family: var(--font-tech);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-reset {
+    background-color: var(--terminal-black);
+    color: var(--tech-green-light);
+    border: 2px solid var(--tech-green-dark);
+}
+
+.btn-reset:hover {
+    background-color: #232724;
+    color: var(--bg-metal-highlight);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.btn-reset:active {
+    transform: translateY(1px);
+}
+
+/* Signature Green Gloss Button modeled after sample1.jpg green overlays */
+.green-glass-btn {
+    background: linear-gradient(135deg, #aed093 0%, #87a568 100%);
+    color: var(--terminal-black);
+    border: 2px solid var(--terminal-black);
+    box-shadow: 
+        0 6px 15px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.green-glass-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+.green-glass-btn:hover {
+    background: linear-gradient(135deg, #badba0 0%, #95b675 100%);
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        0 0 12px rgba(135,165,104,0.4);
+    transform: translateY(-1px);
+}
+
+.green-glass-btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 3px 8px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-fast);
+}
+
+.green-glass-btn:hover .btn-icon {
+    transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   08. SIMULATED TACTICAL SUCCESS OVERLAY MODAL
+   -------------------------------------------------------------------------- */
+.diagnostic-overlay-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 22, 20, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-norm);
+}
+
+.diagnostic-overlay-mask.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.diagnostic-modal-card {
+    background-color: var(--bg-metal-gray);
+    border: 3px solid var(--terminal-black);
+    width: 100%;
+    max-width: 580px;
+    border-radius: var(--radius-md);
+    box-shadow: 
+        0 30px 70px rgba(0,0,0,0.8),
+        inset 0 1px 0 var(--bg-metal-highlight);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.9) translateY(20px);
+    transition: transform var(--transition-norm);
+}
+
+.diagnostic-overlay-mask.open .diagnostic-modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.modal-card-header {
+    background-color: var(--terminal-black);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--panel-border-dark);
+}
+
+.modal-indicator-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--led-glow-blue);
+    box-shadow: 0 0 10px var(--led-glow-blue);
+}
+
+.animate-pulse {
+    animation: ledPulse 1.5s infinite alternate;
+}
+
+@keyframes ledPulse {
+    0% { opacity: 0.4; box-shadow: 0 0 4px var(--led-glow-blue); }
+    100% { opacity: 1; box-shadow: 0 0 12px var(--led-glow-blue); }
+}
+
+.modal-card-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-metal-highlight);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.modal-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diagnostic-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background: rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 15px;
+    border-radius: var(--radius-sm);
+}
+
+.diagnostic-stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+    padding-bottom: 4px;
+}
+
+.diagnostic-stat-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: var(--tech-green-dark);
+}
+
+.stat-value {
+    font-weight: bold;
+    color: var(--terminal-black);
+}
+
+.stat-value.text-green {
+    color: hsl(120, 50%, 30%);
+}
+
+.stat-value.text-blue {
+    color: hsl(200, 70%, 40%);
+}
+
+/* Diagnostic Console CRT box */
+.diagnostic-terminal-box {
+    background-color: var(--terminal-black);
+    border: 2px solid var(--panel-border-dark);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.9);
+}
+
+.diagnostic-terminal-head {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--bg-metal-highlight);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.diagnostic-log-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--terminal-green);
+    text-shadow: 0 0 3px rgba(0,255,0,0.3);
+    white-space: pre-wrap;
+    height: 110px;
+    overflow-y: auto;
+}
+
+.modal-card-footer {
+    padding: 16px 24px;
+    background-color: var(--bg-metal-dark);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 2px solid var(--panel-border-dark);
+}

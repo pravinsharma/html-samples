@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Metal Surface Technology Interface — Form-05</title>
+    <!-- Google Fonts: Rajdhani for bold technical elements, Share Tech Mono for terminal feeds -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="desktop-wrapper">
+        <!-- Background tech decal grids & overlays -->
+        <div class="bg-decals" aria-hidden="true">
+            <div class="tech-grid-pattern"></div>
+            <div class="ambient-glow glow-blue"></div>
+            <div class="ambient-glow glow-green"></div>
+        </div>
+
+        <main class="tactical-rack">
+            <!-- LEFT PANEL: HUD CONTROLLER & DIAGNOSTICS (Inspired by Left and Bottom portions of sample1.jpg) -->
+            <section class="hud-rack-panel" aria-label="System Telemetry Feed">
+                <!-- Mechanical branding header -->
+                <header class="hud-header">
+                    <div class="em-logo-box">
+                        <div class="em-logo-symbol">EM</div>
+                    </div>
+                    <div class="hud-brand-text">
+                        <h1>Game Emulate</h1>
+                        <span class="hud-sub">AND Advanced metal surface Technology Interface</span>
+                        <span class="hud-date">EST. 2024 // PROTOCOL 05</span>
+                    </div>
+                </header>
+
+                <hr class="tech-divider">
+
+                <!-- Tech decals & vertical ruler -->
+                <div class="hud-decal-row">
+                    <div class="technical-ruler">
+                        <div class="ruler-line"></div>
+                        <div class="ruler-ticks">
+                            <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+                        </div>
+                    </div>
+                    <div class="vertical-label-box">
+                        <span class="vertical-label">AESTHETIC MISTAKES</span>
+                    </div>
+                </div>
+
+                <!-- ROTARY DIALS: Interactive knobs spun by user to update form values (Inspired by large black dials in sample1.jpg) -->
+                <div class="dial-rack">
+                    <div class="dial-container" id="dial-freq-container" title="Drag or scroll to adjust CPU Frequency">
+                        <div class="dial-header">
+                            <span class="dial-title">CORE FREQUENCY</span>
+                            <span class="dial-unit">MHz</span>
+                        </div>
+                        <div class="dial-wrapper">
+                            <div class="dial-plate" id="dial-frequency" tabindex="0" role="slider" aria-valuenow="400" aria-valuemin="100" aria-valuemax="800">
+                                <div class="dial-notch"></div>
+                            </div>
+                            <div class="dial-ticks"></div>
+                        </div>
+                        <div class="dial-readout" id="readout-frequency">400</div>
+                    </div>
+
+                    <div class="dial-container" id="dial-volt-container" title="Drag or scroll to adjust Core Voltage">
+                        <div class="dial-header">
+                            <span class="dial-title">VOLTAGE FLUX</span>
+                            <span class="dial-unit">Volts</span>
+                        </div>
+                        <div class="dial-wrapper">
+                            <div class="dial-plate" id="dial-voltage" tabindex="0" role="slider" aria-valuenow="1.20" aria-valuemin="0.80" aria-valuemax="1.80">
+                                <div class="dial-notch"></div>
+                            </div>
+                            <div class="dial-ticks"></div>
+                        </div>
+                        <div class="dial-readout" id="readout-voltage">1.20</div>
+                    </div>
+                </div>
+
+                <!-- Repeating military vents gradient matching the visual texture of sample1.jpg -->
+                <div class="vent-cluster" aria-hidden="true">
+                    <div class="vent-slot"></div>
+                    <div class="vent-slot"></div>
+                    <div class="vent-slot"></div>
+                    <div class="vent-slot"></div>
+                </div>
+
+                <!-- Real-time Live Log Feed (Simulated cockpit diagnostics telemetry) -->
+                <div class="terminal-log-feed">
+                    <div class="terminal-header">
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-title">DIAGNOSTIC TERMINAL LOG</span>
+                    </div>
+                    <div class="terminal-screen" id="log-screen">
+                        <div class="log-line text-system">[SYS] Engine standby. Awaiting interface calibration.</div>
+                        <div class="log-line text-system">[SYS] Synth synthesizer ready. (Audio Enabled).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: INTERFACE FORM PANEL (Form chassis displaying standard/custom controls) -->
+            <section class="form-chassis-panel" aria-label="System Configuration Form">
+                <header class="form-header">
+                    <div class="form-title-area">
+                        <h2>INTERFACE CALIBRATION</h2>
+                        <span class="form-desc">FORM PROTOCOL SYSTEM // CORE REGISTER</span>
+                    </div>
+                    <div class="skewed-step-ribbon">
+                        <span>CALIBRATING</span>
+                    </div>
+                </header>
+
+                <!-- Glowing Blue Tube LED indicator, acts as Form Progress Bar (Inspired by blue glowing pills in sample1.jpg) -->
+                <div class="progress-glow-tube" title="Configuration Completion Status">
+                    <div class="tube-label">INTEGRATION INDEX: <span id="progress-text">20%</span></div>
+                    <div class="tube-outer">
+                        <div class="tube-led-bar" id="progress-led-bar" style="width: 20%;"></div>
+                        <div class="tube-ticks"></div>
+                    </div>
+                </div>
+
+                <form class="calibration-form" id="calibration-form" onsubmit="event.preventDefault();">
+                    <!-- GRID CONTAINER FOR FIELDS -->
+                    <div class="form-grid">
+                        
+                        <!-- FIELD 1: Username/Sign Text Input -->
+                        <div class="form-group span-2">
+                            <label for="input-sig" class="tech-label">
+                                <span class="label-code">01/</span> SYSTEM SIGNATURE CODENAME
+                            </label>
+                            <div class="input-container text-input-box">
+                                <span class="input-prefix">PILOT-</span>
+                                <input type="text" id="input-sig" placeholder="SHARMA-2026" required value="SHARMA-2026" autocomplete="off">
+                                <span class="input-focus-light"></span>
+                            </div>
+                            <span class="helper-text">Enter unique operator credential string.</span>
+                        </div>
+
+                        <!-- FIELD 2: Password/Key Text Input with Strength indicator -->
+                        <div class="form-group span-2">
+                            <label for="input-passkey" class="tech-label">
+                                <span class="label-code">02/</span> SECURE COCKPIT PASSKEY
+                            </label>
+                            <div class="input-container text-input-box">
+                                <input type="password" id="input-passkey" placeholder="••••••••••••" required autocomplete="current-password">
+                                <button type="button" class="btn-toggle-pass" id="btn-toggle-pass" title="Toggle visibility">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                </button>
+                                <span class="input-focus-light"></span>
+                            </div>
+                            <div class="passkey-strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                        </div>
+
+                        <!-- FIELD 3: Subsystem Activation (High-Tech Checkboxes) -->
+                        <div class="form-group span-2">
+                            <span class="tech-label">
+                                <span class="label-code">03/</span> SUBSYSTEM ACTIVATION SWITCHES
+                            </span>
+                            <div class="switches-grid">
+                                <!-- Checkbox 1 -->
+                                <label class="cyber-switch" title="Toggle Telemetry Stream">
+                                    <input type="checkbox" id="check-telemetry" checked>
+                                    <span class="switch-slider"></span>
+                                    <span class="switch-label">TELEMETRY STREAM</span>
+                                </label>
+                                <!-- Checkbox 2 -->
+                                <label class="cyber-switch" title="Toggle Synthetic Audio Cues">
+                                    <input type="checkbox" id="check-audio" checked>
+                                    <span class="switch-slider"></span>
+                                    <span class="switch-label">SYNTH AUDIBLE CUES</span>
+                                </label>
+                                <!-- Checkbox 3 -->
+                                <label class="cyber-switch" title="Bypass Safety Governor Limits">
+                                    <input type="checkbox" id="check-bypass">
+                                    <span class="switch-slider"></span>
+                                    <span class="switch-label">OVERCLOCK BYPASS</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- FIELD 4: Select/Core Engine Target (Diagonal Sci-Fi Custom Dropdown) -->
+                        <div class="form-group span-2">
+                            <label for="select-core-value" class="tech-label">
+                                <span class="label-code">04/</span> EMULATOR ENGINE HOST CORE
+                            </label>
+                            <div class="custom-select-box" id="core-selector">
+                                <input type="hidden" id="select-core-value" value="alpha" name="engine-core">
+                                <div class="select-trigger" id="select-trigger" tabindex="0">
+                                    <span class="trigger-text">Core-Alpha (System Hub)</span>
+                                    <span class="trigger-icon"></span>
+                                </div>
+                                <ul class="select-dropdown" id="select-dropdown">
+                                    <li class="select-option active" data-value="alpha">Core-Alpha (System Hub)</li>
+                                    <li class="select-option" data-value="beta">Core-Beta (Distributed Node)</li>
+                                    <li class="select-option" data-value="gamma">Core-Gamma (Direct GPU Bypass)</li>
+                                    <li class="select-option" data-value="delta">Core-Delta (Quantized Engine)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- FIELD 5: Radio Buttons (Concentric Target Indicators from sample1.jpg) -->
+                        <div class="form-group span-2">
+                            <span class="tech-label">
+                                <span class="label-code">05/</span> OPERATIONAL POWER INTEGRITY LEVEL
+                            </span>
+                            <div class="radio-target-grid">
+                                <label class="cyber-radio" title="Low Voltage ECO Mode">
+                                    <input type="radio" name="power-level" value="eco" checked>
+                                    <span class="radio-target">
+                                        <span class="target-center"></span>
+                                    </span>
+                                    <span class="radio-label-text">ECO EFFICIENCY</span>
+                                </label>
+
+                                <label class="cyber-radio" title="Standard Calibrated Mode">
+                                    <input type="radio" name="power-level" value="standard">
+                                    <span class="radio-target">
+                                        <span class="target-center"></span>
+                                    </span>
+                                    <span class="radio-label-text">BALANCED CORE</span>
+                                </label>
+
+                                <label class="cyber-radio" title="Extreme High Voltage Mode">
+                                    <input type="radio" name="power-level" value="overclock">
+                                    <span class="radio-target">
+                                        <span class="target-center"></span>
+                                    </span>
+                                    <span class="radio-label-text">HAZARDOUS RUNTIME</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- FIELD 6: Slider Range Memory Core -->
+                        <div class="form-group span-2">
+                            <label for="range-memory" class="tech-label">
+                                <span class="label-code">06/</span> RESERVED TELEMETRY BUFFER LIMIT
+                            </label>
+                            <div class="range-slide-container">
+                                <input type="range" id="range-memory" min="1" max="32" value="16" class="cyber-range">
+                                <div class="range-readout-capsule">
+                                    <span class="range-number" id="readout-memory">16</span>
+                                    <span class="range-unit">GB</span>
+                                </div>
+                            </div>
+                            <div class="range-calibration-ticks">
+                                <span>1G</span><span>8G</span><span>16G</span><span>24G</span><span>32G</span>
+                            </div>
+                        </div>
+
+                        <!-- FIELD 7: Textarea manifest extensions -->
+                        <div class="form-group span-2">
+                            <label for="area-manifest" class="tech-label">
+                                <span class="label-code">07/</span> CUSTOM MANIFEST INITIALIZATION STRINGS
+                            </label>
+                            <div class="terminal-textarea-container">
+                                <div class="textarea-terminal-header">
+                                    <span class="terminal-tag">YAML TELEMETRY FORMAT</span>
+                                </div>
+                                <textarea id="area-manifest" placeholder="# Add environment arguments here&#10;sys_overclock: false&#10;telemetry_log_rate: 250ms"></textarea>
+                                <span class="textarea-focus-light"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER ACTIONS: Heavy mechanical reset and green glossy activation button -->
+                    <footer class="form-actions">
+                        <button type="button" class="btn-tactical btn-reset" id="btn-purge-protocol" title="Reset all calibrations">
+                            <span class="btn-text">PURGE / RESET</span>
+                        </button>
+                        <button type="submit" class="btn-tactical btn-activate green-glass-btn" id="btn-execute-protocol" title="Compile and Execute Telemetry config">
+                            <span class="btn-text">INITIALIZE EMULATION ENGINE</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="btn-icon">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </footer>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- SIMULATED BOOT DIAGNOSTIC SUCCESS OVERLAY DIALOG -->
+    <div id="calibration-overlay" class="diagnostic-overlay-mask" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="diagnostic-modal-card">
+            <header class="modal-card-header">
+                <div class="modal-indicator-circle animate-pulse"></div>
+                <h3 id="modal-title">CORE INTEGRATION COMPLETED</h3>
+            </header>
+            <div class="modal-card-body">
+                <div class="diagnostic-grid">
+                    <div class="diagnostic-stat-row">
+                        <span class="stat-label">SIGNATURE ID:</span>
+                        <span class="stat-value text-green" id="diag-sig">SHARMA-2026</span>
+                    </div>
+                    <div class="diagnostic-stat-row">
+                        <span class="stat-label">HOST TARGET CORE:</span>
+                        <span class="stat-value text-blue" id="diag-core">Core-Alpha</span>
+                    </div>
+                    <div class="diagnostic-stat-row">
+                        <span class="stat-label">CALIBRATED FREQ:</span>
+                        <span class="stat-value" id="diag-freq">400 MHz</span>
+                    </div>
+                    <div class="diagnostic-stat-row">
+                        <span class="stat-label">CORE VOLTAGE:</span>
+                        <span class="stat-value" id="diag-volt">1.20 V</span>
+                    </div>
+                    <div class="diagnostic-stat-row">
+                        <span class="stat-label">MEMORY LIMIT:</span>
+                        <span class="stat-value" id="diag-mem">16 GB</span>
+                    </div>
+                </div>
+
+                <div class="diagnostic-terminal-box">
+                    <div class="diagnostic-terminal-head">TELEMETRY COMPILE LOG</div>
+                    <pre class="diagnostic-log-text" id="modal-log-screen">
+[TELEMETRY] Starting telemetry manifest compilation...
+[TELEMETRY] Encoding active configuration vectors...
+[TELEMETRY] Loading boot arguments into core host registry...
+[SUCCESS] Engine initialized successfully! Status code: 0x00
+                    </pre>
+                </div>
+            </div>
+            <footer class="modal-card-footer">
+                <button type="button" class="btn-tactical btn-reset" id="btn-close-overlay">DISMISS PROTOCOL</button>
+                <button type="button" class="btn-tactical btn-activate green-glass-btn" id="btn-download-config">
+                    DOWNLOAD TELEMETRY MANIFEST
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Audio Element or fallback Synth triggers handled in script.js -->
+    <script src="script.js"></script>
+</body>
+</html>

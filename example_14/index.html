@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Dark Skeuomorphic Smart Cabin — Example 14</title>
+    <meta name="description" content="A state-of-the-art dark skeuomorphic cockpit and home automation panel designed based on ultra-tactile glass-plastic controls with realistic rotating dials, tactile secure PIN pad, range sliders, and active status display.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Ambient glowing studio decorative elements -->
+    <div class="ambient-glow glow-gold" id="ambientGold"></div>
+    <div class="ambient-glow glow-cyan" id="ambientCyan"></div>
+
+    <div class="studio-reflection-floor"></div>
+
+    <div class="dashboard-viewport">
+        <!-- Main Extruded Neumorphic Dark Plate -->
+        <main class="control-center" id="cabinConsole">
+            
+            <!-- 1. HEADER: Branding, Status, Dropdown Select -->
+            <header class="control-header">
+                <div class="header-logo-group">
+                    <span class="logo-dot-pulse"></span>
+                    <div>
+                        <h1 class="logo-title">AETHER COCKPIT</h1>
+                        <p class="logo-subtitle">TACTILE DARK CONSOLE V2.4</p>
+                    </div>
+                </div>
+
+                <!-- Sunken Status Badge -->
+                <div class="status-badge-sunken">
+                    <span class="status-pill active" id="systemStatusPill">SECURED</span>
+                </div>
+
+                <!-- Custom Profile Dropdown -->
+                <div class="dropdown-wrapper">
+                    <button class="dropdown-trigger-btn" id="profileDropdownBtn" aria-expanded="false" aria-haspopup="listbox">
+                        <span id="activeDropdownProfile">PROVENANCE DECK</span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <ul class="dropdown-menu-list" id="profileDropdownMenu" role="listbox" aria-label="Operating Profiles">
+                        <li class="dropdown-item active" role="option" data-profile="provenance" aria-selected="true">
+                            <span>PROVENANCE DECK</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3.5" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                        <li class="dropdown-item" role="option" data-profile="apex" aria-selected="false">
+                            <span>APEX RACING</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3.5" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                        <li class="dropdown-item" role="option" data-profile="nebula" aria-selected="false">
+                            <span>NEBULA TOURING</span>
+                            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3.5" fill="none" class="check-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- 2. MAIN COCKPIT GRID -->
+            <div class="control-grid">
+                
+                <!-- COLUMN A: TACTILE CONTROLS & SECURITY FORM -->
+                <section class="grid-column col-left">
+                    
+                    <!-- Neumorphic Plate: The Dial Control Console (Ref. sample1.webp) -->
+                    <div class="neumorphic-card raised-card" id="dialConsoleCard">
+                        <div class="card-header">
+                            <h2 class="card-title">ATMOSPHERE CONSOLE</h2>
+                            <p class="card-subtitle">INTERACTIVE ROTARY CLIMATE ENGINE</p>
+                        </div>
+                        
+                        <div class="dial-console-wrapper">
+                            <!-- Large Dial Assembly -->
+                            <div class="dial-assembly" id="climateDialAssembly">
+                                <!-- Outer recessed tray/groove -->
+                                <div class="dial-tray-sunken">
+                                    <!-- Rotating outer wheel with bevels -->
+                                    <div class="dial-wheel-raised" id="rotaryDialWheel">
+                                        <!-- White Capsule Indicator Dash at top -->
+                                        <div class="dial-indicator-cap"></div>
+                                    </div>
+                                    
+                                    <!-- Central deeply-recessed toggle button (lock/unlock) -->
+                                    <button class="dial-center-recessed" id="btnSystemLockToggle" aria-label="Toggle Deck Security System" aria-pressed="true">
+                                        <!-- Lock/Unlock Split Graphic -->
+                                        <div class="lock-split-icons">
+                                            <!-- Closed Lock Icon -->
+                                            <svg class="lock-icon-svg icon-locked active" id="svgLocked" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                                <circle cx="12" cy="16" r="1.5"></circle>
+                                            </svg>
+                                            
+                                            <!-- Vertical Divider Line -->
+                                            <div class="lock-divider-line"></div>
+                                            
+                                            <!-- Open Lock Icon -->
+                                            <svg class="lock-icon-svg icon-unlocked" id="svgUnlocked" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                                <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                                                <circle cx="12" cy="16" r="1.5"></circle>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Three bottom tactile buttons identical to sample1.webp -->
+                            <div class="bottom-controls-row">
+                                <!-- Button 1: Climate (Cloud Icon) -->
+                                <button class="tactile-circle-btn" id="btnClimateMode" aria-label="Cycle Climate Profile" title="Cycle Climate Profile">
+                                    <svg class="tactile-btn-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                                    </svg>
+                                </button>
+
+                                <!-- Button 2: Fan Speed (Wind Icon) -->
+                                <button class="tactile-circle-btn" id="btnFanSpeed" aria-label="Cycle Fan Blower Speed" title="Cycle Fan Blower Speed">
+                                    <svg class="tactile-btn-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                                    </svg>
+                                </button>
+
+                                <!-- Button 3: Display Brightness (Sun Icon) -->
+                                <button class="tactile-circle-btn" id="btnPanelBrightness" aria-label="Cycle Screen Luminance" title="Cycle Screen Luminance">
+                                    <svg class="tactile-btn-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Neumorphic Plate: Operator Profile & Keypad Form -->
+                    <div class="neumorphic-card raised-card" id="securityFormCard">
+                        <div class="card-header">
+                            <h2 class="card-title">CREDENTIAL VALIDATION</h2>
+                            <p class="card-subtitle">TACTILE PIN SECURITY SYNC</p>
+                        </div>
+
+                        <form id="cockpitForm" class="card-form" onsubmit="return false;" novalidate>
+                            <!-- Profile Input (Sunken Field) -->
+                            <div class="form-group">
+                                <label for="operatorName" class="group-label">CABIN OPERATOR IDENTIFIER</label>
+                                <div class="input-sunken-wrap" id="operatorNameWrap">
+                                    <svg class="input-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <input type="text" id="operatorName" class="tactile-input" placeholder="ENTER IDENTIFIER..." autocomplete="off" required value="PILOT ELITE">
+                                    <span class="status-indicator" id="nameStatus"></span>
+                                </div>
+                                <span class="validation-message" id="nameError"></span>
+                            </div>
+
+                            <!-- Sunken PIN Slots Display -->
+                            <div class="form-group">
+                                <label class="group-label">SECURE 4-DIGIT DECK PIN</label>
+                                <div class="pin-display-row">
+                                    <div class="pin-slot-sunken" data-index="0"><span class="pin-dot"></span></div>
+                                    <div class="pin-slot-sunken" data-index="1"><span class="pin-dot"></span></div>
+                                    <div class="pin-slot-sunken" data-index="2"><span class="pin-dot"></span></div>
+                                    <div class="pin-slot-sunken" data-index="3"><span class="pin-dot"></span></div>
+                                </div>
+                                <span class="validation-message text-center" id="pinError"></span>
+                            </div>
+
+                            <!-- Skeuomorphic Physical Keypad Grid -->
+                            <div class="physical-keypad">
+                                <button type="button" class="keypad-btn btn-number" data-value="1">1</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="2">2</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="3">3</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="4">4</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="5">5</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="6">6</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="7">7</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="8">8</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="9">9</button>
+                                <button type="button" class="keypad-btn btn-action" id="keyClear" aria-label="Clear PIN">CLR</button>
+                                <button type="button" class="keypad-btn btn-number" data-value="0">0</button>
+                                <button type="button" class="keypad-btn btn-action" id="keyBack" aria-label="Backspace PIN">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </section>
+                
+                <!-- COLUMN B: OLED SCREEN & COCKPIT ATMOSPHERE -->
+                <section class="grid-column col-right">
+                    
+                    <!-- Premium Cyber OLED Screen Panel -->
+                    <div class="oled-screen-bezel">
+                        <div class="oled-screen-plate" id="oledDisplayPanel">
+                            <div class="oled-screen-glare"></div>
+                            
+                            <div class="oled-header">
+                                <div class="oled-status-pill">
+                                    <span class="pulse-dot"></span>
+                                    <span class="status-lbl">COCKPIT LIVE LINK</span>
+                                </div>
+                                <span class="oled-clock" id="oledClock">21:59:12</span>
+                            </div>
+
+                            <div class="oled-grid">
+                                <div class="oled-cell">
+                                    <span class="cell-label">DECK STATE</span>
+                                    <span class="cell-val text-red" id="oledSystemState">SECURED</span>
+                                </div>
+                                <div class="oled-cell">
+                                    <span class="cell-label">OPERATOR</span>
+                                    <span class="cell-val" id="oledOperatorName">PILOT ELITE</span>
+                                </div>
+                                <div class="oled-cell">
+                                    <span class="cell-label">TARGET CLIMATE</span>
+                                    <span class="cell-val text-gold" id="oledTargetTemp">22.0°C</span>
+                                </div>
+                                <div class="oled-cell">
+                                    <span class="cell-label">CLIMATE MODE</span>
+                                    <span class="cell-val" id="oledClimateMode">AUTO COMFORT</span>
+                                </div>
+                                <div class="oled-cell">
+                                    <span class="cell-label">FAN VOLTAGE</span>
+                                    <span class="cell-val" id="oledFanSpeed">MEDIUM (LEVEL 2)</span>
+                                </div>
+                                <div class="oled-cell">
+                                    <span class="cell-label">LUMINANCE</span>
+                                    <span class="cell-val" id="oledBrightness">MAX BRIGHT (80%)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="oled-footer">
+                                <span class="footer-segment">NODE: CONSOLE-14</span>
+                                <span class="footer-segment text-cyan" id="oledFooterStatus">SYSTEM LOCKED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Neumorphic Plate: Cabin Atmosphere Control Sliders & Rockers -->
+                    <div class="neumorphic-card raised-card inner-card-block" id="atmosphereSlidersCard">
+                        <h3 class="section-card-title">ATMOSPHERE EXTRACTION</h3>
+
+                        <!-- Sunken Slider Group: Ambient Glow Theme Selector -->
+                        <div class="slider-group">
+                            <div class="slider-header-info">
+                                <span class="slider-label-main">AMBIENT LED FREQUENCY</span>
+                                <span class="slider-percentage-val" id="ambientSliderVal">45%</span>
+                            </div>
+                            <!-- Sunken track containing the input -->
+                            <div class="sunken-slider-track">
+                                <!-- Gradient Active Ribbon Fill -->
+                                <div class="slider-gradient-fill" id="ambientSliderFill" style="width: 45%;"></div>
+                                <input type="range" id="ambientSlider" min="0" max="100" value="45" class="neumorphic-range" aria-label="Ambient LED Frequency">
+                            </div>
+                            <div class="slider-footer-labels">
+                                <span class="footer-lbl-sub">SPECTRUM MODULATOR</span>
+                                <span class="footer-lbl-sub text-right" id="ambientColorName">CYBER CYAN</span>
+                            </div>
+                        </div>
+
+                        <!-- System Toggles & Binary Selector Plates -->
+                        <div class="toggles-flex-grid">
+                            
+                            <!-- Toggle Switch 1: Cabin Ionizer -->
+                            <div class="tactile-rocker-wrapper">
+                                <span class="rocker-label">CABIN IONIZER</span>
+                                <button class="rocker-switch" id="toggleIonizer" aria-pressed="true" aria-label="Toggle Cabin Ionizer">
+                                    <span class="rocker-bar"></span>
+                                    <span class="rocker-text">ON</span>
+                                </button>
+                            </div>
+
+                            <!-- Toggle Switch 2: Recirculation -->
+                            <div class="tactile-rocker-wrapper">
+                                <span class="rocker-label">CLIMATE ECO SYNC</span>
+                                <button class="rocker-switch active" id="toggleRecirc" aria-pressed="true" aria-label="Toggle Climate Eco Sync">
+                                    <span class="rocker-bar"></span>
+                                    <span class="rocker-text">ACTIVE</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- System Confirmation and Action Plates -->
+                    <div class="system-actions-group">
+                        <!-- Primary Glow-Amber Action Button -->
+                        <button type="button" class="action-btn btn-apply" id="btnApplySettings">
+                            <span class="btn-highlight-gloss"></span>
+                            <span class="btn-text">APPLY ACTIVE PROFILE</span>
+                        </button>
+                        
+                        <!-- Sunken Deck Purge Button -->
+                        <button type="button" class="action-btn btn-purge" id="btnPurgeDeck">
+                            <span class="btn-highlight-gloss"></span>
+                            <span class="btn-text">EMERGENCY DECK PURGE</span>
+                        </button>
+                    </div>
+
+                </section>
+            </div>
+
+            <!-- 3. LIVE LOGGER PANEL: Event output stream -->
+            <section class="live-logger-wrap" aria-live="polite">
+                <div class="logger-header">
+                    <span class="logger-status-bullet"></span>
+                    <span class="logger-title">COCKPIT ENGINE TELEMETRY & AUDIT SYSTEM</span>
+                </div>
+                <div class="logger-output-container" id="logConsole">
+                    <div class="log-line text-info">&gt; Aether Cockpit Control Panel initialized. Theme matched to assets/sample1.webp.</div>
+                    <div class="log-line text-info">&gt; Security Node Online. Current status: SECURED. Input 4-Digit PIN to unlock console deck.</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Overlay -->
+    <div id="toastContainer" class="toast-overlay" aria-live="assertive"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
