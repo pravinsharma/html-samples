@@ -362,8 +362,27 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   DEBOSSED SELECT DROPDOWN (SELECT CITY)
+   DEBOSSED SELECT DROPDOWN (CUSTOM STYLED DROPDOWN OPTIONS LIST)
    -------------------------------------------------------------------------- */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.selected-option-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
 .debossed-select-wrapper {
     position: relative;
     width: 100%;
@@ -371,25 +390,10 @@ body {
     align-items: center;
     background-color: #ebf0ec;
     border-radius: 12px;
+    padding: 11px 12px;
     box-shadow: 
         inset 2px 2px 5px rgba(0, 0, 0, 0.06), 
         inset -2px -2px 5px #ffffff;
-}
-
-.debossed-select-wrapper select {
-    width: 100%;
-    border: none;
-    background: transparent;
-    font-family: var(--font-sans);
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--text-dark);
-    padding: 11px 12px;
-    padding-right: 32px;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
 }
 
 .debossed-select-wrapper::after {
@@ -399,6 +403,57 @@ body {
     right: 12px;
     color: var(--text-muted);
     pointer-events: none;
+    transition: transform 0.25s ease;
+}
+
+.custom-select-container.open .debossed-select-wrapper::after {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background-color: #ebf0ec;
+    border-radius: 12px;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.08), 
+        inset 1px 1px 1px #ffffff,
+        inset -1px -1px 2px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    display: none;
+    flex-direction: column;
+    z-index: 99;
+}
+
+.custom-select-container.open .custom-select-options {
+    display: flex;
+}
+
+.custom-select-options li {
+    padding: 10.5px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.custom-select-options li:hover {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: var(--primary-green);
+    font-weight: 700;
+}
+
+.custom-select-options li.selected {
+    background-color: rgba(34, 197, 94, 0.18);
+    color: var(--primary-green);
+    font-weight: 700;
 }
 
 /* Hide label in visual representation for active city dropdown */

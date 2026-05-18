@@ -104,15 +104,18 @@
                         <p>Provide your scholastic achievements.</p>
                     </div>
                     <div class="form-group-debossed">
-                        <label for="degree">Highest Degree Earned</label>
-                        <div class="debossed-select-wrapper">
-                            <select id="degree" name="degree">
-                                <option value="" disabled selected>Choose Degree...</option>
-                                <option value="phd">Doctorate (PhD)</option>
-                                <option value="masters">Master's Degree</option>
-                                <option value="bachelors">Bachelor's Degree</option>
-                                <option value="diploma">High School Diploma</option>
-                            </select>
+                        <label>Highest Degree Earned</label>
+                        <div class="custom-select-container" id="degree-custom-select">
+                            <div class="debossed-select-wrapper custom-select-trigger">
+                                <span class="selected-option-label">Choose Degree...</span>
+                            </div>
+                            <ul class="custom-select-options">
+                                <li data-value="phd">Doctorate (PhD)</li>
+                                <li data-value="masters">Master's Degree</li>
+                                <li data-value="bachelors">Bachelor's Degree</li>
+                                <li data-value="diploma">High School Diploma</li>
+                            </ul>
+                            <input type="hidden" name="degree" id="degree" value="" required>
                         </div>
                     </div>
                     <div class="form-group-debossed">
@@ -148,16 +151,19 @@
 
                     <!-- Debossed Inset Select Dropdown matching 'Select City' in image -->
                     <div class="form-group-debossed select-group">
-                        <label for="city" class="hidden-label">Workspace Hub City</label>
-                        <div class="debossed-select-wrapper">
-                            <select id="city" name="city" required>
-                                <option value="" disabled selected>Select City</option>
-                                <option value="sf">San Francisco</option>
-                                <option value="ny">New York</option>
-                                <option value="ldn">London</option>
-                                <option value="tky">Tokyo</option>
-                                <option value="ber">Berlin</option>
-                            </select>
+                        <label class="hidden-label">Workspace Hub City</label>
+                        <div class="custom-select-container" id="city-custom-select">
+                            <div class="debossed-select-wrapper custom-select-trigger">
+                                <span class="selected-option-label">Select City</span>
+                            </div>
+                            <ul class="custom-select-options">
+                                <li data-value="sf">San Francisco</li>
+                                <li data-value="ny">New York</li>
+                                <li data-value="ldn">London</li>
+                                <li data-value="tky">Tokyo</li>
+                                <li data-value="ber">Berlin</li>
+                            </ul>
+                            <input type="hidden" name="city" id="city" value="" required>
                         </div>
                     </div>
                 </div>

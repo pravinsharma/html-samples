@@ -9,6 +9,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalSteps = 4;
     let activeStep = 3; // Initialize at Step 3 to EXACTLY match the sample1.jpg state!
 
+    // ----------------------------------------------------------------------
+    // 0. CUSTOM DROPDOWN COMPONENT INITIALIZER
+    // ----------------------------------------------------------------------
+    const customSelects = document.querySelectorAll('.custom-select-container');
+    
+    customSelects.forEach(container => {
+        const trigger = container.querySelector('.custom-select-trigger');
+        const triggerLabel = container.querySelector('.selected-option-label');
+        const optionsList = container.querySelector('.custom-select-options');
+        const hiddenInput = container.querySelector('input[type="hidden"]');
+        const options = container.querySelectorAll('.custom-select-options li');
+
+        // Toggle open list
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Close other open dropdowns
+            customSelects.forEach(other => {
+                if (other !== container) other.classList.remove('open');
+            });
+            
+            container.classList.toggle('open');
+        });
+
+        // Click Option
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                const val = opt.getAttribute('data-value');
+                const labelText = opt.textContent;
+
+                // Update input & trigger label
+                hiddenInput.value = val;
+                triggerLabel.textContent = labelText;
+
+                // Sync active option class
+                options.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+
+                // Close dropdown
+                container.classList.remove('open');
+                
+                // Trigger native-like validation update (clear any validation errors)
+                hiddenInput.dispatchEvent(new Event('input'));
+            });
+        });
+    });
+
+    // Close any open dropdowns if clicked anywhere else on document
+    document.addEventListener('click', () => {
+        customSelects.forEach(c => c.classList.remove('open'));
+    });
+
     // DOM Elements
     const stepNodes = [
         document.getElementById('step-node-1'),
@@ -111,10 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
         sumName.textContent = nameVal ? nameVal : 'Not provided';
 
         // City
-        const citySelect = document.getElementById('city');
-        if (citySelect && citySelect.selectedIndex >= 0) {
-            const chosenCity = citySelect.options[citySelect.selectedIndex].text;
-            sumCity.textContent = chosenCity !== 'Select City' ? chosenCity : 'None chosen';
+        const cityInput = document.getElementById('city');
+        const cityMap = {
+            'sf': 'San Francisco',
+            'ny': 'New York',
+            'ldn': 'London',
+            'tky': 'Tokyo',
+            'ber': 'Berlin'
+        };
+        if (cityInput && cityInput.value) {
+            sumCity.textContent = cityMap[cityInput.value] || 'None chosen';
         } else {
             sumCity.textContent = 'None chosen';
         }
@@ -209,14 +269,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: formData.get('email') || "pravin@domain.com"
             },
             academicProfile: {
-                degreeEarned: formData.get('degree') || "None chosen",
+                degreeEarned: (() => {
+                    const degreeMap = {
+                        'phd': 'Doctorate (PhD)',
+                        'masters': 'Master\'s Degree',
+                        'bachelors': 'Bachelor\'s Degree',
+                        'diploma': 'High School Diploma'
+                    };
+                    return degreeMap[formData.get('degree')] || "None chosen";
+                })(),
                 institution: formData.get('institution') || "N/A",
                 graduationYear: parseInt(formData.get('gradYear')) || 2024
             },
             skillsPreferences: {
                 fullTimeCommitment: formData.get('fulltime') ? true : false,
                 remoteCapable: formData.get('remote') ? true : false,
-                workspaceCity: formData.get('city') || "Unassigned"
+                workspaceCity: (() => {
+                    const cityMap = {
+                        'sf': 'San Francisco',
+                        'ny': 'New York',
+                        'ldn': 'London',
+                        'tky': 'Tokyo',
+                        'ber': 'Berlin'
+                    };
+                    return cityMap[formData.get('city')] || "Unassigned";
+                })()
             },
             professionalBio: formData.get('bio') || "",
             agreementStamp: formData.get('agreeTerms') ? "AGREED" : "PENDING",
@@ -289,6 +366,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         form.addEventListener('reset', () => {
             setTimeout(() => {
+                // Reset custom selects
+                customSelects.forEach(container => {
+                    const triggerLabel = container.querySelector('.selected-option-label');
+                    const hiddenInput = container.querySelector('input[type="hidden"]');
+                    const options = container.querySelectorAll('.custom-select-options li');
+                    
+                    hiddenInput.value = "";
+                    if (container.id === 'degree-custom-select') {
+                        triggerLabel.textContent = "Choose Degree...";
+                    } else if (container.id === 'city-custom-select') {
+                        triggerLabel.textContent = "Select City";
+                    }
+                    
+                    options.forEach(o => o.classList.remove('selected'));
+                });
+
                 // Return to step 1 on clean reset
                 activeStep = 1;
                 updateWizardUI();
