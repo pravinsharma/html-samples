@@ -1,0 +1,900 @@
+/* ==========================================================================
+   HYPER-REALISTIC GLASSMORPHIC (ACRYLIC GLASS) DESIGN SYSTEM
+   Based on e:\projects\ai\antigravity\html-samples\example_8\assets\sample1.jpg
+   ========================================================================== */
+
+/* Theme Configuration variables */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.35);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --text-dark: #1f2937;
+    --text-gray: #4b5563;
+    
+    /* Glow Projection Coordinates */
+    --glow-orange: rgba(255, 78, 80, 0.25);
+    --glow-blue: rgba(0, 114, 255, 0.22);
+    --glow-green: rgba(92, 227, 144, 0.2);
+    --glow-rainbow: rgba(255, 179, 71, 0.15);
+}
+
+/* Global Reset & Base Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f1f4; /* Crisp off-white studio floor */
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    position: relative;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING AMBIENT BACKGROUND BLOBS (FOR BLUR DISPERSION)
+   -------------------------------------------------------------------------- */
+.ambient-glows {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.45;
+    animation: floatBlob 20s infinite alternate ease-in-out;
+}
+
+.blob-orange {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #ff6b6b 0%, #ff8a00 100%);
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.blob-blue {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, #0072ff 0%, #00c6ff 100%);
+    bottom: 10%;
+    right: 15%;
+    animation-delay: -5s;
+}
+
+.blob-green {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #00f2fe 0%, #4facfe 100%);
+    top: 35%;
+    right: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(40px) rotate(90deg) scale(1.15);
+    }
+    100% {
+        transform: translateY(-40px) rotate(180deg) scale(0.9);
+    }
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS DASHBOARD PANEL CONTAINER (THE MAIN CARD)
+   -------------------------------------------------------------------------- */
+.glass-card {
+    background-color: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: 36px;
+    padding: 34px;
+    box-shadow: 
+        0 20px 50px rgba(31, 38, 135, 0.05),
+        inset 0 2px 3px rgba(255, 255, 255, 0.7),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(22px) saturate(190%);
+    -webkit-backdrop-filter: blur(22px) saturate(190%);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS PANEL HEADER (CREATIVE BUTTONS & LABELS)
+   -------------------------------------------------------------------------- */
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+/* Orange Glowing Glass Title Capsule (Pill) */
+.glass-pill-title {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+    border: var(--glass-border);
+    border-radius: 50px;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8),
+        0 4px 15px rgba(255, 78, 80, 0.1);
+    z-index: 1;
+}
+
+.pill-text {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.header-readout {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-gray);
+}
+
+/* User Button Square with teal glow */
+.glass-user-btn {
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+    border: var(--glass-border);
+    border-radius: 16px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8),
+        0 4px 15px rgba(92, 227, 144, 0.08);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--text-dark);
+    z-index: 1;
+}
+
+.glass-user-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* --------------------------------------------------------------------------
+   FORM BODY (3 GRID COLUMNS)
+   -------------------------------------------------------------------------- */
+.form-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+@media (max-width: 900px) {
+    .form-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS CASING INPUT WRAPPERS (PHYSICAL GLASS BLOCKS)
+   -------------------------------------------------------------------------- */
+.glass-input-wrapper {
+    position: relative;
+    background: rgba(255, 255, 255, 0.25);
+    border: var(--glass-border);
+    border-radius: 20px;
+    padding: 16px 20px;
+    box-shadow: 
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.75),
+        0 6px 22px rgba(31, 38, 135, 0.03);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.glass-input-wrapper label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    letter-spacing: 0.06em;
+    padding-left: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   SPECULAR HIGHLIGHT COLOR GLOWS PROJECTIONS (BLURRED HALOS)
+   -------------------------------------------------------------------------- */
+.orange-glow { --glow-color: var(--glow-orange); }
+.blue-glow { --glow-color: var(--glow-blue); }
+.green-glow { --glow-color: var(--glow-green); }
+.rainbow-glow { --glow-color: var(--glow-rainbow); }
+
+.glass-input-wrapper::before,
+.glass-card::before,
+.glass-modal::before,
+.glass-pill-title::before,
+.glass-user-btn::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 10%;
+    width: 80%;
+    height: 16px;
+    background: var(--glow-color);
+    filter: blur(18px);
+    opacity: 0.75;
+    z-index: -1;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.glass-input-wrapper:hover::before {
+    opacity: 1;
+    filter: blur(14px);
+    bottom: -12px;
+}
+
+/* --------------------------------------------------------------------------
+   NESTED SPECULAR SLOT INPUTS (WHITE HOLES IN THE GLASS)
+   -------------------------------------------------------------------------- */
+.inner-input-box {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.06), 
+        0 2px 4px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    width: 100%;
+}
+
+.search-icon {
+    color: rgba(0, 0, 0, 0.35);
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.inner-input-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    outline: none;
+}
+
+.inner-input-box input::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   CHROMATIC DISPERSION BOTTOM BARS (RAINBOW LIGHT SPLITTING)
+   -------------------------------------------------------------------------- */
+.chromatic-bar {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        #ff4e50, #f9d423, #56ab2f, #00f2fe, #4facfe, #0072ff, #f857a6
+    );
+    opacity: 0.45;
+    border-radius: 1px;
+    filter: blur(0.5px);
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.glass-input-wrapper:hover .chromatic-bar {
+    opacity: 0.95;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS SELECT DROPDOWN (ORANGE REFRACTION PILL)
+   -------------------------------------------------------------------------- */
+.glass-select-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.06), 
+        0 2px 4px rgba(255, 255, 255, 0.8);
+    width: 100%;
+}
+
+.glass-select-pill select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 24px;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dark);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS TOGGLE SWITCH (EXACT BLUE SWITCH FROM REFERENCE!)
+   -------------------------------------------------------------------------- */
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0;
+}
+
+.toggle-label-text {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.glass-switch {
+    position: relative;
+    display: inline-block;
+    width: 58px;
+    height: 32px;
+    flex-shrink: 0;
+}
+
+.glass-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.08), 
+        0 1.5px 3px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Electric Blue vibrant linear glass groove when active */
+.glass-switch input:checked + .switch-slider {
+    background: linear-gradient(135deg, #1b4cff 0%, #002c9b 100%);
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.25),
+        0 0 10px rgba(0, 78, 255, 0.3);
+}
+
+/* Specular white knob handle */
+.switch-slider::before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 
+        1.5px 1.5px 4px rgba(0, 0, 0, 0.12),
+        -1.5px -1.5px 3px rgba(255, 255, 255, 0.9);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-switch input:checked + .switch-slider::before {
+    transform: translateX(26px);
+}
+
+/* --------------------------------------------------------------------------
+   GLASS CHECKBOX ROWS (EXACT NEON MINT GREEN INLAY IN IMAGE)
+   -------------------------------------------------------------------------- */
+.glass-checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.glass-checkbox-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-checkbox-row input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.row-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Rounded square checkbox box */
+.custom-glass-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+}
+
+.check-icon {
+    width: 12px;
+    height: 12px;
+    color: transparent;
+    transition: color 0.15s ease;
+}
+
+.row-text {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: color 0.22s ease;
+}
+
+.row-right-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.45);
+    border: var(--glass-border);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+}
+
+.plus-icon {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+/* Checked/Active green pill morph (matches green selection card!) */
+.glass-checkbox-row.active-check {
+    background-color: rgba(92, 227, 144, 0.2);
+    border-color: rgba(92, 227, 144, 0.65);
+    box-shadow: 
+        0 4px 10px rgba(92, 227, 144, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.glass-checkbox-row.active-check .custom-glass-check {
+    background-color: rgba(92, 227, 144, 0.85);
+    border-color: rgba(92, 227, 144, 0.85);
+    box-shadow: 0 0 6px rgba(92, 227, 144, 0.5);
+}
+
+.glass-checkbox-row.active-check .check-icon {
+    color: #ffffff;
+}
+
+.glass-checkbox-row.active-check .row-text {
+    color: #104e28;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS RANGE SLIDER
+   -------------------------------------------------------------------------- */
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.slider-value-mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.glass-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    margin: 8px 0;
+}
+
+/* Slider Track */
+.glass-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    border: none;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Slider Thumb (Glass orb) */
+.glass-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    cursor: pointer;
+    box-shadow: 
+        1.5px 1.5px 5px rgba(0, 0, 0, 0.12),
+        -1px -1px 3px rgba(255, 255, 255, 0.8);
+    border: none;
+    margin-top: -7px;
+    transition: transform 0.1s ease;
+}
+
+.glass-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+/* Firefox track & thumb styling */
+.glass-slider::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    border: none;
+}
+
+.glass-slider::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    cursor: pointer;
+    box-shadow: 
+        1.5px 1.5px 5px rgba(0, 0, 0, 0.12),
+        -1.5px -1.5px 3px rgba(255, 255, 255, 0.8);
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+.glass-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   GLASS FILE PICKER DROPZONE
+   -------------------------------------------------------------------------- */
+.glass-dropzone {
+    border: 1.5px dashed rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 18px 10px;
+    border-radius: 14px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.03);
+}
+
+.glass-dropzone:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-style: solid;
+}
+
+.glass-dropzone.dragover {
+    background-color: rgba(255, 138, 0, 0.1);
+    border-color: #ff8a00;
+}
+
+.hidden-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.dropzone-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+    flex-wrap: wrap;
+}
+
+.cloud-icon {
+    color: var(--text-gray);
+}
+
+.dropzone-caption {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.glass-file-tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    background-color: var(--text-dark);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   TEXTAREA (MULTI-LINE CASING)
+   -------------------------------------------------------------------------- */
+.glass-input-wrapper textarea {
+    width: 100%;
+    min-height: 80px;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 10px 14px;
+    outline: none;
+    resize: vertical;
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.06), 
+        0 2px 4px rgba(255, 255, 255, 0.8);
+    transition: all 0.2s ease;
+}
+
+.glass-input-wrapper textarea:focus {
+    box-shadow: 
+        inset 1px 1px 3px rgba(0, 0, 0, 0.08), 
+        0 0 0 2px rgba(0, 114, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   GLASS BUTTONS (EXACT GLOWING PILLS COPY FROM IMAGE)
+   -------------------------------------------------------------------------- */
+.glass-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+/* Vibrant orange/pink gradient glass pill */
+.glass-btn-primary {
+    flex: 1;
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 13px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 
+        0 5px 15px rgba(255, 78, 80, 0.25), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.glass-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(255, 78, 80, 0.35), 
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
+}
+
+.glass-btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(255, 78, 80, 0.2);
+}
+
+/* Vibrant blue/cyan gradient glass pill */
+.glass-btn-secondary {
+    flex: 1;
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 13px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 
+        0 5px 15px rgba(0, 114, 255, 0.25), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.glass-btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(0, 114, 255, 0.35), 
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
+}
+
+.glass-btn-secondary:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(0, 114, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   GLASS COMPILER DIALOG OVERLAY SCREEN
+   -------------------------------------------------------------------------- */
+.glass-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(31, 38, 135, 0.12);
+    backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.glass-overlay.show {
+    display: flex;
+}
+
+.glass-modal {
+    background-color: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: 30px;
+    padding: 24px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 
+        0 30px 65px rgba(31, 38, 135, 0.2),
+        inset 0 2px 2px rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px) saturate(180%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.close-overlay {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.glass-terminal {
+    background-color: rgba(15, 23, 42, 0.8);
+    color: #38bdf8;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 16px;
+    border-radius: 14px;
+    max-height: 140px;
+    overflow-y: auto;
+    line-height: 1.6;
+    text-align: left;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+}

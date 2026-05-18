@@ -1,0 +1,729 @@
+/* ==========================================================================
+   NEUMORPHIC / CLAYMORPHIC SOFT UI DESIGN SYSTEM
+   Based on e:\projects\ai\antigravity\html-samples\example_7\assets\sample1.jpg
+   ========================================================================== */
+
+/* Custom Design Properties */
+:root {
+    --bg-green: #99deac;         /* Soft mint clay green container */
+    --bg-panel: #f2f7f4;         /* Soft off-white sub-panel */
+    --text-dark: #102a18;        /* Extremely deep green/black text */
+    --text-muted: #5f7a68;       /* Sage green for captions */
+    --active-green: #6de39c;     /* Raised neon mint active pill */
+    --dark-green-active: #184c2a;/* Dark green active check / button color */
+    
+    /* Neumorphic Shadow Matrices */
+    --card-shadow: 
+        12px 12px 28px rgba(10, 30, 15, 0.2), 
+        -12px -12px 28px rgba(255, 255, 255, 0.55),
+        inset 4px 4px 8px rgba(255, 255, 255, 0.35),
+        inset -4px -4px 8px rgba(0, 0, 0, 0.08);
+        
+    --panel-shadow: 
+        8px 8px 22px rgba(10, 30, 15, 0.06), 
+        -8px -8px 22px rgba(255, 255, 255, 0.8);
+        
+    --outset-shadow: 
+        4px 4px 10px rgba(10, 30, 15, 0.05), 
+        -4px -4px 10px rgba(255, 255, 255, 0.95);
+        
+    --inset-shadow: 
+        inset 4px 4px 8px rgba(0, 0, 0, 0.05), 
+        inset -4px -4px 8px rgba(255, 255, 255, 0.85);
+
+    --font-family: 'Outfit', sans-serif;
+}
+
+/* Global Reset & Backdrop setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1b452e;
+    font-family: var(--font-family);
+    color: var(--text-dark);
+    position: relative;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+/* Stunning Fullscreen Low-poly Backdrop */
+.backdrop-graphics {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.backdrop-graphics svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   CLAYMORPHIC FORM CONTAINER
+   -------------------------------------------------------------------------- */
+.clay-card {
+    background-color: var(--bg-green);
+    border-radius: 40px;
+    width: 100%;
+    padding: 26px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Header styling */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+}
+
+.header-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+}
+
+.header-btn {
+    background-color: rgba(255, 255, 255, 0.45);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-family);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--dark-green-active);
+    cursor: pointer;
+    box-shadow: var(--outset-shadow);
+    transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 2px 2px 5px rgba(10, 30, 15, 0.04), -2px -2px 5px rgba(255, 255, 255, 0.9);
+}
+
+.header-btn:active {
+    transform: scale(0.97);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   RAISED NEUMORPHIC SELECT CONTAINER (MULTISELECT PILL)
+   -------------------------------------------------------------------------- */
+.clay-group-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.group-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--dark-green-active);
+    letter-spacing: 0.05em;
+    padding-left: 6px;
+}
+
+.neumorphic-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-panel);
+    border-radius: 26px;
+    padding: 8px 12px;
+    box-shadow: var(--outset-shadow);
+    box-sizing: border-box;
+}
+
+/* Recessed circular bubble on the left */
+.counter-bubble {
+    background-color: var(--bg-panel);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 2.5px 2.5px 5px rgba(10, 30, 15, 0.12), inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.9);
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.counter-bubble span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.neumorphic-select {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--font-family);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding: 6px 30px 6px 0;
+}
+
+.chevron-arrow {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   SOFT-WHITE RAISED SUB-PANEL
+   -------------------------------------------------------------------------- */
+.inlay-panel {
+    background-color: var(--bg-panel);
+    border-radius: 30px;
+    padding: 22px;
+    box-shadow: var(--panel-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   DEBOSSED (RECESSED) INPUTS Inside Inlay
+   -------------------------------------------------------------------------- */
+.form-group-debossed {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group-debossed label, .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    padding-left: 4px;
+}
+
+.form-group-debossed input[type="text"],
+.form-group-debossed input[type="password"],
+.form-group-debossed textarea {
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: #ebf2ed;
+    border: none;
+    border-radius: 14px;
+    padding: 11px 14px;
+    outline: none;
+    box-shadow: var(--inset-shadow);
+    transition: all 0.25s ease;
+}
+
+.form-group-debossed input[type="text"]::placeholder,
+.form-group-debossed input[type="password"]::placeholder,
+.form-group-debossed textarea::placeholder {
+    color: rgba(16, 42, 24, 0.4);
+}
+
+.form-group-debossed input[type="text"]:focus,
+.form-group-debossed input[type="password"]:focus,
+.form-group-debossed textarea:focus {
+    box-shadow: 
+        inset 4px 4px 8px rgba(0, 0, 0, 0.08), 
+        inset -4px -4px 8px rgba(255, 255, 255, 0.95),
+        0 0 0 2px rgba(27, 76, 43, 0.18);
+}
+
+/* --------------------------------------------------------------------------
+   ROW-MORPHING CHECKBOXES (EXACT CLAYMORPHIC COPY OF IMAGE)
+   -------------------------------------------------------------------------- */
+.neumorphic-checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.neumorphic-checkbox-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 18px;
+    background-color: transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid transparent;
+}
+
+.neumorphic-checkbox-row input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.row-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Custom rounded checkbox box */
+.custom-check-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #b6c9be;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+}
+
+.check-icon {
+    width: 12px;
+    height: 12px;
+    color: transparent;
+    transition: color 0.15s ease;
+}
+
+.row-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: color 0.22s ease;
+}
+
+/* Raised circular details plus-button on right */
+.row-right-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--bg-panel);
+    box-shadow: 2px 2px 6px rgba(10, 30, 15, 0.05), -2px -2px 6px rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.22s ease;
+    flex-shrink: 0;
+}
+
+.plus-icon {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+/* Dynamic Active Row Morphing (Triggers when check input is checked!) */
+.neumorphic-checkbox-row.active-pill {
+    background-color: var(--active-green);
+    box-shadow: 
+        4px 4px 10px rgba(10, 30, 15, 0.06), 
+        -4px -4px 10px rgba(255, 255, 255, 0.9);
+}
+
+.neumorphic-checkbox-row.active-pill .custom-check-box {
+    background-color: var(--dark-green-active);
+    border-color: var(--dark-green-active);
+}
+
+.neumorphic-checkbox-row.active-pill .check-icon {
+    color: var(--bg-panel);
+}
+
+.neumorphic-checkbox-row.active-pill .row-text {
+    color: var(--dark-green-active);
+    font-weight: 700;
+}
+
+.neumorphic-checkbox-row.active-pill .row-right-btn {
+    background-color: var(--bg-panel);
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.12), inset -1px -1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.neumorphic-checkbox-row.active-pill .plus-icon {
+    color: var(--dark-green-active);
+}
+
+/* --------------------------------------------------------------------------
+   NEUMORPHIC RANGE SLIDER (SOFT UI SLIDER STYLE)
+   -------------------------------------------------------------------------- */
+.space-slider-group {
+    padding: 4px 0;
+}
+
+.slider-val {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dark-green-active);
+}
+
+.neumorphic-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    margin: 8px 0;
+}
+
+/* Slider Track */
+.neumorphic-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background-color: #ebf2ed;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.05), inset -2px -2px 4px rgba(255, 255, 255, 0.85);
+    border: none;
+}
+
+/* Slider Thumb */
+.neumorphic-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: var(--bg-panel);
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(10, 30, 15, 0.12), -2px -2px 5px rgba(255, 255, 255, 0.95);
+    border: none;
+    margin-top: -6px;
+    transition: transform 0.12s ease;
+}
+
+.neumorphic-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.neumorphic-slider::-webkit-slider-thumb:active {
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Firefox sliders */
+.neumorphic-slider::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background-color: #ebf2ed;
+    border-radius: 4px;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.05), inset -2px -2px 4px rgba(255, 255, 255, 0.85);
+    border: none;
+}
+
+.neumorphic-slider::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: var(--bg-panel);
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(10, 30, 15, 0.12), -2px -2px 5px rgba(255, 255, 255, 0.95);
+    border: none;
+    transition: transform 0.12s ease;
+}
+
+.neumorphic-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   RADIO PILL SYSTEM
+   -------------------------------------------------------------------------- */
+.radio-pill-group {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    padding: 2px 0;
+}
+
+.radio-pill-item {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-pill-item input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.pill-btn {
+    display: block;
+    text-align: center;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: #ebf2ed;
+    box-shadow: var(--outset-shadow);
+    transition: all 0.22s ease;
+}
+
+.radio-pill-item:hover .pill-btn {
+    color: var(--text-dark);
+}
+
+.radio-pill-item input:checked + .pill-btn {
+    background-color: var(--active-green);
+    color: var(--dark-green-active);
+    font-weight: 700;
+    box-shadow: inset 1.5px 1.5px 3px rgba(10, 30, 15, 0.12), inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   CLAY FILE PICKER
+   -------------------------------------------------------------------------- */
+.clay-dropzone {
+    border: 2px dashed #b2c9b8;
+    background-color: #ebf2ed;
+    padding: 14px;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.clay-dropzone:hover {
+    background-color: #e2ede5;
+    border-color: #72a581;
+}
+
+.clay-dropzone.dragover {
+    background-color: rgba(109, 227, 156, 0.15);
+    border-color: var(--active-green);
+}
+
+.hidden-file-picker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.dropzone-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    pointer-events: none;
+    flex-wrap: wrap;
+}
+
+.folder-icon {
+    color: var(--text-muted);
+}
+
+.dropzone-caption {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.clay-file-tag {
+    font-size: 11px;
+    font-weight: 700;
+    background-color: var(--dark-green-active);
+    color: var(--bg-panel);
+    padding: 3px 8px;
+    border-radius: 8px;
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   CLAYMORPHIC BUTTON CONTROLS (CONFIRM / RESET COPIES OF IMAGE)
+   -------------------------------------------------------------------------- */
+.clay-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+/* Deep Green Solid Button */
+.clay-btn-confirm {
+    flex: 1;
+    font-family: var(--font-family);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--bg-panel);
+    background-color: var(--dark-green-active);
+    border: none;
+    padding: 13px 20px;
+    border-radius: 18px;
+    box-shadow: 
+        4px 4px 10px rgba(10, 30, 15, 0.16), 
+        -4px -4px 10px rgba(255, 255, 255, 0.55),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clay-btn-confirm:hover {
+    background-color: #123e21;
+}
+
+.clay-btn-confirm:active {
+    transform: scale(0.97);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+/* White Raised Clay Button */
+.clay-btn-reset {
+    flex: 1;
+    font-family: var(--font-family);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    background-color: var(--bg-panel);
+    border: none;
+    padding: 13px 20px;
+    border-radius: 18px;
+    box-shadow: var(--outset-shadow);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clay-btn-reset:hover {
+    background-color: #eaf1eb;
+}
+
+.clay-btn-reset:active {
+    transform: scale(0.97);
+    box-shadow: inset 2.5px 2.5px 5px rgba(10, 30, 15, 0.08), inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.95);
+}
+
+/* --------------------------------------------------------------------------
+   CLAY-CORE BUILD LOG MODAL SYSTEM
+   -------------------------------------------------------------------------- */
+.log-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(16, 42, 24, 0.45);
+    backdrop-filter: blur(6px);
+    display: none; /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.log-overlay.show {
+    display: flex;
+}
+
+.log-card {
+    background-color: var(--bg-green);
+    border-radius: 30px;
+    padding: 24px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 30px 65px rgba(10, 30, 15, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.log-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.close-overlay {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.log-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.clay-terminal-log {
+    background-color: #0b1a11;
+    color: #4dfa77;
+    font-family: 'Space Mono', monospace;
+    font-size: 11.5px;
+    padding: 16px;
+    border-radius: 16px;
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.6;
+    text-align: left;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+.log-footer {
+    display: flex;
+    gap: 10px;
+}

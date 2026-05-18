@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Space — Claymorphic Form</title>
+    <!-- Google Fonts: Outfit for highly rounded modern sans-serif typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Full-screen Low-poly Backdrop Replicating sample1.jpg -->
+    <div class="backdrop-graphics" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#144d32"/>
+                    <stop offset="100%" stop-color="#2a7751"/>
+                </linearGradient>
+            </defs>
+            <rect width="1440" height="900" fill="url(#skyGrad)"/>
+            
+            <!-- Low-poly polygon peaks (forest trees and terrain) -->
+            <polygon points="0,900 320,640 680,900" fill="#2b6b4a" opacity="0.8"/>
+            <polygon points="200,900 580,500 880,900" fill="#3c8e62" opacity="0.85"/>
+            <polygon points="500,900 820,540 1100,900" fill="#245a3c" opacity="0.9"/>
+            <polygon points="800,900 1200,420 1440,900" fill="#4fa777" opacity="0.75"/>
+            <polygon points="1000,900 1340,600 1440,900" fill="#1b452e" opacity="0.95"/>
+            
+            <!-- Left floating poly tree shapes -->
+            <polygon points="-80,550 80,300 240,550" fill="#3c8e62" opacity="0.6"/>
+            <polygon points="-30,600 120,400 280,600" fill="#245a3c" opacity="0.5"/>
+            
+            <!-- Right floating poly tree shapes -->
+            <polygon points="1200,500 1360,250 1440,500" fill="#60c38f" opacity="0.4"/>
+            <polygon points="1100,600 1280,350 1440,600" fill="#3c8e62" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <div class="app-container">
+        <!-- Claymorphic Neumorphic Green Card Screen -->
+        <form id="clay-form" class="clay-card" action="#" method="POST" enctype="multipart/form-data">
+            
+            <!-- Card Header -->
+            <header class="card-header">
+                <h1 class="header-title">Design all</h1>
+                <button type="button" class="header-btn" id="deselect-all-btn">Deselect all</button>
+            </header>
+
+            <!-- Form Content wrapper -->
+            <div class="card-body">
+                
+                <!-- Raised White Dropdown Selector (Model selector) -->
+                <div class="clay-group-box">
+                    <label for="spaceType" class="group-label">Space Blueprint Category</label>
+                    <div class="neumorphic-dropdown-wrapper">
+                        <!-- Left nested recessed counter bubble -->
+                        <div class="counter-bubble">
+                            <span id="counter-display">2</span>
+                        </div>
+                        <select id="spaceType" name="spaceType" class="neumorphic-select">
+                            <option value="polygons" selected>Multiselect (Low Poly)</option>
+                            <option value="voxels">Voxels (Cubical)</option>
+                            <option value="nurbs">NURBS (Curves)</option>
+                            <option value="points">Point Cloud (Raw)</option>
+                        </select>
+                        <span class="chevron-arrow" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- White Soft Raised Inlay Container for Form Checkboxes & Sliders -->
+                <div class="inlay-panel">
+                    
+                    <!-- Text & Password Inputs (Recessed/Carved grooves in the white panel) -->
+                    <div class="form-group-debossed">
+                        <label for="projectName">Space Identifier</label>
+                        <input type="text" id="projectName" name="projectName" required placeholder="Enter project name..." value="LowPoly Forest">
+                    </div>
+
+                    <div class="form-group-debossed">
+                        <label for="accessPin">Access Key</label>
+                        <input type="password" id="accessPin" name="accessPin" required placeholder="Enter space secret key...">
+                    </div>
+
+                    <!-- Custom Checkboxes styled EXACTLY like the image rows! -->
+                    <div class="form-group">
+                        <label class="section-label">Render Subsystems</label>
+                        <div class="neumorphic-checkbox-list">
+                            
+                            <!-- Active Checkbox item (Green pill in design) -->
+                            <label class="neumorphic-checkbox-row active-pill">
+                                <input type="checkbox" name="renderOptions" value="amps" checked>
+                                <div class="row-left">
+                                    <span class="custom-check-box">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">2amps</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                            <!-- Inactive Checkbox items -->
+                            <label class="neumorphic-checkbox-row">
+                                <input type="checkbox" name="renderOptions" value="chips">
+                                <div class="row-left">
+                                    <span class="custom-check-box">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Cim chips</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                            <label class="neumorphic-checkbox-row">
+                                <input type="checkbox" name="renderOptions" value="coletect">
+                                <div class="row-left">
+                                    <span class="custom-check-box">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Coletect</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                            <label class="neumorphic-checkbox-row">
+                                <input type="checkbox" name="renderOptions" value="culsiect">
+                                <div class="row-left">
+                                    <span class="custom-check-box">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Culsiect</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                            <label class="neumorphic-checkbox-row">
+                                <input type="checkbox" name="renderOptions" value="culthops">
+                                <div class="row-left">
+                                    <span class="custom-check-box">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Culthops</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Range Sliders (Soft recessed track, raised soft circle thumb) -->
+                    <div class="form-group-debossed space-slider-group">
+                        <div class="slider-header">
+                            <label for="fogDensity">Environmental Fog</label>
+                            <span id="fog-val" class="slider-val">45%</span>
+                        </div>
+                        <input type="range" id="fogDensity" name="fogDensity" min="0" max="100" value="45" class="neumorphic-slider">
+                    </div>
+
+                    <!-- Radios (Horizontal Radio card options) -->
+                    <div class="form-group-debossed">
+                        <label class="section-label">Terrain Mesh Density</label>
+                        <div class="radio-pill-group">
+                            <label class="radio-pill-item">
+                                <input type="radio" name="meshDensity" value="low" checked>
+                                <span class="pill-btn">Low</span>
+                            </label>
+                            <label class="radio-pill-item">
+                                <input type="radio" name="meshDensity" value="medium">
+                                <span class="pill-btn">Mid</span>
+                            </label>
+                            <label class="radio-pill-item">
+                                <input type="radio" name="meshDensity" value="high">
+                                <span class="pill-btn">High</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- File Picker (Dashed dropzone in soft panel) -->
+                    <div class="form-group-debossed">
+                        <label for="terrainTexture">Custom Heightmap File</label>
+                        <div class="clay-dropzone" id="clay-dropzone">
+                            <input type="file" id="terrainTexture" name="terrainTexture" class="hidden-file-picker" accept="image/*,.raw">
+                            <div class="dropzone-label">
+                                <svg class="folder-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                                </svg>
+                                <span class="dropzone-caption">Browse heightmap image...</span>
+                                <span id="clay-file-name" class="clay-file-tag">No texture chosen</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Textarea Input (Carved multi-line text box) -->
+                    <div class="form-group-debossed">
+                        <label for="spaceNotes">Configuration Coordinates Log</label>
+                        <textarea id="spaceNotes" name="spaceNotes" placeholder="Describe low-poly vector properties or add logs..."></textarea>
+                    </div>
+
+                    <!-- Embossed Buttons inside White Inlay -->
+                    <div class="clay-actions">
+                        <button type="submit" class="clay-btn-confirm">Confirm</button>
+                        <button type="reset" class="clay-btn-reset">Reset</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Neumorphic Retro Console log Overlay for verification -->
+    <div id="log-overlay" class="log-overlay">
+        <div class="log-card">
+            <header class="log-header">
+                <h2>CLAY-CORE BUILD STATUS</h2>
+                <button type="button" class="close-overlay" id="close-overlay-btn">×</button>
+            </header>
+            <div class="log-body">
+                <pre id="clay-terminal-log" class="clay-terminal-log">
+[CLAYCORE] Init build sequence...
+[CLAYCORE] Rendering low-poly forest cells...
+[CLAYCORE] Attaching shaders to [2amps]...
+[CLAYCORE] Generating JSON environment profile...
+[SUCCESS] Space Blueprint successfully generated!
+                </pre>
+                <div class="log-footer">
+                    <button type="button" id="download-clay-json" class="clay-btn-confirm">Download Blueprint</button>
+                    <button type="button" id="dismiss-overlay-btn" class="clay-btn-reset">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

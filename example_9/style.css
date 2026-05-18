@@ -1,0 +1,737 @@
+/* ==========================================================================
+   FORM WIZARD SPECULAR GLASS & NEUMORPHIC STYLE SYSTEM
+   Based on e:\projects\ai\antigravity\html-samples\example_9\assets\sample1.jpg
+   ========================================================================== */
+
+/* Design Variables */
+:root {
+    --studio-bg: #f3f4f6;         /* Light clean room gray */
+    --drawer-bg: #f9fafb;         /* Soft off-white */
+    --primary-green: #22c55e;     /* Solid active green timeline */
+    --neon-green-glow: rgba(34, 197, 94, 0.45);
+    --text-dark: #111827;
+    --text-muted: #6b7280;
+    --border-glass: 1px solid rgba(255, 255, 255, 0.65);
+    
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+/* Global Reset & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--studio-bg);
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+    position: relative;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+/* Clean minimal studio vignette background */
+.backdrop-studio {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffffff 0%, #e2e4e8 100%);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   GLASS BOARD PANEL (VERTICAL SCREEN BACKPLATE)
+   -------------------------------------------------------------------------- */
+.glass-board {
+    background: rgba(255, 255, 255, 0.35);
+    border: var(--border-glass);
+    border-radius: 28px;
+    padding: 34px;
+    box-shadow: 
+        0 20px 45px rgba(0, 0, 0, 0.05),
+        inset 0 2px 2px rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Glass board diagonal specular reflection line */
+.glass-board::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+    border-radius: 28px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* --------------------------------------------------------------------------
+   DYNAMIC VERTICAL PROGRESS STEPPER (EXACT COPY OF REF IMAGES)
+   -------------------------------------------------------------------------- */
+.vertical-stepper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 6px;
+    z-index: 10;
+}
+
+/* Timeline vertical gray bar */
+.stepper-track-bg {
+    width: 4px;
+    background-color: #e5e7eb;
+    position: absolute;
+    left: 22px;
+    top: 15px;
+    bottom: 15px;
+    z-index: 1;
+    border-radius: 2px;
+}
+
+/* Dynamic active green progress bar */
+.stepper-track-fill {
+    width: 4px;
+    background-color: var(--primary-green);
+    position: absolute;
+    left: 22px;
+    top: 15px;
+    height: 66%; /* Controlled by JS dynamically */
+    z-index: 2;
+    border-radius: 2px;
+    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Single Step Node Row */
+.step-node {
+    display: flex;
+    gap: 18px;
+    position: relative;
+    z-index: 3;
+    margin-bottom: 24px;
+    align-items: center;
+    user-select: none;
+    transition: all 0.25s ease;
+}
+
+.step-node:last-child {
+    margin-bottom: 0;
+}
+
+/* Node indicator circle */
+.circle-indicator {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.step-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+    transition: color 0.25s ease;
+}
+
+.step-status {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* --- STEP 1 & 2: COMPLETED NODE STATE (Solid green checkmark) --- */
+.step-node.completed .circle-indicator {
+    background-color: var(--primary-green);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+}
+
+.step-node.completed .check-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+/* Tiny step index number bottom-right of completed step */
+.step-node.completed .sub-num {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background-color: var(--primary-green);
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: #ffffff;
+    line-height: 1;
+}
+
+.step-node.completed .step-title {
+    color: var(--text-dark);
+}
+
+.step-node.completed .step-status {
+    color: var(--text-muted);
+}
+
+/* --- STEP 3: ACTIVE NODE STATE (Glow-ring white bubble) --- */
+.step-node.active .circle-indicator {
+    background-color: #ffffff;
+    border: 3.5px solid var(--primary-green);
+    box-shadow: 0 0 16px var(--neon-green-glow);
+}
+
+.step-node.active .active-num {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-green);
+}
+
+.step-node.active .check-icon, 
+.step-node.active .sub-num {
+    display: none;
+}
+
+.step-node.active .step-title {
+    color: var(--primary-green);
+}
+
+.step-node.active .step-status {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+/* --- STEP 4: PENDING NODE STATE (Muted recessed gray bubble) --- */
+.step-node.pending .circle-indicator {
+    background-color: #e5e7eb;
+    border: 2px solid #d1d5db;
+    box-shadow: none;
+    color: #9ca3af;
+}
+
+.step-node.pending .pending-num {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.step-node.pending .check-icon,
+.step-node.pending .sub-num {
+    display: none;
+}
+
+.step-node.pending .step-title {
+    color: #9ca3af;
+}
+
+.step-node.pending .step-status {
+    color: #9ca3af;
+}
+
+/* --------------------------------------------------------------------------
+   NEUMORPHIC DRAWER FORM CONTAINER (BOTTOM CARD)
+   -------------------------------------------------------------------------- */
+.neumorphic-drawer {
+    background-color: var(--drawer-bg);
+    border-radius: 26px;
+    padding: 22px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.05),
+        inset 0 1.5px 1.5px #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 10;
+}
+
+/* Onboarding slide view steps */
+.form-step-view {
+    display: none; /* Controlled by JS active step */
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-step-view.active {
+    display: flex;
+}
+
+.view-header {
+    margin-bottom: 4px;
+}
+
+.view-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.view-header p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   DEBOSSED (RECESSED) FORM FIELD GROUPS
+   -------------------------------------------------------------------------- */
+.form-group-debossed {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group-debossed label, .section-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    padding-left: 2px;
+}
+
+.form-group-debossed input[type="text"],
+.form-group-debossed input[type="email"],
+.form-group-debossed input[type="password"],
+.form-group-debossed input[type="number"],
+.form-group-debossed textarea {
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: #ebf0ec;
+    border: none;
+    border-radius: 12px;
+    padding: 10.5px 12px;
+    outline: none;
+    box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.06), 
+        inset -2px -2px 5px #ffffff;
+    transition: all 0.25s ease;
+}
+
+.form-group-debossed input:focus,
+.form-group-debossed textarea:focus {
+    box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.08), 
+        inset -2px -2px 5px #ffffff,
+        0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.form-group-debossed textarea {
+    min-height: 64px;
+    resize: vertical;
+}
+
+/* --------------------------------------------------------------------------
+   DEBOSSED SELECT DROPDOWN (SELECT CITY)
+   -------------------------------------------------------------------------- */
+.debossed-select-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #ebf0ec;
+    border-radius: 12px;
+    box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.06), 
+        inset -2px -2px 5px #ffffff;
+}
+
+.debossed-select-wrapper select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    padding: 11px 12px;
+    padding-right: 32px;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.debossed-select-wrapper::after {
+    content: "▼";
+    font-size: 8px;
+    position: absolute;
+    right: 12px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* Hide label in visual representation for active city dropdown */
+.hidden-label {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   METALLIC CHROME TOGGLE SWITCHES (SKEUOMORPHIC DESIGN FROM IMAGE!)
+   -------------------------------------------------------------------------- */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 4px;
+    width: 100%;
+}
+
+.switch-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.clay-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.clay-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-track {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #dcdedc;
+    border-radius: 28px;
+    box-shadow: 
+        inset 1.5px 1.5px 4px rgba(0, 0, 0, 0.1), 
+        0 1px 2px #ffffff;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clay-switch input:checked + .switch-track {
+    background-color: var(--primary-green);
+    box-shadow: 
+        inset 1px 1px 3px rgba(0,0,0,0.15),
+        0 0 8px rgba(34, 197, 94, 0.25);
+}
+
+/* Silver Chrome metallic knob with specular radial gradient */
+.switch-track::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #c4c7c5 45%, #eaeded 75%, #8f9290 100%);
+    border-radius: 50%;
+    box-shadow: 
+        1.5px 1.5px 4px rgba(0, 0, 0, 0.2), 
+        inset 0.5px 0.5px 1px #ffffff;
+    border: 0.5px solid #a3a5a3;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clay-switch input:checked + .switch-track::before {
+    transform: translateX(24px);
+}
+
+.switch-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+/* --------------------------------------------------------------------------
+   WIZARD REVIEW PANEL & TERMS
+   -------------------------------------------------------------------------- */
+.review-box {
+    background-color: #ebf0ec;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--inset-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 4px;
+}
+
+.summary-row:last-child {
+    border: none;
+    padding-bottom: 0;
+}
+
+.summary-lbl {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.summary-val {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.custom-terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 2px;
+}
+
+.custom-terms-checkbox input {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+}
+
+.terms-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background-color: #ebf0ec;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    border: 1px solid #cdd1ce;
+}
+
+.custom-terms-checkbox input:checked ~ .terms-box {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.terms-box::after {
+    content: "";
+    width: 3px; height: 6px;
+    border: solid #ffffff;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.custom-terms-checkbox input:checked ~ .terms-box::after {
+    display: block;
+}
+
+.terms-label {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   DRAWER ACTIONS & GLOSSY GREEN NEXT BUTTON
+   -------------------------------------------------------------------------- */
+.drawer-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+    justify-content: flex-end;
+}
+
+/* Next / Submit Green Glass button with dynamic sheens! */
+.green-glass-btn {
+    position: relative;
+    font-family: var(--font-family);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(180deg, #2fd86a 0%, #16a34a 100%);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 14px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 
+        0 5px 15px rgba(22, 163, 74, 0.3), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    flex: 1.5;
+}
+
+/* Semi-frosted top mirror light reflection */
+.green-glass-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
+.green-glass-btn:hover {
+    background: linear-gradient(180deg, #1ccf61 0%, #138d3f 100%);
+    box-shadow: 0 6px 18px rgba(22, 163, 74, 0.4);
+}
+
+.green-glass-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+}
+
+/* Soft White Raised Neumorphic Back Button */
+.btn-back {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-gray);
+    background-color: var(--drawer-bg);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 12px 24px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 
+        2.5px 2.5px 6px rgba(0, 0, 0, 0.04), 
+        -2.5px -2.5px 6px #ffffff;
+    transition: all 0.2s;
+    outline: none;
+    flex: 1;
+}
+
+.btn-back:hover {
+    background-color: #f3f4f6;
+    box-shadow: 1.5px 1.5px 4px rgba(0, 0, 0, 0.03), -1.5px -1.5px 4px #ffffff;
+}
+
+.btn-back:active {
+    transform: scale(0.97);
+    box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   WIZARD SUCCESS MODAL DIALOG
+   -------------------------------------------------------------------------- */
+.onboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(31, 41, 55, 0.25);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.onboard-overlay.show {
+    display: flex;
+}
+
+.success-card {
+    background-color: var(--drawer-bg);
+    border-radius: 28px;
+    padding: 24px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.success-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.success-header h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.close-overlay {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+.success-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.success-log {
+    background-color: #0b130e;
+    color: #3bf173;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 16px;
+    border-radius: 16px;
+    max-height: 130px;
+    overflow-y: auto;
+    line-height: 1.6;
+    text-align: left;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+}
+
+.success-footer {
+    display: flex;
+    gap: 10px;
+}

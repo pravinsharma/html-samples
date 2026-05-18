@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Core — Glassmorphic Form</title>
+    <!-- Google Fonts: Inter for crisp modern UI, Space Mono for telemetry numbers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Ambient Background Color Blobs for Glass Refraction -->
+    <div class="ambient-glows" aria-hidden="true">
+        <div class="blob blob-orange"></div>
+        <div class="blob blob-blue"></div>
+        <div class="blob blob-green"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Glass Dashboard Panel containing the Form -->
+        <form id="glass-form" class="glass-card" action="#" method="POST" enctype="multipart/form-data">
+            
+            <!-- Technical Window controls and decorative header -->
+            <header class="glass-header">
+                <div class="glass-pill-title orange-glow">
+                    <span class="pill-text">Create workspace</span>
+                </div>
+                <div class="header-readout">
+                    <span class="mono-tag">BUILD // 013</span>
+                </div>
+                <div class="glass-user-btn green-glow" aria-label="User profile">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+            </header>
+
+            <div class="form-body">
+                
+                <!-- Section 1: Casing Metadata -->
+                <div class="form-section">
+                    
+                    <!-- Search Style Text Input with Rainbow Refraction Border -->
+                    <div class="glass-input-wrapper rainbow-glow">
+                        <label for="projectName">Search & Initialize Name</label>
+                        <div class="inner-input-box">
+                            <span class="search-icon" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                                </svg>
+                            </span>
+                            <input type="text" id="projectName" name="projectName" required placeholder="Search projects..." value="Aura Studio">
+                        </div>
+                        <!-- Chrome Chromatic Dispersion Edge Highlight -->
+                        <span class="chromatic-bar"></span>
+                    </div>
+
+                    <!-- Password Box (Recessed Glass slot) -->
+                    <div class="glass-input-wrapper blue-glow">
+                        <label for="accessCode">Secure Access Key</label>
+                        <div class="inner-input-box">
+                            <input type="password" id="accessCode" name="accessCode" required placeholder="Enter key password...">
+                        </div>
+                        <span class="chromatic-bar"></span>
+                    </div>
+
+                    <!-- Select Dropdown nested inside glassy orange-glowing capsule -->
+                    <div class="glass-input-wrapper orange-glow">
+                        <label for="spaceLimit">Profile Priority Tier</label>
+                        <div class="glass-select-pill">
+                            <select id="spaceLimit" name="spaceLimit" required>
+                                <option value="" disabled selected>Select Tier...</option>
+                                <option value="bronze">Bronze Developer (Free)</option>
+                                <option value="silver" selected>Silver Creator (Plus)</option>
+                                <option value="gold">Gold Enterprise (Max)</option>
+                            </select>
+                            <span class="dropdown-arrow">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M6 9l6 6 6-6"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Preferences, Checkboxes & Toggles -->
+                <div class="form-section">
+                    
+                    <!-- Glass Switch Toggle (EXACT COPY OF BLUE TOGGLE IN IMAGE!) -->
+                    <div class="glass-input-wrapper blue-glow">
+                        <label>Subsystem Sync Node</label>
+                        <div class="toggle-container">
+                            <span class="toggle-label-text">Network Tunneling</span>
+                            <label class="glass-switch">
+                                <input type="checkbox" name="networkSync" id="networkSync" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Glass Checkbox Row (EXACT COPY OF CHECKS IN IMAGE!) -->
+                    <div class="glass-input-wrapper green-glow">
+                        <label>Active Core Pipeline</label>
+                        <div class="glass-checkbox-list">
+                            <label class="glass-checkbox-row active-check">
+                                <input type="checkbox" name="corePipe" value="render" checked>
+                                <div class="row-left">
+                                    <span class="custom-glass-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Antialiasing Filter</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+
+                            <label class="glass-checkbox-row">
+                                <input type="checkbox" name="corePipe" value="shadows">
+                                <div class="row-left">
+                                    <span class="custom-glass-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                    <span class="row-text">Ambient Shadow Mesh</span>
+                                </div>
+                                <div class="row-right-btn" aria-label="Toggle node detail">
+                                    <span class="plus-icon">+</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Range Slider (Glass slider styling) -->
+                    <div class="glass-input-wrapper rainbow-glow">
+                        <div class="slider-header">
+                            <label for="opacityLevel">Refraction Blur Index</label>
+                            <span id="blur-val" class="slider-value-mono">60%</span>
+                        </div>
+                        <input type="range" id="opacityLevel" name="opacityLevel" min="0" max="100" value="60" class="glass-slider">
+                    </div>
+                </div>
+
+                <!-- Section 3: File Input & Textarea -->
+                <div class="form-section">
+                    
+                    <!-- File upload picker (Frosted glass container with orange glow) -->
+                    <div class="glass-input-wrapper orange-glow">
+                        <label for="glassAsset">Workspace Seed Template</label>
+                        <div class="glass-dropzone" id="glass-dropzone">
+                            <input type="file" id="glassAsset" name="glassAsset" class="hidden-file-input" accept=".json,.png,.gltf">
+                            <div class="dropzone-label">
+                                <svg class="cloud-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="dropzone-caption">Drop seed block or click</span>
+                                <span id="glass-file-tag" class="glass-file-tag">No template</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Textarea Box styled exactly like the debossed glass cards at the bottom -->
+                    <div class="glass-input-wrapper blue-glow">
+                        <label for="notes">Workspace Configuration Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Toarst, modal config logs..."></textarea>
+                    </div>
+
+                    <!-- Floating Action Buttons modeled exactly after Create Workspace and Search pills! -->
+                    <div class="glass-actions">
+                        <button type="submit" class="glass-btn-primary orange-glow">Create Workspace</button>
+                        <button type="reset" class="glass-btn-secondary blue-glow">Search Projects...</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Hyper-Realistic Frosted Glass Console Success Dialog -->
+    <div id="glass-overlay" class="glass-overlay">
+        <div class="glass-modal blue-glow">
+            <header class="modal-header">
+                <h2>CORE COMPILER STATUS</h2>
+                <button type="button" class="close-overlay" id="close-overlay">×</button>
+            </header>
+            <div class="modal-body">
+                <pre id="glass-terminal" class="glass-terminal">
+[CORE] Initializing glass dispersion parameters...
+[CORE] Packing refracting coordinate channels...
+[CORE] Attaching electric blue underglow meshes...
+[SUCCESS] Aura Studio successfully created! Build: 013.
+                </pre>
+                <div class="modal-footer">
+                    <button type="button" id="download-json" class="glass-btn-primary orange-glow">Download Seed</button>
+                    <button type="button" id="dismiss-overlay" class="glass-btn-secondary blue-glow">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

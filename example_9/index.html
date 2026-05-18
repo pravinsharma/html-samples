@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Onboarding Wizard — Form 09</title>
+    <!-- Google Fonts: Inter for clean text, Space Mono for stepper numbers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Clean Minimalist Studio Background -->
+    <div class="backdrop-studio" aria-hidden="true"></div>
+
+    <div class="app-container">
+        <!-- Main Glass Board Panel -->
+        <div class="glass-board">
+            
+            <!-- Dynamic Vertical Stepper (Copied exactly from sample1.jpg!) -->
+            <nav class="vertical-stepper" aria-label="Onboarding Progress">
+                <div class="stepper-track-bg"></div>
+                <div class="stepper-track-fill" id="stepper-progress-bar"></div>
+                
+                <!-- Step 1: Completed initially for demonstration or dynamic -->
+                <div class="step-node completed" id="step-node-1">
+                    <div class="circle-indicator">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sub-num">1</span>
+                    </div>
+                    <div class="step-text">
+                        <span class="step-title">Personal Details</span>
+                        <span class="step-status">Completed</span>
+                    </div>
+                </div>
+
+                <!-- Step 2: Completed -->
+                <div class="step-node completed" id="step-node-2">
+                    <div class="circle-indicator">
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="sub-num">2</span>
+                    </div>
+                    <div class="step-text">
+                        <span class="step-title">Education</span>
+                        <span class="step-status">Completed</span>
+                    </div>
+                </div>
+
+                <!-- Step 3: Skills (Active glowing step!) -->
+                <div class="step-node active" id="step-node-3">
+                    <div class="circle-indicator">
+                        <span class="active-num">3</span>
+                    </div>
+                    <div class="step-text">
+                        <span class="step-title">Skills</span>
+                        <span class="step-status">In Progress</span>
+                    </div>
+                </div>
+
+                <!-- Step 4: Pending -->
+                <div class="step-node pending" id="step-node-4">
+                    <div class="circle-indicator">
+                        <span class="pending-num">4</span>
+                    </div>
+                    <div class="step-text">
+                        <span class="step-title">Review</span>
+                        <span class="step-status">Pending</span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Bottom Form Card (Soft White Neumorphic Drawer) -->
+            <form id="wizard-form" class="neumorphic-drawer" action="#" method="POST">
+                
+                <!-- STEP 1 VIEW: PERSONAL DETAILS (Hidden initially for demo, active step is 3 based on image, but JS will allow full back/next traversal!) -->
+                <div class="form-step-view" id="step-view-1">
+                    <div class="view-header">
+                        <h2>Personal Details</h2>
+                        <p>Tell us about yourself to begin onboarding.</p>
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="e.g. Pravin Sharma">
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="e.g. pravin@domain.com">
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="password">Profile Security Password</label>
+                        <input type="password" id="password" name="password" required placeholder="••••••••" minlength="8">
+                    </div>
+                </div>
+
+                <!-- STEP 2 VIEW: EDUCATION (Hidden initially) -->
+                <div class="form-step-view" id="step-view-2">
+                    <div class="view-header">
+                        <h2>Education History</h2>
+                        <p>Provide your scholastic achievements.</p>
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="degree">Highest Degree Earned</label>
+                        <div class="debossed-select-wrapper">
+                            <select id="degree" name="degree">
+                                <option value="" disabled selected>Choose Degree...</option>
+                                <option value="phd">Doctorate (PhD)</option>
+                                <option value="masters">Master's Degree</option>
+                                <option value="bachelors">Bachelor's Degree</option>
+                                <option value="diploma">High School Diploma</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="institution">Academic Institution</label>
+                        <input type="text" id="institution" name="institution" placeholder="e.g. Stanford University">
+                    </div>
+                    <div class="form-group-debossed">
+                        <label for="gradYear">Graduation Year</label>
+                        <input type="number" id="gradYear" name="gradYear" min="1980" max="2030" value="2024">
+                    </div>
+                </div>
+
+                <!-- STEP 3 VIEW: SKILLS (ACTIVE STEP MATCHING SAMPLE1.JPG DESIGN!) -->
+                <div class="form-step-view active" id="step-view-3">
+                    
+                    <!-- Side-by-side Metalic Toggle Switches -->
+                    <div class="toggle-row">
+                        <div class="switch-item">
+                            <label class="clay-switch">
+                                <input type="checkbox" name="fulltime" id="fulltime" checked>
+                                <span class="switch-track"></span>
+                            </label>
+                            <span class="switch-label">Full-time</span>
+                        </div>
+                        <div class="switch-item">
+                            <label class="clay-switch">
+                                <input type="checkbox" name="remote" id="remote">
+                                <span class="switch-track"></span>
+                            </label>
+                            <span class="switch-label">Remote</span>
+                        </div>
+                    </div>
+
+                    <!-- Debossed Inset Select Dropdown matching 'Select City' in image -->
+                    <div class="form-group-debossed select-group">
+                        <label for="city" class="hidden-label">Workspace Hub City</label>
+                        <div class="debossed-select-wrapper">
+                            <select id="city" name="city" required>
+                                <option value="" disabled selected>Select City</option>
+                                <option value="sf">San Francisco</option>
+                                <option value="ny">New York</option>
+                                <option value="ldn">London</option>
+                                <option value="tky">Tokyo</option>
+                                <option value="ber">Berlin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 VIEW: REVIEW (Hidden initially) -->
+                <div class="form-step-view" id="step-view-4">
+                    <div class="view-header">
+                        <h2>Review & Complete</h2>
+                        <p>Verify your details and compile onboarding.</p>
+                    </div>
+                    
+                    <!-- Dynamic Summary List -->
+                    <div class="review-box">
+                        <div class="summary-row">
+                            <span class="summary-lbl">Owner:</span>
+                            <span class="summary-val" id="sum-name">N/A</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-lbl">Preferences:</span>
+                            <span class="summary-val" id="sum-prefs">Full-time</span>
+                        </div>
+                        <div class="summary-row">
+                            <span class="summary-lbl">Target City:</span>
+                            <span class="summary-val" id="sum-city">Select City</span>
+                        </div>
+                    </div>
+
+                    <!-- Textarea description -->
+                    <div class="form-group-debossed">
+                        <label for="bio">Bio Notes / Ambitions</label>
+                        <textarea id="bio" name="bio" placeholder="Briefly describe your workspace goals..."></textarea>
+                    </div>
+
+                    <!-- Custom checkbox -->
+                    <label class="custom-terms-checkbox">
+                        <input type="checkbox" name="agreeTerms" id="agreeTerms" required>
+                        <span class="terms-box"></span>
+                        <span class="terms-label">I agree to platform node policies</span>
+                    </label>
+                </div>
+
+                <!-- Action Button row: Back and Next (Glossy Green button) -->
+                <div class="drawer-actions">
+                    <button type="button" class="btn-back" id="btn-back" style="display: inline-block;">Back</button>
+                    <!-- Glossy green reflect next button modeled exactly after green pill in image! -->
+                    <button type="button" class="btn-next green-glass-btn" id="btn-next">Next</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Onboarding Success Overlay Dialog -->
+    <div id="onboard-overlay" class="onboard-overlay">
+        <div class="success-card">
+            <header class="success-header">
+                <h2>WIZARD COMPILER COMPLETE</h2>
+                <button type="button" class="close-overlay" id="close-overlay">×</button>
+            </header>
+            <div class="success-body">
+                <pre id="success-log" class="success-log">
+[WIZARD] Aligning step parameters...
+[WIZARD] Compiling Personal Details (Step 1)...
+[WIZARD] Compiling Academic History (Step 2)...
+[WIZARD] Compiling City & Preferences (Step 3)...
+[WIZARD] Onboarding file completed successfully.
+[SUCCESS] Profile index: 09 compiled.
+                </pre>
+                <div class="success-footer">
+                    <button type="button" id="download-blueprint" class="btn-next green-glass-btn">Download Profile</button>
+                    <button type="button" id="dismiss-overlay" class="btn-back">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
