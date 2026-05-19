@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medit - Personal Health & Wellness Dashboard</title>
+  <meta name="description" content="Medit dashboard for personal tests, analysis, weekly schedule, and vitamin supplement tracking.">
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="top-nav">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            <circle cx="8" cy="8" r="1.5" fill="currentColor"/>
+            <circle cx="16" cy="16" r="1.5" fill="currentColor"/>
+            <path d="M8 8l8 8" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <span class="logo-text">medit</span>
+      </div>
+
+      <nav class="nav-tabs-container">
+        <ul class="nav-tabs">
+          <li class="nav-item active" data-tab="dashboard" title="Dashboard">
+            <button class="nav-btn"><i data-lucide="layout-grid"></i></button>
+          </li>
+          <li class="nav-item" data-tab="analytics" title="Analytics & Tests">
+            <button class="nav-btn"><i data-lucide="line-chart"></i></button>
+          </li>
+          <li class="nav-item" data-tab="supplements" title="Vitamin Supplements">
+            <button class="nav-btn"><i data-lucide="pill"></i></button>
+          </li>
+          <li class="nav-item" data-tab="calendar" title="Weekly Calendar">
+            <button class="nav-btn"><i data-lucide="calendar"></i></button>
+          </li>
+          <li class="nav-item" data-tab="settings" title="Profile Settings">
+            <button class="nav-btn"><i data-lucide="settings"></i></button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="profile-area" id="profile-trigger">
+        <div class="profile-info">
+          <span class="profile-name" id="user-name-display">Hugo Olofsson</span>
+          <span class="profile-email" id="user-email-display">hugo@project.io</span>
+        </div>
+        <div class="profile-avatar-container">
+          <img src="assets/hugo.png" alt="Hugo Olofsson" id="user-avatar-display" class="profile-avatar">
+        </div>
+        <i data-lucide="chevron-down" class="profile-arrow"></i>
+      </div>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="main-content">
+      
+      <!-- 1. DASHBOARD VIEW (Default) -->
+      <section id="dashboard-view" class="tab-view active">
+        
+        <div class="dashboard-grid">
+          
+          <!-- LEFT COLUMN: Personal Tests and Analysis -->
+          <div class="column-left card neumorphic-card">
+            <div class="column-header">
+              <h2>Personal Tests and Analysis</h2>
+              <div class="header-nav-btns">
+                <button class="nav-arrow-btn" id="prev-test-btn" title="Previous Tests"><i data-lucide="chevron-left"></i></button>
+                <button class="nav-arrow-btn" id="next-test-btn" title="Next Tests"><i data-lucide="chevron-right"></i></button>
+              </div>
+            </div>
+
+            <!-- Pill Filters -->
+            <div class="pill-filters">
+              <button class="pill-btn active" data-filter="all">All</button>
+              <button class="pill-btn" data-filter="advice">Advice</button>
+              <button class="pill-btn" data-filter="tests">Tests</button>
+              <button class="pill-btn" data-filter="labs">Labs</button>
+              <button class="pill-btn" data-filter="docs">Docs</button>
+            </div>
+
+            <!-- Test Cards Carousel Container -->
+            <div class="carousel-viewport">
+              <div class="test-cards-track" id="test-cards-container">
+                <!-- Cards will be populated dynamically by app.js -->
+              </div>
+            </div>
+
+            <!-- Calendar Month Selector -->
+            <div class="month-navigator">
+              <button class="nav-arrow-btn small" id="prev-month-btn"><i data-lucide="chevron-left"></i></button>
+              <span class="current-month" id="current-month-display">October, 2022</span>
+              <button class="nav-arrow-btn small" id="next-month-btn"><i data-lucide="chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- MIDDLE COLUMN: 3D DNA Helix View -->
+          <div class="column-middle card neumorphic-card text-center">
+            <div class="dna-metric">
+              <span class="metric-letter">B</span>
+              <span class="metric-label">Structure</span>
+              <span class="metric-value">23.3 <span class="metric-unit">Angstrom</span></span>
+            </div>
+
+            <!-- DNA Canvas Container -->
+            <div class="dna-canvas-container">
+              <canvas id="dna-canvas"></canvas>
+              
+              <!-- Floating action icons -->
+              <div class="floating-controls">
+                <button class="float-btn" id="btn-pulse" title="Pulse Analyzer">
+                  <i data-lucide="activity"></i>
+                </button>
+                <button class="float-btn active" id="btn-dna" title="DNA Sequence View">
+                  <i data-lucide="dna"></i>
+                </button>
+                <button class="float-btn" id="btn-scan" title="Bio Scanner">
+                  <i data-lucide="scan"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Vitamin Supplements -->
+          <div class="column-right card neumorphic-card">
+            <div class="column-header">
+              <h2>Your Vitamin Supplements</h2>
+              <div class="header-nav-btns">
+                <button class="nav-arrow-btn" id="prev-supp-btn" title="Previous Supplements"><i data-lucide="chevron-left"></i></button>
+                <button class="nav-arrow-btn" id="next-supp-btn" title="Next Supplements"><i data-lucide="chevron-right"></i></button>
+              </div>
+            </div>
+
+            <!-- Supplement Grid View -->
+            <div class="supp-carousel-viewport">
+              <div class="supp-cards-track" id="supplements-container">
+                <!-- Supplement items will be populated dynamically by app.js -->
+              </div>
+            </div>
+
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators" id="supp-indicators">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM TIMELINE SECTION -->
+        <section class="bottom-timeline card neumorphic-card">
+          <div class="timeline-header">
+            <h3>Weekly Schedule & Planners</h3>
+            <button class="add-event-btn neumorphic-btn" id="open-add-event-modal">
+              <i data-lucide="plus"></i> Add Event
+            </button>
+          </div>
+          
+          <div class="days-row" id="days-container">
+            <!-- Render Mon - Sun days dynamically -->
+          </div>
+
+          <div class="schedule-details neumorphic-card-inset" id="schedule-details-container">
+            <!-- Selected day items shown here -->
+            <div class="schedule-empty-state">
+              <p>Select a day to view tests, advices, and supplements.</p>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- 2. ANALYTICS VIEW -->
+      <section id="analytics-view" class="tab-view">
+        <div class="view-header">
+          <h1>Analytics & Health Trends</h1>
+          <p>Detailed analysis of your clinical records and health metrics over time.</p>
+        </div>
+        
+        <div class="analytics-grid">
+          <div class="card neumorphic-card detail-chart-card">
+            <h3>Cardiogram Trend (Heart Rate Variability)</h3>
+            <div class="large-chart-container">
+              <svg id="large-heart-chart" class="svg-chart" viewBox="0 0 800 250">
+                <!-- SVG path drawn via JS -->
+              </svg>
+            </div>
+            <div class="chart-stats">
+              <div class="stat-box">
+                <span class="stat-val" id="hr-avg">72 bpm</span>
+                <span class="stat-lbl">Average Pulse</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val" id="hr-max">110 bpm</span>
+                <span class="stat-lbl">Peak Heart Rate</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val" id="hr-min">58 bpm</span>
+                <span class="stat-lbl">Resting Rate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card neumorphic-card detail-chart-card">
+            <h3>Blood Pressure Diagnostics</h3>
+            <div class="large-chart-container">
+              <svg id="large-bp-chart" class="svg-chart" viewBox="0 0 800 250">
+                <!-- SVG bar chart drawn via JS -->
+              </svg>
+            </div>
+            <div class="chart-stats">
+              <div class="stat-box">
+                <span class="stat-val" id="bp-avg">120/80</span>
+                <span class="stat-lbl">Average Reading</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val" id="bp-sys-max">135 mmHg</span>
+                <span class="stat-lbl">Max Systolic</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-val" id="bp-dia-min">74 mmHg</span>
+                <span class="stat-lbl">Min Diastolic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SUPPLEMENTS VIEW -->
+      <section id="supplements-view" class="tab-view">
+        <div class="view-header">
+          <h1>Supplement Manager & Cabinet</h1>
+          <button class="add-event-btn neumorphic-btn" id="open-add-supp-modal">
+            <i data-lucide="plus"></i> Add Supplement
+          </button>
+        </div>
+        
+        <div class="cabinet-grid" id="full-supp-grid">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 4. CALENDAR VIEW -->
+      <section id="calendar-view" class="tab-view">
+        <div class="view-header">
+          <h1>Clinical Appointment Planner</h1>
+          <button class="add-event-btn neumorphic-btn" id="calendar-add-event-btn">
+            <i data-lucide="plus"></i> Schedule Test
+          </button>
+        </div>
+
+        <div class="calendar-layout">
+          <div class="calendar-sidebar neumorphic-card">
+            <h3>Upcoming Reminders</h3>
+            <ul class="reminder-list" id="calendar-reminders-list">
+              <!-- Reminders list -->
+            </ul>
+          </div>
+          <div class="calendar-main neumorphic-card">
+            <div class="calendar-month-header">
+              <h2>October 2022</h2>
+            </div>
+            <div class="calendar-grid-header">
+              <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+            </div>
+            <div class="calendar-cells" id="calendar-days-grid">
+              <!-- 35 calendar cells populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SETTINGS VIEW -->
+      <section id="settings-view" class="tab-view">
+        <div class="view-header">
+          <h1>Profile & Account Settings</h1>
+        </div>
+
+        <div class="settings-layout">
+          <div class="card neumorphic-card profile-settings-card">
+            <h3>Personal Information</h3>
+            <form id="profile-settings-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="settings-name">Full Name</label>
+                  <input type="text" id="settings-name" class="neumorphic-input" value="Hugo Olofsson" required>
+                </div>
+                <div class="form-group">
+                  <label for="settings-email">Email Address</label>
+                  <input type="email" id="settings-email" class="neumorphic-input" value="hugo@project.io" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="settings-age">Age</label>
+                  <input type="number" id="settings-age" class="neumorphic-input" value="29">
+                </div>
+                <div class="form-group">
+                  <label for="settings-blood-type">Blood Group</label>
+                  <select id="settings-blood-type" class="neumorphic-select">
+                    <option value="A+">A Positive (A+)</option>
+                    <option value="A-">A Negative (A-)</option>
+                    <option value="B+" selected>B Positive (B+)</option>
+                    <option value="B-">B Negative (B-)</option>
+                    <option value="O+">O Positive (O+)</option>
+                    <option value="O-">O Negative (O-)</option>
+                    <option value="AB+">AB Positive (AB+)</option>
+                    <option value="AB-">AB Negative (AB-)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="settings-bio">Medical Notes</label>
+                <textarea id="settings-bio" class="neumorphic-input text-area" rows="3">Diagnosed with mild hypertension. Tracking daily supplement intake and bi-weekly cardiogram / blood pressure tests.</textarea>
+              </div>
+              <button type="submit" class="save-settings-btn neumorphic-btn">Save Changes</button>
+            </form>
+          </div>
+
+          <div class="card neumorphic-card preferences-card">
+            <h3>App Customization</h3>
+            <div class="preference-item">
+              <div>
+                <h4>Dark Theme Mode</h4>
+                <p>Switch between dark and light appearance</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="preference-item">
+              <div>
+                <h4>Push Notifications</h4>
+                <p>Receive sound reminders for supplements & test schedules</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="push-notifications-toggle" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="preference-item">
+              <div>
+                <h4>Biometric Sync</h4>
+                <p>Sync pulse/blood pressure directly from Apple Health / Wearable</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="biometric-toggle" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- MODAL: ADD EVENT/APPOINTMENT -->
+    <div class="modal-overlay" id="add-event-modal">
+      <div class="modal-content neumorphic-card">
+        <div class="modal-header">
+          <h3>Add Schedule Event</h3>
+          <button class="modal-close-btn" id="close-event-modal"><i data-lucide="x"></i></button>
+        </div>
+        <form id="add-event-form">
+          <div class="form-group">
+            <label for="event-title">Event Title</label>
+            <input type="text" id="event-title" class="neumorphic-input" placeholder="e.g. Blood Pressure Check" required>
+          </div>
+          <div class="form-group">
+            <label for="event-doctor">Doctor Name (Optional)</label>
+            <input type="text" id="event-doctor" class="neumorphic-input" placeholder="e.g. Dr. Wesley Cain">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-day">Day of Week</label>
+              <select id="event-day" class="neumorphic-select">
+                <option value="Mon">Monday</option>
+                <option value="Tue">Tuesday</option>
+                <option value="Wed">Wednesday</option>
+                <option value="Thu">Thursday</option>
+                <option value="Fri">Friday</option>
+                <option value="Sat">Saturday</option>
+                <option value="Sun">Sunday</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="event-time">Time</label>
+              <input type="time" id="event-time" class="neumorphic-input" value="14:00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="event-type">Event Type</label>
+            <div class="custom-radio-group">
+              <label class="radio-label">
+                <input type="radio" name="event-type" value="Test" checked>
+                <span class="radio-custom"></span> Test
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="event-type" value="Advice">
+                <span class="radio-custom"></span> Advice
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="event-type" value="Supplement">
+                <span class="radio-custom"></span> Supplement
+              </label>
+            </div>
+          </div>
+          <div class="form-group" id="detail-input-group">
+            <label for="event-detail">Value or Subtext</label>
+            <input type="text" id="event-detail" class="neumorphic-input" placeholder="e.g. 2 Tests or OMEGA 3 capsule">
+          </div>
+          <button type="submit" class="submit-modal-btn neumorphic-btn">Add to Calendar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: ADD SUPPLEMENT -->
+    <div class="modal-overlay" id="add-supp-modal">
+      <div class="modal-content neumorphic-card">
+        <div class="modal-header">
+          <h3>Add Vitamin Supplement</h3>
+          <button class="modal-close-btn" id="close-supp-modal"><i data-lucide="x"></i></button>
+        </div>
+        <form id="add-supp-form">
+          <div class="form-group">
+            <label for="supp-name">Supplement Name</label>
+            <input type="text" id="supp-name" class="neumorphic-input" placeholder="e.g. Vitamin D3" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="supp-dosage">Dosage Amount</label>
+              <input type="text" id="supp-dosage" class="neumorphic-input" placeholder="e.g. 1000 IU or 250 mg" required>
+            </div>
+            <div class="form-group">
+              <label for="supp-frequency">Frequency</label>
+              <select id="supp-frequency" class="neumorphic-select">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-weekly">Bi-weekly</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="supp-image-select">Visual Design Bottle/Color</label>
+            <select id="supp-image-select" class="neumorphic-select">
+              <option value="omega3.png">Blue OMEGA 3 Jar</option>
+              <option value="aflubin.png">Pink/Blue Aflubin Capsules</option>
+              <option value="timestin.png">Green Timestin Bottle</option>
+              <option value="vitaminc.png">Pink Vitamin C Bottle</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-modal-btn neumorphic-btn">Save Supplement</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: DETAILED HEALTH RECORD VIEW -->
+    <div class="modal-overlay" id="record-detail-modal">
+      <div class="modal-content neumorphic-card">
+        <div class="modal-header">
+          <h3 id="record-detail-title">Diagnostic Record</h3>
+          <button class="modal-close-btn" id="close-detail-modal"><i data-lucide="x"></i></button>
+        </div>
+        <div class="record-detail-body">
+          <div class="detail-meta">
+            <div class="meta-item">
+              <span class="meta-label">Doctor</span>
+              <span class="meta-value" id="record-detail-doctor">Dr. Wesley Cain</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Date Completed</span>
+              <span class="meta-value" id="record-detail-date">15 Feb, 2022</span>
+            </div>
+          </div>
+          <div class="detail-stats-card neumorphic-card-inset">
+            <h4 id="record-metric-title">Diagnostics Readings</h4>
+            <div class="detail-large-val" id="record-detail-value">120 / 80 mmHg</div>
+            <p class="status-badge normal" id="record-detail-status">Optimal Reading</p>
+          </div>
+          <div class="detail-section">
+            <h4>Clinical Notes</h4>
+            <p id="record-detail-notes">Patient displays healthy cardiovascular metrics. Resting pulse rate is regular. Continue current supplement schedule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

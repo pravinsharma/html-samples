@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spark Pixel Team - Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="agency-dropdown" id="agencyDropdown">
+          <div class="agency-info">
+            <div class="agency-logo">S</div>
+            <div class="agency-details">
+              <span class="agency-label">Agency</span>
+              <span class="agency-name">Spark Pixel Team</span>
+            </div>
+          </div>
+          <div class="dropdown-icon">
+            <i data-lucide="chevrons-up-down"></i>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <!-- Main Menu -->
+        <div class="menu-group">
+          <h3 class="menu-group-title">Main Menu</h3>
+          <ul class="menu-items">
+            <li class="menu-item active" data-tab="dashboard">
+              <a href="#dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+            </li>
+            <li class="menu-item" data-tab="products">
+              <a href="#products"><i data-lucide="package"></i>Products</a>
+            </li>
+            <li class="menu-item" data-tab="transactions">
+              <a href="#transactions"><i data-lucide="arrow-left-right"></i>Transactions</a>
+            </li>
+            <li class="menu-item" data-tab="reports">
+              <a href="#reports"><i data-lucide="bar-chart-2"></i>Reports & Analytics</a>
+            </li>
+            <li class="menu-item" data-tab="messages">
+              <a href="#messages"><i data-lucide="message-square"></i>Messages</a>
+            </li>
+            <li class="menu-item" data-tab="performance">
+              <a href="#performance"><i data-lucide="users"></i>Team Performance</a>
+            </li>
+            <li class="menu-item" data-tab="campaigns">
+              <a href="#campaigns"><i data-lucide="megaphone"></i>Campaigns</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Customers -->
+        <div class="menu-group">
+          <h3 class="menu-group-title">Customers</h3>
+          <ul class="menu-items">
+            <li class="menu-item" data-tab="customers">
+              <a href="#customers"><i data-lucide="users-2"></i>Customer List</a>
+            </li>
+            <li class="menu-item" data-tab="channels">
+              <a href="#channels"><i data-lucide="hash"></i>Channels</a>
+            </li>
+            <li class="menu-item" data-tab="orders">
+              <a href="#orders"><i data-lucide="clipboard-list"></i>Order Management</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Management -->
+        <div class="menu-group">
+          <h3 class="menu-group-title">Management</h3>
+          <ul class="menu-items">
+            <li class="menu-item" data-tab="roles">
+              <a href="#roles"><i data-lucide="shield-check"></i>Roles & Permissions</a>
+            </li>
+            <li class="menu-item" data-tab="billing">
+              <a href="#billing"><i data-lucide="credit-card"></i>Billing & Subscription</a>
+            </li>
+            <li class="menu-item" data-tab="integrations">
+              <a href="#integrations"><i data-lucide="blocks"></i>Integrations</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Settings -->
+        <div class="menu-group">
+          <ul class="menu-items">
+            <li class="menu-item" data-tab="settings">
+              <a href="#settings"><i data-lucide="settings"></i>Settings</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Workspace Content -->
+    <div class="main-wrapper">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div style="display: flex; align-items: center;">
+          <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="breadcrumb-container">
+            <a href="#" class="breadcrumb-parent">Dashboard</a>
+            <span class="breadcrumb-separator">></span>
+            <span class="breadcrumb-current" id="currentBreadcrumb">Overview</span>
+          </div>
+        </div>
+
+        <div class="top-navbar-actions">
+          <div class="search-container">
+            <span class="search-icon"><i data-lucide="search"></i></span>
+            <input type="text" class="search-input" id="globalSearch" placeholder="Search...">
+          </div>
+          <button class="nav-button" aria-label="View Notifications" id="notificationsBtn">
+            <i data-lucide="bell"></i>
+            <span class="nav-button-badge"></span>
+          </button>
+          <div class="user-profile" id="userProfileBtn">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Salung User Avatar" class="user-avatar">
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Page Content -->
+      <main class="content-area">
+        
+        <!-- DASHBOARD PAGE VIEW -->
+        <section class="page-view active" id="dashboard-view">
+          <div class="welcome-section">
+            <h1 class="welcome-title">Welcome back, Salung</h1>
+          </div>
+
+          <!-- Stats summary row -->
+          <div class="stats-grid">
+            <!-- Revenue Card -->
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Total Revenue</span>
+              </div>
+              <div class="stat-main-row">
+                <span class="stat-value">$20,320</span>
+                <div class="stat-mini-graph">
+                  <div class="stat-mini-bar" style="height: 12px;"></div>
+                  <div class="stat-mini-bar" style="height: 18px;"></div>
+                  <div class="stat-mini-bar" style="height: 10px;"></div>
+                  <div class="stat-mini-bar" style="height: 24px;"></div>
+                  <div class="stat-mini-bar highlight" style="height: 32px;"></div>
+                  <div class="stat-mini-bar" style="height: 20px;"></div>
+                  <div class="stat-mini-bar" style="height: 15px;"></div>
+                </div>
+              </div>
+              <div class="stat-footer">
+                <span class="trend-badge up"><i data-lucide="arrow-up-right"></i></span>
+                <span class="trend-text"><span class="trend-highlight">+0.94</span> last year</span>
+              </div>
+            </div>
+
+            <!-- Orders Card -->
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>Total Orders</span>
+              </div>
+              <div class="stat-main-row">
+                <span class="stat-value">10,320 <span class="stat-label-suffix">Orders</span></span>
+                <div class="stat-mini-graph">
+                  <div class="stat-mini-bar" style="height: 8px;"></div>
+                  <div class="stat-mini-bar" style="height: 14px;"></div>
+                  <div class="stat-mini-bar" style="height: 22px;"></div>
+                  <div class="stat-mini-bar" style="height: 18px;"></div>
+                  <div class="stat-mini-bar highlight" style="height: 32px;"></div>
+                  <div class="stat-mini-bar" style="height: 24px;"></div>
+                  <div class="stat-mini-bar" style="height: 12px;"></div>
+                </div>
+              </div>
+              <div class="stat-footer">
+                <span class="trend-badge up"><i data-lucide="arrow-up-right"></i></span>
+                <span class="trend-text"><span class="trend-highlight">+0.91</span> last year</span>
+              </div>
+            </div>
+
+            <!-- Customers Card -->
+            <div class="stat-card">
+              <div class="stat-header">
+                <span>New Customers</span>
+              </div>
+              <div class="stat-main-row">
+                <span class="stat-value">4,305 <span class="stat-label-suffix">New Users</span></span>
+                <div class="stat-mini-graph">
+                  <div class="stat-mini-bar" style="height: 15px;"></div>
+                  <div class="stat-mini-bar" style="height: 10px;"></div>
+                  <div class="stat-mini-bar" style="height: 18px;"></div>
+                  <div class="stat-mini-bar" style="height: 28px;"></div>
+                  <div class="stat-mini-bar highlight" style="height: 32px;"></div>
+                  <div class="stat-mini-bar" style="height: 16px;"></div>
+                  <div class="stat-mini-bar" style="height: 22px;"></div>
+                </div>
+              </div>
+              <div class="stat-footer">
+                <span class="trend-badge up"><i data-lucide="arrow-up-right"></i></span>
+                <span class="trend-text"><span class="trend-highlight">+0.94</span> last year</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pixel Chart Trend Card -->
+          <div class="chart-card">
+            <div class="chart-header-row">
+              <div class="chart-title-container">
+                <span>Sales Trend</span>
+                <button class="info-icon-btn" aria-label="Chart Info" title="Sales statistics overview">
+                  <i data-lucide="info" style="width: 13px; height: 13px;"></i>
+                </button>
+              </div>
+              <div>
+                <button class="more-actions-btn" aria-label="More options"><i data-lucide="more-horizontal"></i></button>
+              </div>
+            </div>
+
+            <div class="chart-sub-header">
+              <div class="chart-sum-info">
+                <div class="chart-sum-val-wrapper">
+                  <span class="chart-sum-label">Total Revenue :</span>
+                  <span class="chart-sum-value">$20,320</span>
+                </div>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <span class="legend-dot new"></span>
+                    <span>New User</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot existing"></span>
+                    <span>Existing User</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="filter-pills">
+                <button class="filter-pill" data-period="weekly">Weekly</button>
+                <button class="filter-pill active" data-period="monthly">Monthly</button>
+                <button class="filter-pill" data-period="yearly">Yearly</button>
+              </div>
+            </div>
+
+            <!-- Pixel Grid Chart Layout -->
+            <div class="chart-display-container" id="chartDisplayContainer">
+              <!-- Y Axis labels -->
+              <div class="chart-y-axis">
+                <span class="chart-y-label">0k</span>
+                <span class="chart-y-label">10k</span>
+                <span class="chart-y-label">20k</span>
+                <span class="chart-y-label">30k</span>
+                <span class="chart-y-label">40k</span>
+                <span class="chart-y-label">50k</span>
+                <span class="chart-y-label">60k</span>
+              </div>
+
+              <!-- Faint Gridlines behind chart -->
+              <div class="chart-grid-lines" id="chartGridlines">
+                <!-- Calculated dynamically in CSS to line up with labels -->
+                <div class="grid-line-item" style="bottom: 0%;"></div>
+                <div class="grid-line-item" style="bottom: 16.666%;"></div>
+                <div class="grid-line-item" style="bottom: 33.333%;"></div>
+                <div class="grid-line-item" style="bottom: 50.000%;"></div>
+                <div class="grid-line-item" style="bottom: 66.666%;"></div>
+                <div class="grid-line-item" style="bottom: 83.333%;"></div>
+                <div class="grid-line-item" style="bottom: 100%;"></div>
+              </div>
+
+              <!-- Columns Container (populated dynamically) -->
+              <div class="chart-columns" id="chartColumns">
+                <!-- Month wrappers will be injected here by app.js -->
+              </div>
+
+              <!-- X Axis labels bottom -->
+              <div class="chart-x-axis" id="chartXAxis">
+                <!-- X labels injected here by app.js -->
+              </div>
+
+              <!-- Hover Tooltip -->
+              <div class="chart-tooltip" id="chartTooltip">
+                <div class="tooltip-header" id="tooltipHeader">Jun 2025</div>
+                <div class="tooltip-row">
+                  <div class="tooltip-label"><span class="legend-dot new"></span>New User</div>
+                  <div class="tooltip-value" id="tooltipNewVal">38k</div>
+                </div>
+                <div class="tooltip-row">
+                  <div class="tooltip-label"><span class="legend-dot existing"></span>Existing User</div>
+                  <div class="tooltip-value" id="tooltipExistingVal">18k</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Grid (Recent Transactions & Team Performance) -->
+          <div class="dashboard-secondary-grid">
+            <div class="widget-card">
+              <div class="widget-header">
+                <h2 class="widget-title">Recent Transactions</h2>
+                <a href="#transactions" class="widget-action-link" id="viewAllTransactionsBtn">View All</a>
+              </div>
+              <div class="widget-table-wrapper">
+                <table class="widget-table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Category</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardTransactionsTable">
+                    <!-- Loaded dynamically in app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="widget-card">
+              <div class="widget-header">
+                <h2 class="widget-title">Team Performance</h2>
+                <a href="#performance" class="widget-action-link">Details</a>
+              </div>
+              <div class="performer-list" id="teamPerformanceList">
+                <!-- Loaded dynamically in app.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRODUCTS PAGE VIEW -->
+        <section class="page-view" id="products-view">
+          <div class="page-header-row">
+            <h1 class="page-title">Products Inventory</h1>
+            <button class="btn-primary" id="addProductBtn">
+              <i data-lucide="plus"></i> Add Product
+            </button>
+          </div>
+
+          <div class="card-table-view">
+            <div class="card-table-filters">
+              <div class="filters-left">
+                <select class="select-filter" id="productCategoryFilter">
+                  <option value="all">All Categories</option>
+                  <option value="Design">Design</option>
+                  <option value="Development">Development</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+                <select class="select-filter" id="productStatusFilter">
+                  <option value="all">All Statuses</option>
+                  <option value="active">Active</option>
+                  <option value="draft">Draft</option>
+                  <option value="out">Out of Stock</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="widget-table-wrapper">
+              <table class="widget-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                  <!-- Loaded dynamically in app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- CUSTOMERS PAGE VIEW -->
+        <section class="page-view" id="customers-view">
+          <div class="page-header-row">
+            <h1 class="page-title">Customer List</h1>
+          </div>
+
+          <div class="card-table-view">
+            <div class="card-table-filters">
+              <div class="filters-left">
+                <select class="select-filter" id="customerStatusFilter">
+                  <option value="all">All Statuses</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="widget-table-wrapper">
+              <table class="widget-table">
+                <thead>
+                  <tr>
+                    <th>Customer Name</th>
+                    <th>Email Address</th>
+                    <th>Joined Date</th>
+                    <th>Total Spend</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="customersTableBody">
+                  <!-- Loaded dynamically in app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TRANSACTIONS PAGE VIEW -->
+        <section class="page-view" id="transactions-view">
+          <div class="page-header-row">
+            <h1 class="page-title">All Transactions</h1>
+          </div>
+
+          <div class="card-table-view">
+            <div class="card-table-filters">
+              <div class="filters-left">
+                <select class="select-filter" id="transactionStatusFilter">
+                  <option value="all">All Transactions</option>
+                  <option value="success">Success</option>
+                  <option value="pending">Pending</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="widget-table-wrapper">
+              <table class="widget-table">
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Customer</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="allTransactionsTableBody">
+                  <!-- Loaded dynamically in app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS PAGE VIEW -->
+        <section class="page-view" id="settings-view">
+          <div class="page-header-row">
+            <h1 class="page-title">System Settings</h1>
+          </div>
+
+          <div class="settings-layout">
+            <div class="settings-nav">
+              <button class="settings-nav-item active" data-settings-tab="general">General Details</button>
+              <button class="settings-nav-item" data-settings-tab="security">Security & Access</button>
+              <button class="settings-nav-item" data-settings-tab="notifications">Notifications</button>
+            </div>
+
+            <div class="settings-form-card">
+              <form id="settingsForm" onsubmit="event.preventDefault();">
+                <h2 class="settings-section-title">General Details</h2>
+                
+                <div class="form-group-grid">
+                  <div class="form-group">
+                    <label for="setFirstName">First Name</label>
+                    <input type="text" id="setFirstName" class="form-input" value="Salung">
+                  </div>
+                  <div class="form-group">
+                    <label for="setLastName">Last Name</label>
+                    <input type="text" id="setLastName" class="form-input" value="Pixel">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="setProfileEmail">Email Address</label>
+                  <input type="email" id="setProfileEmail" class="form-input" value="salung@sparkpixel.team">
+                </div>
+
+                <div class="form-group">
+                  <label for="setAgencyName">Agency Team Name</label>
+                  <input type="text" id="setAgencyName" class="form-input" value="Spark Pixel Team">
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 32px;">
+                  <button type="submit" class="btn-primary" id="saveSettingsBtn">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal View: Add Product -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Product</h3>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addProductForm" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label for="newProdName">Product Name</label>
+            <input type="text" id="newProdName" class="form-input" required placeholder="e.g. Pixel Design System">
+          </div>
+          <div class="form-group">
+            <label for="newProdCategory">Category</label>
+            <select id="newProdCategory" class="form-input">
+              <option value="Design">Design</option>
+              <option value="Development">Development</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+          <div class="form-group-grid">
+            <div class="form-group">
+              <label for="newProdPrice">Price ($)</label>
+              <input type="number" id="newProdPrice" class="form-input" min="0" step="0.01" required placeholder="e.g. 99.00">
+            </div>
+            <div class="form-group">
+              <label for="newProdStock">Stock Quantity</label>
+              <input type="number" id="newProdStock" class="form-input" min="0" required placeholder="e.g. 50">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modalCancelBtn">Cancel</button>
+        <button type="submit" form="addProductForm" class="btn-primary" id="modalSubmitBtn">Create Product</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
