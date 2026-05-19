@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acid Grotesk Labs - Reactor & Formulation Console</title>
+  <meta name="description" content="Technical chemical reactor console and formulation builder for Acid Grotesk Labs. Brutalist layout inspired by clinical chemical warning labels.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Fonts: Space Grotesk for bold headers, Space Mono for technical code/logs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- HAZARD STRIPES TOP BORDER -->
+  <div class="hazard-stripe-top"></div>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <!-- Acid Grotesk Stamp Logo -->
+        <svg class="brand-stamp" viewBox="0 0 100 100" width="80" height="80">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+          <path d="M50 15 A 35 35 0 0 1 85 50 A 35 35 0 0 1 50 85 A 35 35 0 0 1 15 50 A 35 35 0 0 1 50 15 Z" fill="none" stroke="currentColor" stroke-dasharray="1 4"/>
+          <!-- Star shape -->
+          <polygon points="50,33 53,42 62,42 55,48 57,57 50,51 43,57 45,48 38,42 47,42" fill="currentColor"/>
+          <text x="50" y="70" class="stamp-text" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="12">A.G.L.</text>
+        </svg>
+        <div class="brand-names">
+          <span class="brand-title">ACID GROTESK</span>
+          <span class="brand-subtitle">LABORATORIES</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item active" data-tab="dashboard">
+            <button id="nav-btn-dashboard" type="button">
+              <svg class="nav-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+              <span>Reactor Console</span>
+            </button>
+          </li>
+          <li class="nav-item" data-tab="builder">
+            <button id="nav-btn-builder" type="button">
+              <svg class="nav-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Formulation Builder</span>
+            </button>
+          </li>
+          <li class="nav-item" data-tab="safety">
+            <button id="nav-btn-safety" type="button">
+              <svg class="nav-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Safety Diagnostics</span>
+            </button>
+          </li>
+          <li class="nav-item" data-tab="inventory">
+            <button id="nav-btn-inventory" type="button">
+              <svg class="nav-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><line x1="5" y1="6" x2="5.01" y2="6"/><line x1="5" y1="12" x2="5.01" y2="12"/><line x1="5" y1="18" x2="5.01" y2="18"/></svg>
+              <span>Synthesis Logs</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- BARCODE DECAL -->
+      <div class="sidebar-barcode">
+        <svg class="barcode-svg" viewBox="0 0 150 60">
+          <g fill="currentColor">
+            <rect x="0" y="0" width="4" height="45"/>
+            <rect x="6" y="0" width="2" height="45"/>
+            <rect x="10" y="0" width="6" height="45"/>
+            <rect x="18" y="0" width="1" height="45"/>
+            <rect x="22" y="0" width="3" height="45"/>
+            <rect x="28" y="0" width="4" height="45"/>
+            <rect x="34" y="0" width="2" height="45"/>
+            <rect x="38" y="0" width="8" height="45"/>
+            <rect x="48" y="0" width="1" height="45"/>
+            <rect x="52" y="0" width="4" height="45"/>
+            <rect x="58" y="0" width="2" height="45"/>
+            <rect x="62" y="0" width="5" height="45"/>
+            <rect x="70" y="0" width="1" height="45"/>
+            <rect x="74" y="0" width="3" height="45"/>
+            <rect x="80" y="0" width="4" height="45"/>
+            <rect x="86" y="0" width="2" height="45"/>
+            <rect x="90" y="0" width="7" height="45"/>
+            <rect x="100" y="0" width="1" height="45"/>
+            <rect x="104" y="0" width="4" height="45"/>
+            <rect x="110" y="0" width="3" height="45"/>
+            <rect x="115" y="0" width="5" height="45"/>
+            <rect x="122" y="0" width="1" height="45"/>
+            <rect x="125" y="0" width="4" height="45"/>
+            <rect x="131" y="0" width="2" height="45"/>
+            <rect x="135" y="0" width="8" height="45"/>
+            <rect x="146" y="0" width="4" height="45"/>
+          </g>
+          <text x="75" y="55" text-anchor="middle" font-family="'Space Mono', monospace" font-size="8" letter-spacing="1">678-17892-2334(03)</text>
+          <!-- Flashing Laser Scanning Line -->
+          <line class="barcode-laser" x1="0" y1="22" x2="150" y2="22" stroke="#ff3b30" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <div class="pulse-dot status-active"></div>
+          <span>SECURE PROTOCOL ACTV</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONSOLE SCREEN -->
+    <main class="main-content">
+      
+      <!-- TOP CONSOLE HEADER -->
+      <header class="top-header">
+        <div class="header-left">
+          <span class="sub-label">REACTOR ARRAY SECURITY STATUS</span>
+          <div class="status-grid">
+            <span class="status-badge warning-blink">POTENTIAL RISK</span>
+            <span class="header-reactor-info">BATCH PROTOCOL 456728</span>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <div class="meta-item">
+            <span class="meta-label">SYS_CLOCK</span>
+            <span id="current-time" class="meta-value">14:53:51 PM</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">ATM_PRESS</span>
+            <span id="atmos-press" class="meta-value">1.013 BAR</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">LATENCY</span>
+            <span class="meta-value text-accent">0.02ms</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 1. REACTOR DASHBOARD TAB PANEL -->
+      <section id="panel-dashboard" class="tab-panel active-panel">
+        
+        <!-- Tab Sub-header with Chemical Selectors -->
+        <div class="dashboard-banner">
+          <div class="banner-text">
+            <h1>ACID REACTION DYNAMICS</h1>
+            <p>Real-time telemetry and monitoring interface for core chemical synthesis reactors.</p>
+          </div>
+          
+          <div class="chemical-selector-bar">
+            <span class="selector-title">ACTIVE MONITORING:</span>
+            <div class="sub-nav">
+              <button class="sub-nav-btn active" data-reactor="all">ALL REACTORS</button>
+              <button class="sub-nav-btn" data-reactor="r1">NITRIC ACID R-01</button>
+              <button class="sub-nav-btn" data-reactor="r2">SULFURIC ACID R-02</button>
+              <button class="sub-nav-btn" data-reactor="r3">HYALURONIC R-03</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <!-- REACTOR 1 CARD: Nitric Acid (Aesthetic Warning Label layout) -->
+          <div class="card col-4 reactor-card" data-reactor-id="r1">
+            <div class="card-header">
+              <div class="label-badge">R-01</div>
+              <div class="title-block">
+                <span class="card-subtitle">FORMULA: HNO₃</span>
+                <h3 class="card-title">NITRIC ACID GLACIAL</h3>
+              </div>
+              <span class="badge danger-bg">CORROSIVE</span>
+            </div>
+            
+            <div class="card-decal-row">
+              <div class="mini-nfpa">
+                <div class="nfpa-cell health" data-val="3">3</div>
+                <div class="nfpa-cell fire" data-val="0">0</div>
+                <div class="nfpa-cell react" data-val="2">2</div>
+                <div class="nfpa-cell special" data-val="OX">OX</div>
+              </div>
+              <div class="cas-label">
+                <span>CAS NO. 7697-37-2</span>
+                <span>VOL: 200 Liters</span>
+              </div>
+            </div>
+
+            <!-- SVG Dials Grid -->
+            <div class="dials-grid">
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r1-temp-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="100.5" />
+                  <text x="50" y="48" class="dial-value r1-temp-txt" text-anchor="middle">64.8°C</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">HEAT LEVEL</text>
+                </svg>
+              </div>
+              
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r1-press-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="160.8" />
+                  <text x="50" y="48" class="dial-value r1-press-txt" text-anchor="middle">2.41 BAR</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">PRESSURE</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="reactor-meta-block">
+              <div class="meta-row">
+                <span>TARGET PH VALUE</span>
+                <span class="text-mono">0.85 pH</span>
+              </div>
+              <div class="meta-row">
+                <span>FLOW VELOCITY</span>
+                <span class="text-mono">1.82 L/m</span>
+              </div>
+              <div class="safety-override-row">
+                <span class="switch-label-text">Auto-Vent Valve</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked class="r1-vent-switch">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- REACTOR 2 CARD: Sulfuric Acid -->
+          <div class="card col-4 reactor-card" data-reactor-id="r2">
+            <div class="card-header">
+              <div class="label-badge">R-02</div>
+              <div class="title-block">
+                <span class="card-subtitle">FORMULA: H₂SO₄</span>
+                <h3 class="card-title">SULFURIC ACID</h3>
+              </div>
+              <span class="badge danger-bg">TOXIC</span>
+            </div>
+            
+            <div class="card-decal-row">
+              <div class="mini-nfpa">
+                <div class="nfpa-cell health" data-val="3">3</div>
+                <div class="nfpa-cell fire" data-val="0">0</div>
+                <div class="nfpa-cell react" data-val="2">2</div>
+                <div class="nfpa-cell special" data-val="W">W</div>
+              </div>
+              <div class="cas-label">
+                <span>CAS NO. 7664-93-9</span>
+                <span>VOL: 350 Liters</span>
+              </div>
+            </div>
+
+            <!-- SVG Dials Grid -->
+            <div class="dials-grid">
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r2-temp-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="75.3" />
+                  <text x="50" y="48" class="dial-value r2-temp-txt" text-anchor="middle">88.5°C</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">HEAT LEVEL</text>
+                </svg>
+              </div>
+              
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r2-press-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="180.2" />
+                  <text x="50" y="48" class="dial-value r2-press-txt" text-anchor="middle">1.18 BAR</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">PRESSURE</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="reactor-meta-block">
+              <div class="meta-row">
+                <span>TARGET PH VALUE</span>
+                <span class="text-mono">0.30 pH</span>
+              </div>
+              <div class="meta-row">
+                <span>FLOW VELOCITY</span>
+                <span class="text-mono">3.40 L/m</span>
+              </div>
+              <div class="safety-override-row">
+                <span class="switch-label-text">Auto-Vent Valve</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" class="r2-vent-switch">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- REACTOR 3 CARD: Hyaluronic Acid Formulation -->
+          <div class="card col-4 reactor-card" data-reactor-id="r3">
+            <div class="card-header">
+              <div class="label-badge">R-03</div>
+              <div class="title-block">
+                <span class="card-subtitle">HYALURONIC 60mg + LIDO 2%</span>
+                <h3 class="card-title">COMPOUND MATRIX R-03</h3>
+              </div>
+              <span class="badge warning-bg">STABLE</span>
+            </div>
+            
+            <div class="card-decal-row">
+              <div class="mini-nfpa">
+                <div class="nfpa-cell health" data-val="1">1</div>
+                <div class="nfpa-cell fire" data-val="1">1</div>
+                <div class="nfpa-cell react" data-val="0">0</div>
+                <div class="nfpa-cell special" data-val="-">-</div>
+              </div>
+              <div class="cas-label">
+                <span>BATCH REF: 678-17</span>
+                <span>VOL: 120 Liters</span>
+              </div>
+            </div>
+
+            <!-- SVG Dials Grid -->
+            <div class="dials-grid">
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r3-temp-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="190.5" />
+                  <text x="50" y="48" class="dial-value r3-temp-txt" text-anchor="middle">24.2°C</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">HEAT LEVEL</text>
+                </svg>
+              </div>
+              
+              <div class="dial-wrapper">
+                <svg class="dial-svg" viewBox="0 0 100 100">
+                  <circle class="dial-track" cx="50" cy="50" r="40" />
+                  <circle class="dial-progress r3-press-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="200.0" />
+                  <text x="50" y="48" class="dial-value r3-press-txt" text-anchor="middle">0.98 BAR</text>
+                  <text x="50" y="65" class="dial-label" text-anchor="middle">PRESSURE</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="reactor-meta-block">
+              <div class="meta-row">
+                <span>TARGET PH VALUE</span>
+                <span class="text-mono">6.50 pH</span>
+              </div>
+              <div class="meta-row">
+                <span>FLOW VELOCITY</span>
+                <span class="text-mono">0.45 L/m</span>
+              </div>
+              <div class="safety-override-row">
+                <span class="switch-label-text">Auto-Vent Valve</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked class="r3-vent-switch">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- DIAGNOSTIC GRAPH CARD (Full width graphic matching WebP) -->
+          <div class="card col-8 chart-card">
+            <div class="card-header">
+              <div class="title-block">
+                <span class="card-subtitle">DIAGNOSTIC WAVEFORM MATRIX</span>
+                <h3 class="card-title">P (Next Neighbour) vs Position [mm]</h3>
+              </div>
+              <div class="graph-legend">
+                <span class="legend-item"><span class="legend-color stroke-solid"></span>ACTIVE SIGNAL</span>
+                <span class="legend-item"><span class="legend-color stroke-dashed"></span>LIMIT THRESHOLD</span>
+              </div>
+            </div>
+            
+            <div class="chart-content">
+              <svg class="diagnostic-chart-svg" viewBox="0 0 650 200" id="live-telemetry-chart">
+                <!-- Grid Lines -->
+                <line class="chart-gridline" x1="40" y1="20" x2="620" y2="20" />
+                <line class="chart-gridline" x1="40" y1="60" x2="620" y2="60" />
+                <line class="chart-gridline" x1="40" y1="100" x2="620" y2="100" />
+                <line class="chart-gridline" x1="40" y1="140" x2="620" y2="140" />
+                <line class="chart-gridline" x1="40" y1="180" x2="620" y2="180" />
+                
+                <line class="chart-gridline" x1="40" y1="20" x2="40" y2="180" />
+                <line class="chart-gridline" x1="156" y1="20" x2="156" y2="180" />
+                <line class="chart-gridline" x1="272" y1="20" x2="272" y2="180" />
+                <line class="chart-gridline" x1="388" y1="20" x2="388" y2="180" />
+                <line class="chart-gridline" x1="504" y1="20" x2="504" y2="180" />
+                <line class="chart-gridline" x1="620" y1="20" x2="620" y2="180" />
+                
+                <!-- Y-Axis Text labels -->
+                <text class="chart-text" x="15" y="24">1.0</text>
+                <text class="chart-text" x="15" y="64">0.8</text>
+                <text class="chart-text" x="15" y="104">0.6</text>
+                <text class="chart-text" x="15" y="144">0.4</text>
+                <text class="chart-text" x="15" y="184">0.2</text>
+                
+                <!-- X-Axis Text labels -->
+                <text class="chart-text" x="40" y="196">0</text>
+                <text class="chart-text" x="156" y="196">10</text>
+                <text class="chart-text" x="272" y="196">20</text>
+                <text class="chart-text" x="388" y="196">30</text>
+                <text class="chart-text" x="504" y="196">40</text>
+                <text class="chart-text" x="620" y="196">50</text>
+                
+                <!-- Y-Axis Title -->
+                <text class="chart-axis-label" x="10" y="100" transform="rotate(-90 10 100)" text-anchor="middle">P (Next Neighbour)</text>
+                <!-- X-Axis Title -->
+                <text class="chart-axis-label-x" x="330" y="198" text-anchor="middle">Position [mm]</text>
+                
+                <!-- Dashed Threshold Line -->
+                <line class="chart-threshold-line" x1="40" y1="70" x2="620" y2="70" stroke-dasharray="3 3" />
+                
+                <!-- Live Line (Redrawn by app.js) -->
+                <path class="chart-live-path" id="live-chart-path" d="M 40 180 Q 90 150 156 120 T 272 80 T 388 130 T 504 60 T 620 30" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- SYSTEM CALIBRATION & STATS CARD -->
+          <div class="card col-4 stats-panel-card">
+            <div class="card-header">
+              <div class="title-block">
+                <span class="card-subtitle">DIAGNOSTIC UNIT</span>
+                <h3 class="card-title">FLOW ANALYSIS</h3>
+              </div>
+            </div>
+            
+            <div class="stats-panel-content">
+              <div class="technical-spec-block">
+                <div class="spec-header">DIAGNOSTIC MATRIX STATUS</div>
+                <div class="spec-list">
+                  <div class="spec-item">
+                    <span>COEF ALPHA</span>
+                    <span class="text-mono">0.07452-B</span>
+                  </div>
+                  <div class="spec-item">
+                    <span>CALIB COMPLETED</span>
+                    <span class="text-mono">12/12/2026</span>
+                  </div>
+                  <div class="spec-item">
+                    <span>FLOW PRESSURE CONSTANT</span>
+                    <span class="text-mono">e4ML / 1 DRAM</span>
+                  </div>
+                  <div class="spec-item">
+                    <span>REACTIVE INDEX</span>
+                    <span class="text-mono text-accent">100% TCA</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hazard-ribbon-block">
+                <div class="hazard-stripe-mini"></div>
+                <div class="hazard-ribbon-text">
+                  <span>WARNING: CORROSIVE FLUID FLOWS</span>
+                  <span>WEAR APPROVED RESPIRATOR SHIELD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 2. FORMULATION BUILDER TAB PANEL (Core Form View) -->
+      <section id="panel-builder" class="tab-panel">
+        
+        <div class="dashboard-banner">
+          <div class="banner-text">
+            <h1>BATCH FORMULATION BUILDER</h1>
+            <p>Compose, test, and register active formulations for reactor synthesis pipelines.</p>
+          </div>
+        </div>
+
+        <div class="builder-layout">
+          <!-- MAIN FORM -->
+          <form id="formulation-form" class="card col-8 builder-form-card" novalidate>
+            <div class="card-header">
+              <div class="title-block">
+                <span class="card-subtitle">BATCH REGISTRATION</span>
+                <h3 class="card-title">SYNTHESIS INPUT MATRIX</h3>
+              </div>
+              <span class="card-header-badge">FORM_REF_AG-88</span>
+            </div>
+
+            <div class="form-grid">
+              <!-- Text Input: Formula Name -->
+              <div class="input-group full-width">
+                <label class="field-label" for="formula-name">FORMULATION NAME / CODE</label>
+                <div class="input-wrapper">
+                  <input type="text" id="formula-name" class="text-input" placeholder="e.g. Hyaluronic Acid Compound 08A" required>
+                  <span class="input-indicator"></span>
+                </div>
+                <span class="error-message">Formulation code is required.</span>
+              </div>
+
+              <!-- Text Input: Batch ID & CAS Registration -->
+              <div class="input-group">
+                <label class="field-label" for="batch-id">BATCH CODE (SERIAL)</label>
+                <div class="input-wrapper">
+                  <input type="text" id="batch-id" class="text-input" placeholder="e.g. 678-17892-2334" required pattern="[0-9\-]+">
+                  <span class="input-indicator"></span>
+                </div>
+                <span class="error-message">Enter valid numeric batch reference.</span>
+              </div>
+
+              <div class="input-group">
+                <label class="field-label" for="cas-number">CAS REGISTRATION NUMBER</label>
+                <div class="input-wrapper">
+                  <input type="text" id="cas-number" class="text-input" placeholder="e.g. 7664-93-9" required>
+                  <span class="input-indicator"></span>
+                </div>
+                <span class="error-message">CAS registration code is required.</span>
+              </div>
+
+              <!-- Custom Select Dropdown: Base Acid Carrier -->
+              <div class="input-group">
+                <label class="field-label" for="base-carrier">PRIMARY ACID CARRIER</label>
+                <div class="select-wrapper">
+                  <select id="base-carrier" class="custom-select" required>
+                    <option value="" disabled selected>-- SELECT ACID --</option>
+                    <option value="nitric">Nitric Acid (HNO₃)</option>
+                    <option value="sulfuric">Sulfuric Acid (H₂SO₄)</option>
+                    <option value="acetic">Acetic Acid Glacial (CH₃COOH)</option>
+                    <option value="hyaluronic">Hyaluronic Acid (C₁₄H₂₁NO₁₁)</option>
+                  </select>
+                </div>
+                <span class="error-message">Select a valid acid carrier.</span>
+              </div>
+
+              <!-- Custom Stepper: Target Volume (mL) -->
+              <div class="input-group">
+                <label class="field-label">TARGET LIQUID VOLUME (mL)</label>
+                <div class="stepper-control">
+                  <button type="button" class="stepper-btn" id="vol-minus-btn" aria-label="Decrease volume">-</button>
+                  <input type="number" id="volume-input" class="stepper-value" value="60" min="5" max="500" readonly>
+                  <button type="button" class="stepper-btn" id="vol-plus-btn" aria-label="Increase volume">+</button>
+                </div>
+              </div>
+
+              <!-- Range Slider: Target Concentration (%) -->
+              <div class="input-group full-width slider-group">
+                <div class="slider-labels">
+                  <label class="field-label" for="concentration-range">FORMULA CONCENTRATION STRENGTH</label>
+                  <span id="concentration-val" class="slider-bubble">60%</span>
+                </div>
+                <div class="range-wrapper">
+                  <input type="range" id="concentration-range" class="range-input" min="1" max="100" value="60">
+                </div>
+              </div>
+
+              <!-- Segmented Controls / Radio Buttons: Buffer/Stabilizer selection -->
+              <div class="input-group full-width">
+                <span class="field-label">STABILIZING BUFFER STAGE</span>
+                <div class="segmented-control">
+                  <div class="segmented-option">
+                    <input type="radio" id="buffer-lido" name="buffer-agent" value="Lidocaine 2%" class="segmented-input" checked>
+                    <label for="buffer-lido" class="segmented-label">Lidocaine 2%</label>
+                  </div>
+                  <div class="segmented-option">
+                    <input type="radio" id="buffer-saline" name="buffer-agent" value="Saline 0.9%" class="segmented-input">
+                    <label for="buffer-saline" class="segmented-label">Saline 0.9%</label>
+                  </div>
+                  <div class="segmented-option">
+                    <input type="radio" id="buffer-water" name="buffer-agent" value="Purified H2O" class="segmented-input">
+                    <label for="buffer-water" class="segmented-label">Purified H₂O</label>
+                  </div>
+                  <div class="segmented-option">
+                    <input type="radio" id="buffer-none" name="buffer-agent" value="None" class="segmented-input">
+                    <label for="buffer-none" class="segmented-label">None</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Custom Checkboxes: Hazard Classes -->
+              <div class="input-group full-width checkbox-grid-wrapper">
+                <span class="field-label">HAZARD CLASSIFICATIONS (SELECT ALL DETECTED)</span>
+                <div class="custom-checkbox-grid">
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="hazard-corrosive" class="checkbox-input" checked>
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label-text">CORROSIVE FLUID (CLASS 8)</span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="hazard-toxic" class="checkbox-input">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label-text">ACUTE TOXICITY (CLASS 6)</span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="hazard-flammable" class="checkbox-input">
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label-text">FLAMMABLE LIQUID (CLASS 3)</span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" id="hazard-health" class="checkbox-input" checked>
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label-text">HEALTH BIOHAZARD</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Custom Toggles: Safeties -->
+              <div class="input-group full-width toggles-wrapper">
+                <span class="field-label">SAFETY ACTUATION TRIGGERS</span>
+                <div class="toggles-grid">
+                  <label class="toggle-container">
+                    <span class="toggle-label-text">Auto-Ventilation on High Temp</span>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="safety-autovent" checked>
+                      <span class="toggle-slider"></span>
+                    </div>
+                  </label>
+                  <label class="toggle-container">
+                    <span class="toggle-label-text">Trigger Alarm on Over-Pressure</span>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="safety-alarm" checked>
+                      <span class="toggle-slider"></span>
+                    </div>
+                  </label>
+                  <label class="toggle-container">
+                    <span class="toggle-label-text">Override Emergency Drain Valves</span>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="safety-drain">
+                      <span class="toggle-slider"></span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Submit Synthesis Action -->
+              <div class="form-actions full-width">
+                <button type="submit" id="btn-submit-synthesis" class="synthesis-btn">
+                  <span class="btn-hazard-stripes"></span>
+                  <span class="btn-text">INITIALIZE SYNTHESIS PIPELINE</span>
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+          <!-- SIDEBAR FORM PREVIEW (Dynamic NFPA/Barcode preview) -->
+          <div class="builder-preview-sidebar">
+            
+            <!-- Live formulation label preview -->
+            <div class="card label-preview-card">
+              <div class="card-header">
+                <div class="title-block">
+                  <span class="card-subtitle">LIVE PREVIEW</span>
+                  <h3 class="card-title">STICKER LABEL REF</h3>
+                </div>
+              </div>
+              
+              <div class="preview-decal-box">
+                <div class="preview-sticker-header">
+                  <div class="sticker-top-row">
+                    <span class="sticker-brand">ACID GROTESK LABS</span>
+                    <span class="sticker-hosp">HOSPITAL/OFFICE ONLY</span>
+                  </div>
+                  <h2 id="prev-name-display" class="sticker-title-text">HYALURONIC FORMULA 60A</h2>
+                  <div class="sticker-spec-line">
+                    <span id="prev-volume-display">60mL Single Use</span>
+                    <span id="prev-lido-display">Lidocaine 2%</span>
+                  </div>
+                </div>
+
+                <div class="preview-sticker-body">
+                  <div class="sticker-columns">
+                    <div class="sticker-col-left">
+                      <!-- Barcode -->
+                      <svg class="preview-barcode-svg" viewBox="0 0 120 40">
+                        <g fill="currentColor" id="dynamic-barcode-bars">
+                          <!-- Auto filled by script -->
+                        </g>
+                        <text x="60" y="38" text-anchor="middle" font-family="'Space Mono', monospace" font-size="6" id="prev-barcode-text">678-17892-2334(03)</text>
+                      </svg>
+                      <p class="sticker-disclaimer">Store at 20° to 25°C. See USP Controlled Room Temperature. Protect from freezing. Discard remainder.</p>
+                    </div>
+
+                    <div class="sticker-col-right">
+                      <!-- NFPA Diamond -->
+                      <div class="sticker-nfpa-diamond" id="sticker-nfpa">
+                        <div class="diamond-quadrant health-quad">
+                          <span id="nfpa-health-val">1</span>
+                        </div>
+                        <div class="diamond-quadrant fire-quad">
+                          <span id="nfpa-fire-val">1</span>
+                        </div>
+                        <div class="diamond-quadrant react-quad">
+                          <span id="nfpa-react-val">0</span>
+                        </div>
+                        <div class="diamond-quadrant special-quad">
+                          <span id="nfpa-special-val">-</span>
+                        </div>
+                      </div>
+                      <div class="sticker-hazard-icons">
+                        <svg class="hazard-icon-svg active" id="ico-corrosive" viewBox="0 0 100 100" title="Corrosive">
+                          <polygon points="50,10 90,80 10,80" fill="none" stroke="currentColor" stroke-width="5"/>
+                          <!-- Corrosive icon paths -->
+                          <line x1="35" y1="65" x2="65" y2="65" stroke="currentColor" stroke-width="4"/>
+                          <path d="M30 45 Q 40 40 45 50 T 60 45" fill="none" stroke="currentColor" stroke-width="4"/>
+                        </svg>
+                        <svg class="hazard-icon-svg" id="ico-toxic" viewBox="0 0 100 100" title="Toxic">
+                          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="5"/>
+                          <!-- Skull representation -->
+                          <circle cx="50" cy="45" r="15" fill="currentColor"/>
+                          <rect x="42" y="55" width="16" height="12" fill="currentColor" rx="2"/>
+                          <circle cx="45" cy="45" r="4" fill="#000"/>
+                          <circle cx="55" cy="45" r="4" fill="#000"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="preview-sticker-footer">
+                  <div class="footer-meta-block">
+                    <span id="prev-cas-display">CAS REF: 7697-37-2</span>
+                    <span class="sticker-date">USE BY: 12/12/2027</span>
+                  </div>
+                  <div class="sticker-hazard-banner" id="sticker-hazard-warning">
+                    POTENTIAL HAZARDS REGISTERED
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diagnostics details -->
+            <div class="card preview-diagnostics-card">
+              <div class="card-header">
+                <h3 class="card-title">SYNTHESIS ESTIMATES</h3>
+              </div>
+              <div class="estimates-list">
+                <div class="est-row">
+                  <span>ESTIMATED DENSITY</span>
+                  <span class="text-mono" id="est-density">1.42 g/cm³</span>
+                </div>
+                <div class="est-row">
+                  <span>REACTION HEAT</span>
+                  <span class="text-mono text-accent" id="est-heat">Exothermic (+45.2 kJ)</span>
+                </div>
+                <div class="est-row">
+                  <span>TOTAL SOLUTES</span>
+                  <span class="text-mono" id="est-solute">60.00 mg/mL</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. SAFETY DIAGNOSTICS TAB PANEL -->
+      <section id="panel-safety" class="tab-panel">
+        
+        <div class="dashboard-banner">
+          <div class="banner-text">
+            <h1>SAFETY HAZARD & NFPA CONFIGURATOR</h1>
+            <p>Interactively construct NFPA 704 diamonds, inspect chemical properties, and review critical warning sheets.</p>
+          </div>
+        </div>
+
+        <div class="safety-grid">
+          <!-- LEFT CARD: Interactive NFPA 704 Configurator -->
+          <div class="card col-6 safety-config-card">
+            <div class="card-header">
+              <div class="title-block">
+                <span class="card-subtitle">NFPA 704 MATRIX</span>
+                <h3 class="card-title">DIAMOND GENERATOR</h3>
+              </div>
+            </div>
+            
+            <div class="safety-config-content">
+              
+              <!-- Large Interactive Diamond -->
+              <div class="interactive-diamond-container">
+                <div class="nfpa-diamond-large">
+                  <!-- Health Quadrant (Blue) -->
+                  <div class="quadrant q-health">
+                    <span class="quad-label">HEALTH</span>
+                    <span id="large-health-val" class="quad-val">3</span>
+                  </div>
+                  <!-- Flammability Quadrant (Red) -->
+                  <div class="quadrant q-fire">
+                    <span class="quad-label">FIRE</span>
+                    <span id="large-fire-val" class="quad-val">0</span>
+                  </div>
+                  <!-- Reactivity Quadrant (Yellow) -->
+                  <div class="quadrant q-react">
+                    <span class="quad-label">REACT</span>
+                    <span id="large-react-val" class="quad-val">2</span>
+                  </div>
+                  <!-- Special Hazard Quadrant (White) -->
+                  <div class="quadrant q-special">
+                    <span class="quad-label">SPEC</span>
+                    <span id="large-special-val" class="quad-val">OX</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Controls to change diamond inputs -->
+              <div class="diamond-controls">
+                <div class="control-row">
+                  <label for="ctrl-health" class="ctrl-label">HEALTH HAZARD (BLUE)</label>
+                  <select id="ctrl-health" class="custom-select select-mini">
+                    <option value="0">0 - Normal Material</option>
+                    <option value="1">1 - Slightly Hazardous</option>
+                    <option value="2">2 - Hazardous</option>
+                    <option value="3" selected>3 - Extreme Danger</option>
+                    <option value="4">4 - Deadly</option>
+                  </select>
+                </div>
+
+                <div class="control-row">
+                  <label for="ctrl-fire" class="ctrl-label">FLAMMABILITY (RED)</label>
+                  <select id="ctrl-fire" class="custom-select select-mini">
+                    <option value="0" selected>0 - Will Not Burn</option>
+                    <option value="1">1 - Ignites Above 93°C</option>
+                    <option value="2">2 - Ignites Below 93°C</option>
+                    <option value="3">3 - Ignites Below 37°C</option>
+                    <option value="4">4 - Highly Flammable</option>
+                  </select>
+                </div>
+
+                <div class="control-row">
+                  <label for="ctrl-react" class="ctrl-label">INSTABILITY (YELLOW)</label>
+                  <select id="ctrl-react" class="custom-select select-mini">
+                    <option value="0">0 - Stable</option>
+                    <option value="1">1 - Unstable if Heated</option>
+                    <option value="2" selected>2 - Violent Chemical Change</option>
+                    <option value="3">3 - Shock/Heat May Detonate</option>
+                    <option value="4">4 - May Detonate Spontaneously</option>
+                  </select>
+                </div>
+
+                <div class="control-row">
+                  <label for="ctrl-special" class="ctrl-label">SPECIAL HAZARDS (WHITE)</label>
+                  <select id="ctrl-special" class="custom-select select-mini">
+                    <option value="-">None</option>
+                    <option value="W">W (Reacts violently with Water)</option>
+                    <option value="OX" selected>OX (Oxidizer)</option>
+                    <option value="SA">SA (Simple Asphyxiant)</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RIGHT CARD: Dynamic Warning Labels & Instructions (Matches sample1.webp warning panels) -->
+          <div class="card col-6 safety-warning-card">
+            <div class="card-header">
+              <div class="label-badge badge-warning">DANGER</div>
+              <div class="title-block">
+                <span class="card-subtitle">ACID GROTESK DIAGNOSTICS</span>
+                <h3 class="card-title" id="warning-card-title">IMPROPER CONTACT INSTRUCTIONS</h3>
+              </div>
+            </div>
+            
+            <div class="warning-card-body">
+              <div class="warning-alert-box">
+                <div class="warning-hazard-indicator">
+                  <svg class="warning-skull-svg" viewBox="0 0 100 100" width="80" height="80">
+                    <path d="M 50 15 C 32 15, 25 28, 25 45 C 25 58, 32 68, 40 70 L 40 82 C 40 85, 42 87, 45 87 L 55 87 C 58 87, 60 85, 60 82 L 60 70 C 68 68, 75 58, 75 45 C 75 28, 68 15, 50 15 Z" fill="currentColor"/>
+                    <!-- Eye sockets -->
+                    <circle cx="40" cy="45" r="6" fill="#000" />
+                    <circle cx="60" cy="45" r="6" fill="#000" />
+                    <!-- Nose -->
+                    <polygon points="50,52 46,60 54,60" fill="#000"/>
+                    <!-- Teeth slits -->
+                    <line x1="45" y1="78" x2="45" y2="85" stroke="#000" stroke-width="2"/>
+                    <line x1="50" y1="78" x2="50" y2="85" stroke="#000" stroke-width="2"/>
+                    <line x1="55" y1="78" x2="55" y2="85" stroke="#000" stroke-width="2"/>
+                    <!-- Crossed bones behind -->
+                    <path d="M 12 18 L 88 82 M 88 18 L 12 82" stroke="currentColor" stroke-width="8" stroke-linecap="round" style="z-index:-1;"/>
+                  </svg>
+                </div>
+                <div class="warning-text-block">
+                  <h4 class="warning-main-msg" id="warning-main-header">ACID GROUP CRITICAL WARNING</h4>
+                  <p class="warning-desc-msg" id="warning-desc-text">
+                    DANGER! CORROSIVE CAUSES SEVERE BURNS TO EVERY AREA OF CONTACT. HARMFUL IF SWALLOWED OR INHALED. IMPROPER CONTACT WILL CAUSE SEVERE INJURY OR DEATH.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Chemical Spec Sheet Selector -->
+              <div class="spec-sheet-selector-group">
+                <span class="field-label">SELECT CHEMICAL SAFETY SHEET (MSDS)</span>
+                <div class="msds-links">
+                  <button type="button" class="msds-btn active" data-msds="nitric">HNO₃ (Nitric)</button>
+                  <button type="button" class="msds-btn" data-msds="sulfuric">H₂SO₄ (Sulfuric)</button>
+                  <button type="button" class="msds-btn" data-msds="acetic">CH₃COOH (Acetic)</button>
+                  <button type="button" class="msds-btn" data-msds="hyaluronic">Hyaluronic Compound</button>
+                </div>
+              </div>
+
+              <!-- Safety measures details -->
+              <div class="msds-details-box" id="msds-content-box">
+                <div class="msds-sec">
+                  <span class="msds-sec-title">FIRST AID INSTRUCTIONS</span>
+                  <p id="msds-firstaid">In case of contact, immediately flush eyes or skin with plenty of water for at least 15 minutes while removing contaminated clothing and shoes. Wash clothing before reuse. If inhaled, move to fresh air.</p>
+                </div>
+                <div class="msds-sec">
+                  <span class="msds-sec-title">PROTECTIVE APPARATUS REQUIRED</span>
+                  <p id="msds-ppe">Face shield, chemical-resistant gloves (neoprene/nitrile), heavy protective apron, vapor respirator (type acid-gas).</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. SYNTHESIS LOGS TAB PANEL (Inventory table view) -->
+      <section id="panel-inventory" class="tab-panel">
+        
+        <div class="dashboard-banner">
+          <div class="banner-text">
+            <h1>SYNTHESIS RUN DATABASE</h1>
+            <p>Archived record logs of all formulation batches processed in the Acid Grotesk Reactor Array.</p>
+          </div>
+        </div>
+
+        <div class="card inventory-card">
+          <div class="card-header inventory-header-row">
+            <div class="title-block">
+              <span class="card-subtitle">ARCHIVE DATABASE</span>
+              <h3 class="card-title">COMPLETED BATCH RUNS</h3>
+            </div>
+            
+            <div class="inventory-controls">
+              <!-- Search Filter Input Box -->
+              <div class="search-input-wrapper">
+                <input type="text" id="log-search-input" class="text-input" placeholder="Search batch logs...">
+                <svg class="search-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+
+              <!-- Export Button -->
+              <button type="button" id="export-report-btn" class="export-btn">
+                <span>EXPORT EXCEL/CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- DATA TABLE -->
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>TIMESTAMP</th>
+                  <th>BATCH SERIAL</th>
+                  <th>FORMULATION NAME</th>
+                  <th>PRIMARY CARRIER</th>
+                  <th>VOL (mL)</th>
+                  <th>HAZARDS</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <tr>
+                  <td>2026-05-19 14:38:12</td>
+                  <td>678-17892-2334</td>
+                  <td>Nitric Formula N12-A</td>
+                  <td>Nitric Acid (HNO₃)</td>
+                  <td>200 mL</td>
+                  <td><span class="hazard-badge-text">CORROSIVE</span></td>
+                  <td><span class="badge danger-bg">SYNTHESIZED</span></td>
+                </tr>
+                <tr>
+                  <td>2026-05-19 14:15:09</td>
+                  <td>902-88127-1188</td>
+                  <td>Sulfuric Standard B</td>
+                  <td>Sulfuric Acid (H₂SO₄)</td>
+                  <td>150 mL</td>
+                  <td><span class="hazard-badge-text">TOXIC, CORROSIVE</span></td>
+                  <td><span class="badge danger-bg">SYNTHESIZED</span></td>
+                </tr>
+                <tr>
+                  <td>2026-05-19 13:02:44</td>
+                  <td>456-72883-6056</td>
+                  <td>Hyaluronic Anti-Age 60mg</td>
+                  <td>Hyaluronic Acid (C₁₄H₂₁NO₁₁)</td>
+                  <td>60 mL</td>
+                  <td><span class="hazard-badge-text">HEALTH</span></td>
+                  <td><span class="badge success-bg">DISPENSED</span></td>
+                </tr>
+                <tr>
+                  <td>2026-05-19 11:24:55</td>
+                  <td>302-12773-8910</td>
+                  <td>Glacial Cleaner Batch 09</td>
+                  <td>Acetic Acid Glacial (CH₃COOH)</td>
+                  <td>400 mL</td>
+                  <td><span class="hazard-badge-text">FLAMMABLE</span></td>
+                  <td><span class="badge warning-bg">STANDBY</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty search results placeholder -->
+          <div class="no-results-placeholder" id="no-results" style="display: none;">
+            NO BATCH LOGS FOUND MATCHING TARGET STRING
+          </div>
+
+          <div class="inventory-footer-row">
+            <span id="log-count-text">SHOWING 4 BATCH LOG ENTRIES</span>
+            <span>ACID GROTESK SECURE DATABASE v1.02</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- HAZARD STRIPES BOTTOM BORDER -->
+  <div class="hazard-stripe-bottom"></div>
+
+  <!-- JavaScript file -->
+  <script src="app.js"></script>
+</body>
+</html>

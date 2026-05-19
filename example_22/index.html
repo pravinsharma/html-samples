@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>neutone // dsp-1 core</title>
+  <meta name="description" content="Interactive modular audio synthesizer and DSP effects processor dashboard, styled according to the Neutone modular hardware theme.">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Fonts: Inter for clean geometric sans-serif, Space Mono for lowercase tech telemetry -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <div class="synth-outer-grid">
+    <!-- TOP MODULE HEADER -->
+    <header class="synth-header">
+      <div class="header-logo">
+        <span class="logo-bold">neutone</span>
+        <span class="logo-divider">//</span>
+        <span class="logo-tech">dsp-1 core</span>
+      </div>
+      
+      <div class="header-status">
+        <span class="led-indicator active" id="engine-led"></span>
+        <span class="led-label">engine active</span>
+      </div>
+
+      <div class="header-routes">
+        <div class="route-select-group">
+          <label for="midi-route">midi in</label>
+          <select id="midi-route" class="synth-select">
+            <option value="virtual">virtual keyboard</option>
+            <option value="external" disabled>no midi device found</option>
+          </select>
+        </div>
+        <div class="route-select-group">
+          <label for="audio-route">audio out</label>
+          <select id="audio-route" class="synth-select">
+            <option value="stereo">stereo out</option>
+            <option value="mono">mono mix</option>
+            <option value="bypass">bypass engine</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN INTERACTIVE SYSTEM -->
+    <main class="synth-main-content">
+      
+      <!-- COLUMN 1: ROUTING & SYNTH CONTROLS -->
+      <section class="synth-panel col-left">
+        <div class="panel-header">
+          <span class="panel-num">01</span>
+          <h2>oscillator configuration</h2>
+        </div>
+        
+        <div class="panel-body">
+          <!-- Waveform Radio Group -->
+          <div class="control-group">
+            <span class="control-label">waveform type</span>
+            <div class="synth-radio-grid">
+              <label class="radio-card">
+                <input type="radio" name="osc-wave" value="sine" checked>
+                <span class="radio-custom"></span>
+                <span class="radio-label">sine</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="osc-wave" value="square">
+                <span class="radio-custom"></span>
+                <span class="radio-label">square</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="osc-wave" value="sawtooth">
+                <span class="radio-custom"></span>
+                <span class="radio-label">sawtooth</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="osc-wave" value="triangle">
+                <span class="radio-custom"></span>
+                <span class="radio-label">triangle</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Octave Selection Dropdown -->
+          <div class="control-group">
+            <label class="control-label" for="octave-select">keyboard octave</label>
+            <div class="select-wrapper">
+              <select id="octave-select" class="synth-select full-width">
+                <option value="2">c2 - c3 (low bass)</option>
+                <option value="3" selected>c3 - c4 (mid range)</option>
+                <option value="4">c4 - c5 (treble lead)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Keyboard Controller -->
+          <div class="control-group">
+            <span class="control-label">virtual trigger keys</span>
+            <div class="keyboard-container" id="synth-keyboard">
+              <!-- Keys generated dynamically or laid out in HTML for click handler -->
+              <button class="key white" data-note="C" aria-label="C key"><span>C</span></button>
+              <button class="key black" data-note="C#" aria-label="C sharp key"></button>
+              <button class="key white" data-note="D" aria-label="D key"><span>D</span></button>
+              <button class="key black" data-note="D#" aria-label="D sharp key"></button>
+              <button class="key white" data-note="E" aria-label="E key"><span>E</span></button>
+              <button class="key white" data-note="F" aria-label="F key"><span>F</span></button>
+              <button class="key black" data-note="F#" aria-label="F sharp key"></button>
+              <button class="key white" data-note="G" aria-label="G key"><span>G</span></button>
+              <button class="key black" data-note="G#" aria-label="G sharp key"></button>
+              <button class="key white" data-note="A" aria-label="A key"><span>A</span></button>
+              <button class="key black" data-note="A#" aria-label="A sharp key"></button>
+              <button class="key white" data-note="B" aria-label="B key"><span>B</span></button>
+              <button class="key white" data-note="C2" aria-label="C octave key"><span>C+</span></button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">engine controls</span>
+            <button class="synth-btn action-btn full-width" id="btn-panic">
+              <span>panic / stop all notes</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 2: PARAMETERS & ROTARY KNOBS -->
+      <section class="synth-panel col-middle">
+        <div class="panel-header">
+          <span class="panel-num">02</span>
+          <h2>custom settings & mixing</h2>
+        </div>
+
+        <div class="panel-body">
+          <!-- Parameter Modifiers Block (4 knobs like "custom settings") -->
+          <div class="custom-settings-box">
+            <span class="box-label">custom settings</span>
+            <div class="knob-grid-4">
+              <!-- Knob A -->
+              <div class="knob-cell">
+                <span class="knob-title">a: attack</span>
+                <div class="rotary-knob-wrapper" data-min="0" data-max="2" data-step="0.05" data-val="0.1">
+                  <div class="rotary-knob" id="knob-a" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0.1" aria-label="Attack">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-a">0.10s</span>
+              </div>
+              <!-- Knob B -->
+              <div class="knob-cell">
+                <span class="knob-title">b: decay</span>
+                <div class="rotary-knob-wrapper" data-min="0.1" data-max="3" data-step="0.1" data-val="1.5">
+                  <div class="rotary-knob" id="knob-b" tabindex="0" role="slider" aria-valuemin="0.1" aria-valuemax="3" aria-valuenow="1.5" aria-label="Decay">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-b">1.5s</span>
+              </div>
+              <!-- Knob C -->
+              <div class="knob-cell">
+                <span class="knob-title">c: filter cut</span>
+                <div class="rotary-knob-wrapper" data-min="100" data-max="5000" data-step="50" data-val="1200">
+                  <div class="rotary-knob" id="knob-c" tabindex="0" role="slider" aria-valuemin="100" aria-valuemax="5000" aria-valuenow="1200" aria-label="Filter Cutoff">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-c">1200hz</span>
+              </div>
+              <!-- Knob D -->
+              <div class="knob-cell">
+                <span class="knob-title">d: feedback</span>
+                <div class="rotary-knob-wrapper" data-min="0" data-max="95" data-step="1" data-val="40">
+                  <div class="rotary-knob" id="knob-d" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="95" aria-valuenow="40" aria-label="Feedback">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-d">40%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Mixer Section (Large Knobs: wet, dry, output gain) -->
+          <div class="mixer-modules">
+            <div class="large-knob-row">
+              <!-- Wet Knob -->
+              <div class="large-knob-cell">
+                <span class="knob-title">wet</span>
+                <div class="rotary-knob-wrapper large" data-min="0" data-max="100" data-step="1" data-val="35">
+                  <div class="rotary-knob" id="knob-wet" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35" aria-label="Wet Level">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-wet">35%</span>
+              </div>
+              
+              <!-- Dry Knob -->
+              <div class="large-knob-cell">
+                <span class="knob-title">dry</span>
+                <div class="rotary-knob-wrapper large" data-min="0" data-max="100" data-step="1" data-val="65">
+                  <div class="rotary-knob" id="knob-dry" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65" aria-label="Dry Level">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-dry">65%</span>
+              </div>
+
+              <!-- Output Gain Knob -->
+              <div class="large-knob-cell">
+                <span class="knob-title">output gain</span>
+                <div class="rotary-knob-wrapper large" data-min="0" data-max="100" data-step="1" data-val="75">
+                  <div class="rotary-knob" id="knob-gain" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" aria-label="Output Gain">
+                    <div class="knob-pointer"></div>
+                  </div>
+                </div>
+                <span class="knob-value" id="val-gain">75%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Led Indicator Lights (3 gray, 2 green) -->
+          <div class="led-meter-box">
+            <span class="meter-label">db output headroom</span>
+            <div class="led-ladder" id="output-level-meter">
+              <span class="led-dot green" data-level="1"></span>
+              <span class="led-dot green" data-level="2"></span>
+              <span class="led-dot green" data-level="3"></span>
+              <span class="led-dot green" data-level="4"></span>
+              <span class="led-dot green" data-level="5"></span>
+              <span class="led-dot green" data-level="6"></span>
+              <span class="led-dot yellow" data-level="7"></span>
+              <span class="led-dot yellow" data-level="8"></span>
+              <span class="led-dot red" data-level="9"></span>
+              <span class="led-dot red" data-level="10"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMN 3: OSCILLOSCOPE & PRESET SAVER -->
+      <section class="synth-panel col-right">
+        <div class="panel-header">
+          <span class="panel-num">03</span>
+          <h2>wave analyzer & registration</h2>
+        </div>
+
+        <div class="panel-body">
+          <!-- Canvas Visualizer Display -->
+          <div class="visualizer-card">
+            <div class="visualizer-header">
+              <span class="box-label">realtime wave form telemetry</span>
+              <span class="wave-stats" id="sample-rate-txt">rate: 48.0khz</span>
+            </div>
+            <div class="canvas-container">
+              <canvas id="wave-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Registration Form (Dropdown, inputs, checkboxes, toggles) -->
+          <form id="preset-registration-form" class="preset-form" novalidate>
+            <span class="box-label">register preset formulation</span>
+            
+            <div class="form-row">
+              <!-- Text input: Preset Name -->
+              <div class="form-group col-6">
+                <label for="preset-name">preset title</label>
+                <input type="text" id="preset-name" placeholder="e.g. Acid Acid Synth" required class="synth-input">
+                <span class="field-error-msg">Preset title is required.</span>
+              </div>
+              <!-- Text input: Creator -->
+              <div class="form-group col-6">
+                <label for="preset-creator">designer name</label>
+                <input type="text" id="preset-creator" placeholder="e.g. Nao T." required class="synth-input">
+                <span class="field-error-msg">Designer name is required.</span>
+              </div>
+            </div>
+
+            <!-- Custom Options Checkboxes -->
+            <div class="form-group">
+              <span class="form-sub-label">dsp audio modulations</span>
+              <div class="checkbox-row">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="mod-lfo" checked>
+                  <span class="checkbox-checkmark"></span>
+                  <span class="checkbox-text">lfo sweep active</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="mod-overdrive">
+                  <span class="checkbox-checkmark"></span>
+                  <span class="checkbox-text">tube overdrive</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" id="mod-limiter" checked>
+                  <span class="checkbox-checkmark"></span>
+                  <span class="checkbox-text">peak safety limiter</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Toggles (Bypass, Noise Gate) -->
+            <div class="form-group">
+              <span class="form-sub-label">safety overrides</span>
+              <div class="toggles-row">
+                <label class="toggle-container">
+                  <span class="toggle-text">active bypass route</span>
+                  <div class="synth-toggle">
+                    <input type="checkbox" id="toggle-bypass">
+                    <span class="toggle-slider"></span>
+                  </div>
+                </label>
+                <label class="toggle-container">
+                  <span class="toggle-text">sub-harmonic boost</span>
+                  <div class="synth-toggle">
+                    <input type="checkbox" id="toggle-boost" checked>
+                    <span class="toggle-slider"></span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Preset Action Button -->
+            <div class="form-actions">
+              <button type="submit" class="synth-btn submit-btn" id="btn-save-preset">
+                <span class="stripes-bg"></span>
+                <span class="btn-lbl">register synthesis preset</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER PANEL -->
+    <footer class="synth-footer">
+      <div class="footer-left">
+        <span class="footer-lbl">oversampling:</span>
+        <div class="segmented-control">
+          <input type="radio" id="os-x1" name="oversample" value="x1">
+          <label for="os-x1">x1</label>
+          
+          <input type="radio" id="os-x2" name="oversample" value="x2" checked>
+          <label for="os-x2">x2</label>
+          
+          <input type="radio" id="os-x4" name="oversample" value="x4">
+          <label for="os-x4">x4</label>
+        </div>
+      </div>
+
+      <div class="footer-center">
+        <div class="preset-selector-row">
+          <label for="preset-preset-select">synthesis preset:</label>
+          <select id="preset-preset-select" class="synth-select">
+            <option value="default">default init patch</option>
+            <option value="acid-bass">acid bass growl</option>
+            <option value="space-echo">space echo swell</option>
+            <option value="high-fizz">high frequency fizz</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="telemetry-readout">
+          <span>sys_clock: <span id="telemetry-time">14:57:11</span></span>
+          <span class="divider">|</span>
+          <span>latency: <span class="text-neon" id="telemetry-latency">2.3ms</span></span>
+          <span class="divider">|</span>
+          <span>buffers: <span id="telemetry-buffer">512 smp</span></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
